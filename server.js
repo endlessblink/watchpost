@@ -649,9 +649,7 @@ app.post('/api/projects/:name/activate', async (req, res) => {
 
     console.log(`[Projects] Activated project: ${name} -> ${project.masterPlan}`);
 
-    // Re-sync task engine with new project
-    taskEngine.closeDb();
-
+    // Engines are per project; activating only changes the default for requests without a project
     // Small delay to ensure WAL lock is fully released
     let success = initTaskEngine();
     if (!success) {
@@ -685,6 +683,64 @@ app.post('/api/projects/:name/activate', async (req, res) => {
 // ============================================================================
 let taskEngineReady = false;
 
+// One engine and one database per project, chosen per request (no global flip).
+const taskEngines = new Map(); // projectRoot -> { engine, planPath, mtime }
+
+function getEngineForPlan(masterPlanPath) {
+    if (!masterPlanPath || !fs.existsSync(masterPlanPath)) return null;
+    const projectRoot = getProjectRoot(masterPlanPath);
+    let entry = taskEngines.get(projectRoot);
+    if (!entry || entry.planPath !== masterPlanPath) {
+        if (entry) entry.engine.closeDb();
+        const watchpostDir = path.join(projectRoot, '.watchpost');
+        if (!fs.existsSync(watchpostDir)) fs.mkdirSync(watchpostDir, { recursive: true });
+        const engine = taskEngine.createEngine();
+        engine.initDb(path.join(watchpostDir, 'db.sqlite'));
+        entry = { engine, planPath: masterPlanPath, mtime: null };
+        taskEngines.set(projectRoot, entry);
+    }
+    // The plan file is the source: re-read it whenever it changed on disk (Noam 2 Nov).
+    const mtime = fs.statSync(masterPlanPath).mtimeMs;
+    if (entry.mtime !== mtime) {
+        const count = entry.engine.syncFromMarkdown(masterPlanPath);
+        entry.mtime = mtime;
+        entry.count = count;
+    }
+    return entry;
+}
+
+// Which plan file does this request mean? ?cwd= / body.cwd naming a registered project (or a folder holding a MASTER_PLAN.md) wins; otherwise the active project.
+function resolvePlanForRequest(req) {
+    const cwd = (req && ((req.query && req.query.cwd) || (req.body && req.body.cwd))) || '';
+    if (typeof cwd === 'string' && cwd) {
+        const resolved = path.resolve(cwd);
+        let best = null;
+        try {
+            for (const p of readProjects().projects) {
+                if (!p.masterPlan || !p.root) continue;
+                const root = path.resolve(p.root);
+                if ((resolved === root || resolved.startsWith(root + path.sep)) && (!best || root.length > best.rootLen)) best = { plan: p.masterPlan, rootLen: root.length };
+            }
+        } catch (_) { /* fall through */ }
+        if (best) return best.plan;
+        for (const cand of [path.join(resolved, 'MASTER_PLAN.md'), path.join(resolved, 'docs', 'MASTER_PLAN.md')]) {
+            if (fs.existsSync(cand)) return cand;
+        }
+    }
+    return getMasterPlanPath();
+}
+
+// Engine for this request (synced), or null when its project has no usable plan file.
+function engineFor(req) {
+    try {
+        const entry = getEngineForPlan(resolvePlanForRequest(req));
+        return entry ? entry.engine : null;
+    } catch (err) {
+        console.error('[TaskEngine] engineFor failed:', err.message);
+        return null;
+    }
+}
+
 function initTaskEngine() {
     try {
         const masterPlanPath = getMasterPlanPath();
@@ -693,14 +749,9 @@ function initTaskEngine() {
             taskEngineReady = false;
             return false;
         }
-        const projectRoot = getProjectRoot(masterPlanPath);
-        const watchpostDir = path.join(projectRoot, '.watchpost');
-        if (!fs.existsSync(watchpostDir)) fs.mkdirSync(watchpostDir, { recursive: true });
-        const dbPath = path.join(watchpostDir, 'db.sqlite');
-        taskEngine.initDb(dbPath);
-        const count = taskEngine.syncFromMarkdown(masterPlanPath);
+        const entry = getEngineForPlan(masterPlanPath);
         taskEngineReady = true;
-        console.log(`[TaskEngine] Initialized: ${count} tasks synced from ${path.basename(masterPlanPath)}`);
+        console.log(`[TaskEngine] Initialized: ${entry.count ?? '?'} tasks synced from ${path.basename(masterPlanPath)}`);
         return true;
     } catch (err) {
         console.error('[TaskEngine] Init failed:', err.message, err.stack);
@@ -2044,19 +2095,20 @@ function getNativeTaskFilter(status) {
     return { status, excludeDone: false };
 }
 
-function getNativeIssues(status) {
+function getNativeIssues(status, eng = taskEngine) {
     const filter = getNativeTaskFilter(status);
-    const tasks = taskEngine.getTasks(filter.status ? { status: filter.status } : undefined);
+    const tasks = eng.getTasks(filter.status ? { status: filter.status } : undefined);
     return (filter.excludeDone ? tasks.filter(task => task.status !== 'done') : tasks).map(mapNativeTaskToIssue);
 }
 
 // GET /api/beads/stats - Project statistics
 app.get('/api/beads/stats', (req, res) => {
-    if (taskEngineReady) {
-        const tasks = taskEngine.getTasks();
-        const ready = taskEngine.getReady().length;
+    const eng = engineFor(req);
+    if (eng) {
+        const tasks = eng.getTasks();
+        const ready = eng.getReady().length;
         const inProgress = tasks.filter(t => t.status === 'in_progress').length;
-        const blocked = taskEngine.getBlocked().length;
+        const blocked = eng.getBlocked().length;
         const done = tasks.filter(t => t.status === 'done').length;
         return res.json({
             summary: {
@@ -2075,8 +2127,9 @@ app.get('/api/beads/stats', (req, res) => {
 // GET /api/beads/list - All issues (supports ?status=open,in_progress,closed,blocked)
 app.get('/api/beads/list', (req, res) => {
     const status = req.query.status;
-    if (taskEngineReady) {
-        return res.json({ issues: getNativeIssues(status), error: null });
+    const eng = engineFor(req);
+    if (eng) {
+        return res.json({ issues: getNativeIssues(status, eng), error: null });
     }
     const args = status ? `list --limit 0 --status=${status}` : 'list --limit 0';
     const issues = runBd(args);
@@ -2085,8 +2138,9 @@ app.get('/api/beads/list', (req, res) => {
 
 // GET /api/beads/ready - Ready issues (unblocked)
 app.get('/api/beads/ready', (req, res) => {
-    if (taskEngineReady) {
-        return res.json({ issues: taskEngine.getReady().map(mapNativeTaskToIssue), error: null });
+    const eng = engineFor(req);
+    if (eng) {
+        return res.json({ issues: eng.getReady().map(mapNativeTaskToIssue), error: null });
     }
     const issues = runBd('ready');
     res.json({ issues: issues || [], error: issues ? null : 'Failed to fetch ready issues' });
@@ -2100,8 +2154,9 @@ app.get('/api/beads/deps/:id', (req, res) => {
 
 // GET /api/beads/graph - Full dependency graph for D3
 app.get('/api/beads/graph', (req, res) => {
-    if (taskEngineReady) {
-        const graph = taskEngine.getGraph();
+    const eng = engineFor(req);
+    if (eng) {
+        const graph = eng.getGraph();
         return res.json({
             nodes: graph.nodes.map(task => ({
                 id: task.id,
@@ -3605,23 +3660,19 @@ app.get('/api/events', (req, res) => {
 
 // Middleware: check task engine is ready
 const requireTaskEngine = (req, res, next) => {
-    if (!taskEngineReady) {
-        return res.status(503).json({ error: 'Task engine not initialized. Set MASTER_PLAN_PATH first.' });
+    const eng = engineFor(req);
+    if (!eng) {
+        return res.status(503).json({ error: 'Task engine not initialized for this project (no MASTER_PLAN.md found).' });
     }
-    // The plan file is the source: re-read it whenever it changed on disk, so the board never shows an older version of it (Noam 2 Nov).
-    try {
-        const mp = getMasterPlanPath();
-        const mtime = fs.statSync(mp).mtimeMs;
-        if (mp !== lastSyncedPlan.path || mtime !== lastSyncedPlan.mtime) { taskEngine.syncFromMarkdown(mp); lastSyncedPlan = { path: mp, mtime }; }
-    } catch (err) { console.error('[TaskEngine] resync on read failed:', err.message); }
+    req.taskEngine = eng;
+    req.masterPlanPath = resolvePlanForRequest(req);
     next();
 };
-let lastSyncedPlan = { path: null, mtime: null };
 
 // GET /api/tasks/stats - Task statistics
 app.get('/api/tasks/stats', requireTaskEngine, (req, res) => {
     try {
-        res.json(taskEngine.getStats());
+        res.json(req.taskEngine.getStats());
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -3633,7 +3684,7 @@ app.get('/api/tasks/list', requireTaskEngine, (req, res) => {
         const filters = {};
         if (req.query.status) filters.status = req.query.status;
         if (req.query.priority) filters.priority = req.query.priority;
-        const tasks = taskEngine.getTasks(Object.keys(filters).length ? filters : undefined);
+        const tasks = req.taskEngine.getTasks(Object.keys(filters).length ? filters : undefined);
         res.json({ tasks });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -3643,7 +3694,7 @@ app.get('/api/tasks/list', requireTaskEngine, (req, res) => {
 // GET /api/tasks/ready - Tasks with all deps resolved
 app.get('/api/tasks/ready', requireTaskEngine, (req, res) => {
     try {
-        res.json({ tasks: taskEngine.getReady() });
+        res.json({ tasks: req.taskEngine.getReady() });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -3652,7 +3703,7 @@ app.get('/api/tasks/ready', requireTaskEngine, (req, res) => {
 // GET /api/tasks/blocked - Tasks with unresolved deps
 app.get('/api/tasks/blocked', requireTaskEngine, (req, res) => {
     try {
-        res.json({ tasks: taskEngine.getBlocked() });
+        res.json({ tasks: req.taskEngine.getBlocked() });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -3661,7 +3712,7 @@ app.get('/api/tasks/blocked', requireTaskEngine, (req, res) => {
 // GET /api/tasks/:id/deps - Task details with dependencies
 app.get('/api/tasks/:id/deps', requireTaskEngine, (req, res) => {
     try {
-        const task = taskEngine.getTask(req.params.id);
+        const task = req.taskEngine.getTask(req.params.id);
         if (!task) return res.status(404).json({ error: 'Task not found' });
         res.json(task);
     } catch (err) {
@@ -3672,7 +3723,7 @@ app.get('/api/tasks/:id/deps', requireTaskEngine, (req, res) => {
 // GET /api/tasks/graph - Full dependency graph for D3
 app.get('/api/tasks/graph', requireTaskEngine, (req, res) => {
     try {
-        res.json(taskEngine.getGraph());
+        res.json(req.taskEngine.getGraph());
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -3682,11 +3733,11 @@ app.get('/api/tasks/graph', requireTaskEngine, (req, res) => {
 app.post('/api/tasks/:id/claim', requireTaskEngine, (req, res) => {
     try {
         const id = req.params.id;
-        const result = taskEngine.updateStatus(id, 'in_progress');
+        const result = req.taskEngine.updateStatus(id, 'in_progress');
         if (result.changes === 0) return res.status(404).json({ error: 'Task not found' });
         // Write back to markdown
-        const masterPlanPath = getMasterPlanPath();
-        taskEngine.writeBackStatus(masterPlanPath, id, 'in_progress');
+        const masterPlanPath = req.masterPlanPath;
+        req.taskEngine.writeBackStatus(masterPlanPath, id, 'in_progress');
         res.json({ success: true, id, status: 'in_progress' });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -3697,11 +3748,11 @@ app.post('/api/tasks/:id/claim', requireTaskEngine, (req, res) => {
 app.post('/api/tasks/:id/close', requireTaskEngine, (req, res) => {
     try {
         const id = req.params.id;
-        const result = taskEngine.updateStatus(id, 'done');
+        const result = req.taskEngine.updateStatus(id, 'done');
         if (result.changes === 0) return res.status(404).json({ error: 'Task not found' });
         // Write back to markdown
-        const masterPlanPath = getMasterPlanPath();
-        taskEngine.writeBackStatus(masterPlanPath, id, 'done');
+        const masterPlanPath = req.masterPlanPath;
+        req.taskEngine.writeBackStatus(masterPlanPath, id, 'done');
         res.json({ success: true, id, status: 'done' });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -3711,8 +3762,8 @@ app.post('/api/tasks/:id/close', requireTaskEngine, (req, res) => {
 // POST /api/tasks/sync - Re-sync from MASTER_PLAN.md
 app.post('/api/tasks/sync', requireTaskEngine, (req, res) => {
     try {
-        const masterPlanPath = getMasterPlanPath();
-        const count = taskEngine.syncFromMarkdown(masterPlanPath);
+        const masterPlanPath = req.masterPlanPath;
+        const count = req.taskEngine.syncFromMarkdown(masterPlanPath);
         res.json({ success: true, synced: count });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -3924,7 +3975,6 @@ app.listen(PORT, HOST, () => {
             updateEnvFile('MASTER_PLAN_PATH', match.masterPlan);
             console.log(`[Startup] Auto-activated project from CWD: ${match.name} (${match.root})`);
             // Re-init task engine for the correct project
-            taskEngine.closeDb();
             initTaskEngine();
         }
     }

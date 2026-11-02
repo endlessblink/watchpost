@@ -3,6 +3,9 @@
 const Database = require('better-sqlite3');
 const fs = require('fs');
 
+// One engine = one SQLite handle. createEngine() makes an independent one per project;
+// the module-level exports below are a default engine kept for existing callers.
+function createEngine() {
 let db = null;
 
 // ── Database lifecycle ──────────────────────────────────────────────
@@ -518,7 +521,7 @@ function hasCycle(taskId, newDep) {
 
 // ── Exports ─────────────────────────────────────────────────────────
 
-module.exports = {
+return {
   initDb,
   closeDb,
   syncFromMarkdown,
@@ -535,3 +538,7 @@ module.exports = {
   addComment,
   hasCycle,
 };
+}
+
+const defaultEngine = createEngine();
+module.exports = { ...defaultEngine, createEngine };
