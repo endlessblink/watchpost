@@ -310,6 +310,15 @@ function syncFromMarkdown(mdPath) {
   });
 
   syncAll();
+  // The plan file is the source of truth: a task that is no longer in it is no longer on the board (Noam 2 Nov: 246 old tasks stayed after the plan was cleaned).
+  const keep = new Set(tasks.map((t) => t.id));
+  const gone = db.prepare('SELECT id FROM tasks').all().map((r) => r.id).filter((id) => !keep.has(id));
+  if (gone.length) {
+    const dropTask = db.prepare('DELETE FROM tasks WHERE id = ?');
+    const dropDeps = db.prepare('DELETE FROM deps WHERE task_id = ? OR depends_on = ?');
+    const dropComments = db.prepare('DELETE FROM comments WHERE task_id = ?');
+    db.transaction(() => { for (const id of gone) { dropDeps.run(id, id); dropComments.run(id); dropTask.run(id); } })();
+  }
   return tasks.length;
 }
 

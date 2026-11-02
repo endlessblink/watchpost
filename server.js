@@ -3608,8 +3608,15 @@ const requireTaskEngine = (req, res, next) => {
     if (!taskEngineReady) {
         return res.status(503).json({ error: 'Task engine not initialized. Set MASTER_PLAN_PATH first.' });
     }
+    // The plan file is the source: re-read it whenever it changed on disk, so the board never shows an older version of it (Noam 2 Nov).
+    try {
+        const mp = getMasterPlanPath();
+        const mtime = fs.statSync(mp).mtimeMs;
+        if (mp !== lastSyncedPlan.path || mtime !== lastSyncedPlan.mtime) { taskEngine.syncFromMarkdown(mp); lastSyncedPlan = { path: mp, mtime }; }
+    } catch (err) { console.error('[TaskEngine] resync on read failed:', err.message); }
     next();
 };
+let lastSyncedPlan = { path: null, mtime: null };
 
 // GET /api/tasks/stats - Task statistics
 app.get('/api/tasks/stats', requireTaskEngine, (req, res) => {
@@ -3922,7 +3929,9 @@ app.listen(PORT, HOST, () => {
         }
     }
 
-    // Periodic re-scan every 5 minutes (if auto-scan enabled)
+    // Periodic re-scan every 30 minutes (if auto-scan enabled).
+    // A full tree traversal is intentionally infrequent so it does not compete
+    // with interactive desktop work after startup.
     if (localConfig.projectAutoScan !== false) {
         setInterval(() => {
             const scanPaths = localConfig.projectScanPaths || [process.env.HOME];
@@ -3939,7 +3948,7 @@ app.listen(PORT, HOST, () => {
             } catch (err) {
                 console.error('[Scanner] Periodic scan error:', err.message);
             }
-        }, 5 * 60 * 1000); // 5 minutes
+        }, 30 * 60 * 1000); // 30 minutes
     }
 
 });
