@@ -985,20 +985,20 @@
       "root": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox",
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md",
       "planCategory": "imagine-box",
-      "readOnlyPlan": true,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-11-02"
+      "addedAt": "2026-11-02",
+      "planDoor": true
     },
     {
       "name": "finetuned",
       "root": "/media/endlessblink/scratch/finetuned-quality-redesign-20261028",
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md",
       "planCategory": "finetuned",
-      "readOnlyPlan": true,
       "modules": [],
       "source": "owner-request",
-      "addedAt": "2026-11-04"
+      "addedAt": "2026-11-04",
+      "planDoor": true
     }
   ]
 }

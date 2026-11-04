@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const { execFile, execFileSync } = require('child_process');
+const { createPlanDoorEngine } = require('../modules/plan-door-engine');
 
 // ─── Paths ───────────────────────────────────────────────────────────────────
 
@@ -879,7 +880,7 @@ module.exports = function mountControlRoomRoutes(app) {
     app.get('/api/projects/enriched', (req, res) => {
         const projects = loadProjects();
         const enriched = projects.map(project => {
-            const taskStats = parseTaskStats(project.masterPlan || '');
+            const taskStats = project.planDoor ? createPlanDoorEngine(project).projectStats() : parseTaskStats(project.masterPlan || '');
             const cover = findCoverFile(project.name);
             const gitInfo = getGitInfo(project.root || '');
 

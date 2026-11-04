@@ -4055,6 +4055,7 @@
               status,
               priority: task.priority || '',
               lane: task.lane || '',
+              managedPlan: task.managed_plan || false,
               section: 'activeWork',
               description: '',
               subtasks: [],
@@ -4237,7 +4238,7 @@
                     <button class="badge-dropdown-option${priorityClass === 'low' ? ' selected' : ''}" onclick="updateInlinePriority('${task.id}', 'P3-LOW', event)"><span class="priority-dot low"></span>P3-LOW</button>
                   </div>
                 </div>
-                <div class="badge-wrapper">
+                <div class="badge-wrapper" style="${task.managedPlan && !complexity ? 'display:none' : ''}">
                   <div class="task-complexity ${complexityClass} editable" onclick="toggleComplexityDropdown('${task.id}', event)" title="Click to change complexity">${complexity || 'Unknown'}</div>
                   <div class="badge-dropdown complexity-dropdown" id="complexity-dropdown-${task.id}">
                     <button class="badge-dropdown-option${complexityClass === 'simple' ? ' selected' : ''}" onclick="updateInlineComplexity('${task.id}', 'Simple', event)"><span class="complexity-dot simple"></span>Simple</button>

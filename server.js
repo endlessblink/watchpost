@@ -13,6 +13,7 @@ const mountControlRoomRoutes = require('./controlroom/api');
 const mountVpsRoutes = require('./vps/api');
 const mountBotsRoutes = require('./bots/api');
 const mountProjectPlanView = require('./modules/project-plan-view');
+const { createPlanDoorEngine, resolveProject, selectProject, gateMessage } = require('./modules/plan-door-engine');
 
 // ============================================================================
 // LOCAL OVERRIDES SYSTEM
@@ -217,14 +218,17 @@ mountBotsRoutes(app);
 app.get('/api/status', (req, res) => {
     const pkg = require('./package.json');
     const masterPlanResolution = getMasterPlanResolution();
+    const selected = projectForRequest(req);
 
     res.json({
         running: true,
         name: 'Watchpost',
         version: pkg.version,
         port: PORT,
-        project: path.dirname(masterPlanResolution.path),
-        masterPlanPath: masterPlanResolution.path,
+        project: selected?.root || path.dirname(masterPlanResolution.path),
+        projectName: selected?.name || '',
+        planCategory: selected?.planCategory || null,
+        masterPlanPath: selected?.masterPlan || masterPlanResolution.path,
         masterPlanSource: masterPlanResolution.source,
         masterPlanExists: masterPlanResolution.exists,
         uptime: process.uptime(),
@@ -441,7 +445,8 @@ app.post('/api/config/reload', (req, res) => {
 // API Endpoint to get MASTER_PLAN.md content
 app.get('/api/master-plan', (req, res) => {
     const masterPlanResolution = getMasterPlanResolution();
-    const masterPlanPath = masterPlanResolution.path;
+    const selected = projectForRequest(req);
+    const masterPlanPath = selected?.masterPlan || masterPlanResolution.path;
 
     console.log(`[API] Fetching MASTER_PLAN.md from: ${masterPlanPath}`);
 
@@ -455,7 +460,12 @@ app.get('/api/master-plan', (req, res) => {
                 source: masterPlanResolution.source
             });
         }
-        res.json({ content: data, path: masterPlanPath, source: masterPlanResolution.source });
+        try {
+            const scoped = selected?.planDoor && req.query.full !== '1' ? createPlanDoorEngine(selected).markdown() : data;
+            res.json({ content: scoped, fullContent: data, path: masterPlanPath, projectName: selected?.name || '', category: selected?.planCategory || null, source: selected?.planDoor ? 'plan-door' : masterPlanResolution.source });
+        } catch (error) {
+            res.status(503).json({ error: error.message });
+        }
     });
 });
 
@@ -482,6 +492,16 @@ const readProjects = () => {
     }
 };
 
+function projectForRequest(req) {
+    return resolveProject(readProjects().projects, req, getMasterPlanPath(), process.env.WATCHPOST_PROJECT_NAME);
+}
+
+// Legacy quick edits cannot bypass the managed plan's revision/evidence gates.
+app.use(['/api/tasks', '/api/task', '/api/beads'], (req, res, next) => {
+    if (req.method === 'GET' || !projectForRequest(req)?.planDoor) return next();
+    return res.status(409).json({ error: gateMessage, code: 'PLAN_EVIDENCE_REQUIRED' });
+});
+
 // Helper: Write projects.json
 const writeProjects = (data) => {
     fs.writeFileSync(projectsJsonPath, JSON.stringify(data, null, 2) + '\n');
@@ -496,7 +516,7 @@ app.get('/api/projects', (req, res) => {
 
     const projects = data.projects.map(p => ({
         ...p,
-        active: !p.readOnlyPlan && currentPlan === p.masterPlan
+        active: projectForRequest(req)?.name === p.name
     }));
 
     res.json({ projects });
@@ -644,10 +664,7 @@ app.post('/api/projects/:name/activate', async (req, res) => {
     }
 
     // Update runtime environment
-    process.env.MASTER_PLAN_PATH = project.masterPlan;
-
-    // Persist to .env file
-    updateEnvFile('MASTER_PLAN_PATH', project.masterPlan);
+    selectProject(project, process.env, updateEnvFile);
 
     console.log(`[Projects] Activated project: ${name} -> ${project.masterPlan}`);
 
@@ -688,8 +705,13 @@ let taskEngineReady = false;
 // One engine and one database per project, chosen per request (no global flip).
 const taskEngines = new Map(); // projectRoot -> { engine, planPath, mtime }
 
-function getEngineForPlan(masterPlanPath) {
+function getEngineForPlan(masterPlanPath, selectedProject = null) {
     if (!masterPlanPath || !fs.existsSync(masterPlanPath)) return null;
+    const selected = selectedProject || projectForRequest(null);
+    if (selected?.planDoor && selected.masterPlan === masterPlanPath) {
+        const engine = createPlanDoorEngine(selected);
+        return { engine, count: engine.getTasks().length };
+    }
     if (readProjects().projects.some(project => project.readOnlyPlan && project.masterPlan === masterPlanPath)) return null;
     const projectRoot = getProjectRoot(masterPlanPath);
     let entry = taskEngines.get(projectRoot);
@@ -714,6 +736,11 @@ function getEngineForPlan(masterPlanPath) {
 
 // Which plan file does this request mean? ?cwd= / body.cwd naming a registered project (or a folder holding a MASTER_PLAN.md) wins; otherwise the active project.
 function resolvePlanForRequest(req) {
+    const named = req?.query?.project || req?.body?.project;
+    if (typeof named === 'string') {
+        const project = readProjects().projects.find(p => p.name === named);
+        if (project?.masterPlan) return project.masterPlan;
+    }
     const cwd = (req && ((req.query && req.query.cwd) || (req.body && req.body.cwd))) || '';
     if (typeof cwd === 'string' && cwd) {
         const resolved = path.resolve(cwd);
@@ -736,7 +763,7 @@ function resolvePlanForRequest(req) {
 // Engine for this request (synced), or null when its project has no usable plan file.
 function engineFor(req) {
     try {
-        const entry = getEngineForPlan(resolvePlanForRequest(req));
+        const entry = getEngineForPlan(resolvePlanForRequest(req), projectForRequest(req));
         return entry ? entry.engine : null;
     } catch (err) {
         console.error('[TaskEngine] engineFor failed:', err.message);
@@ -1589,16 +1616,18 @@ app.delete('/api/skills/tried/:name', (req, res) => {
 
 // GET /api/docs - Dynamically scan docs/ directory
 app.get('/api/docs', (req, res) => {
-    const masterPlanPath = process.env.MASTER_PLAN_PATH || '';
+    const selected = projectForRequest(req);
+    const masterPlanPath = selected?.masterPlan || process.env.MASTER_PLAN_PATH || '';
     const projectRoot = masterPlanPath ? getProjectRoot(masterPlanPath) : path.join(__dirname, '..');
     const docsDir = path.join(projectRoot, 'docs');
 
     try {
+        const planNodes = selected?.planDoor && fs.existsSync(masterPlanPath) ? [{ id: 'doc-MASTER_PLAN.md', name: 'MASTER_PLAN.md', title: 'Master Plan', type: 'file', path: 'MASTER_PLAN.md', category: 'plan', color: '#ec4899', contentLength: fs.statSync(masterPlanPath).size }] : [];
         if (!fs.existsSync(docsDir)) {
-            return res.json({ nodes: [], links: [] });
+            return res.json({ nodes: planNodes, links: [] });
         }
 
-        const nodes = [];
+        const nodes = [...planNodes];
         const links = [];
         const categoryColors = {
             'architecture': '#3b82f6',
@@ -1689,6 +1718,15 @@ app.get('/api/docs/content', (req, res) => {
     // Sanitize: no directory traversal
     if (relPath.includes('..') || path.isAbsolute(relPath)) {
         return res.status(400).json({ error: 'Invalid path' });
+    }
+
+    const selected = projectForRequest(req);
+    if (selected?.planDoor && relPath === 'MASTER_PLAN.md') {
+        try {
+            return res.json({ content: fs.readFileSync(selected.masterPlan, 'utf8'), path: relPath });
+        } catch (error) {
+            return res.status(404).json({ error: 'Registered master plan is unavailable.' });
+        }
     }
 
     const masterPlanPath = process.env.MASTER_PLAN_PATH || '';
@@ -3874,7 +3912,7 @@ app.listen(PORT, HOST, () => {
     // TASK-322: Recover orphaned tasks (in_progress in beads but no running agent)
     try {
         const masterPlanPath = process.env.MASTER_PLAN_PATH || '';
-        if (readProjects().projects.some(project => project.readOnlyPlan && project.masterPlan === masterPlanPath)) {
+        if (readProjects().projects.some(project => (project.readOnlyPlan || project.planDoor) && project.masterPlan === masterPlanPath)) {
             throw new Error('Managed read-only plan: no legacy task recovery');
         }
         const orphanProjectRoot = masterPlanPath ? getProjectRoot(masterPlanPath) : path.join(__dirname, '..');

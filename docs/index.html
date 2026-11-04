@@ -1480,6 +1480,9 @@
                 updateStats();
                 buildLegend();
                 initGraph();
+                const requestedPath = new URLSearchParams(location.search).get('path');
+                const requestedNode = graphData.nodes.find(node => node.path === requestedPath);
+                if (requestedNode) showContentPanel(requestedNode);
             } catch (error) {
                 console.error('Failed to load graph data:', error);
                 document.getElementById('graph').innerHTML =

@@ -1,0 +1,81 @@
+'use strict';
+const { chromium } = require('playwright');
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
+const { createPlanDoorEngine, resolveProject, selectProject } = require('../modules/plan-door-engine');
+
+(async () => {
+    const root = path.resolve(__dirname, '..');
+    const projects = JSON.parse(fs.readFileSync(path.join(root, 'projects.json'))).projects.filter(p => p.planDoor);
+    const environment = { MASTER_PLAN_PATH: projects[0].masterPlan, WATCHPOST_PROJECT_NAME: 'imaginebox' };
+    const selected = req => resolveProject(projects, req, environment.MASTER_PLAN_PATH, environment.WATCHPOST_PROJECT_NAME);
+    const app = express();
+    app.use(express.json());
+    app.get('/api/projects/enriched', (req, res) => res.json(projects.map(p => ({ ...p, taskStats: createPlanDoorEngine(p).projectStats() }))));
+    app.get('/api/projects', (req, res) => res.json({ projects }));
+    app.get('/api/status', (req, res) => { const p = selected(req); res.json({ running: true, projectName: p.name, project: p.root, masterPlanPath: p.masterPlan }); });
+    app.get('/api/master-plan', (req, res) => res.json({ content: createPlanDoorEngine(selected(req)).markdown() }));
+    app.get('/api/tasks/list', (req, res) => res.json({ tasks: createPlanDoorEngine(selected(req)).getTasks() }));
+    app.post('/api/projects/:name/activate', (req, res) => { const p = projects.find(p => p.name === req.params.name); selectProject(p, environment, () => {}); res.json({ activated: p }); });
+    app.post('/api/tasks/:id/close', (req, res) => res.status(409).json({ error: 'Evidence-gated plan tracker: use current revision and required evidence.' }));
+    app.use(express.static(root));
+    const server = await new Promise(resolve => { const s = app.listen(0, '127.0.0.1', () => resolve(s)); });
+    const privateBase = 'http://127.0.0.1:' + server.address().port;
+    const liveBase = 'http://127.0.0.1:6010';
+    const before = await (await fetch(liveBase + '/api/status')).json();
+    const cacheDir = path.join(path.dirname(projects[0].masterPlan), '.watchpost');
+    const cacheHash = () => fs.existsSync(cacheDir) ? fs.readdirSync(cacheDir).sort().map(name => [name, crypto.createHash('sha256').update(fs.readFileSync(path.join(cacheDir, name))).digest('hex')]) : [];
+    const cacheBefore = cacheHash();
+    const browser = await chromium.launch({ headless: true });
+    try {
+        const page = await browser.newPage({ viewport: { width: 1600, height: 1100 } });
+        await page.goto(privateBase, { waitUntil: 'domcontentloaded' });
+        const frame = () => page.frameLocator('#kanban iframe');
+        const counts = {};
+        for (const name of ['finetuned', 'imaginebox']) {
+            await page.locator('#active-project-badge').click();
+            await page.locator('#project-switcher-search').fill(name);
+            await page.locator('.project-switcher-item').filter({ hasText: name }).click();
+            const expected = name === 'finetuned' ? 2 : 8;
+            await page.waitForFunction(([name]) => document.getElementById('active-project-badge-name').textContent === name, [name]);
+            await frame().locator('[id^="column-"] .task-card').first().waitFor();
+            await page.waitForTimeout(250);
+            counts[name] = await frame().locator('[id^="column-"] .task-card').count();
+            assert.equal(counts[name], expected);
+            assert.equal(new URL(page.url()).pathname, '/');
+            await page.screenshot({ path: '/tmp/watchpost-native-' + name + '.png' });
+        }
+        const denied = await fetch(privateBase + '/api/tasks/TASK-002/close', { method: 'POST' });
+        assert.equal(denied.status, 409);
+        await page.goto(liveBase, { waitUntil: 'domcontentloaded' });
+        await frame().locator('[id^="column-"] .task-card').first().waitFor();
+        await page.waitForTimeout(300);
+        const liveCount = await frame().locator('[id^="column-"] .task-card').count();
+        const liveExpected = before.projectName === 'finetuned' ? 2 : 8;
+        assert.equal(liveCount, liveExpected);
+        await page.screenshot({ path: '/tmp/watchpost-native-live.png' });
+        const after = await (await fetch(liveBase + '/api/status')).json();
+        assert.equal(after.projectName, before.projectName);
+        const full = await (await fetch(liveBase + '/api/master-plan?full=1')).json();
+        assert.equal(full.content, fs.readFileSync(projects[0].masterPlan, 'utf8'));
+        await page.goto(liveBase + '/docs/?path=MASTER_PLAN.md', { waitUntil: 'networkidle' });
+        await page.locator('#contentPanel.visible #contentBody').waitFor();
+        await page.waitForFunction(() => document.getElementById('contentBody').textContent.includes('ImagineBox Master Plan'));
+        await page.screenshot({ path: '/tmp/watchpost-native-master-plan.png' });
+        const doc = await (await fetch(liveBase + '/api/docs/content?path=MASTER_PLAN.md')).json();
+        assert.equal(doc.content, full.content);
+        const liveGate = await fetch(liveBase + '/api/tasks/TASK-002/close?project=imaginebox', { method: 'POST' });
+        assert.equal(liveGate.status, 409);
+        assert.equal((await liveGate.json()).code, 'PLAN_EVIDENCE_REQUIRED');
+        assert.deepEqual(cacheHash(), cacheBefore);
+        const receipt = { passed: true, nativeInterface: true, privateOrdinaryProjectSelection: counts, liveProject: after.projectName, liveTaskCount: liveCount, activeProjectPreserved: true, competingCacheUnchanged: true, fullPlanExactReadback: true, normalDocsMasterPlanVisible: true, quickCloseRejected: true, liveQuickCloseRejected: true, screenshots: ['/tmp/watchpost-native-finetuned.png', '/tmp/watchpost-native-imaginebox.png', '/tmp/watchpost-native-live.png', '/tmp/watchpost-native-master-plan.png'] };
+        fs.writeFileSync('/tmp/watchpost-native-plan-e2e.json', JSON.stringify(receipt, null, 2) + '\n');
+        console.log(JSON.stringify(receipt));
+    } finally {
+        await browser.close();
+        await new Promise(resolve => server.close(resolve));
+    }
+})().catch(error => { console.error(error); process.exitCode = 1; });

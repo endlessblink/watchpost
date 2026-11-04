@@ -1163,7 +1163,7 @@
             }
 
             function composeMeta(p) {
-                if (p.readOnlyPlan) return (p.planCategory === 'finetuned' ? 'Finetuned production' : 'ImagineBox product') + ' · read-only plan';
+                if (p.planDoor) return p.planCategory === 'finetuned' ? 'Finetuned production' : 'ImagineBox product';
                 const parts = [];
                 const s = p.taskStats || {};
                 if (s.inProgress) parts.push(`${s.inProgress} active`);
@@ -1174,7 +1174,7 @@
             }
 
             function isActiveProject(p) {
-                if (p.readOnlyPlan) return false;
+                if (activeProjectName) return p.name === activeProjectName;
                 if (activeMasterPlan && p.masterPlan) return p.masterPlan === activeMasterPlan;
                 return p.name === activeProjectName;
             }
@@ -1301,7 +1301,7 @@
                     if (statusRes && statusRes.ok) {
                         const status = await statusRes.json();
                         activeMasterPlan = status.masterPlanPath || '';
-                        const activeProj = projects.find(p => p.masterPlan === activeMasterPlan);
+                        const activeProj = projects.find(p => p.name === status.projectName) || projects.find(p => p.masterPlan === activeMasterPlan);
                         if (activeProj) setActiveBadge(activeProj.name);
                     }
                 } catch (err) {
@@ -1319,10 +1319,6 @@
             };
 
             async function activateProject(p) {
-                if (p.readOnlyPlan) {
-                    window.location.assign('/project-plan/?project=' + encodeURIComponent(p.name));
-                    return;
-                }
                 if (!p.masterPlan) {
                     showTransientError(`${p.name} has no MASTER_PLAN.md`);
                     return;
