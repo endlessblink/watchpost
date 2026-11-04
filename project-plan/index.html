@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project plan · Watchpost</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #111820; color: #e5ebf2; }
+    body { max-width: 1200px; margin: auto; padding: 24px; }
+    h1 { font-size: 1.6rem; margin-bottom: 8px; }
+    p { color: #b1bfcd; line-height: 1.5; }
+    nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 24px 0; }
+    a, button { color: #cae6ff; border: 1px solid #41546a; border-radius: 6px; padding: 9px 14px; background: #1d2a37; text-decoration: none; font: inherit; cursor: pointer; }
+    a[aria-current="page"] { border-color: #8bc5ff; background: #284561; }
+    .scroll { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; min-width: 650px; }
+    th, td { border-bottom: 1px solid #344353; padding: 12px; text-align: left; vertical-align: top; line-height: 1.4; }
+    th { color: #b1bfcd; font-size: .85rem; }
+    td:first-child { white-space: nowrap; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: .85rem; background: #17222e; padding: 20px; border-radius: 8px; }
+    details { margin-top: 28px; }
+    summary { cursor: pointer; padding: 12px 0; }
+    #notice { color: #ffc5a3; }
+    #updated { font-size: .8rem; overflow-wrap: anywhere; }
+    @media(max-width: 600px) { body { padding: 16px; } }
+  </style>
+</head>
+<body>
+  <h1 id="title">Project plan</h1>
+  <p>Read-only view of the saved master plan. This page does not switch Watchpost’s active project or change task status.</p>
+  <nav aria-label="Task categories">
+    <a data-category="all" href="?project=imaginebox&amp;category=all">All tasks</a>
+    <a data-project="finetuned" href="?project=finetuned">Finetuned</a>
+    <a data-project="imaginebox" href="?project=imaginebox">ImagineBox</a>
+    <button id="refresh" type="button">Refresh</button>
+  </nav>
+  <p id="notice" role="status">Loading saved plan…</p>
+  <div class="scroll"><table aria-label="Project tasks"><thead><tr><th>Task</th><th>Work</th><th>Priority</th><th>Status</th><th>Dependencies</th><th>Category</th></tr></thead><tbody id="tasks"></tbody></table></div>
+  <details><summary>Full master plan, decisions and acceptance checks</summary><pre id="plan"></pre></details>
+  <p id="updated"></p>
+  <script src="view.js"></script>
+</body>
+</html>

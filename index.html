@@ -1163,6 +1163,7 @@
             }
 
             function composeMeta(p) {
+                if (p.readOnlyPlan) return (p.planCategory === 'finetuned' ? 'Finetuned production' : 'ImagineBox product') + ' · read-only plan';
                 const parts = [];
                 const s = p.taskStats || {};
                 if (s.inProgress) parts.push(`${s.inProgress} active`);
@@ -1173,6 +1174,7 @@
             }
 
             function isActiveProject(p) {
+                if (p.readOnlyPlan) return false;
                 if (activeMasterPlan && p.masterPlan) return p.masterPlan === activeMasterPlan;
                 return p.name === activeProjectName;
             }
@@ -1317,6 +1319,10 @@
             };
 
             async function activateProject(p) {
+                if (p.readOnlyPlan) {
+                    window.location.assign('/project-plan/?project=' + encodeURIComponent(p.name));
+                    return;
+                }
                 if (!p.masterPlan) {
                     showTransientError(`${p.name} has no MASTER_PLAN.md`);
                     return;

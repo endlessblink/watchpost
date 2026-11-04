@@ -12,6 +12,7 @@ const { resolveBindHost } = require('./modules/network-access');
 const mountControlRoomRoutes = require('./controlroom/api');
 const mountVpsRoutes = require('./vps/api');
 const mountBotsRoutes = require('./bots/api');
+const mountProjectPlanView = require('./modules/project-plan-view');
 
 // ============================================================================
 // LOCAL OVERRIDES SYSTEM
@@ -466,6 +467,7 @@ app.use(express.json());
 // ============================================================================
 
 const projectsJsonPath = path.join(__dirname, 'projects.json');
+mountProjectPlanView(app, projectsJsonPath, resolvePlanForRequest);
 
 // Helper: Read projects.json
 const readProjects = () => {
@@ -494,7 +496,7 @@ app.get('/api/projects', (req, res) => {
 
     const projects = data.projects.map(p => ({
         ...p,
-        active: currentPlan === p.masterPlan
+        active: !p.readOnlyPlan && currentPlan === p.masterPlan
     }));
 
     res.json({ projects });
@@ -688,6 +690,7 @@ const taskEngines = new Map(); // projectRoot -> { engine, planPath, mtime }
 
 function getEngineForPlan(masterPlanPath) {
     if (!masterPlanPath || !fs.existsSync(masterPlanPath)) return null;
+    if (readProjects().projects.some(project => project.readOnlyPlan && project.masterPlan === masterPlanPath)) return null;
     const projectRoot = getProjectRoot(masterPlanPath);
     let entry = taskEngines.get(projectRoot);
     if (!entry || entry.planPath !== masterPlanPath) {
@@ -750,6 +753,10 @@ function initTaskEngine() {
             return false;
         }
         const entry = getEngineForPlan(masterPlanPath);
+        if (!entry) {
+            taskEngineReady = false;
+            return false;
+        }
         taskEngineReady = true;
         console.log(`[TaskEngine] Initialized: ${entry.count ?? '?'} tasks synced from ${path.basename(masterPlanPath)}`);
         return true;
@@ -3867,6 +3874,9 @@ app.listen(PORT, HOST, () => {
     // TASK-322: Recover orphaned tasks (in_progress in beads but no running agent)
     try {
         const masterPlanPath = process.env.MASTER_PLAN_PATH || '';
+        if (readProjects().projects.some(project => project.readOnlyPlan && project.masterPlan === masterPlanPath)) {
+            throw new Error('Managed read-only plan: no legacy task recovery');
+        }
         const orphanProjectRoot = masterPlanPath ? getProjectRoot(masterPlanPath) : path.join(__dirname, '..');
         const result = execSync(`${BD_PATH} list --status in_progress --json`, { cwd: orphanProjectRoot, timeout: 5000 });
         const orphans = JSON.parse(result.toString());
