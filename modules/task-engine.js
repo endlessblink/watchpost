@@ -318,9 +318,11 @@ function syncFromMarkdown(mdPath) {
   const gone = db.prepare('SELECT id FROM tasks').all().map((r) => r.id).filter((id) => !keep.has(id));
   if (gone.length) {
     const dropTask = db.prepare('DELETE FROM tasks WHERE id = ?');
-    const dropDeps = db.prepare('DELETE FROM deps WHERE task_id = ? OR depends_on = ?');
+    // A surviving task still owns its prerequisite reference even when that
+    // prerequisite is archived; absence is unresolved, not completion.
+    const dropDeps = db.prepare('DELETE FROM deps WHERE task_id = ?');
     const dropComments = db.prepare('DELETE FROM comments WHERE task_id = ?');
-    db.transaction(() => { for (const id of gone) { dropDeps.run(id, id); dropComments.run(id); dropTask.run(id); } })();
+    db.transaction(() => { for (const id of gone) { dropDeps.run(id); dropComments.run(id); dropTask.run(id); } })();
   }
   return tasks.length;
 }
@@ -416,14 +418,15 @@ function getTask(id) {
 }
 
 function getReady() {
-  // Tasks not done where ALL deps are done (or no deps)
+  // Available work is planned; paused/review/already-running work is not ready
+  // to claim. A prerequisite resolves only when its existing record is done.
   return db.prepare(`
     SELECT t.* FROM tasks t
-    WHERE t.status != 'done'
+    WHERE t.status = 'planned'
       AND NOT EXISTS (
         SELECT 1 FROM deps d
-        JOIN tasks dt ON dt.id = d.depends_on
-        WHERE d.task_id = t.id AND dt.status != 'done'
+        LEFT JOIN tasks dt ON dt.id = d.depends_on
+        WHERE d.task_id = t.id AND (dt.id IS NULL OR dt.status != 'done')
       )
     ORDER BY
       CASE t.priority WHEN 'P0' THEN 0 WHEN 'P1' THEN 1 WHEN 'P2' THEN 2 ELSE 3 END,
@@ -437,8 +440,8 @@ function getBlocked() {
     WHERE t.status != 'done'
       AND EXISTS (
         SELECT 1 FROM deps d
-        JOIN tasks dt ON dt.id = d.depends_on
-        WHERE d.task_id = t.id AND dt.status != 'done'
+        LEFT JOIN tasks dt ON dt.id = d.depends_on
+        WHERE d.task_id = t.id AND (dt.id IS NULL OR dt.status != 'done')
       )
     ORDER BY t.id
   `).all();
