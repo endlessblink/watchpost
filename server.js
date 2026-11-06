@@ -13,7 +13,8 @@ const mountControlRoomRoutes = require('./controlroom/api');
 const mountVpsRoutes = require('./vps/api');
 const mountBotsRoutes = require('./bots/api');
 const mountProjectPlanView = require('./modules/project-plan-view');
-const { createPlanDoorEngine, resolveProject, selectProject, gateMessage } = require('./modules/plan-door-engine');
+const { createPlanFile } = require('./modules/plan-create');
+const { createPlanDoorEngine, resolveProject, selectProject, gateMessage, PROJECT_COOKIE } = require('./modules/plan-door-engine');
 
 // ============================================================================
 // LOCAL OVERRIDES SYSTEM
@@ -236,9 +237,9 @@ app.get('/api/status', (req, res) => {
         project: selected?.root || path.dirname(masterPlanResolution.path),
         projectName: selected?.name || '',
         planCategory: selected?.planCategory || null,
-        masterPlanPath: selected?.masterPlan || masterPlanResolution.path,
+        masterPlanPath: selected ? planPathForProject(selected) : masterPlanResolution.path,
         masterPlanSource: masterPlanResolution.source,
-        masterPlanExists: masterPlanResolution.exists,
+        masterPlanExists: selected ? fs.existsSync(planPathForProject(selected)) : masterPlanResolution.exists,
         uptime: process.uptime(),
         url: `http://localhost:${PORT}`
     });
@@ -454,7 +455,7 @@ app.post('/api/config/reload', (req, res) => {
 app.get('/api/master-plan', (req, res) => {
     const masterPlanResolution = getMasterPlanResolution();
     const selected = projectForRequest(req);
-    const masterPlanPath = selected?.masterPlan || masterPlanResolution.path;
+    const masterPlanPath = selected ? planPathForProject(selected) : masterPlanResolution.path;
 
     console.log(`[API] Fetching MASTER_PLAN.md from: ${masterPlanPath}`);
 
@@ -499,6 +500,12 @@ const readProjects = () => {
         return { projects: [] };
     }
 };
+
+// A project's plan path is always its own: the registered file, or the default place in its folder.
+// A project without a plan file therefore reads as "no plan", never as some other project's plan.
+function planPathForProject(project) {
+    return project.masterPlan || path.join(project.root, 'MASTER_PLAN.md');
+}
 
 function projectForRequest(req) {
     return resolveProject(readProjects().projects, req, getMasterPlanPath(), process.env.WATCHPOST_PROJECT_NAME);
@@ -665,13 +672,11 @@ app.post('/api/projects/:name/activate', async (req, res) => {
         return res.status(404).json({ error: `Project "${name}" not found` });
     }
 
-    // A project without a plan file can still be picked; its board is just empty.
-    if (!project.masterPlan) {
-        project.masterPlan = path.join(project.root, 'MASTER_PLAN.md');
-    }
-
-    // Update runtime environment
-    selectProject(project, process.env, updateEnvFile);
+    // A project without a plan file can still be picked; its board offers to create one.
+    // Update runtime environment (default for clients that name no project)
+    selectProject({ ...project, masterPlan: planPathForProject(project) }, process.env, updateEnvFile);
+    // And remember the choice in this browser, so other clients cannot change what it shows.
+    res.cookie(PROJECT_COOKIE, project.name, { path: '/', sameSite: 'lax', maxAge: 365 * 24 * 60 * 60 * 1000 });
 
     console.log(`[Projects] Activated project: ${name} -> ${project.masterPlan}`);
 
@@ -702,6 +707,25 @@ app.post('/api/projects/:name/activate', async (req, res) => {
         response.warning = 'Task engine sync failed — tasks may not load';
     }
     res.json(response);
+});
+
+// POST /api/projects/:name/plan/create - give a project its MASTER_PLAN.md (never overwrites)
+app.post('/api/projects/:name/plan/create', (req, res) => {
+    const data = readProjects();
+    const project = data.projects.find(p => p.name === req.params.name);
+    if (!project) return res.status(404).json({ error: `Project "${req.params.name}" not found` });
+
+    const result = createPlanFile(project);
+    if (!result.ok) return res.status(400).json({ error: result.message, code: result.code });
+
+    project.masterPlan = result.planPath;
+    writeProjects(data);
+    if (process.env.WATCHPOST_PROJECT_NAME === project.name) selectProject(project, process.env, updateEnvFile);
+    console.log(`[Projects] ${result.created ? 'Created' : 'Attached existing'} plan for ${project.name}: ${result.planPath}`);
+
+    const payload = JSON.stringify({ type: 'project-changed', project: { ...project, active: true } });
+    clients.forEach(client => client.write(`data: ${payload}\n\n`));
+    res.json({ created: result.created, planPath: result.planPath, project });
 });
 
 // ============================================================================
@@ -743,23 +767,13 @@ function getEngineForPlan(masterPlanPath, selectedProject = null) {
 
 // Which plan file does this request mean? ?cwd= / body.cwd naming a registered project (or a folder holding a MASTER_PLAN.md) wins; otherwise the active project.
 function resolvePlanForRequest(req) {
-    const named = req?.query?.project || req?.body?.project;
-    if (typeof named === 'string') {
-        const project = readProjects().projects.find(p => p.name === named);
-        if (project?.masterPlan) return project.masterPlan;
-    }
+    // One resolver decides the project (explicit project, folder, this browser's choice, global default).
+    const project = projectForRequest(req);
+    if (project) return planPathForProject(project);
+    // A folder that holds a plan file but is not registered.
     const cwd = (req && ((req.query && req.query.cwd) || (req.body && req.body.cwd))) || '';
     if (typeof cwd === 'string' && cwd) {
         const resolved = path.resolve(cwd);
-        let best = null;
-        try {
-            for (const p of readProjects().projects) {
-                if (!p.masterPlan || !p.root) continue;
-                const root = path.resolve(p.root);
-                if ((resolved === root || resolved.startsWith(root + path.sep)) && (!best || root.length > best.rootLen)) best = { plan: p.masterPlan, rootLen: root.length };
-            }
-        } catch (_) { /* fall through */ }
-        if (best) return best.plan;
         for (const cand of [path.join(resolved, 'MASTER_PLAN.md'), path.join(resolved, 'docs', 'MASTER_PLAN.md')]) {
             if (fs.existsSync(cand)) return cand;
         }
@@ -823,7 +837,7 @@ const getNextId = (content, prefix = 'TASK') => {
 // API Endpoint to get the next available ID
 app.get('/api/next-id', (req, res) => {
     const prefix = req.query.prefix || 'TASK';
-    const masterPlanPath = getMasterPlanPath();
+    const masterPlanPath = resolvePlanForRequest(req);
 
     console.log(`[API] Calculating next ID for prefix: ${prefix}`);
 
@@ -847,7 +861,7 @@ app.get('/api/next-id', (req, res) => {
 app.post('/api/task/:id/status', (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
-    const masterPlanPath = getMasterPlanPath();
+    const masterPlanPath = resolvePlanForRequest(req);
     console.log(`[API] Updating task ${id} status to ${status}`);
 
     fs.readFile(masterPlanPath, 'utf8', (err, data) => {
@@ -950,7 +964,7 @@ app.post('/api/task/:id/status', (req, res) => {
 app.post('/api/task/:id/complexity', (req, res) => {
     const { id } = req.params;
     const { complexity } = req.body;
-    const masterPlanPath = getMasterPlanPath();
+    const masterPlanPath = resolvePlanForRequest(req);
     console.log(`[API] Updating task ${id} complexity to ${complexity}`);
 
     fs.readFile(masterPlanPath, 'utf8', (err, data) => {
@@ -1034,7 +1048,7 @@ app.post('/api/task/:id', (req, res, next) => {
     }
 
     const { property, value } = req.body;
-    const masterPlanPath = getMasterPlanPath();
+    const masterPlanPath = resolvePlanForRequest(req);
     console.log(`[API] Updating task ${id} property ${property} to ${value}`);
 
     if (property !== 'priority') {
@@ -1116,7 +1130,7 @@ app.post('/api/task/add', (req, res) => {
         }
         masterPlanPath = match.masterPlan;
     } else {
-        masterPlanPath = getMasterPlanPath();
+        masterPlanPath = resolvePlanForRequest(req);
     }
 
     if (!title) {

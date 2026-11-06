@@ -90,6 +90,17 @@
 
     <div id="project-toast" class="project-toast"></div>
 
+    <div class="stage">
+    <header class="project-bar" id="project-bar">
+        <button class="project-bar-main" id="project-bar-open" type="button" aria-label="Switch project">
+            <span class="pb-thumb"><img id="bar-thumb" alt="" hidden><span class="pb-initial" id="bar-initial">?</span></span>
+            <span class="pb-text">
+                <span class="pb-name" id="bar-name">—</span>
+                <span class="pb-sub" id="bar-sub"></span>
+            </span>
+            <svg class="pb-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9.5L12 15l5.5-5.5"/></svg>
+        </button>
+    </header>
     <main class="content">
         <div id="projects" class="panel">
             <iframe data-src="controlroom/index.html" title="Projects"></iframe>
@@ -130,6 +141,7 @@
             <iframe data-src="bots/index.html" title="Bots & Personas"></iframe>
         </div>
     </main>
+    </div>
     </div>
 
     <script>
@@ -240,6 +252,7 @@
             activeProjectName = name || '';
             const el = document.getElementById('active-project-badge-name');
             if (el) el.textContent = activeProjectName || '—';
+            renderProjectBar();
             const cap = document.getElementById('active-project-caption');
             if (cap) cap.textContent = activeProjectName || '—';
             const thumb = document.getElementById('active-project-thumb');
@@ -252,6 +265,28 @@
             if (ini) ini.textContent = (activeProjectName || '?').trim().charAt(0).toUpperCase() || '?';
             const trg = document.getElementById('active-project-badge');
             if (trg) trg.title = 'Project: ' + (activeProjectName || 'none') + ' (switch)';
+        }
+
+        // The bar across the top: which project is on, its thumbnail, and what state its plan is in.
+        function renderProjectBar() {
+            const name = activeProjectName;
+            const info = (window.__wpProjectInfo || {})[name] || {};
+            const nameEl = document.getElementById('bar-name');
+            if (!nameEl) return;
+            nameEl.textContent = name || 'No project picked';
+            const thumb = document.getElementById('bar-thumb');
+            const ini = document.getElementById('bar-initial');
+            ini.textContent = (name || '?').trim().charAt(0).toUpperCase() || '?';
+            if (info.coverUrl) { thumb.src = info.coverUrl; thumb.hidden = false; thumb.onerror = () => { thumb.hidden = true; }; }
+            else { thumb.hidden = true; }
+            let sub = '';
+            if (window.__wpPlanExists === false) sub = 'No plan file yet';
+            else if (info.taskStats) {
+                const t = info.taskStats;
+                const open = (t.planned || 0) + (t.inProgress || 0) + (t.review || 0);
+                sub = (t.inProgress || 0) + ' active · ' + open + ' open';
+            }
+            document.getElementById('bar-sub').textContent = sub;
         }
 
         function refreshKanban() {
@@ -317,6 +352,7 @@
                 const res = await fetch('/api/status', { signal: AbortSignal.timeout(8000) });
                 if (!res.ok) return;
                 const st = await res.json();
+                if (window.__wpPlanExists !== st.masterPlanExists) { window.__wpPlanExists = st.masterPlanExists; renderProjectBar(); }
                 if (st.projectName && st.projectName !== activeProjectName) {
                     const first = !activeProjectName;
                     setActiveBadge(st.projectName);
@@ -328,6 +364,10 @@
                 }
             } catch (_) {}
         }
+        document.getElementById('project-bar-open')?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('active-project-badge')?.click();
+        });
         syncActiveProject();
         setInterval(syncActiveProject, 5000);
         document.addEventListener('visibilitychange', () => { if (!document.hidden) syncActiveProject(); });
@@ -496,6 +536,8 @@
                     const data = await enrichedRes.json();
                     projects = Array.isArray(data) ? data : [];
                     window.__wpCovers = Object.fromEntries(projects.map(p => [p.name, p.coverUrl || '']));
+                    window.__wpProjectInfo = Object.fromEntries(projects.map(p => [p.name, { coverUrl: p.coverUrl || '', taskStats: p.taskStats || null }]));
+                    renderProjectBar();
                     if (statusRes && statusRes.ok) {
                         const status = await statusRes.json();
                         activeMasterPlan = status.masterPlanPath || '';
@@ -513,7 +555,7 @@
 
             window.reloadProjectSwitcher = () => {
                 projects = null;
-                if (isOpen) loadProjectList();
+                loadProjectList(); // also refreshes the project bar (counts, thumbnail)
             };
 
             async function activateProject(p) {

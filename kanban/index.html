@@ -1196,8 +1196,52 @@
     }
 
     // Render kanban board from MASTER_PLAN.md / native task API
+
+    // Empty state for a project that has no plan file yet.
+    function showNoPlan(projectName) {
+      const board = document.getElementById('kanban-board');
+      board.innerHTML = '';
+      const box = document.createElement('div');
+      box.className = 'no-plan';
+      const icon = document.createElement('div');
+      icon.className = 'no-plan-icon';
+      icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M12 11v6M9 14h6"/></svg>';
+      const title = document.createElement('div');
+      title.className = 'no-plan-title';
+      title.textContent = projectName + ' has no plan file yet';
+      const hint = document.createElement('div');
+      hint.className = 'no-plan-hint';
+      hint.textContent = 'Create one and this board fills with its tasks.';
+      const btn = document.createElement('button');
+      btn.className = 'no-plan-btn';
+      btn.type = 'button';
+      btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Create plan file</span>';
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        try {
+          const res = await fetch(`${API_BASE}/api/projects/${encodeURIComponent(projectName)}/plan/create`, { method: 'POST' });
+          const out = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(out.error || 'Could not create the plan file');
+          showToast(out.created ? 'Plan file created' : 'Plan file found and linked', 'success');
+          renderKanban();
+        } catch (err) {
+          btn.disabled = false;
+          showToast(err.message, 'error');
+        }
+      });
+      box.append(icon, title, hint, btn);
+      board.appendChild(box);
+    }
+
     async function renderKanban() {
       try {
+        // A project can be on without a plan file: offer to create one instead of an empty board.
+        const planState = await fetch(`${API_BASE}/api/status`, { signal: AbortSignal.timeout(5000) })
+          .then(r => r.ok ? r.json() : null).catch(() => null);
+        if (planState && planState.masterPlanExists === false && planState.projectName) {
+          showNoPlan(planState.projectName);
+          return;
+        }
         console.log('[renderKanban] Starting render...');
         const data = await loadTaskApiKanbanData() || await parseMasterPlan();
         console.log('[renderKanban] Parsed data:', {

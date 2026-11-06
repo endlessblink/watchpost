@@ -24,18 +24,28 @@ describe('Project switcher regression coverage', () => {
         expect(html).not.toContain('id="project-scan-btn"');
     });
 
-    // The popover must paint above the iframe content. The header needs
-    // position:relative and z-index >= the popover's z-index (60).
-    it('keeps the header above iframes so the popover is visible', () => {
+    // The popover must paint above the iframe content: the rail sits above the frames
+    // and the popover is fixed with a higher z-index than the rail.
+    it('keeps the rail and popover above iframes so the popover is visible', () => {
+        const css = readRepoFile('shell.css');
+
+        const railBlock = css.match(/\.rail\s*\{[^}]*\}/);
+        expect(railBlock, '.rail CSS block missing').not.toBeNull();
+        expect(railBlock[0]).toMatch(/position:\s*relative/);
+        expect(railBlock[0]).toMatch(/z-index:\s*30/);
+
+        const popover = css.match(/\.project-switcher-popover\s*\{[^}]*\}/);
+        expect(popover, '.project-switcher-popover CSS block missing').not.toBeNull();
+        expect(popover[0]).toMatch(/position:\s*fixed/);
+        expect(popover[0]).toMatch(/z-index:\s*50/);
+    });
+
+    it('always shows which project is on and follows the server', () => {
         const html = readRepoFile('index.html');
 
-        const headerBlock = html.match(/\.header\s*\{[^}]*\}/);
-        expect(headerBlock, '.header CSS block missing').not.toBeNull();
-        expect(headerBlock[0]).toMatch(/position:\s*relative/);
-        expect(headerBlock[0]).toMatch(/z-index:\s*50/);
-
-        // Popover should be z-index 60 (above the header's stacking context)
-        expect(html).toMatch(/\.project-switcher-popover\s*\{[\s\S]*?z-index:\s*60/);
+        expect(html).toContain('id="active-project-caption"');
+        expect(html).toContain('id="active-project-thumb"');
+        expect(html).toContain('syncActiveProject');
     });
 
     it('wires the switcher to the activate API and broadcasts to iframes', () => {
@@ -73,6 +83,8 @@ describe('Project switcher regression coverage', () => {
         // Parent navigation message
         expect(html).toContain("type: 'activate-and-navigate'");
         expect(html).toContain("target: 'kanban'");
+        // The pick travels with the message so the shell updates without waiting for an event
+        expect(html).toMatch(/activate-and-navigate'[^;]*project:/);
     });
 
     it('keeps the launcher server detached after the shell exits', () => {

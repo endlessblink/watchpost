@@ -86,3 +86,18 @@ html,body{height:100%;overflow:hidden}
 .project-caption{max-width:60px;font-size:10px;line-height:1.15;color:var(--text-2);text-align:center;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word}
 .project-switcher-popover{top:64px;bottom:auto}
 @media (max-width:760px){.project-caption{display:none}.project-switcher-wrap{width:auto;flex-direction:row}.project-switcher-popover{top:auto;bottom:72px}}
+
+/* project bar across the top: which project is on */
+.stage{flex:1;min-width:0;display:flex;flex-direction:column;height:100vh}
+.stage .content{flex:1;min-height:0}
+.project-bar{flex:0 0 56px;display:flex;align-items:center;padding:0 16px;background:var(--surface);position:relative;z-index:20}
+.project-bar-main{display:flex;align-items:center;gap:12px;border:0;background:transparent;border-radius:12px;padding:6px 12px 6px 6px;min-height:44px;text-align:left}
+.project-bar-main:hover{background:var(--card)}
+.pb-thumb{position:relative;width:36px;height:36px;border-radius:10px;background:var(--card);overflow:hidden;display:grid;place-items:center;flex:0 0 36px;font-weight:600}
+.pb-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pb-thumb img:not([hidden]) ~ .pb-initial{display:none}
+.pb-text{display:flex;flex-direction:column;min-width:0}
+.pb-name{font-weight:600;font-size:15px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:46vw}
+.pb-sub{font-size:12px;color:var(--text-3);line-height:1.2}
+.pb-caret{width:16px;height:16px;fill:none;stroke:var(--text-3);stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:760px){.stage{height:auto;flex:1}.project-bar{flex-basis:48px}}

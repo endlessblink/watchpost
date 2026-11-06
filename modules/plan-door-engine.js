@@ -36,6 +36,22 @@ function counts(tasks, key) {
     return [...result].map(([value, count]) => ({ [key]: value, count }));
 }
 
+// The project this browser last picked travels with every request as a cookie, so what the
+// dashboard shows no longer depends on the one global "active project" other clients can change.
+const PROJECT_COOKIE = 'wp_project';
+
+function cookieValue(header, name) {
+    if (typeof header !== 'string' || !header) return '';
+    for (const part of header.split(';')) {
+        const eq = part.indexOf('=');
+        if (eq < 0) continue;
+        if (part.slice(0, eq).trim() === name) {
+            try { return decodeURIComponent(part.slice(eq + 1).trim()); } catch (_) { return ''; }
+        }
+    }
+    return '';
+}
+
 function resolveProject(projects, req, activePlan, activeName) {
     const named = req?.query?.project || req?.body?.project;
     if (typeof named === 'string') return projects.find(project => project.name === named) || null;
@@ -44,6 +60,11 @@ function resolveProject(projects, req, activePlan, activeName) {
         const resolved = path.resolve(cwd);
         const matches = projects.filter(project => project.root && (resolved === project.root || resolved.startsWith(project.root + path.sep)));
         if (matches.length) return matches.sort((a, b) => b.root.length - a.root.length)[0];
+    }
+    const saved = cookieValue(req?.headers?.cookie, PROJECT_COOKIE);
+    if (saved) {
+        const picked = projects.find(project => project.name === saved);
+        if (picked) return picked;
     }
     return projects.find(project => project.name === activeName && project.masterPlan === activePlan)
         || projects.find(project => project.masterPlan === activePlan && project.name === path.basename(path.dirname(activePlan || '')))
@@ -57,4 +78,4 @@ function selectProject(project, environment, persist) {
     persist('WATCHPOST_PROJECT_NAME', project.name);
 }
 
-module.exports = { createPlanDoorEngine, resolveProject, selectProject, gateMessage };
+module.exports = { createPlanDoorEngine, resolveProject, selectProject, gateMessage, PROJECT_COOKIE, cookieValue };
