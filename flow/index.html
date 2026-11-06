@@ -152,7 +152,6 @@
     let userViewPreference = 'delivery';
     let currentProjectRoot = '';
     let currentProjectFilter = '';
-    let activeLocks = [];
     let activityByTask = new Map();
     let activityEntries = [];
     let liveSessions = [];
@@ -226,6 +225,9 @@
 
           if (/^\|\s*-+/.test(trimmed)) continue;
           if (!tableHeaders) continue;
+
+          // A row may have fewer cells than its header: a missing cell is empty, never undefined.
+          while (rawCells.length < tableHeaders.length) rawCells.push('');
 
           const idCol = tableHeaders.includes('id') ? tableHeaders.indexOf('id') : tableHeaders.indexOf('task');
           // `^task$` covers botson's table layout (`| ID | Phase | Task | Status | … |`)
@@ -1135,11 +1137,6 @@
       }];
     }
 
-    function getLineOwner(lineState) {
-      if (!lineState.currentTaskId) return null;
-      return activeLocks.find(lock => lock.task_id === lineState.currentTaskId) || null;
-    }
-
     function deriveLineStates(lines, taskById) {
       const runtimeByLine = buildLineRuntimeMap(lines);
       const lineTaskToLineId = new Map();
@@ -1168,8 +1165,7 @@
         const blockingLineIds = (line.dependsOnLineIds || []).filter(depId => !doneByLineId.get(depId));
         const sessionTracks = runtimeByLine.get(line.id) || [];
         const runtime = sessionTracks[0] || null;
-        const lockOwner = getLineOwner({ currentTaskId: currentTask?.id || null });
-        const owner = lockOwner || (isRuntimeActive(runtime) && runtime?.sid
+        const owner = (isRuntimeActive(runtime) && runtime?.sid
           ? {
               session_short: String(runtime.sid).slice(0, 8),
               session_id: runtime.sid,
@@ -1200,7 +1196,7 @@
           // lines or sprints) are treated as live by default — otherwise they get
           // hidden in the collapsed "Other Planned Flows" section and the user sees
           // an empty Active Instances panel.
-          isLiveInstance: Boolean(lockOwner) || sessionTracks.some(isRuntimeActive) || line.source === 'derived-priority',
+          isLiveInstance: sessionTracks.some(isRuntimeActive) || line.source === 'derived-priority',
           supportTasks: line.supportTaskIds.map(id => taskById.get(id)).filter(task => task && task.status !== 'done'),
         };
       });
@@ -1336,9 +1332,6 @@
       // These are the data points that historically lived in static "go check X"
       // instructions. Embedding the actual values keeps the prompt self-contained
       // and removes the failure mode where the static text drifts from reality.
-      const otherLocks = (activeLocks || [])
-        .filter(l => l && l.task_id && l.task_id !== currentTask?.id)
-        .map(l => `- ${l.task_id} held by instance ${String(l.session_id || l.sid || '').slice(0, 8) || '?'}`);
       const upcomingTaskIds = new Set(upcoming.map(t => t.id));
       const recentTouchingUpcoming = [];
       try {
@@ -1355,10 +1348,6 @@
       } catch { /* activity layer is best-effort context only */ }
 
       const liveSignals = [];
-      if (otherLocks.length) {
-        liveSignals.push('Other active locks in this repo right now:');
-        liveSignals.push(...otherLocks);
-      }
       if (recentTouchingUpcoming.length) {
         if (liveSignals.length) liveSignals.push('');
         liveSignals.push('Recent activity (last 30min) on tasks in your upcoming sequence:');
@@ -2880,16 +2869,6 @@
       }
     }
 
-    async function fetchLocksForProject(projectRoot) {
-      try {
-        const suffix = projectRoot ? `?cwd=${encodeURIComponent(projectRoot)}` : '';
-        const json = await fetchJson(`${API_BASE}/api/locks${suffix}`);
-        return json.locks || [];
-      } catch {
-        return [];
-      }
-    }
-
     async function fetchRecentActivity(projectFilter) {
       try {
         const query = projectFilter
@@ -3208,12 +3187,10 @@
         currentProjectFilter = deriveProjectFilter(status);
         // Draw the plan first: the activity requests below can take 15-20 s on a large changelog, and the screen stayed blank until they all returned.
         renderGraph();
-        const [locks, recentEntries, sessions] = await Promise.all([
-          fetchLocksForProject(currentProjectRoot),
+        const [recentEntries, sessions] = await Promise.all([
           fetchRecentActivity(currentProjectFilter),
           fetchActiveSessions(currentProjectRoot),
         ]);
-        activeLocks = locks;
         activityEntries = recentEntries;
         liveSessions = Array.isArray(sessions) ? sessions : [];
         activityByTask = buildActivityByTask(recentEntries);
