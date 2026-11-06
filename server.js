@@ -232,7 +232,10 @@ mountBotsRoutes(app);
 app.get('/api/usage', (req, res) => {
     try {
         const f = path.join(require('os').homedir(), '.watchpost', 'data', 'usage.json');
-        res.json(JSON.parse(require('fs').readFileSync(f, 'utf8')));
+        const usage = JSON.parse(require('fs').readFileSync(f, 'utf8'));
+        // Whoever writes this file is outside Watchpost, so say how old it is instead of presenting it as live.
+        const ageMin = Math.round((Date.now() - require('fs').statSync(f).mtimeMs) / 60000);
+        res.json({ ...usage, updatedAt: new Date(Date.now() - ageMin * 60000).toISOString(), ageMinutes: ageMin });
     } catch { res.json({ windows: [] }); }
 });
 
@@ -253,6 +256,7 @@ app.get('/api/status', (req, res) => {
         masterPlanPath: selected ? planPathForProject(selected) : masterPlanResolution.path,
         masterPlanSource: masterPlanResolution.source,
         masterPlanExists: selected ? fs.existsSync(planPathForProject(selected)) : masterPlanResolution.exists,
+        taskService: { available: !taskServiceError, reason: taskServiceError },
         uptime: process.uptime(),
         url: `http://localhost:${PORT}`
     });
@@ -745,6 +749,19 @@ app.post('/api/projects/:name/plan/create', (req, res) => {
 // NATIVE TASK ENGINE (SQLite)
 // ============================================================================
 let taskEngineReady = false;
+let taskServiceError = null; // why the task service is unavailable, shown in /api/status and in 503 answers
+
+// The native sqlite module is built per Node version; check it works now so a mismatch is loud, not silent.
+try {
+    const probe = new (require('better-sqlite3'))(':memory:');
+    probe.close();
+} catch (err) {
+    taskServiceError = `better-sqlite3 failed to load: ${err.message.split('\n')[0]}`;
+    console.error('\n'.padEnd(70, '!'));
+    console.error(`[TaskEngine] TASK SERVICE UNAVAILABLE: ${taskServiceError}`);
+    console.error('[TaskEngine] Fix: run `npm rebuild better-sqlite3` with the same Node that runs the server.');
+    console.error(''.padEnd(70, '!') + '\n');
+}
 
 // One engine and one database per project, chosen per request (no global flip).
 const taskEngines = new Map(); // projectRoot -> { engine, planPath, mtime }
@@ -823,6 +840,7 @@ function initTaskEngine() {
         return true;
     } catch (err) {
         console.error('[TaskEngine] Init failed:', err.message, err.stack);
+        taskServiceError = taskServiceError || `Task service failed to start: ${err.message.split('\n')[0]}`;
         taskEngineReady = false;
         return false;
     }
@@ -3782,7 +3800,7 @@ app.get('/api/events', (req, res) => {
 const requireTaskEngine = (req, res, next) => {
     const eng = engineFor(req);
     if (!eng) {
-        return res.status(503).json({ error: 'Task engine not initialized for this project (no MASTER_PLAN.md found).' });
+        return res.status(503).json({ error: taskServiceError ? `Task service unavailable: ${taskServiceError}` : 'Task engine not initialized for this project (no MASTER_PLAN.md found).' });
     }
     req.taskEngine = eng;
     req.masterPlanPath = resolvePlanForRequest(req);
