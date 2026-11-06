@@ -1,4 +1,5 @@
 'use strict';
+const { createCodexIndex } = require('../modules/codex-index');
 
 const fs = require('fs');
 const path = require('path');
@@ -713,94 +714,49 @@ function getCodexChangedFiles(row) {
     return Object.keys(changes).filter(Boolean);
 }
 
-// The Codex session folder is huge and this runs synchronously, so cache each
-// query for a minute; otherwise every Agent Log refresh pins the server.
-const CODEX_ENTRIES_TTL_MS = 60 * 1000;
-const codexEntriesCache = new Map();
+// Codex session archives are huge, so requests never read them. A background index reads each
+// file once, resumes where it stopped, and requests only read the small in-memory result.
+function codexRowToEntries(row, ctx) {
+    if (row?.type === 'session_meta') {
+        const payload = row.payload || {};
+        ctx.sid = payload.session_id || payload.id || ctx.sid;
+        ctx.cwd = payload.cwd || ctx.cwd;
+        ctx.branch = payload.git_branch || payload.gitBranch || ctx.branch;
+        ctx.project = getProjectNameFromCwd(ctx.cwd);
+        return [];
+    }
+    const ts = row?.timestamp || row?.payload?.timestamp || '';
+    if (!ts) return [];
+    const payloadType = row.payload?.type || row.type || '';
+    if (payloadType === 'token_count') return [];
 
-function readCodexEntries(days, projectFilter) {
-    const key = `${days}|${projectFilter || ''}`;
-    const hit = codexEntriesCache.get(key);
-    if (hit && Date.now() - hit.at < CODEX_ENTRIES_TTL_MS) return hit.entries;
-    const entries = readCodexEntriesUncached(days, projectFilter);
-    codexEntriesCache.set(key, { at: Date.now(), entries });
-    return entries;
+    const sid = ctx.sid || path.basename(ctx.file || '', '.jsonl');
+    const project = ctx.project || 'unknown';
+    const changedFiles = getCodexChangedFiles(row);
+    const files = changedFiles.length ? changedFiles : [null];
+    const summary = getCodexSummary(row);
+    return files.map(changedFile => ({
+        ts,
+        sid,
+        tid: `${sid}:${payloadType || row.type}:${ts}:${changedFile || ''}`,
+        tool: `codex.${payloadType || row.type || 'event'}`,
+        event: payloadType || row.type || 'CodexEvent',
+        project,
+        cwd: ctx.cwd || null,
+        file: changedFile,
+        cmd: null,
+        summary,
+        agent: 'codex',
+        branch: ctx.branch || null,
+        source: 'codex'
+    }));
 }
 
-function readCodexEntriesUncached(days, projectFilter) {
-    const cutoffIso = new Date(Date.now() - (days * 24 * 60 * 60 * 1000)).toISOString();
-    const entries = [];
-    const seen = new Set();
+const codexIndex = createCodexIndex({ listFiles: listCodexSessionFiles, rowToEntries: codexRowToEntries });
+codexIndex.start();
 
-    for (const filePath of listCodexSessionFiles(days)) {
-        let content = '';
-        try {
-            content = fs.readFileSync(filePath, 'utf8');
-        } catch {
-            continue;
-        }
-
-        let sid = path.basename(filePath, '.jsonl');
-        let cwd = null;
-        let project = 'unknown';
-        let branch = null;
-
-        for (const line of content.split('\n')) {
-            const trimmed = line.trim();
-            if (!trimmed) continue;
-
-            let row;
-            try {
-                row = JSON.parse(trimmed);
-            } catch {
-                continue;
-            }
-
-            if (row?.type === 'session_meta') {
-                const payload = row.payload || {};
-                sid = payload.session_id || payload.id || sid;
-                cwd = payload.cwd || cwd;
-                branch = payload.git_branch || payload.gitBranch || branch;
-                project = getProjectNameFromCwd(cwd);
-                continue;
-            }
-
-            const ts = row.timestamp || row.payload?.timestamp || '';
-            if (!ts || ts < cutoffIso) continue;
-            if (projectFilter && project !== projectFilter) continue;
-
-            const payloadType = row.payload?.type || row.type || '';
-            if (payloadType === 'token_count') continue;
-
-            const changedFiles = getCodexChangedFiles(row);
-            const files = changedFiles.length ? changedFiles : [null];
-            const summary = getCodexSummary(row);
-
-            for (const changedFile of files) {
-                const tid = `${sid}:${payloadType || row.type}:${ts}:${changedFile || ''}`;
-                if (seen.has(tid)) continue;
-                seen.add(tid);
-
-                entries.push({
-                    ts,
-                    sid,
-                    tid,
-                    tool: `codex.${payloadType || row.type || 'event'}`,
-                    event: payloadType || row.type || 'CodexEvent',
-                    project,
-                    cwd,
-                    file: changedFile,
-                    cmd: null,
-                    summary,
-                    agent: 'codex',
-                    branch,
-                    source: 'codex'
-                });
-            }
-        }
-    }
-
-    return entries;
+function readCodexEntries(days, projectFilter) {
+    return codexIndex.getEntries(days, projectFilter);
 }
 
 function readOpenCodeEntries(days, projectFilter) {
@@ -990,9 +946,13 @@ module.exports = function mountControlRoomRoutes(app) {
         const rendered = [];
         for (const project of projects) {
             if (project.archived) continue;
-            const taskStats = parseTaskStats(project.masterPlan || '');
+            const planEngine = project.planDoor ? createPlanDoorEngine(project) : null;
+            const taskStats = planEngine ? planEngine.projectStats() : parseTaskStats(project.masterPlan || '');
             const gitInfo = getGitInfo(project.root || '');
-            const topInProgress = extractInProgressTitles(project.masterPlan || '', 2);
+            const topInProgress = planEngine
+                ? planEngine.getTasks({ status: 'in_progress' }).slice(0, 2).map(task =>
+                    `${task.id}: ${task.title.length > 60 ? task.title.slice(0, 57) + '…' : task.title}`)
+                : extractInProgressTitles(project.masterPlan || '', 2);
 
             // Staleness filter
             const lastCommitMs = gitInfo.lastCommitDate
@@ -1091,6 +1051,8 @@ module.exports = function mountControlRoomRoutes(app) {
                 try {
                     const projects = loadProjects();
                     for (const p of projects) {
+                        // Managed tasks can change independently of the Markdown mirror.
+                        if (p.planDoor && !p.archived) { stale = true; break; }
                         if (!p.masterPlan || !fs.existsSync(p.masterPlan)) continue;
                         const mtime = fs.statSync(p.masterPlan).mtimeMs;
                         if (mtime > cached.timestamp) { stale = true; break; }
