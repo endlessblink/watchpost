@@ -277,16 +277,22 @@ function renderServices(data) {
     for (const cat of categoryOrder) {
         if (!groups[cat] || !groups[cat].length) continue;
         const cfg = CATEGORY_CONFIG[cat] || { label: cat, icon: 'other' };
-        html += `<section class="category-section">
+        // A long group is cut into blocks of at most 6 services; every block carries its own header,
+        // so whichever column a block lands in, you can tell what it is.
+        const CHUNK = 6;
+        for (let i = 0; i < groups[cat].length; i += CHUNK) {
+            const part = groups[cat].slice(i, i + CHUNK);
+            html += `<section class="category-section${i ? ' continued' : ''}">
             <h2 class="category-header">
                 <span class="category-icon">${icon(cfg.icon)}</span>
                 <span class="category-label">${cfg.label}</span>
-                <span class="category-count">${groups[cat].length}</span>
+                <span class="category-count">${i ? '' : groups[cat].length}</span>
             </h2>
             <div class="category-grid">
-                ${groups[cat].map(renderServiceCard).join('')}
+                ${part.map(renderServiceCard).join('')}
             </div>
         </section>`;
+        }
     }
     grid.innerHTML = html;
 }

@@ -48,3 +48,22 @@ describe('flow task cards and panel', () => {
         expect(panel).not.toContain('score-bar');
     });
 });
+
+describe('map and server page structure', () => {
+    const read = f => fs.readFileSync(path.join(root, f), 'utf8');
+    it('docs map keeps itself fitted to its container until the person moves it', () => {
+        const html = read('docs/index.html');
+        expect(html).toContain('new ResizeObserver(sizeAndFit)');
+        expect(html).toContain('if (autoFit) graph.zoomToFit');
+    });
+    it('skills map skips labels that would sit on another label', () => {
+        const html = read('skills/index.html');
+        expect(html).toContain('labelBoxes');
+        expect(html).toContain('onRenderFramePre');
+    });
+    it('server page cuts long groups into blocks that each carry their header', () => {
+        const html = read('vps/index.html');
+        expect(html).toContain('const CHUNK = 6');
+        expect(read('vps/dusk.css')).toContain('.category-section.continued');
+    });
+});

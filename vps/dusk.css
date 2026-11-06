@@ -142,6 +142,6 @@ svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-
   .svc-row{gap:10px;padding:8px 6px 8px 8px}
 }
 /* groups may split across columns (rows stay whole), so columns fill evenly with no gaps */
-.service-grid>.category-section,.health-layout>*{break-inside:auto;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.category-header{break-after:avoid}
+.service-grid>.category-section,.health-layout>*{break-inside:avoid}
+.category-section.continued .category-header{opacity:.55}
 .service-card{break-inside:avoid}
