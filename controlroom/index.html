@@ -787,7 +787,8 @@ async function activateProject(name) {
         }
         showToast('Switched to ' + name, 'check');
         if (window.parent && window.parent !== window) {
-            window.parent.postMessage({ type: 'activate-and-navigate', target: 'kanban' }, '*');
+            const proj = (typeof allProjects !== 'undefined' && allProjects.find(p => p.name === name)) || null;
+            window.parent.postMessage({ type: 'activate-and-navigate', target: 'kanban', project: proj ? { name: proj.name, root: proj.root, masterPlan: proj.masterPlan } : { name } }, '*');
         }
     } catch (err) {
         showToast('Network error switching project', 'warning');

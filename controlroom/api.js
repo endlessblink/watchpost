@@ -713,7 +713,21 @@ function getCodexChangedFiles(row) {
     return Object.keys(changes).filter(Boolean);
 }
 
+// The Codex session folder is huge and this runs synchronously, so cache each
+// query for a minute; otherwise every Agent Log refresh pins the server.
+const CODEX_ENTRIES_TTL_MS = 60 * 1000;
+const codexEntriesCache = new Map();
+
 function readCodexEntries(days, projectFilter) {
+    const key = `${days}|${projectFilter || ''}`;
+    const hit = codexEntriesCache.get(key);
+    if (hit && Date.now() - hit.at < CODEX_ENTRIES_TTL_MS) return hit.entries;
+    const entries = readCodexEntriesUncached(days, projectFilter);
+    codexEntriesCache.set(key, { at: Date.now(), entries });
+    return entries;
+}
+
+function readCodexEntriesUncached(days, projectFilter) {
     const cutoffIso = new Date(Date.now() - (days * 24 * 60 * 60 * 1000)).toISOString();
     const entries = [];
     const seen = new Set();
