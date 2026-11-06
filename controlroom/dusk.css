@@ -275,3 +275,9 @@ body:has(.detail-overlay.open) .toast-container{bottom:92px}
   .detail-panel{right:8px;left:8px;top:8px;bottom:8px;width:auto;max-width:none}
   .toast-container{left:16px;right:16px;bottom:16px;align-items:center}
 }
+
+/* the project that is on */
+.project-card.is-on,.list-row.is-on{box-shadow:0 0 0 2px var(--accent)}
+.project-card.is-on .card-name::after,.list-row.is-on .list-name::after{content:"";display:inline-block;width:8px;height:8px;margin-left:8px;border-radius:50%;background:var(--accent);vertical-align:middle}
+.on-chip{margin-left:10px;padding:4px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600}
+.on-chip[hidden]{display:none}

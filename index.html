@@ -310,6 +310,28 @@
             } catch (_) {}
         });
 
+        // Keep the menu in step with the server: whoever picked the project (this page,
+        // another tab, an agent), the tile, the board and the pages follow within seconds.
+        async function syncActiveProject() {
+            try {
+                const res = await fetch('/api/status', { signal: AbortSignal.timeout(8000) });
+                if (!res.ok) return;
+                const st = await res.json();
+                if (st.projectName && st.projectName !== activeProjectName) {
+                    const first = !activeProjectName;
+                    setActiveBadge(st.projectName);
+                    if (!first) {
+                        refreshKanban();
+                        broadcastProjectSwitch({ name: st.projectName, root: st.project, masterPlan: st.masterPlanPath });
+                        showToast('Project is now ' + st.projectName);
+                    }
+                }
+            } catch (_) {}
+        }
+        syncActiveProject();
+        setInterval(syncActiveProject, 5000);
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) syncActiveProject(); });
+
         // ── Project Switcher init ──────────────────────────────────────────
         (function initProjectSwitcher() {
             const trigger = document.getElementById('active-project-badge');
@@ -495,10 +517,6 @@
             };
 
             async function activateProject(p) {
-                if (!p.masterPlan) {
-                    showTransientError(`${p.name} has no MASTER_PLAN.md`);
-                    return;
-                }
                 if (isActiveProject(p)) {
                     closePopover();
                     switchTab('kanban');

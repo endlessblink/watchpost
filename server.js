@@ -214,6 +214,14 @@ mountVpsRoutes(app);
 // 8. Mount Bots catalog routes (/api/bots, /api/bots/index.md, /api/bots/resolve)
 mountBotsRoutes(app);
 
+// Usage snapshot (plan limits) - written to ~/.watchpost/data/usage.json by whoever reads the Claude Code usage card
+app.get('/api/usage', (req, res) => {
+    try {
+        const f = path.join(require('os').homedir(), '.watchpost', 'data', 'usage.json');
+        res.json(JSON.parse(require('fs').readFileSync(f, 'utf8')));
+    } catch { res.json({ windows: [] }); }
+});
+
 // Status API - for Claude to detect if Watchpost is running
 app.get('/api/status', (req, res) => {
     const pkg = require('./package.json');
@@ -657,10 +665,9 @@ app.post('/api/projects/:name/activate', async (req, res) => {
         return res.status(404).json({ error: `Project "${name}" not found` });
     }
 
+    // A project without a plan file can still be picked; its board is just empty.
     if (!project.masterPlan) {
-        return res.status(400).json({
-            error: `Project "${name}" has no masterPlan path configured`
-        });
+        project.masterPlan = path.join(project.root, 'MASTER_PLAN.md');
     }
 
     // Update runtime environment
