@@ -185,3 +185,11 @@ svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-
 .no-plan-btn{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 20px;margin-top:6px;border:0;border-radius:var(--r-btn);background:var(--accent);color:var(--on-accent);font-weight:600;font-size:15px}
 .no-plan-btn:disabled{opacity:.6;cursor:progress}
 .no-plan-btn svg{width:18px;height:18px}
+
+/* card structure: id line, title, subtitle */
+.task-card{gap:6px}
+.task-kicker{font-family:var(--f-mono);font-size:11px;letter-spacing:.02em;color:var(--text-3);padding-right:30px}
+.task-title{-webkit-line-clamp:2}
+.task-sub{font-size:12.5px;line-height:1.4;color:var(--text-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty}
+.task-progress{margin-top:4px}
+.task-id{display:none}

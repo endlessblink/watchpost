@@ -7,6 +7,7 @@
   <title>Dev Maestro - Task Management</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../dusk-tokens.css">
   <link rel="stylesheet" href="dusk.css">
   <!-- D3.js for Beads dependency graph -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -1146,16 +1147,16 @@
       return tasks;
     }
 
-    async function loadTaskApiKanbanData() {
+    async function loadTaskApiKanbanData(includeArchived = false) {
       if (!CONFIG.useApi) return null;
 
       try {
-        const response = await fetch(`${API_BASE}/api/tasks/list?t=${Date.now()}`, { signal: AbortSignal.timeout(3000) });
+        const response = await fetch(`${API_BASE}/api/tasks/list?${includeArchived ? 'includeArchived=1&' : ''}t=${Date.now()}`, { signal: AbortSignal.timeout(3000) });
         if (!response.ok) return null;
 
         const json = await response.json();
-        const tasks = Array.isArray(json.tasks) ? json.tasks : [];
-        if (!tasks.length) return null;
+        if (!Array.isArray(json.tasks)) return null;
+        const tasks = json.tasks;
 
         const statusMap = {
           planned: 'todo',
@@ -1179,6 +1180,8 @@
               priority: task.priority || '',
               lane: task.lane || '',
               managedPlan: task.managed_plan || false,
+              archivedAt: task.archived_at || null,
+              notes: task.archive_reason || '',
               section: 'activeWork',
               description: '',
               subtasks: [],
@@ -1390,7 +1393,9 @@
               const showProgress = task.status === 'in-progress' || (progress > 0 && progress < 100);
               const kindText = kind === 'bug' ? 'Bug' : kind === 'issue' ? 'Issue' : kind === 'road' ? 'Roadmap' : 'Task';
               card.innerHTML = `
-              <div class="task-title">${task.title}</div>
+              <div class="task-kicker">${task.id}${task.lane ? ' · ' + task.lane : ''}</div>
+              <div class="task-title">${cardTitle(task)}</div>
+              ${cardSubtitle(task) ? `<div class="task-sub">${cardSubtitle(task)}</div>` : ''}
               ${showProgress ? `<div class="task-progress" title="Progress ${progress}%">
                 <div class="progress-bar"><div class="task-progress-bar ${progressClass}" style="width: ${progress}%"></div></div>
                 <span class="progress-percent">${progress}%</span>
@@ -1723,9 +1728,9 @@
 
     // Archive Kanban Renderer - Shows completed items from MASTER_PLAN.md
     async function renderArchiveKanban() {
-      const data = MASTER_PLAN_DATA || await parseMasterPlan();
+      const data = await loadTaskApiKanbanData(true) || MASTER_PLAN_DATA || await parseMasterPlan();
 
-      // Collect all completed items
+      // Include persisted archives while retaining the existing completed view.
       const completedTasks = [
         ...data.activeWork.filter(i => i.status === 'done'),
         ...data.bugs.filter(i => i.status === 'done'),
@@ -2150,6 +2155,20 @@
         'promoted': 100
       };
       return progressMap[column] || 50;
+    }
+
+    // Card structure: small ID line, clear title, one quiet subtitle line.
+    function escHtml(t) { return String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+    function cardTitle(task) {
+      const t = String(task.title || '').replace(/\s+/g, ' ').replace(/^[\s\/:\u2013\u2014-]+/, '')
+        .replace(/^(?:[A-Z]+-\d+\s*\/\s*)*[A-Z]+-\d+\s*[:\u2013\u2014-]\s*/, '').trim();
+      return t || task.title;
+    }
+    function cardSubtitle(task) {
+      const raw = String(task.notes || task.description || '').replace(/[`*_#>|]/g, '').replace(/\s+/g, ' ').trim();
+      if (!raw) return '';
+      const first = raw.split(/(?<=[.!?])\s/)[0];
+      return escHtml(first.length > 110 ? first.slice(0, 107).trimEnd() + '\u2026' : first);
     }
 
     function getProgressClass(progress) {
@@ -3255,8 +3274,8 @@
               // Optional: Refresh data to ensure sort order/consistency
               setTimeout(() => renderKanban(), 500);
             } else {
-              showToast(`✗ Failed to update status`, 'error');
-              // Revert move? (Requires complex logic, usually refresh fixes it)
+              showToast(`✗ ${result.error || 'Failed to update status'}`, 'error');
+              // Reload so the card goes back where the plan file says it is
               setTimeout(() => renderKanban(), 1000);
             }
           } catch (err) {
@@ -4336,6 +4355,7 @@
     });
 
   </script>
+<script src="../dusk-select.js"></script>
 </body>
 
 </html>
