@@ -326,6 +326,7 @@ async function loadProjects() {
                 root,
                 archived: p.archived || false,
                 updatedAt: p.updatedAt || p.updated_at || p.lastActivity || null,
+                planExists: p.planExists !== false,
                 stats: {
                     done: p.taskStats?.done ?? p.stats?.done ?? 0,
                     active: p.taskStats?.inProgress ?? p.stats?.active ?? 0,
@@ -687,7 +688,7 @@ function cardHtml(p) {
             <div class="card-name">${escHtml(p.name)}</div>
             <div class="card-stats" title="${breakdown}">
                 ${p.stats.active ? `<span class="stat-live" aria-label="${p.stats.active} active"></span>` : ''}
-                <span class="stat-open">${realTotal ? open + ' open' : 'No tasks'}</span>
+                <span class="stat-open">${!p.planExists ? 'No plan file yet' : realTotal ? open + ' open' : 'No tasks'}</span>
                 <span class="card-time">${p.updatedAt ? timeAgo(p.updatedAt) : ''}</span>
             </div>
         </div>

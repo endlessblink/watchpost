@@ -233,8 +233,23 @@
         let activeProjectName = '';
 
         function setActiveBadge(name) {
+            if ((name || '') !== activeProjectName) window.__wpBarStats = null;
             activeProjectName = name || '';
             renderProjectBar();
+            refreshBarStats();
+        }
+
+        // Live counts for the bar: read from the task service for the active project, not from the cached project list.
+        async function refreshBarStats() {
+            const forProject = activeProjectName;
+            try {
+                const res = await fetch('/api/tasks/stats?t=' + Date.now(), { signal: AbortSignal.timeout(8000) });
+                const stats = res.ok ? await res.json() : null;
+                if (forProject !== activeProjectName) return; // the project changed while waiting
+                const by = Object.fromEntries(((stats && stats.byStatus) || []).map(r => [r.status, r.count]));
+                window.__wpBarStats = stats ? { planned: by.planned || 0, inProgress: by.in_progress || 0, review: by.review || 0 } : null;
+                renderProjectBar();
+            } catch (_) {}
         }
 
         // The bar across the top: which project is on, its thumbnail, and what state its plan is in.
@@ -251,8 +266,8 @@
             else { thumb.hidden = true; }
             let sub = '';
             if (window.__wpPlanExists === false) sub = 'No plan file yet';
-            else if (info.taskStats) {
-                const t = info.taskStats;
+            else if (window.__wpBarStats || info.taskStats) {
+                const t = window.__wpBarStats || info.taskStats;
                 const open = (t.planned || 0) + (t.inProgress || 0) + (t.review || 0);
                 sub = (t.inProgress || 0) + ' active · ' + open + ' open';
             }
@@ -323,6 +338,7 @@
                 if (!res.ok) return;
                 const st = await res.json();
                 if (window.__wpPlanExists !== st.masterPlanExists) { window.__wpPlanExists = st.masterPlanExists; renderProjectBar(); }
+                refreshBarStats();
                 if (st.projectName && st.projectName !== activeProjectName) {
                     const first = !activeProjectName;
                     setActiveBadge(st.projectName);
@@ -367,6 +383,7 @@
 
             function composeMeta(p) {
                 if (p.planDoor) return p.planCategory === 'finetuned' ? 'Finetuned production' : 'ImagineBox product';
+                if (p.planExists === false) return 'No plan file yet';
                 const parts = [];
                 const s = p.taskStats || {};
                 if (s.inProgress) parts.push(`${s.inProgress} active`);
@@ -397,6 +414,7 @@
             }
 
             function applyFilter(items) {
+                items = items.filter(p => !p.archived || isActiveProject(p));
                 if (!filter) return items;
                 const q = filter.toLowerCase();
                 return items.filter(p =>

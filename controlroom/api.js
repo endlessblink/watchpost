@@ -839,7 +839,20 @@ function readOpenCodeEntries(days, projectFilter) {
 // projects.json registry rather than re-implementing either.
 const sharedHelpers = { getGitInfo, loadProjects, findProject, detectTechStack };
 
-module.exports = function mountControlRoomRoutes(app) {
+module.exports = function mountControlRoomRoutes(app, { getTaskEngine } = {}) {
+    function projectEngine(project) {
+        return project.planDoor ? createPlanDoorEngine(project) : getTaskEngine?.(project) || null;
+    }
+
+    function projectTaskStats(project, engine = projectEngine(project)) {
+        if (!engine) return parseTaskStats(project.masterPlan || '');
+        if (engine.projectStats) return engine.projectStats();
+        const { total, byStatus } = engine.getStats();
+        const statuses = Object.fromEntries(byStatus.map(row => [row.status, row.count]));
+        return { total, done: statuses.done || 0, inProgress: statuses.in_progress || 0,
+            planned: statuses.planned || 0, paused: statuses.paused || 0, review: statuses.review || 0 };
+    }
+
 
     // Ensure data directories exist at startup
     fs.mkdirSync(COVERS_DIR, { recursive: true });
@@ -850,13 +863,15 @@ module.exports = function mountControlRoomRoutes(app) {
     app.get('/api/projects/enriched', (req, res) => {
         const projects = loadProjects();
         const enriched = projects.map(project => {
-            const taskStats = project.planDoor ? createPlanDoorEngine(project).projectStats() : parseTaskStats(project.masterPlan || '');
+            const taskStats = projectTaskStats(project);
             const cover = findCoverFile(project.name);
             const gitInfo = getGitInfo(project.root || '');
 
             return {
                 ...project,
                 taskStats,
+                // The plan file itself, so every screen can say "No plan file yet" the same way.
+                planExists: project.planDoor ? true : fs.existsSync(project.masterPlan || path.join(project.root || '', 'MASTER_PLAN.md')),
                 coverUrl: cover ? `/api/projects/${encodeURIComponent(project.name)}/cover` : null,
                 lastActivity: gitInfo.lastCommitDate,
                 commits7d: gitInfo.commits7d,
@@ -946,8 +961,8 @@ module.exports = function mountControlRoomRoutes(app) {
         const rendered = [];
         for (const project of projects) {
             if (project.archived) continue;
-            const planEngine = project.planDoor ? createPlanDoorEngine(project) : null;
-            const taskStats = planEngine ? planEngine.projectStats() : parseTaskStats(project.masterPlan || '');
+            const planEngine = projectEngine(project);
+            const taskStats = projectTaskStats(project, planEngine);
             const gitInfo = getGitInfo(project.root || '');
             const topInProgress = planEngine
                 ? planEngine.getTasks({ status: 'in_progress' }).slice(0, 2).map(task =>
@@ -1052,7 +1067,7 @@ module.exports = function mountControlRoomRoutes(app) {
                     const projects = loadProjects();
                     for (const p of projects) {
                         // Managed tasks can change independently of the Markdown mirror.
-                        if (p.planDoor && !p.archived) { stale = true; break; }
+                        if ((getTaskEngine || p.planDoor) && !p.archived) { stale = true; break; }
                         if (!p.masterPlan || !fs.existsSync(p.masterPlan)) continue;
                         const mtime = fs.statSync(p.masterPlan).mtimeMs;
                         if (mtime > cached.timestamp) { stale = true; break; }
@@ -1083,7 +1098,7 @@ module.exports = function mountControlRoomRoutes(app) {
         const project = findProject(req.params.name);
         if (!project) return res.status(404).json({ error: 'Project not found' });
 
-        const tasks = parseTaskStats(project.masterPlan || '');
+        const tasks = projectTaskStats(project);
         const gitInfo = getGitInfo(project.root || '');
 
         res.json({
@@ -1106,12 +1121,12 @@ module.exports = function mountControlRoomRoutes(app) {
 
         // Return cached summary if still fresh
         const cached = readJSON(cacheFile, null);
-        if (cached && cached.timestamp && (Date.now() - cached.timestamp < ONE_HOUR)) {
+        if (!getTaskEngine && !project.planDoor && cached && cached.timestamp && (Date.now() - cached.timestamp < ONE_HOUR)) {
             return res.json(cached.summary);
         }
 
         // Build fresh summary
-        const tasks = parseTaskStats(project.masterPlan || '');
+        const tasks = projectTaskStats(project);
         const gitInfo = getGitInfo(project.root || '');
 
         // Extract titles of recently completed tasks from MASTER_PLAN
