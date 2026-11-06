@@ -5,1959 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Watchpost — Feature Flow</title>
   <script async src="https://cdn.jsdelivr.net/npm/@dagrejs/dagre@1.1.4/dist/dagre.min.js"></script>
-  <style>
-    :root {
-      --surface-primary: #000000;
-      --surface-secondary: #0d1117;
-      --surface-tertiary: #161b22;
-      --surface-hover: rgba(255, 255, 255, 0.05);
-      --text-primary: #e6edf3;
-      --text-secondary: #c9d1d9;
-      --text-muted: #8b949e;
-      --text-subtle: #6e7681;
-      --border-subtle: #1a1a1a;
-      --border-medium: #30363d;
-      --brand-primary: #4ECDC4;
-      --brand-hover: #5fd9d1;
-      --color-flow: #6366f1;
-
-      --status-in-progress: #f59e0b;
-      --status-review: #06b6d4;
-      --status-planned: #c9d1d9;
-      --status-done: rgba(34, 197, 94, 0.55);
-      --status-paused: #6e7681;
-      --status-unknown: #8b949e;
-
-      --edge-solid: rgba(200, 210, 225, 0.55);
-      --edge-dashed: rgba(139, 148, 158, 0.32);
-
-      --recommended-glow: #4ECDC4;
-      --overdue-ring: #ef4444;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      height: 100%; width: 100%;
-      background: var(--surface-primary);
-      color: var(--text-secondary);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      overflow: hidden;
-    }
-
-    #root {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      grid-template-rows: 48px 1fr;
-      grid-template-areas:
-        "toolbar toolbar"
-        "graph   side";
-      height: 100%;
-    }
-
-    .toolbar {
-      grid-area: toolbar;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0 1rem;
-      background: var(--surface-secondary);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .toolbar .title {
-      font-size: 0.85rem; font-weight: 600;
-      color: var(--text-primary); letter-spacing: 0.02em;
-    }
-    .toolbar .title-accent { color: var(--color-flow); }
-    .toolbar .spacer { flex: 1; }
-
-    .toolbar-btn, .toolbar-toggle {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.3rem 0.7rem;
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text-muted);
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      font-size: 0.75rem; font-weight: 500;
-      cursor: pointer;
-      transition: all 150ms ease;
-      user-select: none;
-    }
-    .toolbar-btn:hover, .toolbar-toggle:hover {
-      color: var(--text-primary);
-      background: var(--surface-hover);
-      border-color: var(--border-medium);
-    }
-    .toolbar-toggle.on {
-      color: var(--color-flow);
-      border-color: rgba(99, 102, 241, 0.4);
-      background: rgba(99, 102, 241, 0.08);
-    }
-
-    .toolbar-stats {
-      font-size: 0.72rem; color: var(--text-subtle);
-      display: flex; gap: 0.9rem;
-    }
-    .toolbar-stats span { display: inline-flex; align-items: center; gap: 0.35rem; }
-    .toolbar-stats .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-
-    .graph-pane {
-      grid-area: graph;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.04), transparent 60%),
-        var(--surface-primary);
-    }
-    #graph {
-      width: 100%; height: 100%;
-      display: block;
-      cursor: grab;
-    }
-    #graph.dragging { cursor: grabbing; }
-
-    .rank-label {
-      fill: var(--text-subtle);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      pointer-events: none;
-      opacity: 0.5;
-    }
-
-    .node rect {
-      transition: stroke 150ms ease, filter 150ms ease;
-    }
-    .node:hover rect {
-      stroke: var(--color-flow) !important;
-    }
-    .node.selected rect {
-      stroke: var(--color-flow) !important;
-      stroke-width: 2 !important;
-    }
-    .node.recommended rect {
-      stroke: var(--recommended-glow) !important;
-      stroke-width: 1.6 !important;
-    }
-    .node.ready rect {
-      stroke: rgba(34, 197, 94, 0.55) !important;
-      stroke-width: 1.6 !important;
-    }
-    .node.blocked { opacity: 0.72; }
-    .node.overdue rect {
-      stroke: var(--overdue-ring) !important;
-    }
-    .node-id {
-      fill: var(--text-primary);
-      font-size: 10.5px;
-      font-weight: 600;
-      pointer-events: none;
-    }
-    .node-title {
-      fill: var(--text-muted);
-      font-size: 9.5px;
-      pointer-events: none;
-    }
-    /* HTML title inside <foreignObject> — proper pixel-perfect ellipsis */
-    .node-title-html {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      font-size: 10px;
-      line-height: 1.35;
-      color: var(--text-secondary);
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      padding: 0 10px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      pointer-events: none;
-      height: 100%;
-      box-sizing: border-box;
-    }
-    .node.overdue .node-title-html { color: var(--text-primary); }
-    .node.ready .node-title-html { color: var(--text-primary); }
-    /* Thin divider between header row and title row */
-    .node-rule {
-      stroke: rgba(255, 255, 255, 0.05);
-      stroke-width: 1;
-      pointer-events: none;
-    }
-    .node-priority {
-      font-size: 8.5px;
-      font-weight: 600;
-      pointer-events: none;
-    }
-
-    .edge {
-      fill: none;
-      stroke-width: 1.4;
-    }
-    .edge.inferred {
-      stroke-dasharray: 4 3;
-      stroke-width: 1;
-    }
-    .edge.highlight {
-      stroke: var(--color-flow) !important;
-      stroke-width: 2.2;
-      opacity: 1 !important;
-    }
-
-    .graph-empty {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 0.5rem; color: var(--text-subtle); font-size: 0.85rem;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 200ms ease;
-    }
-    .graph-empty.visible { opacity: 1; }
-    .graph-empty code {
-      background: var(--surface-secondary);
-      padding: 0.1rem 0.35rem; border-radius: 4px;
-      color: var(--color-flow); font-size: 0.75rem;
-    }
-
-    .legend {
-      position: absolute; left: 12px; bottom: 12px;
-      background: rgba(13, 17, 23, 0.85);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 0.55rem 0.7rem;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      display: grid; grid-template-columns: auto auto;
-      gap: 0.2rem 0.8rem;
-      pointer-events: none; user-select: none;
-    }
-    .legend .row { display: flex; align-items: center; gap: 0.4rem; }
-    .legend .swatch { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
-    .legend .line { width: 16px; height: 0; border-top: 2px solid; display: inline-block; }
-    .legend .line.dashed { border-top-style: dashed; }
-
-    .zoom-controls {
-      position: absolute; right: 12px; bottom: 12px;
-      display: flex; flex-direction: column; gap: 4px;
-    }
-    .zoom-controls button {
-      width: 28px; height: 28px;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(13, 17, 23, 0.85);
-      backdrop-filter: blur(8px);
-      color: var(--text-muted);
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      font-size: 14px; font-weight: 600;
-      cursor: pointer;
-    }
-    .zoom-controls button:hover {
-      color: var(--color-flow);
-      border-color: rgba(99, 102, 241, 0.4);
-    }
-
-    .side-pane {
-      grid-area: side;
-      background: var(--surface-secondary);
-      border-left: 1px solid var(--border-subtle);
-      overflow-y: auto;
-      padding: 1rem;
-    }
-    .side-empty {
-      color: var(--text-subtle);
-      font-size: 0.78rem; line-height: 1.5;
-      padding: 1rem 0.25rem; text-align: center;
-    }
-    .side-empty svg {
-      width: 28px; height: 28px; opacity: 0.35;
-      display: block; margin: 0 auto 0.5rem;
-    }
-
-    .task-detail h2 {
-      font-size: 0.78rem; font-weight: 700;
-      color: var(--color-flow);
-      letter-spacing: 0.06em; text-transform: uppercase;
-      margin-bottom: 0.25rem;
-    }
-    .task-detail h3 {
-      font-size: 0.95rem; color: var(--text-primary);
-      font-weight: 600; line-height: 1.35;
-      margin-bottom: 0.75rem;
-    }
-    .task-detail .meta {
-      display: flex; flex-wrap: wrap; gap: 0.4rem;
-      margin-bottom: 0.85rem;
-    }
-    .task-detail .pill {
-      display: inline-flex; align-items: center; gap: 0.3rem;
-      padding: 0.18rem 0.5rem; border-radius: 999px;
-      font-size: 0.7rem; font-weight: 500;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-    }
-    .task-detail .pill.status-in-progress { color: var(--status-in-progress); border-color: rgba(245, 158, 11, 0.35); }
-    .task-detail .pill.status-review      { color: var(--status-review); border-color: rgba(6, 182, 212, 0.35); }
-    .task-detail .pill.status-done        { color: #22c55e; border-color: rgba(34, 197, 94, 0.35); }
-    .task-detail .pill.status-paused      { color: var(--status-paused); }
-    .task-detail .pill.priority-high      { color: #ef4444; border-color: rgba(239, 68, 68, 0.3); }
-    .task-detail .pill.priority-medium    { color: #f59e0b; border-color: rgba(245, 158, 11, 0.3); }
-    .task-detail .pill.priority-low       { color: var(--text-muted); }
-    .task-detail .pill.overdue            { color: var(--overdue-ring); border-color: rgba(239, 68, 68, 0.35); }
-    .task-detail .pill.rank               { color: var(--color-flow); border-color: rgba(99, 102, 241, 0.35); }
-
-    .task-detail .banner {
-      display: flex; align-items: center; gap: 0.5rem;
-      padding: 0.45rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.78rem;
-      margin-bottom: 0.85rem;
-    }
-    .task-detail .banner .dot {
-      width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0;
-    }
-    .task-detail .banner.ready {
-      background: rgba(34, 197, 94, 0.08);
-      border: 1px solid rgba(34, 197, 94, 0.25);
-      color: #bbf7d0;
-    }
-    .task-detail .banner.blocked {
-      background: rgba(239, 68, 68, 0.08);
-      border: 1px solid rgba(239, 68, 68, 0.25);
-      color: #fecaca;
-    }
-    .task-detail .banner.done {
-      background: rgba(110, 118, 129, 0.08);
-      border: 1px solid rgba(110, 118, 129, 0.25);
-      color: var(--text-muted);
-      padding: 0.4rem 0.6rem;
-    }
-    .task-detail .score-row {
-      display: flex; align-items: center; gap: 0.4rem;
-      font-size: 0.72rem; color: var(--text-muted);
-      margin-bottom: 0.85rem;
-    }
-    .task-detail .score-bar {
-      flex: 1; height: 4px; background: var(--surface-hover); border-radius: 2px; overflow: hidden;
-    }
-    .task-detail .score-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--color-flow), var(--recommended-glow));
-      transition: width 250ms ease;
-    }
-
-    .task-detail .dep-block { margin-top: 0.9rem; }
-    .task-detail .dep-block .label {
-      font-size: 0.68rem; color: var(--text-subtle);
-      letter-spacing: 0.08em; text-transform: uppercase;
-      margin-bottom: 0.35rem;
-    }
-    .task-detail .dep-list {
-      display: flex; flex-wrap: wrap; gap: 0.35rem;
-    }
-    .task-detail .dep-chip {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-secondary);
-      font-size: 0.7rem;
-      padding: 0.2rem 0.5rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 120ms ease;
-    }
-    .task-detail .dep-chip:hover {
-      color: var(--color-flow);
-      border-color: rgba(99, 102, 241, 0.4);
-      background: rgba(99, 102, 241, 0.08);
-    }
-    .task-detail .dep-chip.done { text-decoration: line-through; opacity: 0.6; }
-    .task-detail .dep-chip.inferred { border-style: dashed; color: var(--text-muted); }
-
-    .task-detail .body-preview {
-      font-size: 0.78rem; color: var(--text-muted); line-height: 1.55;
-      max-height: 200px; overflow-y: auto;
-      background: rgba(255, 255, 255, 0.02);
-      padding: 0.55rem 0.7rem;
-      border-radius: 6px;
-      border: 1px solid var(--border-subtle);
-      white-space: pre-wrap; word-break: break-word;
-      margin-top: 0.75rem;
-    }
-    .task-detail .actions {
-      display: flex; gap: 0.5rem; margin-top: 1rem;
-    }
-    .task-detail .actions button {
-      flex: 1;
-      padding: 0.45rem 0.6rem;
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--text-primary);
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 120ms ease;
-    }
-    .task-detail .actions button:hover {
-      background: rgba(99, 102, 241, 0.2);
-      border-color: var(--color-flow);
-    }
-
-    .toast {
-      position: fixed;
-      right: 356px; bottom: 16px;
-      background: rgba(13, 17, 23, 0.95);
-      border: 1px solid var(--border-medium);
-      padding: 0.5rem 0.85rem;
-      border-radius: 6px;
-      font-size: 0.75rem; color: var(--text-primary);
-      opacity: 0; transform: translateY(8px);
-      transition: all 180ms ease;
-      pointer-events: none; z-index: 20;
-    }
-    .toast.visible { opacity: 1; transform: translateY(0); }
-    .toast.success { border-color: rgba(34, 197, 94, 0.45); }
-    .toast.error   { border-color: rgba(239, 68, 68, 0.45); }
-
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-radius: 3px; }
-
-    /* ─── Sprint-focused view (active when MASTER_PLAN has `### Current sprint framing`) ── */
-    .sprint-layout {
-      position: absolute; inset: 0;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      background: var(--surface-primary);
-    }
-    .sprint-layout[hidden] { display: none; }
-
-    .sprint-sidebar {
-      background: var(--surface-secondary);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 12px 16px;
-      overflow-x: auto;
-      overflow-y: hidden;
-    }
-    .sprint-sidebar-header {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      color: var(--text-subtle);
-      padding: 0 0 10px;
-      text-transform: uppercase;
-    }
-    #sprint-list {
-      display: flex;
-      gap: 12px;
-      flex-wrap: nowrap;
-      min-width: max-content;
-      padding-bottom: 2px;
-      align-items: stretch;
-    }
-    .sprint-step {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex: 0 0 auto;
-    }
-    .sprint-connector {
-      width: 44px;
-      height: 2px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      flex: 0 0 auto;
-      position: relative;
-      overflow: hidden;
-    }
-    .sprint-connector::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      transform-origin: left center;
-      transform: scaleX(0);
-      background: linear-gradient(90deg, #22c55e, var(--color-flow));
-    }
-    .sprint-connector.completed::after,
-    .sprint-connector.current::after {
-      transform: scaleX(1);
-    }
-    .sprint-item {
-      display: block;
-      width: 320px;
-      min-width: 320px;
-      background: transparent;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      text-align: left;
-      padding: 12px 14px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
-      font: inherit;
-    }
-    .sprint-item:hover {
-      background: var(--surface-hover);
-      color: var(--text-secondary);
-    }
-    .sprint-item:focus-visible {
-      outline: 2px solid var(--color-flow);
-      outline-offset: -2px;
-    }
-    .sprint-item.active {
-      background: rgba(99, 102, 241, 0.08);
-      border-color: var(--color-flow);
-      color: var(--text-primary);
-      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.25) inset;
-    }
-    .sprint-item.completed {
-      border-color: rgba(34, 197, 94, 0.3);
-      background: rgba(34, 197, 94, 0.06);
-      color: var(--text-secondary);
-    }
-    .sprint-item.locked {
-      opacity: 0.72;
-      cursor: not-allowed;
-    }
-    .sprint-item.locked:hover {
-      background: transparent;
-      color: var(--text-muted);
-      border-color: var(--border-subtle);
-    }
-    .sprint-item-letter {
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      color: var(--color-flow);
-      opacity: 0.85;
-    }
-    .sprint-item-state {
-      margin-top: 10px;
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid transparent;
-    }
-    .sprint-item-state.current {
-      color: #c7d2fe;
-      background: rgba(99, 102, 241, 0.12);
-      border-color: rgba(99, 102, 241, 0.25);
-    }
-    .sprint-item-state.completed {
-      color: #86efac;
-      background: rgba(34, 197, 94, 0.1);
-      border-color: rgba(34, 197, 94, 0.25);
-    }
-    .sprint-item-state.locked {
-      color: var(--text-subtle);
-      background: rgba(255, 255, 255, 0.04);
-      border-color: var(--border-subtle);
-    }
-    .sprint-item-name {
-      font-size: 13px;
-      font-weight: 600;
-      margin: 3px 0 6px;
-      line-height: 1.25;
-    }
-    .sprint-item-progress {
-      height: 3px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    .sprint-item-progress-fill {
-      height: 100%;
-      background: #22c55e;
-      transition: width 300ms ease-out;
-    }
-    .sprint-item-counts {
-      font-size: 10.5px;
-      color: var(--text-subtle);
-      margin-top: 5px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .sprint-item-counts .pill {
-      padding: 1px 6px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.04);
-    }
-    .sprint-item-counts .pill.ready  { color: #22c55e; background: rgba(34,197,94,0.08); }
-    .sprint-item-counts .pill.active { color: #f59e0b; background: rgba(245,158,11,0.08); }
-    .sprint-item-copy {
-      margin-top: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 8px;
-      border-radius: 6px;
-      border: 1px solid var(--border-subtle);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text-muted);
-      font-size: 10.5px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 120ms ease;
-    }
-    .sprint-item-copy:hover {
-      color: var(--text-primary);
-      background: var(--surface-hover);
-      border-color: var(--border-medium);
-    }
-
-    .sprint-main {
-      padding: 28px 36px;
-      overflow-y: auto;
-    }
-    .flow-board {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .flow-section {
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.02);
-      padding: 16px 18px;
-    }
-    .flow-section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .flow-section-header h2 {
-      margin: 0;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .flow-section-header p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-    .flow-section-count {
-      color: var(--text-subtle);
-      font-size: 11px;
-      font-weight: 600;
-    }
-    .flow-section-count.primary {
-      color: #c7d2fe;
-    }
-    .flow-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .flow-row {
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 16px 18px 18px;
-      background: linear-gradient(180deg, rgba(18, 20, 28, 0.96), rgba(16, 18, 24, 0.92));
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-    }
-    .flow-row.current {
-      border-color: rgba(99, 102, 241, 0.42);
-      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.12), inset 0 1px 0 rgba(255,255,255,0.03);
-    }
-    .flow-row.blocked {
-      border-color: rgba(239, 68, 68, 0.34);
-    }
-    .flow-row.upnext {
-      opacity: 0.94;
-      background: linear-gradient(180deg, rgba(22, 24, 30, 0.95), rgba(18, 20, 26, 0.9));
-    }
-    .flow-row.agent-flow {
-      position: relative;
-      overflow: hidden;
-      border-radius: 8px;
-      border-color: rgba(255, 255, 255, 0.1);
-      background:
-        linear-gradient(115deg, rgba(15, 23, 42, 0.98) 0%, rgba(10, 13, 19, 0.98) 42%, rgba(18, 20, 27, 0.96) 100%);
-      padding: 0;
-      gap: 0;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    }
-    .flow-row.agent-flow::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(132deg, rgba(244, 114, 43, 0.18), transparent 28%),
-        repeating-linear-gradient(132deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 28px);
-      opacity: 0.75;
-    }
-    .flow-row.agent-flow.needs-assignment::before {
-      background:
-        linear-gradient(132deg, rgba(245, 158, 11, 0.16), transparent 30%),
-        repeating-linear-gradient(132deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 28px);
-    }
-    .agent-track-poster {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(170px, 0.34fr) minmax(320px, 1fr) auto;
-      gap: 20px;
-      align-items: stretch;
-      min-height: 174px;
-      padding: 22px 24px 20px;
-    }
-    .agent-track-ribbon {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-width: 0;
-      padding: 2px 0 4px;
-    }
-    .agent-track-ribbon::after {
-      content: '';
-      position: absolute;
-      right: -10px;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.16), transparent);
-    }
-    .agent-track-agent {
-      color: var(--text-primary);
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.09em;
-      line-height: 1.2;
-      text-transform: uppercase;
-    }
-    .agent-track-agent-meta {
-      color: var(--text-subtle);
-      font-size: 11px;
-      line-height: 1.45;
-      margin-top: 8px;
-    }
-    .agent-track-owner-mark {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 50%;
-      color: #f4a261;
-      background: rgba(255, 255, 255, 0.04);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .agent-track-main {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
-      min-width: 0;
-    }
-    .agent-track-copy {
-      min-width: 0;
-    }
-    .agent-track-kicker {
-      color: rgba(226, 232, 240, 0.54);
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 0.2em;
-      line-height: 1.2;
-      text-transform: uppercase;
-    }
-    .agent-track-headline {
-      appearance: none;
-      border: 0;
-      background: transparent;
-      padding: 0;
-      margin-top: 9px;
-      text-align: left;
-      color: var(--text-primary);
-      font: inherit;
-      font-size: clamp(22px, 3.1vw, 36px);
-      font-weight: 950;
-      letter-spacing: 0;
-      line-height: 1.02;
-      cursor: pointer;
-      max-width: 18ch;
-      overflow-wrap: anywhere;
-    }
-    .agent-track-headline:hover {
-      color: #f8d8bd;
-    }
-    .agent-track-headline.static {
-      cursor: default;
-    }
-    .agent-track-detail {
-      margin-top: 12px;
-      max-width: 76ch;
-      color: rgba(203, 213, 225, 0.76);
-      font-size: 12.5px;
-      line-height: 1.5;
-    }
-    .agent-track-slash {
-      align-self: flex-start;
-      display: inline-flex;
-      max-width: min(640px, 100%);
-      background: #f4e0c9;
-      color: #101823;
-      clip-path: polygon(0 0, calc(100% - 34px) 0, 100% 100%, 0% 100%);
-      padding: 11px 48px 11px 16px;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.02em;
-      line-height: 1.25;
-      text-transform: uppercase;
-    }
-    .agent-track-actions {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .agent-track-meta {
-      position: relative;
-      display: flex;
-      align-content: flex-start;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 7px;
-      min-width: 170px;
-      max-width: 230px;
-    }
-    .agent-track-sequence {
-      position: relative;
-      padding: 0 22px 20px;
-    }
-    .agent-track-sequence .flow-sequence {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 16px;
-    }
-    .flow-row-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .flow-instance-top {
-      display: grid;
-      grid-template-columns: minmax(150px, 0.42fr) minmax(260px, 1fr) auto;
-      gap: 14px;
-      align-items: start;
-    }
-    .flow-instance-agent {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      min-width: 0;
-    }
-    .flow-instance-agent-code {
-      color: var(--text-primary);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .flow-instance-agent-sub {
-      color: var(--text-subtle);
-      font-size: 11.5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .flow-instance-task {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      min-width: 0;
-    }
-    .flow-instance-task-kicker {
-      color: var(--text-subtle);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .flow-instance-task-title {
-      appearance: none;
-      border: 0;
-      background: transparent;
-      padding: 0;
-      text-align: left;
-      font: inherit;
-      color: var(--text-primary);
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 1.35;
-      cursor: pointer;
-    }
-    .flow-instance-task-title:hover {
-      color: #c7d2fe;
-    }
-    .flow-instance-task-detail {
-      color: var(--text-muted);
-      font-size: 12px;
-      line-height: 1.45;
-      max-width: 78ch;
-    }
-    .flow-instance-meta {
-      display: flex;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 6px;
-      min-width: 150px;
-    }
-    .flow-assignment-controls {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 0;
-    }
-    .flow-task-select {
-      min-width: min(360px, 100%);
-      max-width: 100%;
-      height: 32px;
-      border: 1px solid var(--border-medium);
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.035);
-      color: var(--text-primary);
-      padding: 0 9px;
-      font-size: 12px;
-      line-height: 32px;
-    }
-    .flow-task-select:focus {
-      outline: 1px solid rgba(99, 102, 241, 0.7);
-      outline-offset: 1px;
-    }
-    .flow-row-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      min-width: 0;
-    }
-    .flow-row-labels {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .flow-row-name {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.3;
-      letter-spacing: -0.01em;
-    }
-    .flow-row-owner,
-    .flow-row-state,
-    .flow-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid transparent;
-    }
-    .flow-row-owner {
-      color: #a5b4fc;
-      background: rgba(99, 102, 241, 0.12);
-      border-color: rgba(99, 102, 241, 0.25);
-    }
-    .flow-row-owner.unclaimed {
-      color: var(--text-subtle);
-      background: rgba(255, 255, 255, 0.04);
-      border-color: var(--border-subtle);
-    }
-    .flow-row-state.ready {
-      color: #86efac;
-      background: rgba(34, 197, 94, 0.12);
-      border-color: rgba(34, 197, 94, 0.24);
-    }
-    .flow-row-state.in-progress {
-      color: #fcd34d;
-      background: rgba(245, 158, 11, 0.12);
-      border-color: rgba(245, 158, 11, 0.24);
-    }
-    .flow-row-state.blocked {
-      color: #fca5a5;
-      background: rgba(239, 68, 68, 0.12);
-      border-color: rgba(239, 68, 68, 0.24);
-    }
-    .flow-row-state.locked {
-      color: var(--text-subtle);
-      background: rgba(255, 255, 255, 0.04);
-      border-color: var(--border-subtle);
-    }
-    .flow-row-hint {
-      color: var(--text-muted);
-      font-size: 12.5px;
-      line-height: 1.45;
-    }
-    .flow-row-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .flow-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 6px 11px;
-      border-radius: 7px;
-      border: 1px solid var(--border-subtle);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text-muted);
-      font: inherit;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .flow-btn:hover {
-      color: var(--text-primary);
-      background: var(--surface-hover);
-      border-color: var(--border-medium);
-    }
-    .flow-btn.primary {
-      background: rgba(99, 102, 241, 0.12);
-      border-color: rgba(99, 102, 241, 0.28);
-      color: #c7d2fe;
-    }
-    .flow-sequence {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      overflow-x: auto;
-      padding: 4px 2px 2px;
-    }
-    .flow-agent-tracks {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 8px;
-    }
-    .flow-agent-track {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      min-width: 0;
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.025);
-      padding: 8px 10px;
-      color: var(--text-secondary);
-      font-size: 11.5px;
-    }
-    .flow-agent-track-main {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      min-width: 0;
-    }
-    .flow-agent-track strong {
-      color: var(--text-primary);
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    .flow-agent-track span,
-    .flow-agent-task-labels {
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .flow-agent-task-labels {
-      color: var(--text-muted);
-      font-size: 11px;
-      line-height: 1.3;
-    }
-    .flow-agent-track small {
-      flex: 0 0 auto;
-      color: var(--text-subtle);
-      font-size: 10.5px;
-    }
-    @media (max-width: 900px) {
-      .agent-track-poster {
-        grid-template-columns: 1fr;
-        min-height: 0;
-        padding: 18px;
-      }
-      .agent-track-ribbon::after {
-        display: none;
-      }
-      .agent-track-headline {
-        max-width: none;
-        font-size: 24px;
-      }
-      .agent-track-meta {
-        justify-content: flex-start;
-        max-width: none;
-      }
-      .agent-track-sequence {
-        padding: 0 18px 18px;
-      }
-      .flow-instance-top {
-        grid-template-columns: 1fr;
-      }
-      .flow-instance-meta {
-        justify-content: flex-start;
-      }
-    }
-    .flow-arrow {
-      flex: 0 0 auto;
-      width: 42px;
-      height: 2px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      position: relative;
-    }
-    .flow-arrow::after {
-      content: '';
-      position: absolute;
-      right: -1px;
-      top: 50%;
-      width: 10px;
-      height: 10px;
-      border-top: 2px solid rgba(255,255,255,0.2);
-      border-right: 2px solid rgba(255,255,255,0.2);
-      transform: translateY(-50%) rotate(45deg);
-    }
-    .flow-node {
-      border: 1px solid var(--border-subtle);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      padding: 16px 18px;
-      min-width: 180px;
-      max-width: 220px;
-      min-height: 118px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      gap: 8px;
-      flex: 0 0 auto;
-      cursor: pointer;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-    }
-    .flow-node:hover {
-      background: var(--surface-hover);
-      border-color: var(--border-medium);
-    }
-    .flow-node.done {
-      border-color: rgba(34, 197, 94, 0.28);
-      background: linear-gradient(180deg, rgba(34,197,94,0.08), rgba(34,197,94,0.04));
-      opacity: 0.72;
-    }
-    .flow-node.current {
-      border-color: rgba(99, 102, 241, 0.42);
-      background: linear-gradient(180deg, rgba(99,102,241,0.16), rgba(99,102,241,0.08));
-      box-shadow: 0 10px 30px rgba(99,102,241,0.12), inset 0 1px 0 rgba(255,255,255,0.04);
-    }
-    .flow-node.next {
-      border-color: rgba(245, 158, 11, 0.34);
-      background: linear-gradient(180deg, rgba(245,158,11,0.1), rgba(245,158,11,0.04));
-    }
-    .flow-node.blocked {
-      border-color: rgba(239, 68, 68, 0.34);
-      background: linear-gradient(180deg, rgba(239,68,68,0.1), rgba(239,68,68,0.04));
-    }
-    .flow-node.locked {
-      opacity: 0.64;
-    }
-    .flow-node-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-      background: rgba(255,255,255,0.05);
-    }
-    .flow-node.current .flow-node-eyebrow {
-      color: #c7d2fe;
-      background: rgba(99,102,241,0.18);
-    }
-    .flow-node.next .flow-node-eyebrow {
-      color: #fcd34d;
-      background: rgba(245,158,11,0.14);
-    }
-    .flow-node.blocked .flow-node-eyebrow {
-      color: #fca5a5;
-      background: rgba(239,68,68,0.14);
-    }
-    .flow-node.done .flow-node-eyebrow {
-      color: #86efac;
-      background: rgba(34,197,94,0.14);
-    }
-    .flow-node-id {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-    .flow-node-title {
-      color: var(--text-secondary);
-      font-size: 13px;
-      line-height: 1.45;
-      text-wrap: balance;
-    }
-    .flow-node-empty {
-      color: var(--text-muted);
-      font-size: 12.5px;
-      line-height: 1.45;
-    }
-    .flow-chip {
-      color: #fca5a5;
-      background: rgba(239, 68, 68, 0.1);
-      border-color: rgba(239, 68, 68, 0.22);
-      cursor: pointer;
-      text-transform: none;
-      letter-spacing: 0;
-      font-size: 10.5px;
-    }
-    .flow-chip.line {
-      color: #c7d2fe;
-      background: rgba(99, 102, 241, 0.1);
-      border-color: rgba(99, 102, 241, 0.22);
-      cursor: default;
-    }
-    .flow-backlog details {
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 12px;
-      margin-top: 12px;
-    }
-    .flow-collapsed details {
-      border-top: 0;
-      padding-top: 0;
-      margin-top: 0;
-    }
-    .flow-backlog details:first-child {
-      margin-top: 0;
-      padding-top: 0;
-      border-top: 0;
-    }
-    .flow-backlog summary {
-      cursor: pointer;
-      color: var(--text-primary);
-      font-size: 12.5px;
-      font-weight: 600;
-    }
-    .flow-empty {
-      color: var(--text-muted);
-      font-size: 12.5px;
-      line-height: 1.45;
-      padding: 4px 0;
-    }
-    .flow-backlog-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .flow-backlog-item {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 9px 10px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      cursor: pointer;
-    }
-    .flow-backlog-item:hover {
-      background: var(--surface-hover);
-    }
-    .flow-backlog-empty {
-      color: var(--text-muted);
-      font-size: 12.5px;
-      line-height: 1.45;
-    }
-    .sprint-main-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .sprint-main-header h1 {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin: 0 0 4px;
-    }
-    .sprint-main-header-copy {
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .sprint-main-header .sub {
-      font-size: 12.5px;
-      color: var(--text-muted);
-    }
-    .sprint-main-header .sub b.ready { color: #22c55e; }
-    .sprint-main-header .sub b.active { color: #f59e0b; }
-    .sprint-main-header .sub b.blocked { color: #ef4444; }
-
-    .delivery-spine {
-      margin-top: 22px;
-      padding: 16px 18px;
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      background: linear-gradient(180deg, rgba(99, 102, 241, 0.05), rgba(255,255,255,0.015));
-    }
-    .delivery-spine-title {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-    .delivery-spine-title h2 {
-      margin: 0;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .delivery-spine-title span {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-    .delivery-spine-note {
-      margin: 0 0 14px;
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-    .delivery-lines-panel {
-      margin-top: 18px;
-      padding: 16px 18px;
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.015);
-    }
-    .delivery-lines-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .delivery-line-row {
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 12px 14px;
-      background: var(--surface-secondary);
-    }
-    .delivery-line-row.current {
-      border-color: rgba(99, 102, 241, 0.4);
-      background: rgba(99, 102, 241, 0.06);
-    }
-    .delivery-line-row.locked {
-      opacity: 0.78;
-    }
-    .delivery-line-row-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .delivery-line-row-meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .delivery-line-row-id {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-flow);
-    }
-    .delivery-line-row-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    .delivery-line-row-state {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid transparent;
-    }
-    .delivery-line-row-state.current {
-      color: #c7d2fe;
-      background: rgba(99, 102, 241, 0.12);
-      border-color: rgba(99, 102, 241, 0.25);
-    }
-    .delivery-line-row-state.locked {
-      color: var(--text-subtle);
-      background: rgba(255, 255, 255, 0.04);
-      border-color: var(--border-subtle);
-    }
-    .delivery-line-row-counts {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      font-size: 10.5px;
-      color: var(--text-subtle);
-    }
-    .delivery-line-row-counts span {
-      padding: 1px 6px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-    }
-    .delivery-line-row-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .delivery-line-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 5px 10px;
-      border-radius: 6px;
-      border: 1px solid var(--border-subtle);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text-muted);
-      cursor: pointer;
-      font: inherit;
-      font-size: 11px;
-      font-weight: 600;
-    }
-    .delivery-line-btn:hover {
-      color: var(--text-primary);
-      background: var(--surface-hover);
-      border-color: var(--border-medium);
-    }
-    .delivery-line-btn.primary {
-      background: rgba(99, 102, 241, 0.1);
-      border-color: rgba(99, 102, 241, 0.25);
-      color: #c7d2fe;
-    }
-    .delivery-line-btn.primary:hover {
-      border-color: var(--color-flow);
-      color: var(--text-primary);
-    }
-    .delivery-line-steps {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow-x: auto;
-      padding-top: 10px;
-    }
-    .delivery-line-step {
-      min-width: 148px;
-      max-width: 148px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid var(--border-subtle);
-      background: rgba(255, 255, 255, 0.02);
-      font-size: 11px;
-    }
-    .delivery-line-step.done {
-      border-color: rgba(34, 197, 94, 0.25);
-      background: rgba(34, 197, 94, 0.06);
-    }
-    .delivery-line-step.current {
-      border-color: rgba(245, 158, 11, 0.3);
-      background: rgba(245, 158, 11, 0.08);
-    }
-    .delivery-line-step.next {
-      border-color: rgba(99, 102, 241, 0.3);
-      background: rgba(99, 102, 241, 0.08);
-    }
-    .delivery-line-step.blocked {
-      border-color: rgba(239, 68, 68, 0.24);
-      background: rgba(239, 68, 68, 0.06);
-    }
-    .delivery-line-step-top {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-    .delivery-line-step-order {
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-    }
-    .delivery-line-step-id {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-    .delivery-line-step-state {
-      margin-left: auto;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-    }
-    .delivery-line-step-title {
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-    .delivery-line-step-arrow {
-      flex: 0 0 auto;
-      color: var(--text-subtle);
-      font-size: 14px;
-    }
-    .task-spine {
-      display: flex;
-      align-items: stretch;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-    .task-spine-step {
-      min-width: 220px;
-      max-width: 220px;
-      border-radius: 10px;
-      border: 1px solid var(--border-subtle);
-      background: var(--surface-secondary);
-      padding: 12px 14px;
-    }
-    .task-spine-step.done {
-      border-color: rgba(34, 197, 94, 0.28);
-      background: rgba(34, 197, 94, 0.06);
-    }
-    .task-spine-step.current {
-      border-color: rgba(245, 158, 11, 0.4);
-      background: rgba(245, 158, 11, 0.08);
-    }
-    .task-spine-step.next {
-      border-color: rgba(99, 102, 241, 0.38);
-      background: rgba(99, 102, 241, 0.08);
-    }
-    .task-spine-step.blocked {
-      border-color: rgba(239, 68, 68, 0.24);
-      background: rgba(239, 68, 68, 0.06);
-    }
-    .task-spine-step.parked {
-      opacity: 0.86;
-    }
-    .task-spine-top {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-    .task-spine-order {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--text-subtle);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .task-spine-id {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-    .task-spine-state {
-      margin-left: auto;
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-    }
-    .task-spine-title {
-      font-size: 12.5px;
-      line-height: 1.45;
-      color: var(--text-secondary);
-    }
-    .task-spine-wait {
-      margin-top: 8px;
-      font-size: 10.5px;
-      color: #fca5a5;
-      line-height: 1.45;
-    }
-    .task-spine-connector {
-      width: 28px;
-      flex: 0 0 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-subtle);
-      font-size: 16px;
-    }
-
-    .bucket {
-      margin-top: 28px;
-    }
-    .bucket-note {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin: -2px 0 12px;
-    }
-    .bucket-title {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-      margin-bottom: 12px;
-    }
-    .bucket-title .accent { font-size: 14px; font-weight: 700; }
-    .bucket-title.in-progress .accent { color: #f59e0b; }
-    .bucket-title.ready .accent { color: #22c55e; }
-    .bucket-title.next .accent { color: #6366f1; }
-    .bucket-title.focus .accent { color: var(--color-flow); }
-    .bucket-title .count {
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-secondary);
-      font-weight: 600;
-      padding: 1px 7px;
-      border-radius: 10px;
-      letter-spacing: 0;
-      font-size: 10px;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 12px;
-    }
-
-    .task-card {
-      position: relative;
-      background: var(--surface-secondary);
-      border: 1px solid var(--border-subtle);
-      border-left-width: 3px;
-      border-radius: 8px;
-      padding: 12px 14px 14px;
-      cursor: pointer;
-      transition: border-color 120ms ease, transform 90ms ease, background 120ms ease;
-      min-height: 96px;
-    }
-    .task-card:hover {
-      background: var(--surface-tertiary);
-      border-color: var(--border-medium);
-    }
-    .task-card:focus-visible {
-      outline: 2px solid var(--color-flow);
-      outline-offset: 2px;
-    }
-    .task-card:active { transform: scale(0.98); }
-    .task-card.p0 { border-left-color: #ef4444; }
-    .task-card.p1 { border-left-color: #f59e0b; }
-    .task-card.p2 { border-left-color: #8b949e; }
-    .task-card.selected {
-      border-color: var(--color-flow);
-      box-shadow: 0 0 0 1px var(--color-flow) inset;
-    }
-    .task-card-top {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-    .task-card-id {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: 0.02em;
-    }
-    .task-card-priority {
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: 1px 6px;
-      border-radius: 3px;
-    }
-    .task-card-priority.p0 { color: #ef4444; background: rgba(239,68,68,0.1); }
-    .task-card-priority.p1 { color: #f59e0b; background: rgba(245,158,11,0.1); }
-    .task-card-priority.p2 { color: #8b949e; background: rgba(139,148,158,0.1); }
-    .task-card-status {
-      margin-left: auto;
-      font-size: 9.5px;
-      font-weight: 600;
-      color: var(--text-subtle);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .task-card-title {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      line-height: 1.4;
-      margin-bottom: 10px;
-    }
-    .task-card-actions {
-      display: flex;
-      gap: 6px;
-    }
-    .task-card-actions .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 5px 10px;
-      font-size: 11px;
-      font-weight: 600;
-      border-radius: 5px;
-      background: rgba(99, 102, 241, 0.1);
-      color: #a5b4fc;
-      border: 1px solid rgba(99, 102, 241, 0.25);
-      cursor: pointer;
-      transition: all 120ms ease;
-      font-family: inherit;
-    }
-    .task-card-actions .btn:hover {
-      background: rgba(99, 102, 241, 0.2);
-      border-color: var(--color-flow);
-      color: var(--text-primary);
-    }
-    .task-card-actions .btn.secondary {
-      background: transparent;
-      border-color: var(--border-medium);
-      color: var(--text-muted);
-    }
-    .task-card-actions .btn.secondary:hover {
-      color: var(--text-primary);
-      background: var(--surface-hover);
-    }
-    .task-card-wait {
-      font-size: 10.5px;
-      color: #ef4444;
-      margin-top: 6px;
-    }
-
-    .next-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.015);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 8px;
-    }
-    .next-row {
-      display: grid;
-      grid-template-columns: 28px 110px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 8px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 120ms ease;
-      color: var(--text-secondary);
-      font-size: 12.5px;
-    }
-    .next-row:hover { background: var(--surface-hover); }
-    .next-row:focus-visible {
-      outline: 2px solid var(--color-flow);
-      outline-offset: -2px;
-    }
-    .next-row-num {
-      color: var(--text-subtle);
-      font-size: 10px;
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-    }
-    .next-row-id {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-    .next-row-title {
-      color: var(--text-muted);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .next-row-blocker {
-      color: #ef4444;
-      font-size: 10.5px;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    .sprint-empty {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px dashed var(--border-medium);
-      border-radius: 8px;
-      padding: 22px;
-      color: var(--text-muted);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-    .sprint-empty b { color: var(--text-primary); }
-    .sprint-empty .blocker-list {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .sprint-empty .blocker-list .blocker {
-      padding: 3px 8px;
-      background: rgba(239,68,68,0.1);
-      border: 1px solid rgba(239,68,68,0.25);
-      color: #fca5a5;
-      font-size: 11px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .remaining-toggle {
-      margin-top: 24px;
-      background: transparent;
-      border: 1px dashed var(--border-medium);
-      color: var(--text-muted);
-      padding: 10px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      font: inherit;
-      font-size: 12px;
-      width: 100%;
-      text-align: left;
-    }
-    .remaining-toggle:hover { color: var(--text-primary); border-color: var(--border-strong); }
-
-    .remaining-table {
-      margin-top: 12px;
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-    }
-    .remaining-table th {
-      text-align: left;
-      padding: 6px 10px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .remaining-table td {
-      padding: 8px 10px;
-      border-bottom: 1px solid var(--border-subtle);
-      color: var(--text-secondary);
-    }
-    .remaining-table tr:hover td { background: var(--surface-hover); cursor: pointer; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .sprint-item-progress-fill { transition: none; }
-      .task-card { transition: none; }
-      .task-card:active { transform: none; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../dusk-tokens.css">
+  <link rel="stylesheet" href="dusk.css">
 </head>
 <body>
   <div id="root">
     <div class="toolbar">
-      <span class="title">Feature <span class="title-accent">Flow</span></span>
-        <span class="toolbar-stats" id="stats">
-        <span title="Tasks with no unfinished blockers"><span class="dot" style="background: #22c55e;"></span><span id="stat-ready">0</span> unblocked</span>
-        <span title="Tasks waiting on at least one unfinished blocker"><span class="dot" style="background: #ef4444;"></span><span id="stat-blocked">0</span> blocked</span>
-        <span><span class="dot" style="background: var(--status-in-progress);"></span><span id="stat-active">0</span> active</span>
-        <span><span class="dot" style="background: var(--status-review);"></span><span id="stat-review">0</span> review</span>
-        <span><span class="dot" style="background: var(--overdue-ring);"></span><span id="stat-overdue">0</span> overdue</span>
+      <h1 class="title">Flow</h1>
+      <span class="toolbar-stats" id="stats" aria-label="Plan summary">
+        <span class="stat st-ready" title="Unblocked: tasks with no unfinished blockers"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10.5 8.8l4.5 3.2-4.5 3.2z"/></svg><span id="stat-ready">0</span><span class="sr"> unblocked</span></span>
+        <span class="stat st-blocked" title="Blocked: tasks waiting on an unfinished blocker"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></svg><span id="stat-blocked">0</span><span class="sr"> blocked</span></span>
+        <span class="stat st-active" title="Active: in progress now"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2.5-6 4 12L16 12h5"/></svg><span id="stat-active">0</span><span class="sr"> active</span></span>
+        <span class="stat st-review" title="Review / waiting on another lane"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.5"/></svg><span id="stat-review">0</span><span class="sr"> review</span></span>
+        <span class="stat st-overdue" title="Overdue: past due date"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span id="stat-overdue">0</span><span class="sr"> overdue</span></span>
       </span>
       <span class="spacer"></span>
-      <span class="view-mode-group" role="tablist" aria-label="Flow view mode">
-        <button class="toolbar-toggle on" id="view-mode-lanes" data-view-mode="delivery" type="button" role="tab" aria-selected="true" title="Lane view (default) — per-instance status chains">Lanes</button>
-        <button class="toolbar-toggle" id="view-mode-graph" data-view-mode="streams" type="button" role="tab" aria-selected="false" title="Dependency graph (dagre layout)">Graph</button>
+      <span class="tools">
+        <button class="toolbar-toggle tb on" id="toggle-rank-labels" type="button" title="Stages: show section labels on the left" aria-label="Show stage labels">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h6"/></svg>
+        </button>
+        <button class="toolbar-toggle tb on" id="toggle-auto-infer" type="button" title="Auto-infer: compute waves from task IDs mentioned in task text. Off = only explicit Depends-on lines." aria-label="Auto-infer order from task text">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>
+        </button>
+        <button class="toolbar-toggle tb on" id="toggle-inferred" type="button" title="Dashed edges: show links inferred from task text" aria-label="Show inferred links">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h3M10.5 12h3M17 12h3"/></svg>
+        </button>
+        <button class="toolbar-btn tb" id="fit-view" type="button" title="Fit: re-center and fit all tasks" aria-label="Fit graph to screen">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 015.5 4H9M15 4h3.5A1.5 1.5 0 0120 5.5V9M20 15v3.5a1.5 1.5 0 01-1.5 1.5H15M9 20H5.5A1.5 1.5 0 014 18.5V15"/></svg>
+        </button>
+        <span class="tool-gap" aria-hidden="true"></span>
+        <button class="toolbar-toggle tb" id="toggle-done" type="button" title="Show finished tasks" aria-label="Show finished tasks">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.3l2.5 2.5 4.5-5"/></svg>
+        </button>
+        <button class="toolbar-btn tb" id="refresh" type="button" title="Reload the plan file" aria-label="Reload the plan">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 11-2.2-5.3L20 9.5"/><path d="M20 4.5v5h-5"/></svg>
+        </button>
       </span>
-      <button class="toolbar-toggle on" id="toggle-rank-labels" title="Show column rank labels (Now, Next, Later)">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <line x1="3" y1="12" x2="21" y2="12"/>
-          <line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
-        Stages
-      </button>
-      <button class="toolbar-toggle on" id="toggle-auto-infer" title="Auto-compute waves from body-text references (FEATURE→TASK and TASK→TASK mentions). Turn off to require explicit **Depends-on** lines.">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-        </svg>
-        Auto-infer
-      </button>
-      <button class="toolbar-toggle on" id="toggle-inferred" title="Show dashed edges for inferred dependencies (from body-text references)">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14" stroke-dasharray="3 3"/>
-        </svg>
-        Dashed edges
-      </button>
-      <button class="toolbar-toggle" id="toggle-done" title="Show or hide completed tasks">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-        Done
-      </button>
-      <button class="toolbar-btn" id="fit-view" title="Re-center and fit all nodes">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="4 14 4 20 10 20"/>
-          <polyline points="20 10 20 4 14 4"/>
-          <line x1="14" y1="10" x2="21" y2="3"/>
-          <line x1="3" y1="21" x2="10" y2="14"/>
-        </svg>
-        Fit
-      </button>
-      <button class="toolbar-btn" id="refresh" title="Manually re-fetch MASTER_PLAN.md">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="23 4 23 10 17 10"/>
-          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
-        </svg>
-        Refresh
-      </button>
+      <span class="view-mode-group views" role="tablist" aria-label="Flow view mode">
+        <button class="toolbar-toggle vb on" id="view-mode-lanes" data-view-mode="delivery" type="button" role="tab" aria-selected="true" title="Lanes: each live agent and its chain of steps" aria-label="Lanes"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M18 11.5c0 4-12 1-12 4"/></svg><span class="lbl">Lanes</span></button>
+        <button class="toolbar-toggle vb" id="view-mode-graph" data-view-mode="streams" type="button" role="tab" aria-selected="false" title="Graph: every task and what it waits on" aria-label="Graph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="7" height="5" rx="1.5"/><rect x="14" y="4" width="7" height="5" rx="1.5"/><rect x="8.5" y="15" width="7" height="5" rx="1.5"/><path d="M6.5 9v2.5a1.5 1.5 0 001.5 1.5h8a1.5 1.5 0 001.5-1.5V9M12 13v2"/></svg><span class="lbl">Graph</span></button>
+      </span>
     </div>
 
     <div class="graph-pane">
-      <svg id="graph" xmlns="http://www.w3.org/2000/svg">
+      <svg id="graph" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Task dependency graph">
         <defs>
           <marker id="arrow-solid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M0,0 L10,5 L0,10 z" fill="rgba(200, 210, 225, 0.65)"/>
+            <path d="M1,1.5 L9,5 L1,8.5 z" fill="rgba(155, 162, 180, 0.6)"/>
           </marker>
           <marker id="arrow-dashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-            <path d="M0,0 L10,5 L0,10 z" fill="rgba(139, 148, 158, 0.4)"/>
+            <path d="M1,1.5 L9,5 L1,8.5 z" fill="rgba(134, 141, 162, 0.4)"/>
           </marker>
           <marker id="arrow-highlight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M0,0 L10,5 L0,10 z" fill="#6366f1"/>
+            <path d="M1,1.5 L9,5 L1,8.5 z" fill="#7CC3B3"/>
           </marker>
         </defs>
         <g id="viewport">
@@ -1967,22 +69,25 @@
         </g>
       </svg>
       <div class="graph-empty" id="empty-state">
-        <div>No tasks parsed from MASTER_PLAN.md.</div>
-        <div style="font-size: 0.75rem; opacity: 0.7;">Check that the active project exposes tasks via <code>/api/master-plan</code>.</div>
+        <div>No tasks found in the plan.</div>
+        <div class="graph-empty-sub">The active project's plan file has no tasks yet.</div>
       </div>
-      <div class="legend">
-        <div class="row"><span class="swatch" style="background: var(--status-in-progress);"></span> In Progress</div>
-        <div class="row"><span class="swatch" style="background: var(--status-review);"></span> Review</div>
-        <div class="row"><span class="swatch" style="background: var(--status-planned);"></span> Planned</div>
-        <div class="row"><span class="swatch" style="background: var(--status-done);"></span> Done</div>
-        <div class="row"><span class="swatch" style="background: #22c55e; border-radius: 50%;"></span> Ready (parallel)</div>
-        <div class="row"><span class="swatch" style="background: #ef4444;"></span> Blocked (sequential)</div>
-        <div class="row"><span class="line" style="border-color: var(--edge-solid);"></span> Depends-on / Blocks</div>
-        <div class="row"><span class="line dashed" style="border-color: var(--edge-dashed);"></span> Inferred (body ref)</div>
+      <div class="legend" tabindex="0" aria-label="Graph legend">
+        <span class="legend-key" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg></span>
+        <div class="legend-body">
+          <div class="row"><span class="swatch" style="background: var(--act);"></span> In progress</div>
+          <div class="row"><span class="swatch" style="background: var(--review);"></span> Review</div>
+          <div class="row"><span class="swatch" style="background: var(--plan);"></span> Planned</div>
+          <div class="row"><span class="swatch" style="background: var(--done);"></span> Done</div>
+          <div class="row"><span class="swatch round" style="background: var(--done);"></span> Ready to start</div>
+          <div class="row"><span class="swatch" style="background: var(--pause);"></span> Waiting on another task</div>
+          <div class="row"><span class="line"></span> Depends on</div>
+          <div class="row"><span class="line dashed"></span> Mentioned in text</div>
+        </div>
       </div>
       <div class="zoom-controls">
-        <button id="zoom-in" title="Zoom in">+</button>
-        <button id="zoom-out" title="Zoom out">−</button>
+        <button id="zoom-in" type="button" title="Zoom in" aria-label="Zoom in"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></button>
+        <button id="zoom-out" type="button" title="Zoom out" aria-label="Zoom out"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
       </div>
 
       <!-- Delivery-focused view (shown when MASTER_PLAN exposes Delivery Lines or legacy sprint framing) -->
@@ -1991,23 +96,18 @@
           <div class="sprint-sidebar-header">Delivery Line</div>
           <div id="sprint-list" role="list"></div>
         </nav>
-        <main class="sprint-main" id="sprint-main" aria-labelledby="sprint-heading"></main>
+        <main class="sprint-main" id="sprint-main" aria-label="Lanes"></main>
       </div>
     </div>
 
-    <aside class="side-pane" id="side-pane">
+    <aside class="side-pane" id="side-pane" aria-label="Task details">
       <div class="side-empty">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="9"/>
-          <line x1="12" y1="8" x2="12" y2="12"/>
-          <line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
-        Click a task for details.<br>
-        In delivery mode, the main pane shows current flows, up-next lines, and backlog while this side pane holds task detail.
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h9l3 3v13H6z"/><path d="M9 11h6M9 15h4"/></svg>
+        Pick a task to see its details.
       </div>
     </aside>
   </div>
-  <div class="toast" id="toast"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
     /* ─── Constants ────────────────────────────────────────────────── */
@@ -2016,21 +116,22 @@
     const ID_PATTERN = new RegExp(TASK_ID_SOURCE, 'g');
     const TOP_N_RECOMMENDED = 3;
 
+    // Dusk palette (matches ../dusk-tokens.css). Strokes stay faint: status reads from the left tick.
     const STATUS_FILL = {
-      'in-progress': '#f59e0b',
-      'review':      '#06b6d4',
-      'planned':     '#c9d1d9',
-      'done':        'rgba(34, 197, 94, 0.55)',
-      'paused':      '#6e7681',
-      'unknown':     '#8b949e',
+      'in-progress': '#D9B26F',
+      'review':      '#B59AD9',
+      'planned':     '#8DA2CB',
+      'done':        '#8DBF9A',
+      'paused':      '#D58E8E',
+      'unknown':     '#868DA2',
     };
     const STATUS_STROKE = {
-      'in-progress': 'rgba(245, 158, 11, 0.65)',
-      'review':      'rgba(6, 182, 212, 0.6)',
-      'planned':     'rgba(201, 209, 217, 0.35)',
-      'done':        'rgba(34, 197, 94, 0.45)',
-      'paused':      'rgba(110, 118, 129, 0.5)',
-      'unknown':     'rgba(139, 148, 158, 0.4)',
+      'in-progress': 'rgba(217, 178, 111, 0.35)',
+      'review':      'rgba(181, 154, 217, 0.0)',
+      'planned':     'rgba(141, 162, 203, 0.0)',
+      'done':        'rgba(141, 191, 154, 0.0)',
+      'paused':      'rgba(213, 142, 142, 0.0)',
+      'unknown':     'rgba(134, 141, 162, 0.0)',
     };
     const NODE_W = 200;
     const NODE_H = 76;
@@ -2686,16 +787,15 @@
           y: stream.rowY - 14,
           width: Math.max(stream.lastX, stream.firstTaskX + NODE_W) - 20 + 20,
           height: NODE_H + 28,
-          rx: 10,
-          fill: rowIdx % 2 === 0 ? 'rgba(255, 255, 255, 0.015)' : 'rgba(255, 255, 255, 0.008)',
-          stroke: 'rgba(255, 255, 255, 0.04)',
-          'stroke-width': '1',
+          rx: 18,
+          fill: rowIdx % 2 === 0 ? '#1C1F28' : '#1A1D25',
+          stroke: 'none',
         });
         rankLabelsLayer.appendChild(band);
 
         if (showRankLabels) {
           const isStandalone = !stream.section;
-          const accent = isStandalone ? '#8b949e' : '#6366f1';
+          const accent = isStandalone ? '#868DA2' : '#8DA2CB';
 
           const kindLabel = svgEl('text', {
             x: 34, y: stream.rowY + 8, 'text-anchor': 'start',
@@ -2741,7 +841,7 @@
           const line = svgEl('path', {
             d: `M ${x1} ${y} L ${x2} ${y}`,
             fill: 'none',
-            stroke: 'rgba(200, 210, 225, 0.5)',
+            stroke: 'rgba(155, 162, 180, 0.35)',
             'stroke-width': '1.5',
             'marker-end': 'url(#arrow-solid)',
           });
@@ -2754,7 +854,7 @@
         const path = svgEl('path', {
           class: `edge ${edge.type === 'inferred' ? 'inferred' : 'solid'}`,
           d: edgePath(edge.srcPos, edge.tgtPos),
-          stroke: edge.type === 'inferred' ? 'rgba(139, 148, 158, 0.4)' : 'rgba(200, 210, 225, 0.75)',
+          stroke: edge.type === 'inferred' ? 'rgba(134, 141, 162, 0.35)' : 'rgba(155, 162, 180, 0.55)',
           'marker-end': edge.type === 'inferred' ? 'url(#arrow-dashed)' : 'url(#arrow-solid)',
         });
         path.dataset.source = edge.source;
@@ -2779,16 +879,18 @@
           const rect = svgEl('rect', {
             width: NODE_W,
             height: NODE_H,
-            rx: 7,
-            fill: t.status === 'done' ? 'rgba(13, 17, 23, 0.6)' : 'rgba(22, 27, 34, 0.98)',
+            rx: 14,
+            class: 'node-card',
+            fill: t.status === 'done' ? '#1F222C' : '#252936',
             stroke: STATUS_STROKE[t.status] || STATUS_STROKE.unknown,
-            'stroke-width': 1.2,
+            'stroke-width': 1,
           });
           group.appendChild(rect);
 
-          // Status bar on left (same color as column accent)
+          // Status tick on the left, inset so it sits inside the rounded card
           const bar = svgEl('rect', {
-            x: 0, y: 0, width: 3, height: NODE_H, rx: 0,
+            class: 'node-tick',
+            x: 3, y: 14, width: 3, height: NODE_H - 28, rx: 1.5,
             fill: STATUS_FILL[t.status] || STATUS_FILL.unknown,
           });
           group.appendChild(bar);
@@ -2796,9 +898,9 @@
           // Sequence number (1, 2, 3… within column) — a small pill top-left
           const seqBg = svgEl('rect', {
             x: 9, y: 6, width: 18, height: 14, rx: 7,
-            fill: pos.recommended ? 'rgba(78, 205, 196, 0.18)' : 'rgba(255, 255, 255, 0.06)',
-            stroke: pos.recommended ? 'rgba(78, 205, 196, 0.5)' : 'rgba(255, 255, 255, 0.12)',
-            'stroke-width': '0.8',
+            class: 'node-seq',
+            fill: pos.recommended ? '#22332F' : '#2B3040',
+            stroke: 'none',
           });
           group.appendChild(seqBg);
           const seqText = svgEl('text', {
@@ -2806,7 +908,7 @@
             'text-anchor': 'middle',
           });
           seqText.textContent = String(idx + 1);
-          seqText.style.fill = pos.recommended ? '#4ECDC4' : 'var(--text-muted)';
+          seqText.style.fill = pos.recommended ? '#7CC3B3' : 'var(--text-muted)';
           seqText.style.fontSize = '9.5px';
           seqText.style.fontWeight = '700';
           group.appendChild(seqText);
@@ -2818,7 +920,7 @@
 
           // Priority chip (right side)
           if (t.priority) {
-            const prColor = t.priority === 'high' ? '#ef4444' : t.priority === 'medium' ? '#f59e0b' : '#8b949e';
+            const prColor = t.priority === 'high' ? '#E3877A' : t.priority === 'medium' ? '#D9B26F' : '#868DA2';
             const prText = svgEl('text', {
               class: 'node-priority',
               x: NODE_W - 8, y: 16,
@@ -2857,12 +959,11 @@
               x: badgeX, y: badgeY, 'text-anchor': 'start',
             });
             txt.textContent = t.unblocks.length > 0
-              ? `▶ START · unblocks ${t.unblocks.length}`
-              : '▶ START NOW';
-            txt.style.fill = '#22c55e';
+              ? `Ready · unblocks ${t.unblocks.length}`
+              : 'Ready to start';
+            txt.style.fill = '#8DBF9A';
             txt.style.fontSize = '9.5px';
-            txt.style.fontWeight = '700';
-            txt.style.letterSpacing = '0.04em';
+            txt.style.fontWeight = '600';
             group.appendChild(txt);
           } else if (t.isBlocked) {
             const firstBlocker = (t.effectiveBlockers || [])[0] || '?';
@@ -2872,7 +973,7 @@
             txt.textContent = t.effectiveBlockers.length > 1
               ? `waits for ${firstBlocker} +${t.effectiveBlockers.length - 1}`
               : `waits for ${firstBlocker}`;
-            txt.style.fill = '#ef4444';
+            txt.style.fill = '#D58E8E';
             txt.style.fontSize = '9px';
             txt.style.fontWeight = '600';
             group.appendChild(txt);
@@ -2880,7 +981,7 @@
 
           // Tooltip
           const tip = svgEl('title');
-          tip.textContent = `${t.id}: ${t.title}\n${statusLabel(t.status)}${t.priority ? ' · ' + t.priority : ''}${t.dueDate ? ' · due ' + t.dueDate.toISOString().slice(0, 10) : ''}${t.score ? '\nNext-up score: ' + t.score : ''}${pos.recommended ? '\n★ Top-3 recommended' : ''}`;
+          tip.textContent = `${t.id}: ${t.title}\n${statusLabel(t.status)}${t.priority ? ' · ' + t.priority : ''}${t.dueDate ? ' · due ' + t.dueDate.toISOString().slice(0, 10) : ''}${t.score ? '\nNext-up score: ' + t.score : ''}${pos.recommended ? '\nTop-3 recommended' : ''}`;
           group.appendChild(tip);
 
           group.addEventListener('click', (ev) => {
@@ -3321,7 +1422,7 @@
           </div>`;
       }
       return `
-        <div class="flow-node ${cls}" data-id="${task.id}" role="button" tabindex="0">
+        <div class="flow-node ${cls}" data-id="${task.id}" role="button" tabindex="0" title="${escapeAttr(`${label}: ${task.id} ${task.title || ''}`)}">
           <span class="flow-node-eyebrow">${label}</span>
           <div class="flow-node-id">${task.id}</div>
           <div class="flow-node-title">${escapeHtml(task.title || '')}</div>
@@ -3426,7 +1527,7 @@
             <div class="agent-track-ribbon">
               <div>
                 <div class="agent-track-agent">${escapeHtml(agentName)}</div>
-                <div class="agent-track-agent-meta">${escapeHtml(lastSeen)}<br>${escapeHtml(track.source || 'live session')}</div>
+                <div class="agent-track-agent-meta">${escapeHtml(lastSeen)}<span aria-hidden="true"> · </span>${escapeHtml(track.source || 'live session')}</div>
               </div>
               <div class="agent-track-owner-mark">${escapeHtml(initials)}</div>
             </div>
@@ -3544,7 +1645,7 @@
             <div class="agent-track-ribbon">
               <div>
                 <div class="agent-track-agent">${escapeHtml(agentName)}</div>
-                <div class="agent-track-agent-meta">${escapeHtml(lastSeen || 'live')}<br>${escapeHtml(sourceLabel)}</div>
+                <div class="agent-track-agent-meta">${escapeHtml(lastSeen || 'live')}<span aria-hidden="true"> · </span>${escapeHtml(sourceLabel)}</div>
               </div>
               <div class="agent-track-owner-mark">${escapeHtml(agentInitials)}</div>
             </div>
@@ -3615,7 +1716,7 @@
             </div>
             <div class="flow-row-actions">
               ${blockerChip}
-              <button class="flow-btn" type="button" data-action="copy-line-agent-prompt" data-line-id="${line.id}" title="Copy a context-rich prompt to hand this lane to an AI agent">Copy prompt</button>
+              <button class="flow-btn icon" type="button" data-action="copy-line-agent-prompt" data-line-id="${line.id}" title="Copy a context-rich prompt to hand this lane to an AI agent" aria-label="Copy agent prompt"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5"/><path d="M15.5 8.5V6.5a2 2 0 00-2-2h-7a2 2 0 00-2 2v7a2 2 0 002 2h2"/></svg></button>
               <button class="flow-btn primary" type="button" data-action="continue-line" data-line-id="${line.id}">Continue</button>
             </div>
           </div>
@@ -4396,7 +2497,7 @@
           }
         });
       });
-      root.querySelectorAll('.flow-node[data-id], .flow-backlog-item[data-id], .flow-chip[data-id]').forEach(el => {
+      root.querySelectorAll('.flow-node[data-id], .flow-backlog-item[data-id], .flow-chip[data-id], .agent-track-headline[data-id]:not([data-id=""])').forEach(el => {
         el.addEventListener('click', () => openTaskDetail(el.dataset.id));
         el.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -4640,13 +2741,9 @@
       if (!task) {
         pane.innerHTML = `
           <div class="side-empty">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="9"/>
-              <line x1="12" y1="8" x2="12" y2="12"/>
-              <line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-            Click a task for details.<br>
-            Left columns are earlier in the flow; right columns depend on them. Top-3 recommended tasks glow teal.
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h9l3 3v13H6z"/><path d="M9 11h6M9 15h4"/></svg>
+            Pick a task to see its details.
+            <small>Earlier steps sit on the left. The top three to start next carry a teal number.</small>
           </div>`;
         return;
       }
@@ -4678,13 +2775,13 @@
       } else if (task.isReady) {
         readinessBanner = `
           <div class="banner ready">
-            <span class="dot" style="background: #22c55e;"></span>
+            <span class="dot"></span>
             <span><b>Unblocked.</b> No unfinished blockers are currently stopping this task.</span>
           </div>`;
       } else if (task.isBlocked) {
         readinessBanner = `
           <div class="banner blocked">
-            <span class="dot" style="background: #ef4444;"></span>
+            <span class="dot"></span>
             <span><b>Blocked.</b> Waiting on ${task.unfinishedBlockerIds.length} task${task.unfinishedBlockerIds.length === 1 ? '' : 's'}.</span>
           </div>`;
       }
@@ -4708,14 +2805,14 @@
             <div class="score-bar"><div class="score-fill" style="width: ${scorePct}%"></div></div>
             <span>${task.score || 0}</span>
           </div>
-          ${unfinishedBlockerChips ? `<div class="dep-block"><div class="label">⏸ Must finish first</div><div class="dep-list">${unfinishedBlockerChips}</div></div>` : ''}
-          ${unblocksChips ? `<div class="dep-block"><div class="label">↪ Completing this unblocks</div><div class="dep-list">${unblocksChips}</div></div>` : ''}
+          ${unfinishedBlockerChips ? `<div class="dep-block"><div class="label">Must finish first</div><div class="dep-list">${unfinishedBlockerChips}</div></div>` : ''}
+          ${unblocksChips ? `<div class="dep-block"><div class="label">Finishing this unblocks</div><div class="dep-list">${unblocksChips}</div></div>` : ''}
           ${dependsChips ? `<div class="dep-block"><div class="label">Declared depends-on</div><div class="dep-list">${dependsChips}</div></div>` : ''}
           ${blocksChips ? `<div class="dep-block"><div class="label">Declared blocks</div><div class="dep-list">${blocksChips}</div></div>` : ''}
           ${inferredChips ? `<div class="dep-block"><div class="label">Mentioned in body</div><div class="dep-list">${inferredChips}</div></div>` : ''}
           ${task.body.trim() ? `<div class="body-preview">${escapeHtml(task.body.trim().slice(0, 800))}${task.body.trim().length > 800 ? '…' : ''}</div>` : ''}
           <div class="actions">
-            <button id="jump-kanban">Open in Kanban</button>
+            <button id="jump-kanban" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/></svg>Open in Kanban</button>
           </div>
         </div>
       `;
@@ -5109,6 +3206,8 @@
         allTasks = mergeTaskDetails(apiTasks, parsedTasks);
         currentProjectRoot = status?.project || '';
         currentProjectFilter = deriveProjectFilter(status);
+        // Draw the plan first: the activity requests below can take 15-20 s on a large changelog, and the screen stayed blank until they all returned.
+        renderGraph();
         const [locks, recentEntries, sessions] = await Promise.all([
           fetchLocksForProject(currentProjectRoot),
           fetchRecentActivity(currentProjectFilter),
@@ -5210,6 +3309,13 @@
       showRankLabels = !showRankLabels;
       e.currentTarget.classList.toggle('on', showRankLabels);
       renderGraph();
+    });
+
+    // Icon-only toggles: mirror the visual "on" state for screen readers.
+    document.querySelectorAll('.toolbar .toolbar-toggle:not([role="tab"])').forEach(btn => {
+      const sync = () => btn.setAttribute('aria-pressed', String(btn.classList.contains('on')));
+      sync();
+      new MutationObserver(sync).observe(btn, { attributes: true, attributeFilter: ['class'] });
     });
 
     window.addEventListener('message', (event) => {

@@ -3,296 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skills Inventory</title>
+    <title>Skills</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../dusk-tokens.css">
+    <link rel="stylesheet" href="dusk.css">
     <script src="https://unpkg.com/d3@7"></script>
     <script src="https://unpkg.com/force-graph"></script>
-    <style>
-        :root {
-            --surface-primary: #000000;
-            --surface-secondary: #0d1117;
-            --surface-tertiary: #161b22;
-            --surface-elevated: #21262d;
-            --surface-hover: rgba(255, 255, 255, 0.05);
-            --text-primary: #e6edf3;
-            --text-secondary: #c9d1d9;
-            --text-muted: #8b949e;
-            --text-subtle: #6e7681;
-            --border-subtle: #1a1a1a;
-            --border-medium: #30363d;
-            --brand-primary: #10b981;
-            --brand-hover: #34d399;
-            --brand-subtle: rgba(16, 185, 129, 0.15);
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-            --radius-sm: 6px;
-            --radius-md: 8px;
-            --radius-lg: 12px;
-            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * { box-sizing: border-box; }
-        html, body { height: 100%; margin: 0; overflow: hidden; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--surface-primary);
-            color: var(--text-secondary);
-        }
-
-        .shell { display: flex; flex-direction: column; height: 100%; min-width: 0; }
-
-        .header {
-            display: grid;
-            grid-template-columns: minmax(220px, 0.8fr) minmax(320px, 1.2fr) auto auto;
-            gap: 1rem;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            background: rgba(31, 31, 31, 0.95);
-            border-bottom: 1px solid var(--border-subtle);
-            backdrop-filter: blur(18px);
-        }
-
-        .title { min-width: 0; }
-        .title h1 { margin: 0; color: var(--text-primary); font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
-        .title p { margin: 0.2rem 0 0; color: var(--text-muted); font-size: 0.76rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-        .search-input {
-            width: 100%;
-            padding: 0.6rem 0.75rem;
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-md);
-            background: var(--surface-tertiary);
-            color: var(--text-primary);
-            font-size: 0.86rem;
-        }
-        .search-input:focus { outline: none; border-color: var(--brand-primary); box-shadow: 0 0 0 2px var(--brand-subtle); }
-
-        .scope-switcher {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.35rem;
-            border: 1px solid var(--border-medium);
-            border-radius: 10px;
-            background: var(--surface-tertiary);
-        }
-        .scope-title { padding: 0 0.3rem; color: var(--text-muted); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
-        .scope-options { display: flex; gap: 0.25rem; }
-        .scope-btn, .tab-btn, .filter-btn, .tool-btn {
-            border: 1px solid transparent;
-            border-radius: var(--radius-md);
-            background: transparent;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            white-space: nowrap;
-        }
-        .scope-btn { padding: 0.34rem 0.55rem; font-size: 0.74rem; }
-        .scope-btn:hover, .scope-btn.active,
-        .tab-btn:hover, .tab-btn.active,
-        .filter-btn:hover, .filter-btn.active {
-            color: var(--text-primary);
-            border-color: var(--brand-primary);
-            background: var(--brand-subtle);
-        }
-
-        .stats { display: flex; gap: 0.55rem; justify-content: flex-end; flex-wrap: wrap; }
-        .stat { min-width: 74px; padding: 0.42rem 0.58rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: var(--surface-tertiary); }
-        .stat-value { display: block; color: var(--text-primary); font-size: 0.95rem; font-weight: 700; line-height: 1; }
-        .stat-label { display: block; margin-top: 0.2rem; color: var(--text-subtle); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; }
-
-        .main {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(320px, 380px);
-            min-height: 0;
-            flex: 1;
-        }
-
-        .workbench { display: flex; flex-direction: column; min-width: 0; min-height: 0; border-right: 1px solid var(--border-subtle); }
-        .tabbar {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.85rem 1rem;
-            background: var(--surface-secondary);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-        .tab-btn { padding: 0.5rem 0.8rem; font-size: 0.8rem; }
-        .tab-spacer { flex: 1; }
-        .loading-note { color: var(--brand-hover); font-size: 0.75rem; font-weight: 650; display: none; }
-
-        .panel { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); background: var(--surface-tertiary); }
-        .panel-header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.8rem 0.9rem 0.45rem; }
-        .panel-title { color: var(--text-primary); font-size: 0.84rem; font-weight: 700; }
-        .panel-kicker { color: var(--text-subtle); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; }
-        .panel-body { padding: 0 0.9rem 0.9rem; }
-
-        .content { min-height: 0; overflow: auto; padding: 1rem; }
-        .tab-panel { display: none; min-height: 100%; }
-        .tab-panel.active { display: block; }
-
-        .toolbar { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
-        .filter-btn { padding: 0.38rem 0.62rem; font-size: 0.72rem; border-color: var(--border-subtle); background: var(--surface-secondary); border-radius: 999px; }
-        .muted-note { color: var(--text-muted); font-size: 0.78rem; line-height: 1.45; }
-
-        .inventory-table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            background: var(--surface-tertiary);
-        }
-        .inventory-table th,
-        .inventory-table td {
-            padding: 0.72rem 0.75rem;
-            border-bottom: 1px solid var(--border-subtle);
-            text-align: left;
-            vertical-align: top;
-            font-size: 0.8rem;
-        }
-        .inventory-table th { color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; background: var(--surface-secondary); position: sticky; top: 0; z-index: 2; }
-        .inventory-table tr { cursor: pointer; }
-        .inventory-table tbody tr:hover { background: var(--surface-hover); }
-        .inventory-table tr.selected { background: var(--brand-subtle); }
-        .skill-name { color: var(--text-primary); font-weight: 700; font-size: 0.86rem; }
-        .skill-desc { color: var(--text-subtle); margin-top: 0.18rem; max-width: 54ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .path-text { color: var(--text-subtle); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.7rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 28ch; }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            border-radius: 999px;
-            padding: 0.18rem 0.48rem;
-            color: var(--text-primary);
-            background: var(--surface-elevated);
-            font-size: 0.66rem;
-            white-space: nowrap;
-        }
-        .badge.good { background: rgba(16, 185, 129, 0.16); color: #86efac; }
-        .badge.warn { background: rgba(245, 158, 11, 0.16); color: #fcd34d; }
-        .badge.bad { background: rgba(239, 68, 68, 0.18); color: #fca5a5; }
-        .badge.info { background: rgba(59, 130, 246, 0.16); color: #93c5fd; }
-        .badge.copy { background: rgba(148, 163, 184, 0.16); color: #cbd5e1; }
-        .badge-row { display: flex; gap: 0.32rem; flex-wrap: wrap; }
-
-        .list { display: flex; flex-direction: column; gap: 0.5rem; }
-        .row { display: grid; grid-template-columns: 1fr auto; gap: 0.65rem; align-items: start; padding: 0.72rem; border-radius: var(--radius-md); background: var(--surface-secondary); border: 1px solid transparent; cursor: pointer; }
-        .row:hover { border-color: var(--border-medium); background: var(--surface-hover); }
-        .row-name { color: var(--text-primary); font-size: 0.86rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .row-meta { margin-top: 0.22rem; color: var(--text-subtle); font-size: 0.74rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .row-desc { margin-top: 0.36rem; color: var(--text-muted); font-size: 0.74rem; line-height: 1.4; }
-        .usage-meter { height: 4px; margin-top: 0.5rem; border-radius: 999px; background: var(--surface-elevated); overflow: hidden; }
-        .usage-fill { height: 100%; background: var(--brand-primary); border-radius: inherit; }
-
-        .quest-stage { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr); gap: 1rem; align-items: stretch; }
-        .quest-hero { position: relative; min-height: 430px; padding: 1.35rem; border: 1px solid rgba(16, 185, 129, 0.42); border-radius: 18px; background: radial-gradient(circle at 16% 12%, rgba(16, 185, 129, 0.22), transparent 34%), linear-gradient(145deg, rgba(13, 17, 23, 0.98), rgba(22, 27, 34, 0.9)); overflow: hidden; }
-        .quest-hero::after { content: ''; position: absolute; inset: auto -18% -45% 22%; height: 260px; background: radial-gradient(circle, rgba(16, 185, 129, 0.22), transparent 68%); pointer-events: none; }
-        .quest-eyebrow { color: #86efac; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
-        .quest-title { margin: 0.65rem 0 0; color: var(--text-primary); font-size: clamp(2.2rem, 5vw, 5.4rem); line-height: 0.92; letter-spacing: -0.07em; max-width: 9ch; }
-        .quest-description { margin-top: 1rem; max-width: 62ch; color: var(--text-secondary); font-size: 1rem; line-height: 1.55; }
-        .quest-reasons { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.1rem; max-width: 680px; }
-        .quest-actions { display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; margin-top: 1.35rem; }
-        .primary-action { border: 1px solid rgba(16, 185, 129, 0.7); border-radius: 999px; background: var(--brand-primary); color: #052e24; cursor: pointer; font-weight: 800; padding: 0.72rem 1rem; }
-        .secondary-note { color: var(--text-muted); font-size: 0.78rem; }
-        .quest-score { position: absolute; right: 1.1rem; top: 1.1rem; display: grid; place-items: center; width: 78px; height: 78px; border-radius: 24px; background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(16, 185, 129, 0.38); color: #86efac; font-size: 1.65rem; font-weight: 900; }
-        .quest-score span { display: block; color: var(--text-subtle); font-size: 0.56rem; letter-spacing: 0.08em; text-transform: uppercase; }
-        .quest-queue { display: flex; flex-direction: column; gap: 0.55rem; min-height: 430px; }
-        .quest-row { display: grid; grid-template-columns: auto 1fr auto; gap: 0.7rem; align-items: center; padding: 0.75rem; border: 1px solid var(--border-subtle); border-radius: 14px; background: var(--surface-tertiary); cursor: pointer; transition: all var(--transition-fast); }
-        .quest-row:hover { border-color: var(--brand-primary); background: var(--surface-hover); transform: translateX(2px); }
-        .quest-rank { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: var(--surface-secondary); color: var(--text-muted); font-weight: 800; }
-        .quest-progress { height: 5px; margin-top: 0.5rem; border-radius: 999px; background: var(--surface-elevated); overflow: hidden; }
-        .quest-progress div { height: 100%; border-radius: inherit; background: var(--brand-primary); }
-
-        .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; }
-        .metric { padding: 0.85rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); background: var(--surface-tertiary); }
-        .metric-value { color: var(--text-primary); font-size: 1.35rem; font-weight: 800; line-height: 1; }
-        .metric-label { margin-top: 0.35rem; color: var(--text-subtle); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; }
-
-        .inspector { min-width: 0; min-height: 0; overflow: auto; padding: 1rem; background: var(--surface-secondary); }
-        .inspector .panel { margin-bottom: 0.85rem; }
-        .inspector-title { margin: 0; color: var(--text-primary); font-size: 1.15rem; line-height: 1.22; }
-        .inspector-subtitle { margin-top: 0.35rem; color: var(--text-muted); font-size: 0.8rem; line-height: 1.4; word-break: break-word; }
-        .copy-list { display: flex; flex-direction: column; gap: 0.45rem; }
-        .copy-item { padding: 0.65rem; border-radius: var(--radius-md); background: var(--surface-secondary); border: 1px solid var(--border-subtle); }
-        .copy-source { color: var(--text-primary); font-size: 0.82rem; font-weight: 700; }
-        .copy-path { margin-top: 0.25rem; color: var(--text-subtle); font-size: 0.68rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
-
-        .map-panel { position: relative; height: calc(100vh - 150px); min-height: 520px; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); background: #000; overflow: hidden; }
-        #graph { width: 100%; height: 100%; }
-        .graph-toolbar { position: absolute; left: 1rem; top: 1rem; display: flex; gap: 0.4rem; z-index: 5; }
-        .tool-btn { min-width: 36px; height: 34px; border-color: var(--border-medium); background: rgba(31, 31, 31, 0.92); color: var(--text-secondary); }
-        .tool-btn:hover { border-color: var(--brand-primary); color: var(--text-primary); }
-        .graph-hint { position: absolute; left: 1rem; bottom: 1rem; max-width: 420px; padding: 0.6rem 0.75rem; border: 1px solid var(--border-subtle); border-radius: 10px; background: rgba(13, 17, 23, 0.92); color: var(--text-muted); font-size: 0.74rem; line-height: 1.35; z-index: 5; }
-        .graph-count { position: absolute; right: 1rem; bottom: 1rem; padding: 0.45rem 0.65rem; border: 1px solid var(--border-subtle); border-radius: 999px; background: rgba(13, 17, 23, 0.92); color: var(--text-muted); font-size: 0.72rem; z-index: 5; }
-
-        .empty { color: var(--text-subtle); font-size: 0.8rem; line-height: 1.45; }
-
-        @media (max-width: 1100px) {
-            .header { grid-template-columns: 1fr; }
-            .stats { justify-content: flex-start; }
-            .main { grid-template-columns: 1fr; }
-            .workbench { border-right: 0; }
-            .inspector { border-top: 1px solid var(--border-subtle); }
-            .grid-2, .grid-3, .quest-stage { grid-template-columns: 1fr; }
-            .quest-title { max-width: 12ch; }
-        }
-    </style>
 </head>
 <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></symbol>
+            <symbol id="i-folder" viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 016.5 5h3l2 2h6A2.5 2.5 0 0120 9.5v7a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 014 16.5z"/></symbol>
+            <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 4l8 4-8 4-8-4z"/><path d="M4 12l8 4 8-4M4 16l8 4 8-4"/></symbol>
+            <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></symbol>
+            <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+            <symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 20v-8M12 20V4M19 20v-5"/></symbol>
+            <symbol id="i-archive" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="4.5" rx="1.8"/><path d="M5.5 9v8.5A2.5 2.5 0 008 20h8a2.5 2.5 0 002.5-2.5V9M10 13h4"/></symbol>
+            <symbol id="i-network" viewBox="0 0 24 24"><circle cx="6" cy="6.5" r="2.5"/><circle cx="18" cy="6.5" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6.5h7M7.2 8.7l3.6 7M16.8 8.7l-3.6 7"/></symbol>
+            <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12L16 12h5"/></symbol>
+            <symbol id="i-idle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke-dasharray="3 3.2"/></symbol>
+            <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M7.5 10l2.5 2-2.5 2M13 14h3.5"/></symbol>
+            <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.5"/><path d="M15.5 8.5V6.5A2.5 2.5 0 0013 4H6.5A2.5 2.5 0 004 6.5V13a2.5 2.5 0 002.5 2.5h2"/></symbol>
+            <symbol id="i-merge" viewBox="0 0 24 24"><path d="M7 4v3.5c0 3.5 5 4.5 5 8.5v4M17 4v3.5c0 3.5-5 4.5-5 8.5"/></symbol>
+            <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="7" cy="8" r="2"/><circle cx="17" cy="7" r="2"/><circle cx="12" cy="13" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="17" r="2"/></symbol>
+            <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+            <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+            <symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V6a2 2 0 012-2h3M15 4h3a2 2 0 012 2v3M20 15v3a2 2 0 01-2 2h-3M9 20H6a2 2 0 01-2-2v-3"/></symbol>
+            <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></symbol>
+            <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+            <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+            <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+            <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0012 3z"/></symbol>
+            <symbol id="i-note" viewBox="0 0 24 24"><path d="M7 3.5h7l4.5 4.5v10A2.5 2.5 0 0116 20.5H7A2.5 2.5 0 014.5 18V6A2.5 2.5 0 017 3.5z"/><path d="M13.5 3.5V8h4.5M9 13h6M9 16.5h4"/></symbol>
+            <!-- category glyphs -->
+            <symbol id="c-design" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18c1.5 0 2-1 1.5-2.2-.5-1.3.3-2.3 1.6-2.3H17a4 4 0 004-4c0-5-4-9.5-9-9.5z"/><path d="M7.5 11.5h.01M10 7.5h.01M15 8h.01"/></symbol>
+            <symbol id="c-development" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></symbol>
+            <symbol id="c-debugging" viewBox="0 0 24 24"><rect x="8" y="7" width="8" height="12" rx="4"/><path d="M12 7V4.5M9.5 4.5l1 2.5M14.5 4.5l-1 2.5M4 11h4M16 11h4M4.5 16H8M16 16h3.5"/></symbol>
+            <symbol id="c-review" viewBox="0 0 24 24"><path d="M2.5 12S6 6 12 6s9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+            <symbol id="c-research" viewBox="0 0 24 24"><path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5"/></symbol>
+            <symbol id="c-workflow" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M18 11.5c0 4-12 1-12 4"/></symbol>
+            <symbol id="c-architecture" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></symbol>
+            <symbol id="c-content" viewBox="0 0 24 24"><path d="M4 20l1-4L16 5l3 3L8 19zM14 7l3 3"/></symbol>
+            <symbol id="c-integration" viewBox="0 0 24 24"><path d="M9 3.5V8M15 3.5V8M7 8h10v3a5 5 0 01-10 0zM12 16v4.5"/></symbol>
+            <symbol id="c-media" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M20.5 15.5l-4.5-4.5-8.5 8"/></symbol>
+            <symbol id="c-memory" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7.5" ry="2.8"/><path d="M4.5 6v12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V6M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/></symbol>
+            <symbol id="c-other" viewBox="0 0 24 24"><path d="M12 3.5l7.5 4.2v8.6L12 20.5l-7.5-4.2V7.7z"/><path d="M12 12v8.5M12 12l7.5-4.3M12 12L4.5 7.7"/></symbol>
+        </defs>
+    </svg>
+
     <div class="shell">
         <header class="header">
             <div class="title">
-                <h1>Skills Inventory</h1>
-                <p>Logical skills, physical copies, usage, and cleanup signals.</p>
+                <h1>Skills</h1>
+                <p class="sr">Logical skills, physical copies, usage, and cleanup signals.</p>
             </div>
-            <input id="search" class="search-input" type="search" placeholder="Search skills, sources, categories, statuses...">
-            <div class="scope-switcher" aria-label="Skill inventory scope">
-                <div class="scope-title">Showing</div>
+            <div class="stats" aria-label="Summary">
+                <div class="stat lead" title="Skills, one per name"><span class="stat-value" id="logicalCount">0</span><span class="stat-label">available</span></div>
+                <div class="stat" title="Physical copies on disk"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span class="stat-value" id="skillCount">0</span><span class="stat-label sr">Copies</span></div>
+                <div class="stat" title="Used in scanned sessions"><svg class="ic" aria-hidden="true"><use href="#i-pulse"/></svg><span class="stat-value" id="usedCountTop">0</span><span class="stat-label sr">Used</span></div>
+                <div class="stat" title="Cleanup candidates"><svg class="ic" aria-hidden="true"><use href="#i-merge"/></svg><span class="stat-value" id="cleanupCountTop">0</span><span class="stat-label sr">Cleanup</span></div>
+            </div>
+            <span class="grow"></span>
+            <label class="search-box">
+                <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
+                <input id="search" class="search-input" type="search" placeholder="Find a skill" aria-label="Search skills, sources, categories, statuses" autocomplete="off">
+            </label>
+            <div class="scope-switcher" role="group" aria-label="Skill inventory scope">
+                <span class="scope-title sr">Showing</span>
                 <div class="scope-options" id="scopeControls">
-                    <button class="scope-btn active" data-scope="active-project">This project</button>
-                    <button class="scope-btn" data-scope="all-projects">Every project</button>
+                    <button class="scope-btn active" data-scope="active-project" aria-pressed="true" aria-label="This project" title="This project"><svg class="ic" aria-hidden="true"><use href="#i-folder"/></svg></button>
+                    <button class="scope-btn" data-scope="all-projects" aria-pressed="false" aria-label="Every project" title="Every project"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg></button>
                 </div>
-            </div>
-            <div class="stats">
-                <div class="stat"><span class="stat-value" id="skillCount">0</span><span class="stat-label">Skills</span></div>
-                <div class="stat"><span class="stat-value" id="logicalCount">0</span><span class="stat-label">Logical</span></div>
-                <div class="stat"><span class="stat-value" id="usedCountTop">0</span><span class="stat-label">Used</span></div>
-                <div class="stat"><span class="stat-value" id="cleanupCountTop">0</span><span class="stat-label">Cleanup</span></div>
             </div>
         </header>
 
         <main class="main">
             <section class="workbench">
-                <nav class="tabbar">
-                    <button class="tab-btn active" data-tab="inventory">Inventory</button>
-                    <button class="tab-btn" data-tab="discover">Discover</button>
-                    <button class="tab-btn" data-tab="usage">Usage</button>
-                    <button class="tab-btn" data-tab="cleanup">Cleanup</button>
-                    <button class="tab-btn" data-tab="map">Map</button>
+                <nav class="tabbar" aria-label="Skill views">
+                    <div class="views">
+                        <button class="tab-btn active" data-tab="inventory" aria-pressed="true" aria-label="Inventory" title="Inventory"><svg class="ic" aria-hidden="true"><use href="#i-grid"/></svg><span class="lbl">Inventory</span></button>
+                        <button class="tab-btn" data-tab="discover" aria-pressed="false" aria-label="Discover" title="Discover"><svg class="ic" aria-hidden="true"><use href="#i-compass"/></svg><span class="lbl">Discover</span></button>
+                        <button class="tab-btn" data-tab="usage" aria-pressed="false" aria-label="Usage" title="Usage"><svg class="ic" aria-hidden="true"><use href="#i-bars"/></svg><span class="lbl">Usage</span></button>
+                        <button class="tab-btn" data-tab="cleanup" aria-pressed="false" aria-label="Cleanup" title="Cleanup"><svg class="ic" aria-hidden="true"><use href="#i-archive"/></svg><span class="lbl">Cleanup</span></button>
+                        <button class="tab-btn" data-tab="map" aria-pressed="false" aria-label="Map" title="Map"><svg class="ic" aria-hidden="true"><use href="#i-network"/></svg><span class="lbl">Map</span></button>
+                    </div>
                     <div class="tab-spacer"></div>
-                    <div id="loadingNote" class="loading-note">Loading skill inventory...</div>
+                    <div id="loadingNote" class="loading-note" role="status">Loading skills</div>
                 </nav>
 
                 <div class="content">
                     <section id="inventory" class="tab-panel active">
                         <div class="toolbar">
-                            <button class="filter-btn active" data-status="all">All</button>
-                            <button class="filter-btn" data-status="active">Active</button>
-                            <button class="filter-btn" data-status="unused">Unused</button>
-                            <button class="filter-btn" data-status="needs-wrapper">Needs Wrapper</button>
-                            <button class="filter-btn" data-status="framework-copy">Framework Copies</button>
+                            <div class="seg" role="group" aria-label="Filter by status">
+                                <button class="filter-btn active" data-status="all" aria-pressed="true" aria-label="All" title="All"><svg class="ic" aria-hidden="true"><use href="#i-grid"/></svg><span class="lbl">All</span></button>
+                                <button class="filter-btn" data-status="active" aria-pressed="false" aria-label="Active" title="Active"><svg class="ic" aria-hidden="true"><use href="#i-pulse"/></svg><span class="lbl">Active</span></button>
+                                <button class="filter-btn" data-status="unused" aria-pressed="false" aria-label="Unused" title="Unused"><svg class="ic" aria-hidden="true"><use href="#i-idle"/></svg><span class="lbl">Unused</span></button>
+                                <button class="filter-btn" data-status="needs-wrapper" aria-pressed="false" aria-label="Needs wrapper" title="Needs a command wrapper"><svg class="ic" aria-hidden="true"><use href="#i-terminal"/></svg><span class="lbl">Needs wrapper</span></button>
+                                <button class="filter-btn" data-status="framework-copy" aria-pressed="false" aria-label="Framework copies" title="Framework copies"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span class="lbl">Copies</span></button>
+                            </div>
                         </div>
                         <table class="inventory-table">
-                            <thead>
+                            <thead class="sr">
                                 <tr>
-                                    <th>Skill</th>
-                                    <th>Status</th>
-                                    <th>Usage</th>
-                                    <th>Copies</th>
                                     <th>Category</th>
-                                    <th>Canonical Source</th>
+                                    <th>Skill</th>
+                                    <th>Flags</th>
+                                    <th>Uses</th>
                                 </tr>
                             </thead>
                             <tbody id="inventoryRows"></tbody>
@@ -300,32 +118,36 @@
                     </section>
 
                     <section id="discover" class="tab-panel">
-                        <section class="panel" style="margin-bottom:0.85rem;">
-                            <div class="panel-header"><div class="panel-title">Skill Quest</div><div class="panel-kicker" id="recommendedCount">0 ready</div></div>
-                            <div class="panel-body muted-note">One suggested skill at a time. Skills leave this queue when Watchpost observes transcript usage, or when you mark them tried locally.</div>
-                        </section>
+                        <div class="section-head">
+                            <span class="section-title">Skill quest</span>
+                            <span class="panel-kicker" id="recommendedCount">0 ready</span>
+                            <span class="hint-wrap" tabindex="0" aria-label="About skill quest">
+                                <svg class="ic sm" aria-hidden="true"><use href="#i-info"/></svg>
+                                <span class="hint-pop" role="tooltip">One suggested skill at a time. Skills leave this queue when Watchpost sees them used in a session, or when you mark them tried.</span>
+                            </span>
+                        </div>
                         <div class="quest-stage">
                             <section class="quest-hero" id="featuredSkill"></section>
                             <section class="panel">
-                                <div class="panel-header"><div class="panel-title">Next In Line</div><div class="panel-kicker">Queue</div></div>
+                                <div class="panel-header"><div class="panel-title">Next in line</div></div>
                                 <div class="panel-body quest-queue" id="questQueue"></div>
                             </section>
                         </div>
                     </section>
 
                     <section id="usage" class="tab-panel">
-                        <div class="grid-3" style="margin-bottom:1rem;">
-                            <div class="metric"><div class="metric-value" id="usedMetric">0</div><div class="metric-label">Used Skills</div></div>
-                            <div class="metric"><div class="metric-value" id="unusedMetric">0</div><div class="metric-label">Unused Skills</div></div>
-                            <div class="metric"><div class="metric-value" id="scanMetric">0</div><div class="metric-label">Logs Scanned</div></div>
+                        <div class="grid-3 metrics-row">
+                            <div class="metric"><div class="metric-value" id="usedMetric">0</div><div class="metric-label">Used</div></div>
+                            <div class="metric"><div class="metric-value" id="unusedMetric">0</div><div class="metric-label">Never used</div></div>
+                            <div class="metric"><div class="metric-value" id="scanMetric">0</div><div class="metric-label">Sessions scanned</div></div>
                         </div>
                         <div class="grid-2">
                             <section class="panel">
-                                <div class="panel-header"><div class="panel-title">Most Used</div><div class="panel-kicker">Logical</div></div>
+                                <div class="panel-header"><svg class="ic sm c-good" aria-hidden="true"><use href="#i-pulse"/></svg><div class="panel-title">Most used</div></div>
                                 <div class="panel-body list" id="topUsedList"></div>
                             </section>
                             <section class="panel">
-                                <div class="panel-header"><div class="panel-title">Never Used</div><div class="panel-kicker">Candidates</div></div>
+                                <div class="panel-header"><svg class="ic sm" aria-hidden="true"><use href="#i-idle"/></svg><div class="panel-title">Never used</div></div>
                                 <div class="panel-body list" id="unusedList"></div>
                             </section>
                         </div>
@@ -334,13 +156,18 @@
                     <section id="cleanup" class="tab-panel">
                         <div class="grid-2">
                             <section class="panel">
-                                <div class="panel-header"><div class="panel-title">Consolidation Candidates</div><div class="panel-kicker" id="consolidationCount">0</div></div>
+                                <div class="panel-header"><svg class="ic sm c-warn" aria-hidden="true"><use href="#i-merge"/></svg><div class="panel-title">Could be merged</div><div class="panel-kicker" id="consolidationCount">0</div></div>
                                 <div class="panel-body list" id="consolidationList"></div>
                             </section>
                             <section class="panel">
-                                <div class="panel-header"><div class="panel-title">Repeated Across Frameworks</div><div class="panel-kicker" id="frameworkCopiesCount">0</div></div>
+                                <div class="panel-header">
+                                    <svg class="ic sm c-info" aria-hidden="true"><use href="#i-copy"/></svg><div class="panel-title">Repeated across frameworks</div><div class="panel-kicker" id="frameworkCopiesCount">0</div>
+                                    <span class="hint-wrap" tabindex="0" aria-label="About repeated skills">
+                                        <svg class="ic sm" aria-hidden="true"><use href="#i-info"/></svg>
+                                        <span class="hint-pop" role="tooltip">Same skill name in more than one harness or project. Informational, not counted as a duplicate to clean up.</span>
+                                    </span>
+                                </div>
                                 <div class="panel-body">
-                                    <div class="muted-note" style="margin-bottom:0.75rem;">Same skill name in multiple harnesses or projects. These are informational, not cleanup duplicates by default.</div>
                                     <div class="list" id="frameworkCopiesList"></div>
                                 </div>
                             </section>
@@ -349,58 +176,69 @@
 
                     <section id="map" class="tab-panel">
                         <div class="toolbar">
-                            <button class="filter-btn active" data-graph="map">All Skills Map</button>
-                            <button class="filter-btn" data-graph="all">Relationship Graph</button>
-                            <button class="filter-btn" data-graph="used">Used</button>
-                            <button class="filter-btn" data-graph="unused">Unused</button>
-                            <button class="filter-btn" data-graph="consolidation">Consolidate</button>
+                            <div class="seg" role="group" aria-label="Map view">
+                                <button class="filter-btn active" data-graph="map" aria-pressed="true" aria-label="All skills map" title="All skills map"><svg class="ic" aria-hidden="true"><use href="#i-dots"/></svg><span class="lbl">All skills</span></button>
+                                <button class="filter-btn" data-graph="all" aria-pressed="false" aria-label="Relationship graph" title="Relationship graph"><svg class="ic" aria-hidden="true"><use href="#i-network"/></svg><span class="lbl">Relationships</span></button>
+                                <button class="filter-btn" data-graph="used" aria-pressed="false" aria-label="Used" title="Used"><svg class="ic" aria-hidden="true"><use href="#i-pulse"/></svg><span class="lbl">Used</span></button>
+                                <button class="filter-btn" data-graph="unused" aria-pressed="false" aria-label="Unused" title="Unused"><svg class="ic" aria-hidden="true"><use href="#i-idle"/></svg><span class="lbl">Unused</span></button>
+                                <button class="filter-btn" data-graph="consolidation" aria-pressed="false" aria-label="Consolidate" title="Consolidate"><svg class="ic" aria-hidden="true"><use href="#i-merge"/></svg><span class="lbl">Consolidate</span></button>
+                            </div>
                         </div>
                         <div class="map-panel">
                             <div id="graph"></div>
                             <div class="graph-toolbar">
-                                <button class="tool-btn" id="zoomIn" title="Zoom in">+</button>
-                                <button class="tool-btn" id="zoomOut" title="Zoom out">-</button>
-                                <button class="tool-btn" id="zoomFit" title="Fit graph">Fit</button>
+                                <button class="tool-btn" id="zoomIn" title="Zoom in" aria-label="Zoom in"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+                                <button class="tool-btn" id="zoomOut" title="Zoom out" aria-label="Zoom out"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
+                                <button class="tool-btn" id="zoomFit" title="Fit graph" aria-label="Fit graph"><svg class="ic" aria-hidden="true"><use href="#i-fit"/></svg></button>
                             </div>
-                            <div class="graph-hint" id="graphHint">All Skills Map shows logical skills, grouped by category. Dense relationship edges are hidden.</div>
+                            <span class="hint-wrap graph-info" tabindex="0" aria-label="About this map" aria-describedby="graphHint">
+                                <svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>
+                                <span class="hint-pop graph-hint" id="graphHint" role="tooltip">All Skills Map shows logical skills, grouped by category. Dense relationship edges are hidden.</span>
+                            </span>
                             <div class="graph-count" id="graphCount">0 shown</div>
                         </div>
                     </section>
                 </div>
             </section>
 
-            <aside class="inspector">
-                <section class="panel">
-                    <div class="panel-header"><div class="panel-title">Inspector</div><div class="panel-kicker" id="scopeLabel">This project</div></div>
-                    <div class="panel-body">
-                        <h2 class="inspector-title" id="inspectorTitle">Select a skill</h2>
-                        <div class="inspector-subtitle" id="inspectorSubtitle">Choose a row from Inventory, Usage, Cleanup, or Map.</div>
-                        <div class="badge-row" id="inspectorBadges" style="margin-top:0.8rem;"></div>
-                    </div>
+            <div class="scrim" id="inspectorScrim" aria-hidden="true"></div>
+            <aside class="inspector" aria-label="Skill details">
+                <div class="insp-top">
+                    <span class="panel-kicker scope-pill" id="scopeLabel">This project</span>
+                    <button class="tool-btn insp-close" id="inspectorClose" type="button" aria-label="Close details" title="Close"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+                </div>
+                <section class="insp-sec">
+                    <h2 class="inspector-title" id="inspectorTitle">Select a skill</h2>
+                    <div class="inspector-subtitle" id="inspectorSubtitle">Choose a skill from any view.</div>
+                    <div class="badge-row" id="inspectorBadges"></div>
                 </section>
 
-                <section class="panel">
-                    <div class="panel-header"><div class="panel-title">Metrics</div><div class="panel-kicker">Logical</div></div>
-                    <div class="panel-body grid-3" id="inspectorMetrics"></div>
+                <section class="insp-sec">
+                    <div class="grid-3 insp-metrics" id="inspectorMetrics"></div>
                 </section>
 
-                <section class="panel">
-                    <div class="panel-header"><div class="panel-title">Physical Copies</div><div class="panel-kicker" id="copyCountLabel">0</div></div>
-                    <div class="panel-body copy-list" id="copyList"></div>
+                <section class="insp-sec">
+                    <div class="insp-head"><svg class="ic sm" aria-hidden="true"><use href="#i-copy"/></svg><span>Copies</span><span class="panel-kicker" id="copyCountLabel">0</span></div>
+                    <div class="copy-list" id="copyList"></div>
                 </section>
 
-                <section class="panel">
-                    <div class="panel-header"><div class="panel-title">Recommended Action</div><div class="panel-kicker">Next</div></div>
-                    <div class="panel-body muted-note" id="recommendedAction">Select a skill to see recommended action.</div>
+                <section class="insp-sec">
+                    <div class="insp-head"><svg class="ic sm" aria-hidden="true"><use href="#i-bulb"/></svg><span>Next step</span></div>
+                    <div class="muted-note" id="recommendedAction">Select a skill to see the next step.</div>
                 </section>
             </aside>
         </main>
     </div>
 
     <script>
-        const COLORS = { skill: '#2dd4bf', command: '#60a5fa', category: '#a78bfa', source: '#f59e0b', issue: '#fb7185', dim: '#475569' };
-        const CATEGORY_COLORS = { design: '#f472b6', orchestration: '#22c55e', review: '#f97316', development: '#38bdf8', research: '#a78bfa', content: '#facc15', integration: '#34d399', media: '#fb7185', memory: '#14b8a6', other: '#94a3b8' };
-        const LINK_COLORS = { duplicate: 'rgba(251,113,133,0.75)', 'framework-copy': 'rgba(96,165,250,0.32)', invokes: 'rgba(96,165,250,0.65)', similar: 'rgba(45,212,191,0.4)', references: 'rgba(167,139,250,0.55)', category: 'rgba(148,163,184,0.24)', source: 'rgba(148,163,184,0.18)' };
+        // Dusk palette: soft, low-contrast hues (6-digit hex so drawNode can append alpha).
+        const COLORS = { skill: '#7cc3b3', command: '#8da2cb', category: '#b59ad9', source: '#d9b26f', issue: '#d58e8e', dim: '#5c6378' };
+        const CATEGORY_COLORS = { design: '#b59ad9', orchestration: '#7cc3b3', workflow: '#7cc3b3', review: '#d9b26f', development: '#8da2cb', architecture: '#8dbf9a', debugging: '#d58e8e', research: '#9db3d6', content: '#d6c486', integration: '#8dbf9a', media: '#d3a08e', memory: '#7cb8c3', default: '#9ba2b4', other: '#9ba2b4' };
+        const LINK_COLORS = { duplicate: 'rgba(213,142,142,0.6)', 'framework-copy': 'rgba(141,162,203,0.3)', invokes: 'rgba(141,162,203,0.55)', similar: 'rgba(124,195,179,0.35)', references: 'rgba(181,154,217,0.45)', category: 'rgba(155,162,180,0.2)', source: 'rgba(155,162,180,0.15)' };
+        const CATEGORY_GLYPH = { design: 'c-design', development: 'c-development', debugging: 'c-debugging', review: 'c-review', research: 'c-research', workflow: 'c-workflow', orchestration: 'c-workflow', architecture: 'c-architecture', content: 'c-content', writing: 'c-content', integration: 'c-integration', media: 'c-media', memory: 'c-memory' };
+        function icon(id, cls = '') { return `<svg class="ic ${cls}" aria-hidden="true"><use href="#${id}"/></svg>`; }
+        function categoryIcon(category) { return icon(CATEGORY_GLYPH[category] || 'c-other'); }
+        function categoryColor(category) { return CATEGORY_COLORS[category] || CATEGORY_COLORS.other; }
 
         let rawData = { nodes: [], links: [], stats: {}, insights: {} };
         let logicalSkills = [];
@@ -472,7 +310,7 @@
         }
 
         function unique(values) { return [...new Set(values.filter(Boolean))]; }
-        function escapeHtml(value) { return String(value || '').replace(/[&<>"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char])); }
+        function escapeHtml(value) { return String(value === 0 ? '0' : value || '').replace(/[&<>"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char])); }
         function formatDate(value) { if (!value) return 'Never'; const date = new Date(value); return Number.isNaN(date.getTime()) ? 'Unknown' : date.toISOString().slice(0, 10); }
         async function migrateLocalTriedSkills() {
             let local = [];
@@ -537,15 +375,13 @@
             const rows = filteredLogicalSkills();
             const tbody = document.getElementById('inventoryRows');
             tbody.innerHTML = rows.map(skill => `
-                <tr data-skill="${escapeHtml(skill.name)}" class="${selectedSkill?.name === skill.name ? 'selected' : ''}">
-                    <td><div class="skill-name">${escapeHtml(skill.name)}</div><div class="skill-desc">${escapeHtml(skill.title)}</div></td>
-                    <td><div class="badge-row">${statusBadges(skill)}</div></td>
-                    <td><span class="badge ${skill.usage > 0 ? 'good' : 'copy'}">${skill.usage} uses</span><div class="path-text">${formatDate(skill.lastUsed)}</div></td>
-                    <td><span class="badge ${skill.copyCount > 1 ? 'info' : 'copy'}">${skill.copyCount}</span></td>
-                    <td><span class="badge copy">${escapeHtml(skill.category)}</span></td>
-                    <td><div class="path-text">${escapeHtml(skill.source)}</div></td>
+                <tr data-skill="${escapeHtml(skill.name)}" class="${selectedSkill?.name === skill.name ? 'selected' : ''}" tabindex="0" role="button" title="${escapeHtml(`${skill.status} · ${skill.category} · ${skill.source} · last used ${formatDate(skill.lastUsed)}`)}">
+                    <td class="sk-ic" style="--cat:${categoryColor(skill.category)}">${categoryIcon(skill.category)}<span class="sr">${escapeHtml(skill.category)}</span></td>
+                    <td class="sk-main"><div class="skill-name">${escapeHtml(skill.name)}</div><div class="skill-desc">${escapeHtml(skill.description || skill.title)}</div></td>
+                    <td class="sk-flags">${inventoryFlags(skill)}</td>
+                    <td class="sk-use ${skill.usage > 0 ? 'on' : ''}" aria-label="${skill.usage} uses">${skill.usage}</td>
                 </tr>
-            `).join('') || '<tr><td colspan="6"><div class="empty">No skills match the current filters.</div></td></tr>';
+            `).join('') || '<tr><td colspan="4"><div class="empty">No skills match the current filters.</div></td></tr>';
 
             tbody.querySelectorAll('tr[data-skill]').forEach(row => {
                 row.addEventListener('click', () => selectSkill(row.dataset.skill));
@@ -567,27 +403,28 @@
                 return;
             }
 
+            const fit = Math.max(0, Math.min(Number(featured.score) || 0, 100));
             hero.innerHTML = `
-                <div class="quest-score">${escapeHtml(featured.score)}<span>fit</span></div>
-                <div class="quest-eyebrow">Next Skill To Try</div>
+                <div class="quest-score" style="--p:${fit}" title="Fit score"><b>${escapeHtml(featured.score)}</b><span>fit</span></div>
+                <div class="quest-eyebrow"><span class="quest-cat" style="--cat:${categoryColor(featured.category)}">${categoryIcon(featured.category)}</span>Next skill to try</div>
                 <h2 class="quest-title">${escapeHtml(featured.name)}</h2>
                 <div class="quest-description">${escapeHtml(featured.description || featured.title || 'No description available.')}</div>
-                <div class="quest-reasons">${(featured.reasons || []).slice(0, 5).map(reason => `<span class="badge good">${escapeHtml(reason)}</span>`).join('')}</div>
+                <div class="quest-reasons">${(featured.reasons || []).slice(0, 5).map(reason => `<span class="badge">${escapeHtml(reason)}</span>`).join('')}</div>
                 <div class="quest-actions">
-                    <button class="primary-action" data-skill="${escapeHtml(featured.name)}">Inspect skill</button>
-                    <button class="tool-btn" data-tried="${escapeHtml(featured.name)}">Mark tried</button>
+                    <button class="primary-action" data-skill="${escapeHtml(featured.name)}">${icon('i-arrow')}Inspect skill</button>
+                    <button class="tool-btn wide" data-tried="${escapeHtml(featured.name)}">Mark tried</button>
                     <div class="secondary-note">${escapeHtml(featured.category)} · ${escapeHtml(featured.source)}${featured.copyCount > 1 ? ` · ${featured.copyCount} copies` : ''}</div>
                 </div>
             `;
             queue.innerHTML = recommendations.slice(1, 9).map((item, index) => `
-                <div class="quest-row" data-skill="${escapeHtml(item.name)}">
+                <div class="quest-row" data-skill="${escapeHtml(item.name)}" tabindex="0" role="button" title="${escapeHtml((item.reasons || []).join(' · '))}">
                     <div class="quest-rank">${index + 2}</div>
-                    <div>
+                    <div class="quest-row-main">
                         <div class="row-name">${escapeHtml(item.name)}</div>
-                        <div class="row-meta">${escapeHtml((item.reasons || [])[0] || item.category)} · ${escapeHtml(item.source)}</div>
+                        <div class="row-meta">${escapeHtml(item.category)} · ${escapeHtml(item.source)}</div>
                         <div class="quest-progress"><div style="width:${Math.max(10, Math.min(item.score, 100))}%"></div></div>
                     </div>
-                    <span class="badge info">${escapeHtml(item.score)}</span>
+                    <span class="row-num" aria-label="fit ${escapeHtml(item.score)}">${escapeHtml(item.score)}</span>
                 </div>
             `).join('') || '<div class="empty">No more queued skills yet.</div>';
             document.querySelectorAll('#discover [data-skill]').forEach(item => item.addEventListener('click', () => selectSkill(item.dataset.skill)));
@@ -617,11 +454,22 @@
             return badges.join('');
         }
 
+        // Inventory cards stay quiet: only flags that call for attention, as icons with a tooltip.
+        function inventoryFlags(skill) {
+            const flags = [];
+            if (skill.tried && skill.usage === 0) flags.push(`<span class="flag good" title="Tried">${icon('i-check')}<span class="sr">tried</span></span>`);
+            if (skill.frameworkCopy) flags.push(`<span class="flag info" title="${skill.copyCount} copies">${icon('i-copy')}<span class="n">${skill.copyCount}</span></span>`);
+            if (skill.needsWrapper) flags.push(`<span class="flag warn" title="Needs a command wrapper">${icon('i-terminal')}<span class="sr">needs wrapper</span></span>`);
+            if (skill.needsMetadata) flags.push(`<span class="flag warn" title="Needs a description">${icon('i-note')}<span class="sr">needs metadata</span></span>`);
+            return flags.join('');
+        }
+
         function selectSkill(name) {
             selectedSkill = logicalSkills.find(skill => skill.name === name) || null;
             renderInventory();
             renderInspector(selectedSkill);
             if (currentTab === 'map') focusGraphSkill(selectedSkill);
+            document.body.classList.toggle('inspecting', !!selectedSkill);
         }
 
         function renderUsage() {
@@ -639,7 +487,7 @@
             const target = document.getElementById('consolidationList');
             target.innerHTML = consolidation.length ? consolidation.slice(0, 12).map(group => {
                 const names = unique((group.skills || []).map(skill => skill.name)).join(' + ');
-                return `<div class="row" data-skill="${escapeHtml(group.skills?.[0]?.name || '')}"><div><div class="row-name">${escapeHtml(names)}</div><div class="row-meta">${escapeHtml(group.reason)}</div><div class="row-desc">Keep the clearer, higher-use skill. Fold or archive the lower-signal overlap.</div></div><span class="badge warn">score ${Math.round(group.score)}</span></div>`;
+                return `<div class="row" data-skill="${escapeHtml(group.skills?.[0]?.name || '')}" tabindex="0" role="button" title="Keep the clearer, higher-use skill. Fold or archive the lower-signal overlap."><div class="row-main"><div class="row-name">${escapeHtml(names)}</div><div class="row-meta">${escapeHtml(group.reason)}</div></div><span class="row-num warn" aria-label="score ${Math.round(group.score)}">${Math.round(group.score)}</span></div>`;
             }).join('') : '<div class="empty">No consolidation candidates found.</div>';
             target.querySelectorAll('.row[data-skill]').forEach(row => row.addEventListener('click', () => selectSkill(row.dataset.skill)));
 
@@ -647,7 +495,7 @@
             document.getElementById('frameworkCopiesCount').textContent = frameworkCopies.length;
             const copyTarget = document.getElementById('frameworkCopiesList');
             copyTarget.innerHTML = frameworkCopies.length ? frameworkCopies.slice(0, 18).map(group => `
-                <div class="row" data-skill="${escapeHtml(group.name)}"><div><div class="row-name">${escapeHtml(group.name)}</div><div class="row-meta">${group.count} copies · ${escapeHtml((group.sources || []).slice(0, 3).join(', '))}${group.sources?.length > 3 ? '...' : ''}</div><div class="row-desc">Informational: repeated because it exists in more than one framework or project.</div></div><span class="badge info">copy</span></div>
+                <div class="row" data-skill="${escapeHtml(group.name)}" tabindex="0" role="button" title="Informational: repeated because it exists in more than one framework or project."><div class="row-main"><div class="row-name">${escapeHtml(group.name)}</div><div class="row-meta">${escapeHtml((group.sources || []).slice(0, 3).join(', '))}${group.sources?.length > 3 ? '...' : ''}</div></div><span class="row-num info" aria-label="${group.count} copies">${icon('i-copy', 'sm')}${group.count}</span></div>
             `).join('') : '<div class="empty">No cross-framework copies found.</div>';
             copyTarget.querySelectorAll('.row[data-skill]').forEach(row => row.addEventListener('click', () => selectSkill(row.dataset.skill)));
         }
@@ -656,7 +504,7 @@
             const target = document.getElementById(id);
             target.innerHTML = rows.length ? rows.map(skill => {
                 const meter = options.meter ? `<div class="usage-meter"><div class="usage-fill" style="width:${Math.max(4, Math.round(((skill.usage || 0) / options.maxUsage) * 100))}%"></div></div>` : '';
-                return `<div class="row" data-skill="${escapeHtml(skill.name)}"><div><div class="row-name">${escapeHtml(displayName(skill))}</div><div class="row-meta">${escapeHtml(metaFn(skill))}</div>${meter}</div><span class="badge ${skill.usage > 0 ? 'good' : 'copy'}">${skill.usage || 0}</span></div>`;
+                return `<div class="row" data-skill="${escapeHtml(skill.name)}" tabindex="0" role="button"><span class="row-ic" style="--cat:${categoryColor(skill.category)}">${categoryIcon(skill.category)}</span><div class="row-main"><div class="row-name">${escapeHtml(displayName(skill))}</div><div class="row-meta">${escapeHtml(metaFn(skill))}</div>${meter}</div><span class="row-num ${skill.usage > 0 ? 'good' : ''}" aria-label="${skill.usage || 0} uses">${skill.usage || 0}</span></div>`;
             }).join('') : '<div class="empty">Nothing to show yet.</div>';
             target.querySelectorAll('.row[data-skill]').forEach(row => row.addEventListener('click', () => selectSkill(row.dataset.skill)));
         }
@@ -666,7 +514,7 @@
         function renderInspector(skill) {
             if (!skill) {
                 document.getElementById('inspectorTitle').textContent = 'Select a skill';
-                document.getElementById('inspectorSubtitle').textContent = 'Choose a row from Inventory, Usage, Cleanup, or Map.';
+                document.getElementById('inspectorSubtitle').textContent = 'Choose a skill from any view.';
                 document.getElementById('inspectorBadges').innerHTML = '';
                 document.getElementById('inspectorMetrics').innerHTML = '';
                 document.getElementById('copyList').innerHTML = '<div class="empty">No skill selected.</div>';
@@ -679,11 +527,11 @@
             document.getElementById('inspectorSubtitle').textContent = skill.description || skill.title || 'No description available.';
             document.getElementById('inspectorBadges').innerHTML = statusBadges(skill);
             document.getElementById('inspectorMetrics').innerHTML = [
-                ['Uses', skill.usage || 0], ['Projects', skill.projectCount || 0], ['Last Used', formatDate(skill.lastUsed)]
+                ['Uses', skill.usage || 0], ['Projects', skill.projectCount || 0], ['Last used', formatDate(skill.lastUsed)]
             ].map(([label, value]) => `<div class="metric"><div class="metric-value">${escapeHtml(value)}</div><div class="metric-label">${escapeHtml(label)}</div></div>`).join('');
             document.getElementById('copyCountLabel').textContent = skill.copyCount;
             document.getElementById('copyList').innerHTML = skill.copies.map(copy => `
-                <div class="copy-item"><div class="copy-source">${escapeHtml(copy.source)} · ${copy.usage || 0} uses</div><div class="copy-path">${escapeHtml(copy.path)}</div></div>
+                <div class="copy-item"><div class="copy-source"><span>${escapeHtml(copy.source)}</span><span class="copy-uses">${copy.usage || 0} uses</span></div><div class="copy-path" title="${escapeHtml(copy.path)}">&lrm;${escapeHtml(copy.path)}&lrm;</div></div>
             `).join('');
             document.getElementById('recommendedAction').textContent = recommendation(skill);
         }
@@ -776,22 +624,26 @@
             ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = nodeColor(node) + (hoveredNode?.id === node.id || selectedSkill?.name === node.name ? 'ff' : 'd8');
             ctx.fill();
-            ctx.strokeStyle = selectedSkill?.name === node.name ? '#ffffff' : nodeColor(node);
-            ctx.lineWidth = 1.4 / globalScale;
+            const isSelected = selectedSkill?.name === node.name;
+            ctx.strokeStyle = isSelected ? '#d3d8e2' : nodeColor(node);
+            ctx.lineWidth = (isSelected ? 2.6 : 1.2) / globalScale;
             ctx.stroke();
             const fontSize = graphMode === 'map' ? Math.max(12, 15 / globalScale) : Math.max(10, 12 / globalScale);
             const shouldLabel = node.type === 'category' || node.type === 'source' || (graphMode === 'map' && node.type === 'skill') || node.usage > 0 || hoveredNode?.id === node.id;
             if (!shouldLabel) return;
             const display = label.length > 30 ? label.slice(0, 27) + '...' : label;
-            ctx.font = `${node.type === 'category' || node.type === 'source' ? '700 ' : ''}${fontSize}px Inter, sans-serif`;
+            ctx.font = `${node.type === 'category' || node.type === 'source' ? '600 ' : ''}${fontSize}px Geist, system-ui, sans-serif`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top';
             const textWidth = ctx.measureText(display).width;
             if (graphMode === 'map' && node.type === 'skill') {
-                ctx.fillStyle = 'rgba(0,0,0,0.72)';
-                ctx.fillRect(node.x - textWidth / 2 - 4, node.y + radius + 2, textWidth + 8, fontSize + 5);
+                ctx.fillStyle = 'rgba(22,24,31,0.78)';
+                const bx = node.x - textWidth / 2 - 5, by = node.y + radius + 2, bw = textWidth + 10, bh = fontSize + 6;
+                ctx.beginPath();
+                if (ctx.roundRect) ctx.roundRect(bx, by, bw, bh, Math.min(6, bh / 2)); else ctx.rect(bx, by, bw, bh);
+                ctx.fill();
             }
-            ctx.fillStyle = '#e6edf3';
+            ctx.fillStyle = node.type === 'skill' ? '#c2c8d4' : '#d3d8e2';
             ctx.fillText(display, node.x, node.y + radius + 5);
         }
         function graphHintText() {
@@ -811,14 +663,14 @@
             const btn = event.target.closest('.scope-btn');
             if (!btn) return;
             activeScope = btn.dataset.scope;
-            document.querySelectorAll('#scopeControls .scope-btn').forEach(item => item.classList.toggle('active', item === btn));
+            document.querySelectorAll('#scopeControls .scope-btn').forEach(item => { item.classList.toggle('active', item === btn); item.setAttribute('aria-pressed', item === btn); });
             init().catch(showError);
         });
         document.querySelector('.tabbar').addEventListener('click', event => {
             const btn = event.target.closest('.tab-btn');
             if (!btn) return;
             currentTab = btn.dataset.tab;
-            document.querySelectorAll('.tab-btn').forEach(item => item.classList.toggle('active', item === btn));
+            document.querySelectorAll('.tab-btn').forEach(item => { item.classList.toggle('active', item === btn); item.setAttribute('aria-pressed', item === btn); });
             document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.toggle('active', panel.id === currentTab));
             if (currentTab === 'map') setTimeout(renderGraph, 30);
         });
@@ -826,14 +678,14 @@
             const btn = event.target.closest('.filter-btn');
             if (!btn) return;
             activeStatus = btn.dataset.status;
-            document.querySelectorAll('#inventory .filter-btn').forEach(item => item.classList.toggle('active', item === btn));
+            document.querySelectorAll('#inventory .filter-btn').forEach(item => { item.classList.toggle('active', item === btn); item.setAttribute('aria-pressed', item === btn); });
             renderInventory();
         });
         document.getElementById('map').addEventListener('click', event => {
             const btn = event.target.closest('.filter-btn');
             if (!btn) return;
             graphMode = btn.dataset.graph;
-            document.querySelectorAll('#map .filter-btn').forEach(item => item.classList.toggle('active', item === btn));
+            document.querySelectorAll('#map .filter-btn').forEach(item => { item.classList.toggle('active', item === btn); item.setAttribute('aria-pressed', item === btn); });
             renderGraph();
         });
         document.getElementById('zoomIn').addEventListener('click', () => graph?.zoom(graph.zoom() * 1.45, 250));
@@ -846,11 +698,26 @@
                 init().catch(showError);
             } else if (event.data?.type === 'tab-activated' && currentTab === 'map') {
                 renderGraph();
+            } else if (event.data?.type === 'theme-change') {
+                // Dusk is dark-only; nothing to switch.
             }
         });
+        // Keyboard: rows and cards act like buttons.
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && document.body.classList.contains('inspecting')) { closeInspector(); return; }
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            const target = event.target.closest?.('[role="button"][data-skill]');
+            if (!target) return;
+            event.preventDefault();
+            target.click();
+        });
+        // On narrow screens the inspector is a drawer opened by selecting a skill.
+        function closeInspector() { document.body.classList.remove('inspecting'); }
+        document.getElementById('inspectorClose').addEventListener('click', closeInspector);
+        document.getElementById('inspectorScrim').addEventListener('click', closeInspector);
         function showError(error) {
             setLoading(false);
-            document.getElementById('inventoryRows').innerHTML = `<tr><td colspan="6"><div class="empty">Failed to load skills: ${escapeHtml(error.message)}</div></td></tr>`;
+            document.getElementById('inventoryRows').innerHTML = `<tr><td colspan="4"><div class="empty">Failed to load skills: ${escapeHtml(error.message)}</div></td></tr>`;
         }
 
         init().catch(showError);

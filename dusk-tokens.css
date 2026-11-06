@@ -1,0 +1,19 @@
+/* Watchpost "Dusk" shared tokens and base. Every page links this first, then its own dusk.css. */
+:root{
+  --bg:#16181F; --surface:#1C1F28; --card:#252936; --card-2:#2B3040; --line:#2C313F;
+  --text:#D3D8E2; --text-2:#9BA2B4; --text-3:#868DA2; --on-accent:#10201C;
+  --accent:#7CC3B3; --accent-soft:#22332F;
+  --plan:#8DA2CB; --act:#D9B26F; --review:#B59AD9; --pause:#D58E8E; --done:#8DBF9A;
+  --p1:#E3877A; --p2:#D9B26F;
+  --r-card:14px; --r-col:18px; --r-btn:10px;
+  --f-ui:'Geist',system-ui,-apple-system,'Segoe UI',sans-serif; --f-mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--f-ui);font-size:14.5px;line-height:1.4;-webkit-font-smoothing:antialiased}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+svg.ic,.ic{width:18px;height:18px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+*:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

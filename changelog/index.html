@@ -4,861 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agent Log</title>
-    <style>
-        :root {
-            --surface-primary: #000000;
-            --surface-secondary: #0d1117;
-            --surface-tertiary: #161b22;
-            --surface-hover: rgba(255, 255, 255, 0.05);
-            --text-primary: #e6edf3;
-            --text-secondary: #c9d1d9;
-            --text-muted: #8b949e;
-            --text-subtle: #6e7681;
-            --border-subtle: #1a1a1a;
-            --border-medium: #30363d;
-            --brand-primary: #4ECDC4;
-            --brand-dim: rgba(78, 205, 196, 0.12);
-            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-
-            /* Tool badge colors */
-            --tool-write: #10b981;
-            --tool-write-bg: rgba(16, 185, 129, 0.12);
-            --tool-edit: #3b82f6;
-            --tool-edit-bg: rgba(59, 130, 246, 0.12);
-            --tool-bash: #f59e0b;
-            --tool-bash-bg: rgba(245, 158, 11, 0.12);
-            --tool-agent: #8b5cf6;
-            --tool-agent-bg: rgba(139, 92, 246, 0.12);
-            --tool-read: #6e7681;
-            --tool-read-bg: rgba(110, 118, 129, 0.12);
-            --tool-grep: #4ECDC4;
-            --tool-grep-bg: rgba(78, 205, 196, 0.12);
-            --tool-glob: #06b6d4;
-            --tool-glob-bg: rgba(6, 182, 212, 0.12);
-            --tool-default: #6e7681;
-            --tool-default-bg: rgba(110, 118, 129, 0.1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body {
-            height: 100%;
-            overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--surface-primary);
-            color: var(--text-secondary);
-        }
-
-        /* ── Layout ── */
-        .page {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        /* ── Header ── */
-        .header {
-            flex-shrink: 0;
-            background: var(--surface-secondary);
-            border-bottom: 1px solid var(--border-medium);
-            padding: 0.75rem 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.625rem;
-        }
-
-        .header-top {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .header-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .header-title svg {
-            width: 16px;
-            height: 16px;
-            stroke: var(--brand-primary);
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-            flex-shrink: 0;
-        }
-
-        .live-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--brand-primary);
-            box-shadow: 0 0 6px var(--brand-primary);
-            animation: pulse 2s ease-in-out infinite;
-            flex-shrink: 0;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.85); }
-        }
-
-        .header-stats {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-left: auto;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
-        }
-
-        .stat-value {
-            font-weight: 600;
-            color: var(--text-secondary);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .stat-sep {
-            color: var(--border-medium);
-        }
-
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        /* Time range buttons */
-        .range-group {
-            display: flex;
-            border: 1px solid var(--border-medium);
-            border-radius: 6px;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .range-btn {
-            padding: 0.3rem 0.625rem;
-            background: transparent;
-            border: none;
-            border-right: 1px solid var(--border-medium);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            white-space: nowrap;
-        }
-
-        .range-btn:last-child {
-            border-right: none;
-        }
-
-        .range-btn:hover {
-            background: var(--surface-hover);
-            color: var(--text-secondary);
-        }
-
-        .range-btn.active {
-            background: var(--brand-dim);
-            color: var(--brand-primary);
-        }
-
-        /* Tool filter dropdown */
-        .filter-select {
-            padding: 0.3rem 0.625rem;
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-medium);
-            border-radius: 6px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            cursor: pointer;
-            outline: none;
-            transition: border-color var(--transition-fast);
-        }
-
-        .filter-select:hover, .filter-select:focus {
-            border-color: var(--brand-primary);
-        }
-
-        /* Search input */
-        .search-input {
-            padding: 0.3rem 0.625rem 0.3rem 1.75rem;
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-medium);
-            border-radius: 6px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            outline: none;
-            transition: border-color var(--transition-fast);
-            width: 180px;
-            position: relative;
-        }
-
-        .search-wrapper {
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .search-wrapper svg {
-            position: absolute;
-            left: 0.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
-            stroke: var(--text-subtle);
-            stroke-width: 2;
-            fill: none;
-            pointer-events: none;
-        }
-
-        .search-input:hover, .search-input:focus {
-            border-color: var(--brand-primary);
-        }
-
-        .search-input::placeholder {
-            color: var(--text-subtle);
-        }
-
-        /* Clear filters button */
-        .clear-btn {
-            padding: 0.3rem 0.625rem;
-            background: transparent;
-            border: 1px solid var(--border-medium);
-            border-radius: 6px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            white-space: nowrap;
-            display: none;
-            align-items: center;
-            gap: 0.375rem;
-        }
-
-        .clear-btn.visible {
-            display: flex;
-        }
-
-        .clear-btn:hover {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: rgba(239, 68, 68, 0.4);
-            color: #ef4444;
-        }
-
-        .clear-btn svg {
-            width: 12px;
-            height: 12px;
-            stroke: currentColor;
-            stroke-width: 2;
-            fill: none;
-        }
-
-        /* ── Timeline scroll container ── */
-        .timeline-container {
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding: 1rem 1.25rem;
-            scrollbar-width: thin;
-            scrollbar-color: var(--border-medium) transparent;
-        }
-
-        .timeline-container::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .timeline-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .timeline-container::-webkit-scrollbar-thumb {
-            background: var(--border-medium);
-            border-radius: 3px;
-        }
-
-        /* ── Session group ── */
-        .session-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .session-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.625rem;
-            position: sticky;
-            top: 0;
-            background: var(--surface-primary);
-            padding: 0.25rem 0;
-            z-index: 10;
-        }
-
-        .session-header-line {
-            height: 1px;
-            flex: 1;
-            background: var(--border-subtle);
-        }
-
-        .session-header-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-subtle);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .session-id-chip {
-            font-size: 0.75rem;
-            padding: 0.1rem 0.4rem;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-            letter-spacing: 0;
-        }
-
-        .session-id-chip:hover {
-            opacity: 0.8;
-        }
-
-        /* ── Action card ── */
-        .action-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .action-card {
-            display: grid;
-            grid-template-columns: 110px auto 1fr auto;
-            align-items: start;
-            gap: 0.75rem;
-            padding: 0.5rem 0.75rem;
-            border-radius: 8px;
-            border: 1px solid transparent;
-            cursor: default;
-            transition: background var(--transition-fast), border-color var(--transition-fast);
-            animation: slideIn 250ms ease-out both;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-6px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .action-card:hover {
-            background: var(--surface-hover);
-            border-color: var(--border-subtle);
-        }
-
-        .action-card.expanded {
-            background: var(--surface-tertiary);
-            border-color: var(--border-medium);
-        }
-
-        /* Timestamp */
-        .action-time {
-            font-size: 0.82rem;
-            color: var(--text-subtle);
-            white-space: nowrap;
-            padding-top: 2px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .action-time[title] {
-            cursor: help;
-            text-decoration-line: underline;
-            text-decoration-style: dotted;
-            text-decoration-color: var(--text-subtle);
-        }
-
-        /* Tool badge */
-        .tool-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.15rem 0.45rem;
-            border-radius: 4px;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            white-space: nowrap;
-            align-self: start;
-            margin-top: 1px;
-        }
-
-        /* Main content area */
-        .action-body {
-            min-width: 0;
-        }
-
-        .action-path {
-            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
-            font-size: 0.87rem;
-            color: var(--text-secondary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            cursor: pointer;
-            max-width: 100%;
-            display: block;
-        }
-
-        .action-path:hover {
-            color: var(--brand-primary);
-            text-decoration: underline;
-            text-decoration-color: rgba(78, 205, 196, 0.5);
-        }
-
-        .action-command {
-            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
-            font-size: 0.85rem;
-            color: var(--tool-bash);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
-        }
-
-        .action-summary {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
-            margin-top: 1px;
-        }
-
-        .action-card.expanded .action-summary {
-            white-space: normal;
-            overflow: visible;
-        }
-
-        .action-expand-hint {
-            font-size: 0.75rem;
-            color: var(--text-subtle);
-            cursor: pointer;
-            margin-top: 2px;
-            display: none;
-        }
-
-        .action-card.has-more .action-expand-hint {
-            display: block;
-        }
-
-        .action-card.expanded .action-expand-hint {
-            display: none;
-        }
-
-        /* Project badge (right side) */
-        .action-meta {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 0.25rem;
-            flex-shrink: 0;
-        }
-
-        .project-badge {
-            font-size: 0.75rem;
-            color: var(--text-subtle);
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-subtle);
-            padding: 0.1rem 0.4rem;
-            border-radius: 4px;
-            white-space: nowrap;
-        }
-
-        .agent-label {
-            font-size: 0.75rem;
-            color: var(--text-subtle);
-            white-space: nowrap;
-        }
-
-        /* ── Empty state ── */
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            padding: 4rem 2rem;
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        .empty-icon {
-            width: 48px;
-            height: 48px;
-            opacity: 0.25;
-        }
-
-        .empty-icon svg {
-            width: 100%;
-            height: 100%;
-            stroke: var(--text-secondary);
-            stroke-width: 1.5;
-            fill: none;
-        }
-
-        .empty-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        .empty-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            max-width: 320px;
-            line-height: 1.5;
-        }
-
-        /* ── Loading spinner ── */
-        .loading-state {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            padding: 3rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--border-medium);
-            border-top-color: var(--brand-primary);
-            border-radius: 50%;
-            animation: spin 0.75s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* ── Error state ── */
-        .error-state {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
-            padding: 0.75rem 1rem;
-            margin: 1rem 0;
-            background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: #ef4444;
-        }
-
-        /* ── New items notification ── */
-        .new-items-bar {
-            display: none;
-            position: sticky;
-            top: 0.5rem;
-            z-index: 20;
-            justify-content: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .new-items-bar.visible {
-            display: flex;
-        }
-
-        .new-items-pill {
-            background: var(--brand-primary);
-            color: #000;
-            font-size: 0.85rem;
-            font-weight: 700;
-            padding: 0.3rem 0.75rem;
-            border-radius: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(78, 205, 196, 0.35);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-        }
-
-        .new-items-pill:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(78, 205, 196, 0.45);
-        }
-
-        .new-items-pill svg {
-            width: 12px;
-            height: 12px;
-            stroke: currentColor;
-            stroke-width: 2.5;
-            fill: none;
-        }
-
-        /* ── Filter active indicator in search area ── */
-        .filter-active-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--brand-primary);
-            display: none;
-            flex-shrink: 0;
-        }
-
-        .filter-active-dot.visible {
-            display: block;
-        }
-
-        /* ── Split layout ── */
-        .content-area {
-            flex: 1;
-            display: flex;
-            overflow: hidden;
-        }
-
-        .timeline-container {
-            flex: 0 0 60%;
-            /* keep existing overflow/padding/scrollbar styles */
-        }
-
-        .detail-panel {
-            flex: 0 0 40%;
-            border-left: 1px solid var(--border-medium);
-            background: var(--surface-secondary);
-            overflow-y: auto;
-            padding: 1.25rem;
-            scrollbar-width: thin;
-            scrollbar-color: var(--border-medium) transparent;
-        }
-
-        .detail-panel::-webkit-scrollbar { width: 6px; }
-        .detail-panel::-webkit-scrollbar-track { background: transparent; }
-        .detail-panel::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 3px; }
-
-        /* Detail panel content */
-        .detail-empty {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: var(--text-subtle);
-            font-size: 0.9rem;
-            text-align: center;
-            gap: 0.5rem;
-        }
-
-        .detail-empty svg {
-            width: 32px;
-            height: 32px;
-            stroke: var(--text-subtle);
-            stroke-width: 1.5;
-            fill: none;
-            opacity: 0.4;
-        }
-
-        .detail-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .detail-header .tool-badge {
-            font-size: 0.85rem;
-            padding: 0.25rem 0.6rem;
-        }
-
-        .detail-header-text {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .detail-header-time {
-            margin-left: auto;
-            font-size: 0.82rem;
-            color: var(--text-subtle);
-        }
-
-        .detail-section {
-            margin-bottom: 1.25rem;
-        }
-
-        .detail-section-title {
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--text-subtle);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-        }
-
-        .detail-value {
-            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
-            font-size: 0.87rem;
-            color: var(--text-secondary);
-            word-break: break-all;
-            line-height: 1.5;
-            padding: 0.5rem 0.75rem;
-            background: var(--surface-tertiary);
-            border-radius: 6px;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .detail-value.summary {
-            white-space: pre-wrap;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .detail-meta {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 0.375rem 1rem;
-            font-size: 0.85rem;
-        }
-
-        .detail-meta-key {
-            color: var(--text-subtle);
-            font-weight: 500;
-        }
-
-        .detail-meta-val {
-            color: var(--text-secondary);
-            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
-            font-size: 0.82rem;
-            word-break: break-all;
-        }
-
-        /* Highlight selected card */
-        .action-card.selected {
-            background: var(--surface-tertiary);
-            border-color: var(--brand-primary);
-            border-left: 3px solid var(--brand-primary);
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../dusk-tokens.css">
+    <link rel="stylesheet" href="dusk.css">
 </head>
 <body>
 <div class="page">
 
-    <!-- Header -->
-    <div class="header">
+    <!-- Header: compact Dusk toolbar -->
+    <header class="header">
         <div class="header-top">
-            <div class="header-title">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                Agent Log
-                <div class="live-dot" id="live-dot" title="Live updates connected"></div>
-            </div>
-            <div class="header-stats" id="header-stats">
-                <span class="stat-item">
+            <h1 class="header-title">
+                Agent log
+                <span class="live-dot" id="live-dot" title="Live updates connected" role="status" aria-label="Live updates"></span>
+            </h1>
+            <div class="header-stats" id="header-stats" aria-label="Totals for this range">
+                <span class="stat-item" title="Actions">
+                    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2.5-6 4 12L16 12h5"/></svg>
                     <span class="stat-value" id="stat-actions">—</span>
-                    <span>actions</span>
+                    <span class="sr">actions</span>
                 </span>
-                <span class="stat-sep">·</span>
-                <span class="stat-item">
+                <span class="stat-item" title="Sessions">
+                    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 4-8 4-8-4z"/><path d="M4 12l8 4 8-4M4 16l8 4 8-4"/></svg>
                     <span class="stat-value" id="stat-sessions">—</span>
-                    <span>sessions</span>
+                    <span class="sr">sessions</span>
                 </span>
-                <span class="stat-sep">·</span>
-                <span class="stat-item">
+                <span class="stat-item" title="Files changed">
+                    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V9z"/><path d="M14 4v5h5"/></svg>
                     <span class="stat-value" id="stat-files">—</span>
-                    <span>files changed</span>
+                    <span class="sr">files changed</span>
                 </span>
             </div>
         </div>
 
         <div class="header-controls">
             <!-- Time range -->
-            <div class="range-group">
-                <button class="range-btn" data-range="1h">1h</button>
-                <button class="range-btn" data-range="6h">6h</button>
-                <button class="range-btn active" data-range="24h">24h</button>
-                <button class="range-btn" data-range="7d">7d</button>
-                <button class="range-btn" data-range="all">All</button>
+            <div class="range-group" role="group" aria-label="Time range">
+                <button class="range-btn" data-range="1h" title="Last hour">1h</button>
+                <button class="range-btn" data-range="6h" title="Last 6 hours">6h</button>
+                <button class="range-btn active" data-range="24h" title="Last 24 hours">24h</button>
+                <button class="range-btn" data-range="7d" title="Last 7 days">7d</button>
+                <button class="range-btn" data-range="all" title="Everything">All</button>
             </div>
 
             <!-- Project filter -->
-            <select class="filter-select" id="project-filter" title="Filter by project" style="min-width:140px;">
-                <option value="all">All projects</option>
-                <!-- Populated dynamically -->
-            </select>
+            <label class="proj" title="Filter by project">
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 015.5 5H9l2 2h7.5A2.5 2.5 0 0121 9.5v7a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 16.5z"/></svg>
+                <select class="filter-select" id="project-filter" aria-label="Filter by project">
+                    <option value="all">All projects</option>
+                    <!-- Populated dynamically -->
+                </select>
+                <svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+            </label>
 
-            <!-- Tool filter -->
-            <select class="filter-select" id="tool-filter" title="Filter by tool">
-                <option value="all">All tools</option>
-                <option value="Write">Write</option>
-                <option value="Edit">Edit</option>
-                <option value="Bash">Bash</option>
-                <option value="Agent">Agent</option>
-                <option value="Read">Read</option>
-                <option value="Grep">Grep</option>
-                <option value="Glob">Glob</option>
-            </select>
+            <span class="grow"></span>
 
-            <!-- File search -->
+            <!-- File search (expands on focus) -->
             <div class="search-wrapper">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8"/>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>
                 <input
                     type="text"
                     class="search-input"
                     id="file-search"
-                    placeholder="Search files or commands…"
+                    placeholder="Files or commands"
+                    aria-label="Search files or commands"
                     autocomplete="off"
                     spellcheck="false"
                 />
             </div>
 
-            <div class="filter-active-dot" id="filter-dot" title="Filters active"></div>
+            <!-- Tool filter (icon button, native select underneath) -->
+            <label class="tb tool-tb" title="Filter by tool">
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"/></svg>
+                <span class="mark" aria-hidden="true"></span>
+                <select class="filter-select" id="tool-filter" aria-label="Filter by tool">
+                    <option value="all">All tools</option>
+                    <option value="Write">Write</option>
+                    <option value="Edit">Edit</option>
+                    <option value="Bash">Bash</option>
+                    <option value="Agent">Agent</option>
+                    <option value="Read">Read</option>
+                    <option value="Grep">Grep</option>
+                    <option value="Glob">Glob</option>
+                </select>
+            </label>
 
-            <!-- Clear filters -->
-            <button class="clear-btn" id="clear-filters">
-                <svg viewBox="0 0 24 24">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-                Clear filters
+            <!-- Clear filters (appears only when a filter is on) -->
+            <button class="clear-btn tb" id="clear-filters" title="Clear filters" aria-label="Clear filters">
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7L7 17M7 7l10 10"/></svg>
+                <span class="filter-active-dot" id="filter-dot" aria-hidden="true"></span>
             </button>
         </div>
-    </div>
+    </header>
 
     <!-- Content area: timeline + detail -->
     <div class="content-area">
     <div class="timeline-container" id="timeline-container">
         <!-- New items notification -->
         <div class="new-items-bar" id="new-items-bar">
-            <div class="new-items-pill" id="new-items-pill">
-                <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+            <div class="new-items-pill" id="new-items-pill" role="button" tabindex="0">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
                 <span id="new-items-text">New actions</span>
             </div>
         </div>
@@ -873,13 +119,16 @@
     </div><!-- end timeline-container -->
 
     <!-- Detail Panel -->
-    <div class="detail-panel" id="detail-panel">
+    <aside class="detail-panel" id="detail-panel" aria-label="Action details">
+        <button class="ib detail-close" id="detail-close" type="button" title="Close details" aria-label="Close details">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7L7 17M7 7l10 10"/></svg>
+        </button>
         <div class="detail-empty" id="detail-empty">
-            <svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.5"/></svg>
             <div>Click an action to see details</div>
         </div>
         <div id="detail-content" style="display:none;"></div>
-    </div>
+    </aside>
 
     </div><!-- end content-area -->
 
@@ -900,14 +149,15 @@ let sseSource = null;
 let sseConnected = false;
 
 // Session color palette (deterministic from session ID)
+// Dusk: soft, low-chroma hues that sit quietly on the dark background
 const SESSION_COLORS = [
-    '#4ECDC4', '#f59e0b', '#8b5cf6', '#10b981',
-    '#3b82f6', '#ec4899', '#06b6d4', '#ef4444',
-    '#84cc16', '#f97316',
+    '#7CC3B3', '#D9B26F', '#B59AD9', '#8DBF9A',
+    '#8DA2CB', '#D49AB8', '#86B9CF', '#D58E8E',
+    '#B5C48A', '#D9A07F',
 ];
 
 function sessionColor(sessionId) {
-    if (!sessionId) return '#6e7681';
+    if (!sessionId) return '#868DA2';
     let hash = 0;
     for (let i = 0; i < sessionId.length; i++) {
         hash = (hash * 31 + sessionId.charCodeAt(i)) >>> 0;
@@ -918,20 +168,39 @@ function sessionColor(sessionId) {
 // ─────────────────────────────────────────────
 // Tool badge config
 // ─────────────────────────────────────────────
-const TOOL_CONFIG = {
-    Write:  { color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)' },
-    Edit:   { color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.12)' },
-    Bash:   { color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)' },
-    Agent:  { color: '#8b5cf6', bg: 'rgba(139, 92, 246, 0.12)' },
-    Task:   { color: '#8b5cf6', bg: 'rgba(139, 92, 246, 0.12)' },
-    Read:   { color: '#6e7681', bg: 'rgba(110, 118, 129, 0.12)' },
-    Grep:   { color: '#4ECDC4', bg: 'rgba(78, 205, 196, 0.12)' },
-    Glob:   { color: '#06b6d4', bg: 'rgba(6, 182, 212, 0.12)' },
+// Dusk palette: each tool gets a soft hue and an icon instead of a text label
+const TOOL_ICONS = {
+    write: '<path d="M14 4H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V9z"/><path d="M14 4v5h5M12 12v5M9.5 14.5h5"/>',
+    edit:  '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+    bash:  '<path d="M5 8l4 4-4 4M12 17h7"/>',
+    agent: '<path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/>',
+    read:  '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.5"/>',
+    grep:  '<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/>',
+    glob:  '<path d="M3 7.5A2.5 2.5 0 015.5 5H9l2 2h7.5A2.5 2.5 0 0121 9.5v7a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 16.5z"/>',
+    other: '<circle cx="12" cy="12" r="3"/>',
 };
+const TOOL_CONFIG = {
+    Write:  { color: '#8DBF9A', bg: '#22302A', icon: TOOL_ICONS.write },
+    Edit:   { color: '#8DA2CB', bg: '#232A3A', icon: TOOL_ICONS.edit },
+    Bash:   { color: '#D9B26F', bg: '#33291A', icon: TOOL_ICONS.bash },
+    Agent:  { color: '#B59AD9', bg: '#2E2640', icon: TOOL_ICONS.agent },
+    Task:   { color: '#B59AD9', bg: '#2E2640', icon: TOOL_ICONS.agent },
+    Read:   { color: '#9BA2B4', bg: '#252936', icon: TOOL_ICONS.read },
+    Grep:   { color: '#7CC3B3', bg: '#22332F', icon: TOOL_ICONS.grep },
+    Glob:   { color: '#86B9CF', bg: '#20303A', icon: TOOL_ICONS.glob },
+};
+const TOOL_FALLBACK = { color: '#868DA2', bg: '#252936', icon: TOOL_ICONS.other };
 
 function toolStyle(tool) {
-    const cfg = TOOL_CONFIG[tool] || { color: '#6e7681', bg: 'rgba(110, 118, 129, 0.1)' };
+    const cfg = TOOL_CONFIG[tool] || TOOL_FALLBACK;
     return `color:${cfg.color};background:${cfg.bg};`;
+}
+
+// Round tool chip: icon only, the tool name lives in title + aria-label
+function toolBadge(tool) {
+    const cfg = TOOL_CONFIG[tool] || TOOL_FALLBACK;
+    const name = escHtml(tool);
+    return `<div class="tool-badge" data-tool="${name}" style="${toolStyle(tool)}" title="${name}" role="img" aria-label="${name}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${cfg.icon}</svg></div>`;
 }
 
 // ─────────────────────────────────────────────
@@ -1043,7 +312,7 @@ function connectSSE() {
         sseSource.onopen = () => {
             sseConnected = true;
             const dot = document.getElementById('live-dot');
-            if (dot) dot.title = 'Live — connected';
+            if (dot) { dot.style.cssText = ''; dot.title = 'Live — connected'; }
         };
 
         sseSource.onerror = () => {
@@ -1119,9 +388,9 @@ function renderActionCard(action, idx) {
 
     const hasMore = action.input_summary && action.input_summary.length > 120;
 
-    return `<div class="action-card ${hasMore ? 'has-more' : ''}" data-id="${action.id}" data-session="${escHtml(action.session_id || '')}" style="animation-delay:${Math.min(idx * 20, 300)}ms">
+    return `<div class="action-card ${hasMore ? 'has-more' : ''}" data-id="${action.id}" data-session="${escHtml(action.session_id || '')}" style="animation-delay:${Math.min(idx * 20, 300)}ms" tabindex="0" role="button">
         <div class="action-time" title="${absTime}">${relTime}</div>
-        <div class="tool-badge" style="${style}">${escHtml(tool)}</div>
+        ${toolBadge(tool)}
         <div class="action-body">${mainContent}</div>
         <div class="action-meta">${projectBadge}${agentLabel}</div>
     </div>`;
@@ -1162,9 +431,9 @@ function renderGroups(actions) {
         const sessionHeader = `<div class="session-header">
             <div class="session-header-line"></div>
             <div class="session-header-label">
-                Session
-                <span class="session-id-chip" data-session="${escHtml(sid)}" style="color:${color};background:${color}22;" title="Filter to this session">${escHtml(shortId)}</span>
-                · ${sessionStart} · ${count} action${count !== 1 ? 's' : ''}
+                <span class="session-id-chip" data-session="${escHtml(sid)}" style="color:${color};background:${color}1F;" title="Show only this session" role="button" tabindex="0" aria-label="Show only session ${escHtml(shortId)}">${escHtml(shortId)}</span>
+                <span class="session-when">${sessionStart}</span>
+                <span class="session-count" title="${count} action${count !== 1 ? 's' : ''}">${count}</span>
             </div>
             <div class="session-header-line"></div>
         </div>`;
@@ -1219,6 +488,10 @@ function updateFilterIndicators() {
     const anyActive = activeToolFilter !== 'all' || activeFileFilter || activeSessionFilter || activeProjectFilter !== 'all';
     document.getElementById('filter-dot').classList.toggle('visible', !!anyActive);
     document.getElementById('clear-filters').classList.toggle('visible', !!anyActive);
+    // Dusk toolbar: icon controls show a small mark when their own filter is on
+    document.querySelector('.tool-tb')?.classList.toggle('has-filter', activeToolFilter !== 'all');
+    document.querySelector('.proj')?.classList.toggle('has-filter', activeProjectFilter !== 'all');
+    document.querySelector('.search-wrapper')?.classList.toggle('has-q', !!activeFileFilter);
 }
 
 function rerender() {
@@ -1244,6 +517,7 @@ function showDetail(action) {
     document.getElementById('detail-empty').style.display = 'none';
     const content = document.getElementById('detail-content');
     content.style.display = 'block';
+    document.body.classList.add('detail-open');
 
     const tool = action.tool || 'Unknown';
     const style = toolStyle(tool);
@@ -1348,13 +622,39 @@ function showDetail(action) {
 
     content.innerHTML = `
         <div class="detail-header">
-            <div class="tool-badge" style="${style}">${escHtml(tool)}</div>
-            <div class="detail-header-text">${escHtml(action.agent_id || 'conductor')}</div>
+            ${toolBadge(tool)}
+            <div class="detail-header-text"><strong>${escHtml(tool)}</strong> ${escHtml(action.agent_id || 'conductor')}</div>
             <div class="detail-header-time">${relativeTime(action.ts)}</div>
         </div>
         ${sections}
     `;
 }
+
+// Dusk: the detail panel only takes space while an action is open
+function closeDetail() {
+    selectedActionId = null;
+    document.querySelectorAll('.action-card.selected').forEach(c => c.classList.remove('selected'));
+    document.getElementById('detail-content').style.display = 'none';
+    document.getElementById('detail-empty').style.display = '';
+    document.body.classList.remove('detail-open');
+}
+document.getElementById('detail-close').addEventListener('click', closeDetail);
+// Narrow screens: tapping the dimmed backdrop (content-area::after) closes the sheet
+document.querySelector('.content-area').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget && window.matchMedia('(max-width: 860px)').matches) closeDetail();
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('detail-open')) closeDetail();
+});
+
+// Keyboard: Enter/Space on a focusable row or chip acts like a click
+document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const el = e.target.closest?.('.action-card, .session-id-chip, .new-items-pill');
+    if (!el || el !== e.target) return;
+    e.preventDefault();
+    el.click();
+});
 
 // ─────────────────────────────────────────────
 // Card interaction listeners

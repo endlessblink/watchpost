@@ -1,0 +1,142 @@
+/* Watchpost Server tab — "Dusk": calm, soft-edged dark. Tokens come from ../dusk-tokens.css. */
+body{min-height:100vh;overflow:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ic.sm{width:15px;height:15px}
+.mono{font-family:var(--f-mono)}
+
+/* ── toolbar ── */
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 24px}
+.page-title{margin:0 4px 0 0;font-size:19px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.up-chip{display:none;align-items:center;gap:8px;height:34px;padding:0 12px;border-radius:999px;background:var(--card);font-size:13.5px;font-weight:500;color:var(--text-2)}
+.up-chip.visible{display:inline-flex}
+.up-chip i{width:8px;height:8px;border-radius:50%;background:var(--done)}
+.up-chip.warn i{background:var(--act)}
+.up-chip.bad i{background:var(--pause)}
+
+.subtabs{display:flex;gap:2px;padding:3px;border-radius:12px;background:var(--surface)}
+.subtab{display:flex;align-items:center;justify-content:center;gap:8px;min-width:40px;height:36px;padding:0 10px;border:0;border-radius:9px;background:transparent;color:var(--text-3);font-size:13.5px;font-weight:500;transition:color .15s,background .15s}
+.subtab:hover{color:var(--text)}
+.subtab .lbl{display:none}
+.subtab.active{background:var(--card-2);color:var(--text);padding:0 14px}
+.subtab.active .lbl{display:inline}
+.subtab.active svg{color:var(--accent)}
+
+.topbar-spacer{flex:1}
+.last-checked{font-family:var(--f-mono);font-size:11.5px;color:var(--text-3);white-space:nowrap}
+.last-checked.stale{color:var(--act)}
+.btn-refresh{width:40px;height:40px;border:0;border-radius:var(--r-btn);background:transparent;color:var(--text-2);display:grid;place-items:center;flex:0 0 40px}
+.btn-refresh:hover{background:var(--card);color:var(--text)}
+.btn-refresh.spinning svg{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── error banner ── */
+.error-banner{display:none;align-items:center;gap:10px;margin:0 24px 14px;padding:10px 16px;border-radius:var(--r-card);background:rgba(217,178,111,.08);color:var(--act);font-size:13.5px;max-width:1180px}
+.error-banner.visible{display:flex}
+.error-banner svg{width:16px;height:16px;flex:0 0 auto}
+
+/* ── panels ── */
+.tab-panel{display:none;padding:8px 24px 56px}
+.tab-panel.active{display:block}
+.service-grid,.health-layout{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:16px;max-width:1180px;align-items:start}
+.pane,.category-section{background:var(--surface);border-radius:18px;padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.pane h3,.category-header{margin:0 0 4px;padding:2px 4px;font-size:13px;font-weight:600;color:var(--text-2);display:flex;align-items:center;gap:8px}
+.category-icon{display:inline-flex;color:var(--text-3)}
+.category-icon svg,.pane h3 svg{width:15px;height:15px}
+.category-count{font-family:var(--f-mono);font-weight:400;font-size:12px;color:var(--text-3)}
+.category-grid{display:flex;flex-direction:column;gap:8px}
+.empty-note{grid-column:1/-1;color:var(--text-3);font-size:13.5px;padding:24px 4px}
+
+/* ── service row (the card) ── */
+.service-card{background:var(--card);border-radius:var(--r-card);box-shadow:0 1px 2px rgba(0,0,0,.25),0 6px 12px -8px rgba(0,0,0,.45);transition:background .15s;min-width:0}
+.service-card:hover,.service-card:focus-within{background:var(--card-2)}
+.svc-row{display:flex;align-items:center;gap:12px;padding:8px 10px 8px 8px;min-height:56px}
+
+.svc-thumb{position:relative;width:40px;height:40px;flex:0 0 40px;border-radius:11px;display:grid;place-items:center}
+.svc-thumb-bg{position:absolute;inset:0;border-radius:inherit;overflow:hidden;filter:saturate(.55) brightness(.9);display:grid;place-items:center}
+.svc-thumb-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.svc-initial{position:relative;font-size:15px;font-weight:600;color:rgba(211,216,226,.55);user-select:none}
+.cover-status-dot{position:absolute;right:-3px;bottom:-3px;width:12px;height:12px;border-radius:50%;background:var(--text-3);border:3px solid var(--card);transition:border-color .15s}
+.service-card:hover .cover-status-dot,.service-card:focus-within .cover-status-dot{border-color:var(--card-2)}
+.cover-status-dot.green{background:var(--done)}
+.cover-status-dot.amber{background:var(--act)}
+.cover-status-dot.red{background:var(--pause)}
+.cover-status-dot.loading{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+.svc-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.svc-name{display:flex;align-items:center;gap:6px;font-weight:500;font-size:14.5px;color:var(--text);min-width:0}
+.svc-name > span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.svc-tag{display:inline-flex;color:var(--text-3);flex:0 0 auto}
+.svc-tag svg{width:13px;height:13px}
+.card-detail{font-size:12.5px;color:var(--text-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.status-red .card-detail{color:var(--pause)}
+.status-amber .card-detail{color:var(--act)}
+
+/* actions appear on hover or focus; always shown on touch screens */
+.card-actions{display:flex;align-items:center;gap:2px;flex:0 0 auto;opacity:0;transition:opacity .15s}
+.service-card:hover .card-actions,.service-card:focus-within .card-actions{opacity:1}
+@media (hover:none){.card-actions{opacity:1}}
+.btn-dash,.btn-icon{width:34px;height:34px;border:0;border-radius:9px;background:transparent;color:var(--text-2);display:grid;place-items:center;transition:background .15s,color .15s}
+.btn-dash svg,.btn-icon svg{width:16px;height:16px}
+.btn-dash:hover,.btn-icon:hover{background:var(--bg);color:var(--text)}
+.btn-dash{color:var(--accent)}
+.btn-dash.dimmed{opacity:.35;pointer-events:none}
+.btn-icon.restart:hover{color:var(--act)}
+.btn-icon.update:hover{color:var(--accent)}
+.btn-icon.logs-active{background:var(--bg);color:var(--accent)}
+
+.restarting-badge{display:none;align-items:center;gap:6px;font-size:12.5px;color:var(--act);white-space:nowrap}
+.restarting-badge.visible{display:inline-flex}
+.restarting-badge svg{width:14px;height:14px;animation:spin .8s linear infinite}
+
+.log-viewer{display:none;margin:0 8px 8px;padding:10px 12px;border-radius:10px;background:var(--bg)}
+.log-viewer.visible{display:block}
+.log-viewer pre{margin:0;font-family:var(--f-mono);font-size:11.5px;line-height:1.6;color:var(--text-2);white-space:pre-wrap;word-break:break-all;max-height:200px;overflow-y:auto}
+
+/* skeleton */
+.skeleton{background:linear-gradient(90deg,var(--card) 25%,var(--card-2) 50%,var(--card) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:8px}
+@keyframes shimmer{to{background-position:-200% 0}}
+.skel-row{display:flex;align-items:center;gap:12px;padding:8px;min-height:56px;background:var(--card);border-radius:var(--r-card)}
+.skel-row .skeleton{background:linear-gradient(90deg,var(--card-2) 25%,var(--line) 50%,var(--card-2) 75%);background-size:200% 100%}
+
+/* ── health ── */
+.meter{display:flex;flex-direction:column;gap:8px;padding:6px 4px}
+.meter .top2{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--text-2)}
+.meter .top2 .mono{font-size:12.5px;color:var(--text)}
+.progress-bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;background:var(--accent);transition:width .4s ease}
+.progress-fill.amber{background:var(--act)}
+.progress-fill.red{background:var(--pause)}
+.sparkline{display:block;width:100%;height:30px}
+
+.info-row{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 4px;color:var(--text-2);font-size:13.5px}
+.info-row + .info-row{border-top:1px solid rgba(44,49,63,.6)}
+.info-row-label{display:inline-flex;align-items:center;gap:10px;color:var(--text-3);width:96px;flex:0 0 auto}
+.info-row-label svg{width:16px;height:16px}
+.info-row-value{flex:1;color:var(--text-2)}
+.load-dots,.net-badges{display:flex;gap:6px;flex-wrap:wrap}
+.load-pill{display:inline-flex;align-items:baseline;gap:5px;height:26px;padding:0 10px;border-radius:999px;background:var(--card);font-family:var(--f-mono);font-size:12.5px;line-height:26px;color:var(--text)}
+.load-pill small{color:var(--text-3);font-size:11px}
+.load-pill.green{color:var(--done)}.load-pill.amber{color:var(--act)}.load-pill.red{color:var(--pause)}
+.net-badge{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;background:var(--card);font-family:var(--f-mono);font-size:12.5px;color:var(--text)}
+.net-badge svg{width:13px;height:13px;color:var(--text-3)}
+
+.proc-grid{display:contents}
+.proc-row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px;padding:0 4px;font-size:13.5px}
+.proc-row + .proc-row{border-top:1px solid rgba(44,49,63,.6)}
+.proc-name{color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.proc-val{font-family:var(--f-mono);font-size:12.5px;color:var(--text-3);font-variant-numeric:tabular-nums}
+.proc-empty{color:var(--text-3);font-size:12.5px;padding:6px 4px}
+
+@media (max-width:760px){
+  .topbar{padding:12px 16px;gap:8px}
+  .tab-panel{padding:6px 16px 48px}
+  .error-banner{margin:0 16px 12px}
+  .last-checked{display:none}
+  .subtab.active{padding:0 10px}
+  .subtab.active .lbl{display:none}
+  .info-row-label{width:88px}
+  .pane,.category-section{padding:14px 10px 12px}
+  .svc-row{gap:10px;padding:8px 6px 8px 8px}
+}

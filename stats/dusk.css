@@ -1,0 +1,109 @@
+/* Watchpost Stats — "Dusk": calm, soft-edged dark. Linked after ../dusk-tokens.css. */
+body{overflow:auto}
+.ic.sm{width:15px;height:15px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mono{font-family:var(--f-mono)}
+
+.container{display:flex;flex-direction:column;min-height:100%}
+
+/* toolbar */
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 24px}
+.pt{margin:0;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.grow{flex:1}
+.tb{width:40px;height:40px;border-radius:var(--r-btn);border:0;background:transparent;color:var(--text-2);display:grid;place-items:center}
+.tb:hover{background:var(--card);color:var(--text)}
+.tb.spin svg{animation:spin .8s linear}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* layout */
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(480px,100%),1fr));gap:16px;padding:6px 24px 56px;max-width:1480px;align-items:stretch}
+.stack{display:flex;flex-direction:column;gap:16px;min-width:0}
+.stack .pane{flex:1}
+.pane{background:var(--surface);border-radius:var(--r-col);padding:18px 20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.pane.wide{grid-column:1/-1}
+.card-header{display:flex;align-items:center;gap:10px}
+.card-title{margin:0;font-size:13px;font-weight:600;color:var(--text-2);display:flex;align-items:center;gap:8px}
+.card-title .ic{width:16px;height:16px;color:var(--text-3)}
+.card-subtitle{margin-left:auto;font-family:var(--f-mono);font-size:11.5px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* overview (health banner) */
+.pane.health-banner{flex-direction:row;flex-wrap:wrap;align-items:center;gap:18px 40px;padding:22px 24px}
+.health-status{display:flex;align-items:center;gap:14px;min-width:0;flex:1 1 260px}
+.health-indicator{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;flex:0 0 48px;background:var(--card);color:var(--text-3)}
+.health-indicator .ic{width:22px;height:22px}
+.health-indicator.good{background:color-mix(in srgb,var(--done) 14%,var(--surface));color:var(--done)}
+.health-indicator.warning{background:color-mix(in srgb,var(--act) 14%,var(--surface));color:var(--act)}
+.health-indicator.critical{background:color-mix(in srgb,var(--p1) 14%,var(--surface));color:var(--p1)}
+.health-text h2{margin:0;font-size:17px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.health-text p{margin:2px 0 0;font-size:13px;color:var(--text-3)}
+.health-text.good h2{color:var(--done)}.health-text.warning h2{color:var(--act)}.health-text.critical h2{color:var(--p1)}
+.health-metrics{display:flex;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.health-metric{display:flex;flex-direction:column;gap:6px}
+.health-metric-value{font-size:34px;line-height:1;font-weight:600;letter-spacing:-.02em;color:var(--text);font-variant-numeric:tabular-nums}
+.health-metric-label{display:flex;align-items:center;gap:6px;color:var(--text-3);font-size:12.5px}
+.health-metric-label .ic{width:15px;height:15px}
+.health-metric.m-done .ic{color:var(--done)}.health-metric.m-act .ic{color:var(--act)}.health-metric.m-bug .ic{color:var(--pause)}
+.overall{flex:1 1 100%;display:flex;align-items:center;gap:12px}
+.overall .track{flex:1;height:6px;border-radius:3px;background:var(--card);overflow:hidden}
+.overall .fill{height:100%;width:0;border-radius:3px;background:var(--done);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+
+/* shared row list */
+.active-work-list,.completed-list,.work-next-list{flex:1;display:flex;flex-direction:column;gap:2px;max-height:340px;overflow-y:auto;margin:0 -8px;padding:0 2px}
+.row{display:flex;align-items:center;gap:12px;min-height:42px;padding:7px 10px;border-radius:12px;min-width:0}
+.row:hover{background:var(--card)}
+.row .st{display:grid;place-items:center;width:18px;flex:0 0 18px}
+.row .st .ic{width:16px;height:16px}
+.row .t{flex:1;min-width:0;font-size:14px;line-height:1.35;color:var(--text);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}
+.row .rid{font-family:var(--f-mono);font-size:11.5px;color:var(--text-3);opacity:0;transition:opacity .15s;white-space:nowrap}
+.row:hover .rid,.row:focus-within .rid{opacity:1}
+.row .meta{font-family:var(--f-mono);font-size:11.5px;color:var(--text-3);white-space:nowrap}
+.s-progress{color:var(--act)}.s-monitoring{color:var(--review)}.s-todo{color:var(--plan)}
+.p-high{color:var(--p1)}.p-medium{color:var(--p2)}.p-low{color:var(--text-3)}
+.c-done{color:var(--done)}
+.ty-bug{color:var(--pause)}.ty-task{color:var(--plan)}.ty-road{color:var(--review)}.ty-issue{color:var(--act)}.ty-idea{color:var(--accent)}
+.completed-item .t{color:var(--text-2)}
+
+/* bars (priority + category) */
+.priority-matrix,.type-breakdown{display:flex;flex-direction:column;gap:14px}
+.hb{display:flex;align-items:center;gap:12px;font-size:14px}
+.hb .n{width:118px;display:flex;align-items:center;gap:9px;color:var(--text-2);flex:0 0 118px}
+.hb .n .ic{width:16px;height:16px}
+.hb .track{flex:1;height:10px;border-radius:5px;background:var(--card);overflow:hidden;display:flex}
+.hb .track i{display:block;height:100%;border-radius:5px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.hb .v{font-family:var(--f-mono);font-size:12.5px;color:var(--text-3);min-width:52px;text-align:right;white-space:nowrap}
+.hb .v b{font-weight:500;color:var(--text-2)}
+
+/* open bugs */
+.open-bugs-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;max-height:360px;overflow-y:auto}
+.open-bug-item{background:var(--card);border-radius:var(--r-card);padding:12px 14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 1px 2px rgba(0,0,0,.25),0 6px 12px -8px rgba(0,0,0,.45);position:relative}
+.open-bug-item:hover{background:var(--card-2)}
+.open-bug-header{display:flex;align-items:center;gap:8px;color:var(--text-3)}
+.open-bug-header .ic{width:15px;height:15px}
+.open-bug-id{font-family:var(--f-mono);font-size:11.5px;color:var(--text-3);margin-left:auto}
+.open-bug-title{font-size:14px;font-weight:500;line-height:1.35;color:var(--text);text-wrap:pretty;overflow-wrap:anywhere}
+.open-bug-notes{font-size:12.5px;color:var(--text-3);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* empty + loading */
+.empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:96px;padding:16px;color:var(--text-3);font-size:13px;text-align:center;grid-column:1/-1}
+.empty-state .ic{width:22px;height:22px;opacity:.75}
+.empty-state .spinner{width:18px;height:18px;border-radius:50%;border:2px solid var(--card-2);border-top-color:var(--accent);animation:spin 1s linear infinite}
+
+/* soft scrollbars */
+*{scrollbar-width:thin;scrollbar-color:var(--card-2) transparent}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--card-2);border-radius:4px}
+
+/* page-load: staggered rise */
+.pane{animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
+.pane:nth-child(2),.stack .pane:first-child{animation-delay:.04s}.stack .pane:last-child{animation-delay:.18s}.pane:nth-child(3){animation-delay:.08s}.pane:nth-child(4){animation-delay:.12s}.pane:nth-child(5){animation-delay:.16s}.pane:nth-child(6){animation-delay:.2s}.pane:nth-child(7){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+@media (max-width:760px){
+  .bar{padding:12px 16px}
+  .dashboard-grid{padding:4px 16px 40px;gap:12px}
+  .pane{padding:16px}
+  .health-metrics{gap:22px;width:100%;justify-content:space-between}
+  .health-metric-value{font-size:28px}
+  .hb .n{width:92px;flex-basis:92px}
+}

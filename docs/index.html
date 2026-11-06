@@ -3,805 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation Graph</title>
+    <title>Docs · Watchpost</title>
     <script src="https://unpkg.com/d3@7"></script>
     <script src="https://unpkg.com/force-graph"></script>
     <script src="https://unpkg.com/marked@9.1.6/marked.min.js"></script>
     <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
-    <style>
-        /* Design tokens - Pure black theme (matching Storybook) */
-        :root {
-            --surface-primary: #000000;
-            --surface-secondary: #0d1117;
-            --surface-tertiary: #161b22;
-            --surface-hover: rgba(255, 255, 255, 0.05);
-            --text-primary: #e6edf3;
-            --text-secondary: #c9d1d9;
-            --text-muted: #8b949e;
-            --text-subtle: #6e7681;
-            --border-subtle: #1a1a1a;
-            --border-medium: #30363d;
-            --brand-primary: #4ECDC4;
-            --brand-hover: #5fd9d1;
-            --brand-subtle: rgba(78, 205, 196, 0.15);
-            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-            overflow: hidden;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--surface-primary);
-            color: var(--text-secondary);
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .header {
-            background: rgba(31, 31, 31, 0.95);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 0.75rem 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .search-box {
-            flex: 1;
-            max-width: 300px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 0.5rem 0.75rem;
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-medium);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            transition: all var(--transition-fast);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--brand-primary);
-            box-shadow: 0 0 0 2px var(--brand-subtle);
-        }
-
-        .search-input::placeholder {
-            color: var(--text-subtle);
-        }
-
-        .toggle-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .toggle-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-
-        .toggle-checkbox {
-            width: 1rem;
-            height: 1rem;
-            cursor: pointer;
-            accent-color: var(--brand-primary);
-        }
-
-        .stats {
-            display: flex;
-            gap: 1rem;
-            font-size: 0.75rem;
-            color: var(--text-subtle);
-        }
-
-        .stat {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .stat-value {
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        .graph-container {
-            flex: 1;
-            position: relative;
-        }
-
-        #graph {
-            width: 100%;
-            height: 100%;
-        }
-
-        .controls {
-            position: absolute;
-            bottom: 1rem;
-            left: 1rem;
-            display: flex;
-            gap: 0.25rem;
-            z-index: 100;
-        }
-
-        .control-btn {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(31, 31, 31, 0.9);
-            border: 1px solid var(--border-medium);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all var(--transition-fast);
-        }
-
-        .control-btn:hover {
-            background: var(--surface-tertiary);
-            border-color: var(--brand-primary);
-        }
-
-        /* Old detail panel - hidden, replaced by content panel */
-        .detail-panel {
-            display: none !important;
-        }
-
-        /* Content panel - slide-in from right */
-        .content-panel {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: rgba(13, 17, 23, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-left: 1px solid var(--border-medium);
-            z-index: 200;
-            display: flex;
-            flex-direction: column;
-            transform: translateX(100%);
-            transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .content-panel.visible {
-            transform: translateX(0);
-        }
-
-        .content-panel-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border-subtle);
-            flex-shrink: 0;
-        }
-
-        .content-panel-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            flex: 1;
-            margin-right: 1rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .content-panel-path {
-            font-size: 0.75rem;
-            color: var(--text-subtle);
-            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-            padding: 0.25rem 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 4px;
-            margin-right: 1rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 300px;
-        }
-
-        .content-panel-close {
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-medium);
-            border-radius: 6px;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all var(--transition-fast);
-            flex-shrink: 0;
-        }
-
-        .content-panel-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-        }
-
-        .usage-stats {
-            padding: 20px 24px 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            flex-shrink: 0;
-        }
-
-        .usage-chart-container {
-            position: relative;
-            background: rgba(255,255,255,0.02);
-            border-radius: 10px;
-            padding: 12px 14px 8px;
-            border: 1px solid rgba(255,255,255,0.04);
-            margin-bottom: 12px;
-        }
-
-        .usage-chart {
-            display: block;
-            width: 100%;
-            height: 100px;
-            border-radius: 4px;
-        }
-
-        .usage-chart-axis {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 2px 0;
-        }
-
-        .usage-chart-axis span {
-            font-size: 10px;
-            color: rgba(255,255,255,0.3);
-        }
-
-        .usage-dates {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-top: 4px;
-        }
-
-        .usage-date-item {
-            font-size: 11px;
-            color: rgba(255,255,255,0.35);
-        }
-
-        .usage-date-item strong {
-            color: rgba(255,255,255,0.65);
-            font-weight: 600;
-        }
-
-        .content-panel-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem;
-        }
-
-        .content-loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100px;
-            color: var(--text-subtle);
-        }
-
-        /* Markdown rendered content styles */
-        .markdown-body {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 0.9rem;
-        }
-
-        .markdown-body h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 0 0 1rem 0;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .markdown-body h2 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 1.5rem 0 0.75rem 0;
-            padding-bottom: 0.3rem;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .markdown-body h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 1.25rem 0 0.5rem 0;
-        }
-
-        .markdown-body h4, .markdown-body h5, .markdown-body h6 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 1rem 0 0.5rem 0;
-        }
-
-        .markdown-body p {
-            margin: 0 0 0.75rem 0;
-        }
-
-        .markdown-body ul, .markdown-body ol {
-            margin: 0 0 0.75rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .markdown-body li {
-            margin-bottom: 0.25rem;
-        }
-
-        .markdown-body code {
-            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-            font-size: 0.85em;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 0.15em 0.4em;
-            border-radius: 4px;
-            color: var(--brand-primary);
-        }
-
-        .markdown-body pre {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--border-medium);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 0 0 1rem 0;
-            overflow-x: auto;
-        }
-
-        .markdown-body pre code {
-            background: none;
-            padding: 0;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        .markdown-body blockquote {
-            border-left: 3px solid var(--brand-primary);
-            padding: 0.5rem 1rem;
-            margin: 0 0 1rem 0;
-            background: rgba(78, 205, 196, 0.05);
-            color: var(--text-muted);
-        }
-
-        .markdown-body table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0 0 1rem 0;
-        }
-
-        .markdown-body th {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.5rem 0.75rem;
-            text-align: left;
-            font-weight: 600;
-            color: var(--text-primary);
-            border: 1px solid var(--border-medium);
-        }
-
-        .markdown-body td {
-            padding: 0.5rem 0.75rem;
-            border: 1px solid var(--border-medium);
-        }
-
-        .markdown-body a {
-            color: var(--brand-primary);
-            text-decoration: none;
-        }
-
-        .markdown-body a:hover {
-            text-decoration: underline;
-        }
-
-        .markdown-body hr {
-            border: none;
-            border-top: 1px solid var(--border-medium);
-            margin: 1.5rem 0;
-        }
-
-        .markdown-body strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .markdown-body img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-
-        /* Collapsible chapter styles */
-        .content-chapter {
-            margin: 0 0 4px;
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 8px;
-            background: rgba(255,255,255,0.015);
-            overflow: hidden;
-        }
-
-        .content-chapter[open] {
-            border-color: rgba(78, 205, 196, 0.15);
-            background: rgba(255,255,255,0.02);
-        }
-
-        .chapter-summary {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            font-size: 15px;
-            font-weight: 700;
-            color: rgba(255,255,255,0.85);
-            cursor: pointer;
-            user-select: none;
-            list-style: none;
-            transition: background 0.15s;
-        }
-
-        .chapter-summary::-webkit-details-marker { display: none; }
-
-        .chapter-summary::before {
-            content: '\25B6';
-            font-size: 10px;
-            color: rgba(255,255,255,0.35);
-            transition: transform 0.2s;
-            flex-shrink: 0;
-        }
-
-        .content-chapter[open] > .chapter-summary::before {
-            transform: rotate(90deg);
-            color: #4ecdc4;
-        }
-
-        .chapter-summary:hover {
-            background: rgba(255,255,255,0.03);
-        }
-
-        .chapter-badge {
-            margin-left: auto;
-            font-size: 10px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.25);
-            background: rgba(255,255,255,0.05);
-            padding: 2px 8px;
-            border-radius: 10px;
-        }
-
-        .analytics-stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .analytics-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 10px;
-            padding: 16px 14px 12px;
-            text-align: center;
-            transition: border-color 150ms ease;
-        }
-
-        .analytics-card:hover {
-            border-color: rgba(255,255,255,0.12);
-        }
-
-        .analytics-card-value {
-            font-size: 28px;
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: -0.5px;
-        }
-
-        .analytics-card-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.55);
-            margin-top: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .analytics-card-sub {
-            font-size: 10px;
-            color: rgba(255,255,255,0.3);
-            margin-top: 3px;
-        }
-
-        .analytics-chart-title {
-            font-size: 11px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.4);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .analytics-verdict {
-            margin-top: 12px;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .analytics-verdict.high-usage {
-            background: rgba(78, 205, 196, 0.08);
-            border: 1px solid rgba(78, 205, 196, 0.2);
-            color: rgba(78, 205, 196, 0.9);
-        }
-
-        .analytics-verdict.moderate-usage {
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            color: rgba(245, 158, 11, 0.9);
-        }
-
-        .analytics-verdict.low-usage {
-            background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: rgba(239, 68, 68, 0.9);
-        }
-
-        .analytics-verdict.no-usage {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .analytics-breakdown {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
-            border-radius: 10px;
-            padding: 14px 16px 10px;
-            margin-bottom: 12px;
-        }
-
-        .breakdown-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 6px;
-        }
-
-        .breakdown-label {
-            font-size: 11px;
-            color: rgba(255,255,255,0.6);
-            min-width: 100px;
-            text-transform: capitalize;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .breakdown-bar-wrap {
-            flex: 1;
-            height: 14px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 7px;
-            overflow: hidden;
-        }
-
-        .breakdown-bar {
-            height: 100%;
-            background: linear-gradient(90deg, rgba(78,205,196,0.7), rgba(78,205,196,0.3));
-            border-radius: 7px;
-            transition: width 300ms ease;
-        }
-
-        .breakdown-count {
-            font-size: 12px;
-            font-weight: 700;
-            color: rgba(255,255,255,0.7);
-            min-width: 28px;
-            text-align: right;
-        }
-
-        .analytics-sessions {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
-            border-radius: 10px;
-            padding: 14px 16px 10px;
-            margin-bottom: 12px;
-        }
-
-        .session-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 5px;
-            font-size: 11px;
-            color: rgba(255,255,255,0.5);
-        }
-
-        .session-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #4ecdc4;
-            flex-shrink: 0;
-        }
-
-        .session-date {
-            color: rgba(255,255,255,0.6);
-        }
-
-        .chapter-content {
-            padding: 0 14px 12px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-        }
-
-        /* Mermaid diagram styles */
-        .mermaid-diagram {
-            background: var(--surface-secondary);
-            border: 1px solid var(--border-medium);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-            overflow-x: auto;
-            text-align: center;
-        }
-
-        .mermaid-diagram svg {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .auto-diagram {
-            margin: 0.75rem 0;
-            border: 1px solid rgba(78, 205, 196, 0.2);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .overview-diagram {
-            background: rgba(78, 205, 196, 0.05);
-            border-color: rgba(78, 205, 196, 0.3);
-            padding: 0.5rem;
-        }
-
-        .overview-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #4ECDC4;
-            padding: 0.25rem 0.5rem;
-            font-weight: 600;
-        }
-
-        .mermaid-error {
-            color: #ef4444;
-            font-size: 0.8rem;
-            padding: 0.5rem;
-        }
-
-        /* Scrollbar styling */
-        .content-panel-body::-webkit-scrollbar {
-            width: 6px;
-        }
-        .content-panel-body::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .content-panel-body::-webkit-scrollbar-thumb {
-            background: var(--border-medium);
-            border-radius: 3px;
-        }
-        .content-panel-body::-webkit-scrollbar-thumb:hover {
-            background: var(--text-subtle);
-        }
-
-        .legend {
-            position: absolute;
-            bottom: 1rem;
-            right: 1rem;
-            background: rgba(31, 31, 31, 0.9);
-            border: 1px solid var(--border-medium);
-            border-radius: 10px;
-            padding: 0.75rem;
-            z-index: 100;
-            max-height: calc(100% - 2rem);
-            overflow-y: auto;
-        }
-
-        .legend-title {
-            font-size: 0.7rem;
-            color: var(--text-subtle);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .legend-items {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .legend-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../dusk-tokens.css">
+    <link rel="stylesheet" href="dusk.css">
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <div class="title">
-                <span>&#x1F4DA;</span>
-                <span>Documentation</span>
-            </div>
+            <h1 class="title">Docs</h1>
 
-            <div class="search-box">
-                <input type="text" class="search-input" id="search" placeholder="Search docs...">
-            </div>
-
-            <div class="toggle-group">
-                <label class="toggle-label">
-                    <input type="checkbox" class="toggle-checkbox" id="hideArchived" checked>
-                    <span>Hide archived</span>
-                </label>
-            </div>
-
-            <div class="stats">
-                <div class="stat">
-                    <span>Active:</span>
+            <div class="stats" aria-label="Document counts">
+                <div class="stat" title="Active docs">
+                    <span class="sr">Active:</span>
                     <span class="stat-value" id="activeCount">0</span>
+                    <span class="stat-unit" aria-hidden="true">docs</span>
                 </div>
-                <div class="stat">
-                    <span>Archived:</span>
+                <div class="stat stat-archived" title="Archived docs">
+                    <svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="4.5" rx="1.5"/><path d="M5 9v8.5A2.5 2.5 0 007.5 20h9a2.5 2.5 0 002.5-2.5V9M10 13h4"/></svg>
+                    <span class="sr">Archived:</span>
                     <span class="stat-value" id="archivedCount">0</span>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <div class="search-box" id="searchBox">
+                    <label class="search-icon" for="search" title="Search docs">
+                        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>
+                    </label>
+                    <input type="search" class="search-input" id="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off">
+                </div>
+
+                <div class="toggle-group">
+                    <label class="toggle-label tb" title="Hide archived docs">
+                        <input type="checkbox" class="toggle-checkbox" id="hideArchived" checked aria-label="Hide archived docs">
+                        <svg class="ic ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12s3.5-6.5 9-6.5S21 12 21 12s-3.5 6.5-9 6.5S3 12 3 12z"/><circle cx="12" cy="12" r="2.6"/></svg>
+                        <svg class="ic ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M9.6 5.9A9.6 9.6 0 0112 5.5c5.5 0 9 6.5 9 6.5a15 15 0 01-2.6 3.3M6.4 7.6A14.6 14.6 0 003 12s3.5 6.5 9 6.5a9 9 0 004-.9M10.2 10.2a2.6 2.6 0 003.6 3.6"/></svg>
+                    </label>
                 </div>
             </div>
         </header>
@@ -809,26 +52,29 @@
         <div class="graph-container">
             <div id="graph"></div>
 
-            <div class="controls">
-                <button class="control-btn" id="zoomIn" title="Zoom in">+</button>
-                <button class="control-btn" id="zoomOut" title="Zoom out">&#x2212;</button>
-                <button class="control-btn" id="zoomFit" title="Fit to view">&#x22A1;</button>
+            <div class="controls" role="group" aria-label="Zoom">
+                <button class="control-btn" id="zoomIn" title="Zoom in" aria-label="Zoom in"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></button>
+                <button class="control-btn" id="zoomOut" title="Zoom out" aria-label="Zoom out"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
+                <button class="control-btn" id="zoomFit" title="Fit to view" aria-label="Fit to view"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V6.5A2.5 2.5 0 016.5 4H9M15 4h2.5A2.5 2.5 0 0120 6.5V9M20 15v2.5a2.5 2.5 0 01-2.5 2.5H15M9 20H6.5A2.5 2.5 0 014 17.5V15"/></svg></button>
             </div>
 
             <!-- Content panel - slide-in from right -->
-            <div class="content-panel" id="contentPanel">
+            <aside class="content-panel" id="contentPanel" aria-label="Document">
                 <div class="content-panel-header">
-                    <div class="content-panel-title" id="contentTitle"></div>
-                    <div class="content-panel-path" id="contentPath"></div>
-                    <button class="content-panel-close" id="contentClose" title="Close (Esc)">&#x2715;</button>
+                    <div class="content-panel-heading">
+                        <div class="content-panel-title" id="contentTitle"></div>
+                        <div class="content-panel-path" id="contentPath"></div>
+                    </div>
+                    <button class="content-panel-usage" id="usageToggle" title="Usage" aria-label="Show usage" aria-expanded="false" aria-controls="usageStats"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-8M12 20V4M19 20v-5"/></svg></button>
+                    <button class="content-panel-close" id="contentClose" title="Close (Esc)" aria-label="Close"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button>
                 </div>
                 <div class="usage-stats" id="usageStats"></div>
                 <div class="content-panel-body" id="contentBody">
                     <div class="content-loading">Loading...</div>
                 </div>
-            </div>
+            </aside>
 
-            <div class="legend">
+            <div class="legend" tabindex="0" aria-label="Categories">
                 <div class="legend-title">Categories</div>
                 <div class="legend-items" id="legendItems"></div>
             </div>
@@ -837,34 +83,35 @@
 
     <script>
         // Category colors
+        // Dusk palette: soft, low-contrast tones per category (data colours are ignored on purpose)
         const COLORS = {
-            'reports': '#f59e0b',
-            'conflict-systems-resolution': '#8b5cf6',
-            'archive': '#64748b',
-            'debug': '#ef4444',
-            'guides': '#10b981',
-            'planning': '#3b82f6',
-            'reference': '#06b6d4',
-            'other': '#94a3b8'
+            'reports': '#D9B26F',
+            'conflict-systems-resolution': '#B59AD9',
+            'archive': '#5E6477',
+            'debug': '#D58E8E',
+            'guides': '#8DBF9A',
+            'planning': '#8DA2CB',
+            'plan': '#8DA2CB',
+            'architecture': '#B59AD9',
+            'reference': '#D9B26F',
+            'default': '#7E869A',
+            'other': '#7E869A'
         };
+        const DUSK = {
+            surface: '#1C1F28', card: '#252936', text: '#D3D8E2', text2: '#9BA2B4', text3: '#868DA2',
+            accent: '#7CC3B3', line: 'rgba(155, 162, 180, 0.14)'
+        };
+        const toneOf = node => node.isArchived ? COLORS.archive : (COLORS[node.category] || COLORS.other);
+        const plainTitle = t => String(t || '').replace(/[\p{Extended_Pictographic}️‍]/gu, '').trim();
+        const LABEL_MIN_SCALE = 0.1; // below this zoom, doc labels hide (hover still shows them)
+        let searchTerm = '';
+        const matchesSearch = node => !!searchTerm && (node.title?.toLowerCase().includes(searchTerm) || node.path?.toLowerCase().includes(searchTerm));
 
         let graphData = null;
         let graph = null;
         window._graph = null;
         let selectedNode = null;
         let hoveredNode = null;
-
-        // Category emojis
-        const CATEGORY_EMOJIS = {
-            'reports': '\u{1F4CA}',
-            'conflict-systems-resolution': '\u{2694}\uFE0F',
-            'archive': '\u{1F4E6}',
-            'debug': '\u{1F41B}',
-            'guides': '\u{1F4D6}',
-            'planning': '\u{1F4CB}',
-            'reference': '\u{1F4DA}',
-            'other': '\u{1F4C4}'
-        };
 
         // =============================================
         // Usage tracking via localStorage (timestamped)
@@ -896,7 +143,7 @@
         }
 
         async function renderUsageStats(container, nodeId, nodePath) {
-            container.innerHTML = '<div style="color:rgba(255,255,255,0.3);font-size:12px;padding:8px 0">Loading analytics...</div>';
+            container.innerHTML = '<div class="usage-note">Loading usage…</div>';
 
             try {
                 const resp = await fetch('/api/docs/analytics?path=' + encodeURIComponent(nodePath));
@@ -905,7 +152,7 @@
                 container.innerHTML = '';
                 renderAnalyticsPanel(container, data, 'doc');
             } catch (err) {
-                container.innerHTML = '<div style="color:rgba(255,255,255,0.25);font-size:11px;padding:4px 0">Analytics unavailable</div>';
+                container.innerHTML = '<div class="usage-note">Usage unavailable</div>';
             }
         }
 
@@ -930,9 +177,9 @@
             statsRow.className = 'analytics-stats-row';
 
             const cards = [
-                { value: usage.fileReads || 0, label: 'File Reads', sub: 'by Claude agents', color: '#4ecdc4' },
-                { value: activity.activeDays || 0, label: 'Active Days', sub: 'of ' + (activity.days || 90), color: '#f59e0b' },
-                { value: meta.sizeKB ? meta.sizeKB + 'KB' : '\u2014', label: 'File Size', sub: '', color: '#a78bfa' }
+                { value: usage.fileReads || 0, label: 'Reads', sub: 'by agents', color: 'var(--accent)' },
+                { value: activity.activeDays || 0, label: 'Active days', sub: 'of ' + (activity.days || 90), color: 'var(--act)' },
+                { value: meta.sizeKB ? meta.sizeKB + 'KB' : '\u2014', label: 'Size', sub: '', color: 'var(--review)' }
             ];
 
             cards.forEach(card => {
@@ -1054,7 +301,7 @@
                 // Grid
                 for (let g = 0; g <= 3; g++) {
                     const y = cHeight - (g / 3) * (cHeight - 8) - 2;
-                    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+                    ctx.strokeStyle = 'rgba(155,162,180,0.08)';
                     ctx.lineWidth = 1;
                     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(cWidth, y); ctx.stroke();
                 }
@@ -1067,11 +314,11 @@
 
                     const gradient = ctx.createLinearGradient(0, y, 0, y + barH);
                     if (val > 0) {
-                        gradient.addColorStop(0, 'rgba(78, 205, 196, 0.95)');
-                        gradient.addColorStop(1, 'rgba(78, 205, 196, 0.35)');
+                        gradient.addColorStop(0, 'rgba(124, 195, 179, 0.85)');
+                        gradient.addColorStop(1, 'rgba(124, 195, 179, 0.4)');
                     } else {
-                        gradient.addColorStop(0, 'rgba(255,255,255,0.04)');
-                        gradient.addColorStop(1, 'rgba(255,255,255,0.01)');
+                        gradient.addColorStop(0, 'rgba(155,162,180,0.08)');
+                        gradient.addColorStop(1, 'rgba(155,162,180,0.04)');
                     }
                     ctx.fillStyle = gradient;
                     const r = Math.min(2, w / 2);
@@ -1083,8 +330,8 @@
                     ctx.fill();
 
                     if (val > 0 && barH > 16 && barW > 8) {
-                        ctx.fillStyle = 'rgba(0,0,0,0.5)';
-                        ctx.font = '600 8px system-ui';
+                        ctx.fillStyle = 'rgba(16,32,28,0.75)';
+                        ctx.font = '500 8px Geist, system-ui';
                         ctx.textAlign = 'center';
                         ctx.fillText(val, x + w / 2, y + 10);
                     }
@@ -1109,16 +356,16 @@
 
             if (totalReads >= 50 && days >= 5) {
                 verdict.classList.add('high-usage');
-                verdict.innerHTML = '<strong>⚡ Heavily Used</strong> — This doc is actively referenced by Claude across multiple sessions. Core part of the workflow.';
+                verdict.innerHTML = '<strong>Heavily used</strong> — actively referenced by agents across many sessions. Core part of the workflow.';
             } else if (totalReads >= 10 || days >= 3) {
                 verdict.classList.add('moderate-usage');
-                verdict.innerHTML = '<strong>📊 Moderately Used</strong> — Referenced occasionally. Worth keeping if the content is still relevant.';
+                verdict.innerHTML = '<strong>Used now and then</strong> — worth keeping if the content is still relevant.';
             } else if (totalReads >= 1) {
                 verdict.classList.add('low-usage');
-                verdict.innerHTML = '<strong>⚠️ Rarely Used</strong> — Only ' + totalReads + ' read' + (totalReads !== 1 ? 's' : '') + ' in ' + (activity.days || 90) + ' days. Consider reviewing if this is still needed.';
+                verdict.innerHTML = '<strong>Rarely used</strong> — only ' + totalReads + ' read' + (totalReads !== 1 ? 's' : '') + ' in ' + (activity.days || 90) + ' days. Worth a review.';
             } else {
                 verdict.classList.add('no-usage');
-                verdict.innerHTML = '<strong>🗑 Never Used</strong> — No usage detected in the last ' + (activity.days || 90) + ' days. Candidate for removal or consolidation.';
+                verdict.innerHTML = '<strong>Not used</strong> — no reads in the last ' + (activity.days || 90) + ' days. Could be removed or merged.';
             }
             container.appendChild(verdict);
         }
@@ -1151,18 +398,19 @@
             startOnLoad: false,
             theme: 'dark',
             themeVariables: {
-                primaryColor: '#4ECDC4',
-                primaryTextColor: '#e6edf3',
-                primaryBorderColor: '#30363d',
-                lineColor: '#8b949e',
-                secondaryColor: '#161b22',
-                tertiaryColor: '#0d1117',
-                background: '#0d1117',
-                mainBkg: '#161b22',
-                nodeBorder: '#4ECDC4',
-                clusterBkg: '#161b22',
-                titleColor: '#e6edf3',
-                edgeLabelBackground: '#0d1117'
+                primaryColor: '#2B3040',
+                primaryTextColor: '#D3D8E2',
+                primaryBorderColor: '#3A4052',
+                lineColor: '#868DA2',
+                secondaryColor: '#252936',
+                tertiaryColor: '#1C1F28',
+                background: '#1C1F28',
+                mainBkg: '#2B3040',
+                nodeBorder: '#4A6A63',
+                clusterBkg: '#252936',
+                titleColor: '#D3D8E2',
+                edgeLabelBackground: '#1C1F28',
+                fontFamily: 'Geist, system-ui, sans-serif'
             }
         });
 
@@ -1384,7 +632,7 @@
             const pathEl = document.getElementById('contentPath');
             const bodyEl = document.getElementById('contentBody');
 
-            titleEl.textContent = node.title;
+            titleEl.textContent = plainTitle(node.title);
             pathEl.textContent = 'docs/' + node.path;
             bodyEl.innerHTML = '<div class="content-loading">Loading...</div>';
             panel.classList.add('visible');
@@ -1486,8 +734,7 @@
             } catch (error) {
                 console.error('Failed to load graph data:', error);
                 document.getElementById('graph').innerHTML =
-                    '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748b;">' +
-                    'Failed to load graph data. Run: npm run docs:graph</div>';
+                    '<div class="graph-empty">Could not load the docs map. Run: npm run docs:graph</div>';
             }
         }
 
@@ -1508,7 +755,8 @@
                 item.className = 'legend-item';
                 item.innerHTML =
                     '<div class="legend-dot" style="background: ' + (COLORS[cat] || COLORS.other) + '"></div>' +
-                    '<span>' + cat.charAt(0).toUpperCase() + cat.slice(1).replace(/-/g, ' ') + '</span>';
+                    '<span class="legend-name">' + cat.charAt(0).toUpperCase() + cat.slice(1).replace(/-/g, ' ') + '</span>';
+                item.title = cat.charAt(0).toUpperCase() + cat.slice(1).replace(/-/g, ' ');
                 legendItems.appendChild(item);
             });
         }
@@ -1549,12 +797,12 @@
                 .graphData({ nodes, links });
             window._graph = graph;
             graph
-                .backgroundColor('#0f172a')
-                .nodeColor(node => node.color || COLORS.other)
+                .backgroundColor(DUSK.surface)
+                .nodeColor(toneOf)
                 .nodeVal(node => node.isCategory ? 18 : 8)
-                .nodeLabel(node => node.title)
-                .linkColor(() => 'rgba(148, 163, 184, 0.2)')
-                .linkWidth(1.5)
+                .nodeLabel(node => plainTitle(node.title))
+                .linkColor(() => DUSK.line)
+                .linkWidth(1.25)
                 .onNodeClick(handleNodeClick)
                 .onNodeHover(handleNodeHover)
                 .cooldownTicks(300)
@@ -1573,63 +821,67 @@
             // Weak radial to prevent flying to infinity
             graph.d3Force('radial', d3.forceRadial(radius * 0.7, 0, 0).strength(0.02));
 
-            // Custom node rendering with emojis
+            // Custom node rendering: soft discs, quiet labels, search + selection rings
             graph.nodeCanvasObject((node, ctx, globalScale) => {
-                const emoji = CATEGORY_EMOJIS[node.category] || '\u{1F4C4}';
+                const tone = toneOf(node);
                 const nodeSize = getNodeSize(node);
-                const emojiSize = node.isCategory ? 16 / globalScale : 12 / globalScale;
 
                 const isHovered = hoveredNode && hoveredNode.id === node.id;
                 const isSelected = selectedNode && selectedNode.id === node.id;
+                const isMatch = matchesSearch(node);
+                const dimmed = !!searchTerm && !isMatch && !isSelected;
 
-                // Draw node circle with slight transparency
+                ctx.save();
+                ctx.globalAlpha = dimmed ? 0.22 : 1;
+
+                // Soft disc: tinted fill, slightly brighter core ring
                 ctx.beginPath();
                 ctx.arc(node.x, node.y, nodeSize, 0, 2 * Math.PI);
-                ctx.fillStyle = (node.color || COLORS.other) + (isHovered ? 'ff' : 'cc');
+                ctx.fillStyle = tone + (isHovered || isSelected || isMatch ? 'e6' : 'a6');
                 ctx.fill();
-
-                // Draw border
-                ctx.strokeStyle = node.color || COLORS.other;
-                ctx.lineWidth = (isHovered || isSelected ? 3 : 2) / globalScale;
+                ctx.strokeStyle = tone;
+                ctx.lineWidth = 1.25 / globalScale;
                 ctx.stroke();
 
-                // Highlight selected node
-                if (isSelected) {
-                    ctx.strokeStyle = '#22c55e';
-                    ctx.lineWidth = 3 / globalScale;
+                // Selection / search ring sits a little outside the disc
+                if (isSelected || isMatch) {
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, nodeSize + 5 / globalScale, 0, 2 * Math.PI);
+                    ctx.strokeStyle = DUSK.accent;
+                    ctx.lineWidth = 2 / globalScale;
                     ctx.stroke();
                 }
 
-                // Draw emoji inside the circle
-                ctx.font = emojiSize + 'px Sans-Serif';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(emoji, node.x, node.y);
-
-                // ALWAYS draw labels - short for docs, full for categories
-                const minLabelSize = 11;
-                const labelFontSize = Math.max(minLabelSize, node.isCategory ? 14 / globalScale : 11 / globalScale);
-                ctx.font = (node.isCategory ? 'bold ' : '') + labelFontSize + 'px Sans-Serif';
+                // Labels: always visible but quiet; full title on hover
+                const labelFontSize = Math.max(11, (node.isCategory ? 14 : 11) / globalScale);
+                ctx.font = (node.isCategory || isHovered || isSelected ? '500 ' : '400 ') + labelFontSize + 'px Geist, system-ui, sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
+                const labelY = node.y + nodeSize + 6 / globalScale;
 
-                // Background for hovered nodes for better readability
-                if (isHovered && !node.isCategory) {
-                    const fullLabel = node.title.length > 30 ? node.title.substring(0, 27) + '...' : node.title;
+                const title = plainTitle(node.title);
+                if ((isHovered || isSelected) && !node.isCategory) {
+                    const fullLabel = title.length > 40 ? title.substring(0, 37) + '…' : title;
                     const textWidth = ctx.measureText(fullLabel).width;
-                    ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
-                    ctx.fillRect(node.x - textWidth/2 - 4, node.y + nodeSize + 1, textWidth + 8, labelFontSize + 6);
-                    ctx.fillStyle = '#ffffff';
-                    ctx.fillText(fullLabel, node.x, node.y + nodeSize + 4);
-                } else {
-                    // Normal label - truncate short to prevent overlaps
-                    ctx.fillStyle = node.isCategory ? '#f1f5f9' : '#cbd5e1';
-                    var label = node.title;
+                    const padX = 8 / globalScale, padY = 4 / globalScale;
+                    const w = textWidth + padX * 2, h = labelFontSize + padY * 2;
+                    const x = node.x - w / 2, y = labelY - padY;
+                    ctx.fillStyle = DUSK.card;
+                    ctx.beginPath();
+                    if (ctx.roundRect) ctx.roundRect(x, y, w, h, 8 / globalScale); else ctx.rect(x, y, w, h);
+                    ctx.fill();
+                    ctx.fillStyle = DUSK.text;
+                    ctx.fillText(fullLabel, node.x, labelY);
+                } else if (node.isCategory || isMatch || globalScale >= LABEL_MIN_SCALE) {
+                    // Quiet when zoomed far out: only category and matching labels remain
+                    ctx.fillStyle = node.isCategory ? DUSK.text : (isMatch ? DUSK.text : DUSK.text3);
+                    let label = title;
                     if (!node.isCategory && label.length > 14) {
-                        label = label.substring(0, 11) + '...';
+                        label = label.substring(0, 12) + '…';
                     }
-                    ctx.fillText(label, node.x, node.y + nodeSize + 4);
+                    ctx.fillText(label, node.x, labelY);
                 }
+                ctx.restore();
             });
         }
 
@@ -1664,15 +916,25 @@
         document.getElementById('hideArchived').addEventListener('change', refreshGraph);
 
         document.getElementById('search').addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
+            const term = e.target.value.trim().toLowerCase();
+            searchTerm = term;
+            document.getElementById('searchBox').classList.toggle('has-q', !!term);
             if (!graph) return;
 
             graph.nodeColor(node => {
-                if (term && (node.title?.toLowerCase().includes(term) || node.path?.toLowerCase().includes(term))) {
-                    return '#22c55e'; // highlight green
+                if (matchesSearch(node)) {
+                    return DUSK.accent; // highlight
                 }
-                return node.color || COLORS.other;
+                return toneOf(node);
             });
+        });
+
+        // Usage details stay folded away until asked for
+        document.getElementById('usageToggle').addEventListener('click', (e) => {
+            const panel = document.getElementById('contentPanel');
+            const open = panel.classList.toggle('usage-open');
+            e.currentTarget.setAttribute('aria-expanded', String(open));
+            e.currentTarget.setAttribute('aria-label', open ? 'Hide usage' : 'Show usage');
         });
 
         document.getElementById('zoomIn').addEventListener('click', () => {

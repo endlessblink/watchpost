@@ -3,1602 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watchpost - Control Room</title>
-    <style>
-        :root {
-            --surface-primary: #000000;
-            --surface-secondary: #0d1117;
-            --surface-tertiary: #161b22;
-            --surface-elevated: #21262d;
-            --surface-hover: rgba(255, 255, 255, 0.05);
-
-            --text-primary: #e6edf3;
-            --text-secondary: #c9d1d9;
-            --text-muted: #8b949e;
-            --text-subtle: #6e7681;
-
-            --border-subtle: #1a1a1a;
-            --border-medium: #30363d;
-            --border-strong: #484f58;
-
-            --brand-primary: #4ECDC4;
-            --brand-hover: #5fd9d1;
-            --brand-subtle: rgba(78, 205, 196, 0.12);
-
-            --color-success: #10b981;
-            --color-warning: #f59e0b;
-            --color-danger: #ef4444;
-            --color-info: #3b82f6;
-
-            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-
-            --radius-xs: 3px;
-            --radius-sm: 6px;
-            --radius-md: 8px;
-            --radius-lg: 12px;
-            --radius-xl: 16px;
-            --radius-full: 9999px;
-
-            --font-xs: 12px;
-            --font-sm: 13px;
-            --font-md: 13px;
-            --font-base: 14px;
-            --font-lg: 16px;
-            --font-xl: 18px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body {
-            height: 100%;
-            background: var(--surface-primary);
-            color: var(--text-secondary);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            font-size: var(--font-base);
-            overflow: hidden;
-        }
-
-        /* ── Top bar ─────────────────────────────────────────────────── */
-        .topbar {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0 1.25rem;
-            height: 48px;
-            background: var(--surface-secondary);
-            border-bottom: 1px solid var(--border-subtle);
-            flex-shrink: 0;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .topbar-title {
-            font-size: var(--font-md);
-            font-weight: 600;
-            color: var(--text-primary);
-            white-space: nowrap;
-            letter-spacing: -0.01em;
-        }
-
-        .topbar-title span {
-            color: var(--brand-primary);
-        }
-
-        .search-wrap {
-            position: relative;
-            flex: 1;
-            max-width: 340px;
-        }
-
-        .search-wrap svg {
-            position: absolute;
-            left: 0.625rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 14px;
-            height: 14px;
-            stroke: var(--text-subtle);
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-            pointer-events: none;
-        }
-
-        .search-input {
-            width: 100%;
-            height: 32px;
-            padding: 0 0.625rem 0 2rem;
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-md);
-            color: var(--text-primary);
-            font-size: var(--font-sm);
-            outline: none;
-            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-        }
-
-        .search-input::placeholder { color: var(--text-subtle); }
-
-        .search-input:focus {
-            border-color: rgba(78, 205, 196, 0.4);
-            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.08);
-        }
-
-        .topbar-spacer { flex: 1; }
-
-        .archived-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: var(--font-sm);
-            color: var(--text-muted);
-            cursor: pointer;
-            user-select: none;
-            white-space: nowrap;
-        }
-
-        .archived-toggle input[type="checkbox"] { display: none; }
-
-        .toggle-track {
-            width: 30px;
-            height: 16px;
-            background: var(--surface-elevated);
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-full);
-            position: relative;
-            transition: background var(--transition-fast), border-color var(--transition-fast);
-            flex-shrink: 0;
-        }
-
-        .toggle-track::after {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: var(--text-subtle);
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            transition: transform var(--transition-fast), background var(--transition-fast);
-        }
-
-        .archived-toggle input:checked + .toggle-track {
-            background: var(--brand-subtle);
-            border-color: rgba(78, 205, 196, 0.3);
-        }
-
-        .archived-toggle input:checked + .toggle-track::after {
-            transform: translateX(14px);
-            background: var(--brand-primary);
-        }
-
-        .view-toggle {
-            display: flex;
-            gap: 2px;
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-md);
-            padding: 2px;
-        }
-
-        .view-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 24px;
-            background: transparent;
-            border: none;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: all var(--transition-fast);
-        }
-
-        .view-btn:hover { color: var(--text-secondary); background: var(--surface-hover); }
-
-        .view-btn.active {
-            background: var(--surface-elevated);
-            color: var(--brand-primary);
-        }
-
-        .view-btn svg {
-            width: 14px;
-            height: 14px;
-            stroke: currentColor;
-            stroke-width: 1.75;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        .sort-dropdown {
-            height: 32px;
-            padding: 0 8px;
-            background: var(--surface-tertiary);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-md);
-            font-size: var(--font-sm);
-            cursor: pointer;
-            transition: border-color var(--transition-fast), background var(--transition-fast);
-            font-family: inherit;
-        }
-
-        .sort-dropdown:hover {
-            border-color: var(--border-medium);
-            background: var(--surface-elevated);
-        }
-
-        .sort-dropdown:focus {
-            outline: none;
-            border-color: rgba(78, 205, 196, 0.4);
-            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.08);
-        }
-
-        .sort-dropdown option {
-            background: var(--surface-secondary);
-            color: var(--text-primary);
-        }
-
-        /* ── Main layout ─────────────────────────────────────────────── */
-        .layout {
-            display: flex;
-            flex-direction: column;
-            height: calc(100vh - 48px - 37px);
-            overflow: hidden;
-        }
-
-        .content-scroll {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding: 1.25rem 2rem;
-            scrollbar-width: thin;
-            scrollbar-color: var(--border-medium) transparent;
-        }
-
-        .content-scroll::-webkit-scrollbar { width: 6px; }
-        .content-scroll::-webkit-scrollbar-track { background: transparent; }
-        .content-scroll::-webkit-scrollbar-thumb {
-            background: var(--border-medium);
-            border-radius: 3px;
-        }
-
-        /* ── Project Grid ────────────────────────────────────────────── */
-        .section-label {
-            font-size: var(--font-xs);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-subtle);
-            margin-bottom: 0.875rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-label .count {
-            font-size: var(--font-xs);
-            color: var(--text-subtle);
-            font-weight: 400;
-            letter-spacing: 0;
-            text-transform: none;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 0.875rem;
-            margin-bottom: 1.5rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .project-grid.hidden { display: none; }
-
-        /* ── Project Card (Grid) ─────────────────────────────────────── */
-        .project-card {
-            background: var(--surface-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(78, 205, 196, 0.25);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(78, 205, 196, 0.1);
-        }
-
-        .project-card.archived {
-            opacity: 0.55;
-            filter: grayscale(0.4);
-        }
-
-        .card-cover {
-            height: 120px;
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .card-cover-gradient {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .card-cover-initial {
-            font-size: 2rem;
-            font-weight: 800;
-            color: rgba(255, 255, 255, 0.3);
-            letter-spacing: -0.04em;
-            text-transform: uppercase;
-            user-select: none;
-        }
-
-        .card-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card-body {
-            padding: 0.625rem 0.75rem 0.5rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .card-name {
-            font-size: var(--font-md);
-            font-weight: 600;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.3;
-        }
-
-        .card-stats {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .stat-dot {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            font-size: var(--font-xs);
-            color: var(--text-muted);
-        }
-
-        .stat-dot::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .stat-dot.done::before { background: var(--color-success); }
-        .stat-dot.active::before { background: var(--color-warning); }
-        .stat-dot.planned::before { background: var(--text-subtle); }
-
-        .card-time {
-            font-size: var(--font-xs);
-            color: var(--text-subtle);
-            margin-top: 0.125rem;
-        }
-
-        .card-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.375rem 0.625rem;
-            border-top: 1px solid var(--border-subtle);
-            background: rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-
-        .action-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            padding: 0.3rem 0.6rem;
-            background: transparent;
-            border: 1px solid transparent;
-            border-radius: var(--radius-sm);
-            color: var(--text-muted);
-            font-size: var(--font-xs);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            white-space: nowrap;
-        }
-
-        .action-btn:hover {
-            color: var(--text-secondary);
-            background: var(--surface-hover);
-            border-color: var(--border-medium);
-        }
-
-        .action-btn.primary:hover {
-            color: var(--brand-primary);
-            background: var(--brand-subtle);
-            border-color: rgba(78, 205, 196, 0.2);
-        }
-
-        .action-btn svg {
-            width: 12px;
-            height: 12px;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-            flex-shrink: 0;
-        }
-
-        .action-spacer { flex: 1; }
-
-        /* ── Drag-to-reorder (custom sort only) ─────────────────────────── */
-        .project-card[draggable="true"] {
-            cursor: grab;
-        }
-        .project-card[draggable="true"]:active {
-            cursor: grabbing;
-        }
-        .project-card.dragging {
-            opacity: 0.4;
-            transform: scale(0.97);
-            transition: opacity var(--transition-fast), transform var(--transition-fast);
-        }
-        .project-card.drag-over {
-            border-top: 2px solid var(--brand-primary);
-            box-shadow: 0 -2px 8px rgba(78, 205, 196, 0.35);
-            transition: border-top var(--transition-fast), box-shadow var(--transition-fast);
-        }
-
-        .more-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 26px;
-            height: 26px;
-            background: transparent;
-            border: 1px solid transparent;
-            border-radius: var(--radius-sm);
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            position: relative;
-        }
-
-        .more-btn:hover {
-            color: var(--text-secondary);
-            background: var(--surface-hover);
-            border-color: var(--border-medium);
-        }
-
-        .more-btn svg {
-            width: 14px;
-            height: 14px;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        /* ── Project List View ───────────────────────────────────────── */
-        .project-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            margin-bottom: 2rem;
-        }
-
-        .project-list.hidden { display: none; }
-
-        .list-row {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            height: 52px;
-            padding: 0 0.75rem;
-            background: var(--surface-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-
-        .list-row:hover {
-            border-color: rgba(78, 205, 196, 0.2);
-            background: rgba(13, 17, 23, 0.8);
-        }
-
-        .list-row.archived {
-            opacity: 0.5;
-            filter: grayscale(0.5);
-        }
-
-        .list-thumb {
-            width: 36px;
-            height: 36px;
-            border-radius: var(--radius-sm);
-            flex-shrink: 0;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .list-thumb-initial {
-            font-size: 1rem;
-            font-weight: 800;
-            color: rgba(255, 255, 255, 0.4);
-            text-transform: uppercase;
-        }
-
-        .list-name {
-            font-size: var(--font-base);
-            font-weight: 500;
-            color: var(--text-primary);
-            flex: 1;
-            min-width: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .list-stats {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-shrink: 0;
-        }
-
-        .list-stat {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            font-size: var(--font-xs);
-            color: var(--text-muted);
-        }
-
-        .list-stat::before {
-            content: '';
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .list-stat.done::before { background: var(--color-success); }
-        .list-stat.active::before { background: var(--color-warning); }
-        .list-stat.planned::before { background: var(--text-subtle); }
-
-        .list-time {
-            font-size: var(--font-xs);
-            color: var(--text-subtle);
-            flex-shrink: 0;
-            width: 60px;
-            text-align: right;
-        }
-
-        .list-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            flex-shrink: 0;
-        }
-
-        /* ── Context Dropdown ────────────────────────────────────────── */
-        .context-menu {
-            position: fixed;
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-md);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.3);
-            min-width: 160px;
-            z-index: 1000;
-            overflow: hidden;
-            animation: menu-appear 120ms ease-out;
-        }
-
-        @keyframes menu-appear {
-            from { opacity: 0; transform: scale(0.95) translateY(-4px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .context-item {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
-            padding: 0.5rem 0.875rem;
-            font-size: var(--font-sm);
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-
-        .context-item:hover { background: var(--surface-hover); color: var(--text-primary); }
-        .context-item.danger:hover { background: rgba(239, 68, 68, 0.1); color: var(--color-danger); }
-
-        .context-item svg {
-            width: 13px;
-            height: 13px;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-            flex-shrink: 0;
-        }
-
-        .context-divider {
-            height: 1px;
-            background: var(--border-subtle);
-            margin: 3px 0;
-        }
-
-        /* ── Detail Panel ────────────────────────────────────────────── */
-        .detail-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.72);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity var(--transition-slow);
-            z-index: 200;
-        }
-
-        .detail-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .detail-panel {
-            width: 90%;
-            max-width: 720px;
-            max-height: 85vh;
-            background: var(--surface-secondary);
-            border-radius: var(--radius-xl);
-            border: 1px solid var(--border-medium);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transform: scale(0.95) translateY(20px);
-            transition: transform var(--transition-slow);
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.04);
-        }
-
-        .detail-overlay.open .detail-panel {
-            transform: scale(1) translateY(0);
-        }
-
-        .detail-cover {
-            height: 160px;
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .detail-cover-gradient {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .detail-cover-initial {
-            font-size: 5rem;
-            font-weight: 800;
-            color: rgba(255, 255, 255, 0.18);
-            letter-spacing: -0.04em;
-            text-transform: uppercase;
-            user-select: none;
-        }
-
-        .detail-cover-close {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.75);
-            transition: all var(--transition-fast);
-        }
-
-        .detail-cover-close:hover {
-            background: rgba(0, 0, 0, 0.65);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .detail-cover-close svg {
-            width: 13px;
-            height: 13px;
-            stroke: currentColor;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        /* Keep .detail-close for backward compat (unused but safe) */
-        .detail-close {
-            display: none;
-        }
-
-        .detail-scroll {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            scrollbar-width: thin;
-            scrollbar-color: var(--border-medium) transparent;
-        }
-
-        .detail-scroll::-webkit-scrollbar { width: 4px; }
-        .detail-scroll::-webkit-scrollbar-thumb {
-            background: var(--border-medium);
-            border-radius: 2px;
-        }
-
-        .detail-info {
-            padding: 1.75rem 2.25rem 0;
-        }
-
-        .detail-name {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.025em;
-            margin-bottom: 0.375rem;
-        }
-
-        .detail-path {
-            font-size: var(--font-sm);
-            color: var(--text-muted);
-            font-family: 'SFMono-Regular', Consolas, monospace;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: var(--radius-sm);
-            transition: all var(--transition-fast);
-            margin-left: -0.5rem;
-            word-break: break-all;
-        }
-
-        .detail-path:hover {
-            background: var(--surface-hover);
-            color: var(--brand-primary);
-        }
-
-        .detail-path svg {
-            width: 11px;
-            height: 11px;
-            stroke: currentColor;
-            stroke-width: 2;
-            fill: none;
-            flex-shrink: 0;
-        }
-
-        .detail-section {
-            padding: 1.25rem 2.25rem;
-            border-top: 1px solid var(--border-subtle);
-            margin-top: 0.75rem;
-        }
-
-        .detail-section-title {
-            font-size: var(--font-sm);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-subtle);
-            margin-bottom: 0.75rem;
-        }
-
-        .detail-summary-text {
-            font-size: var(--font-base);
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .detail-bar-wrap {
-            height: 8px;
-            border-radius: var(--radius-full);
-            overflow: hidden;
-            display: flex;
-            gap: 1px;
-            margin-bottom: 0.625rem;
-            background: var(--surface-tertiary);
-        }
-
-        .detail-bar-seg {
-            height: 100%;
-            transition: width var(--transition-slow);
-        }
-
-        .detail-bar-seg.done { background: var(--color-success); }
-        .detail-bar-seg.active { background: var(--color-warning); }
-        .detail-bar-seg.planned { background: var(--text-subtle); }
-
-        .detail-bar-legend {
-            display: flex;
-            gap: 1rem;
-            font-size: var(--font-sm);
-            color: var(--text-muted);
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .legend-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-        }
-
-        .detail-commits {
-            display: flex;
-            flex-direction: column;
-            gap: 0.375rem;
-        }
-
-        .commit-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-            font-size: var(--font-base);
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        .commit-item::before {
-            content: '·';
-            color: var(--brand-primary);
-            font-size: 1.2em;
-            line-height: 1;
-            margin-top: 1px;
-            flex-shrink: 0;
-        }
-
-        .detail-notes-input {
-            width: 100%;
-            min-height: 80px;
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-md);
-            color: var(--text-primary);
-            font-size: var(--font-sm);
-            font-family: inherit;
-            padding: 0.625rem 0.75rem;
-            resize: vertical;
-            outline: none;
-            transition: border-color var(--transition-fast);
-            line-height: 1.5;
-        }
-
-        .detail-notes-input:focus {
-            border-color: rgba(78, 205, 196, 0.4);
-        }
-
-        .detail-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            padding: 0.875rem 2.25rem;
-            border-top: 1px solid var(--border-subtle);
-            flex-shrink: 0;
-            background: var(--surface-secondary);
-        }
-
-        .detail-action-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.4rem 0.875rem;
-            border-radius: var(--radius-md);
-            font-size: var(--font-sm);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            border: 1px solid var(--border-medium);
-            background: var(--surface-tertiary);
-            color: var(--text-secondary);
-        }
-
-        .detail-action-btn:hover {
-            background: var(--surface-elevated);
-            color: var(--text-primary);
-        }
-
-        .detail-action-btn.primary:hover {
-            border-color: rgba(78, 205, 196, 0.3);
-            color: var(--brand-primary);
-            background: var(--brand-subtle);
-        }
-
-        .detail-action-btn.danger:hover {
-            border-color: rgba(239, 68, 68, 0.3);
-            color: var(--color-danger);
-            background: rgba(239, 68, 68, 0.08);
-        }
-
-        .detail-action-btn svg {
-            width: 13px;
-            height: 13px;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        /* ── Notes Section ───────────────────────────────────────────── */
-        .notes-section {
-            border-top: 1px solid var(--border-subtle);
-            padding: 1.125rem 2.25rem 1.5rem;
-        }
-
-        .notes-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 0.875rem;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .notes-toggle-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: transparent;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: all var(--transition-fast);
-        }
-
-        .notes-toggle-btn:hover {
-            background: var(--surface-hover);
-            color: var(--text-secondary);
-        }
-
-        .notes-toggle-btn svg {
-            width: 12px;
-            height: 12px;
-            stroke: currentColor;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-            transition: transform var(--transition-fast);
-        }
-
-        .notes-toggle-btn.collapsed svg { transform: rotate(-90deg); }
-
-        .notes-body { overflow: hidden; }
-        .notes-body.hidden { display: none; }
-
-        .notes-add-row {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.875rem;
-        }
-
-        .notes-input {
-            flex: 1;
-            height: 34px;
-            padding: 0 0.75rem;
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-md);
-            color: var(--text-primary);
-            font-size: var(--font-sm);
-            font-family: inherit;
-            outline: none;
-            transition: border-color var(--transition-fast);
-        }
-
-        .notes-input::placeholder { color: var(--text-subtle); }
-
-        .notes-input:focus {
-            border-color: rgba(78, 205, 196, 0.35);
-            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.07);
-        }
-
-        .notes-add-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 34px;
-            height: 34px;
-            background: var(--brand-subtle);
-            border: 1px solid rgba(78, 205, 196, 0.2);
-            border-radius: var(--radius-md);
-            color: var(--brand-primary);
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all var(--transition-fast);
-            flex-shrink: 0;
-        }
-
-        .notes-add-btn:hover {
-            background: rgba(78, 205, 196, 0.2);
-        }
-
-        .notes-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .note-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.625rem;
-            padding: 0.5rem 0.625rem;
-            border-radius: var(--radius-sm);
-            transition: background var(--transition-fast);
-        }
-
-        .note-item:hover { background: var(--surface-hover); }
-
-        .note-check {
-            appearance: none;
-            -webkit-appearance: none;
-            width: 14px;
-            height: 14px;
-            border: 1px solid var(--border-medium);
-            border-radius: 3px;
-            cursor: pointer;
-            flex-shrink: 0;
-            margin-top: 2px;
-            position: relative;
-            transition: all var(--transition-fast);
-        }
-
-        .note-check:checked {
-            background: var(--brand-primary);
-            border-color: var(--brand-primary);
-        }
-
-        .note-check:checked::after {
-            content: '';
-            position: absolute;
-            top: 1px;
-            left: 3px;
-            width: 5px;
-            height: 8px;
-            border: 1.5px solid #000;
-            border-top: none;
-            border-left: none;
-            transform: rotate(45deg);
-        }
-
-        .note-text {
-            flex: 1;
-            font-size: var(--font-sm);
-            color: var(--text-secondary);
-            line-height: 1.5;
-            word-break: break-word;
-        }
-
-        .note-text.done {
-            text-decoration: line-through;
-            color: var(--text-subtle);
-        }
-
-        .note-delete {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            background: transparent;
-            border: none;
-            border-radius: var(--radius-xs);
-            cursor: pointer;
-            color: var(--text-subtle);
-            opacity: 0;
-            transition: all var(--transition-fast);
-            flex-shrink: 0;
-        }
-
-        .note-item:hover .note-delete { opacity: 1; }
-
-        .note-delete:hover {
-            color: var(--color-danger);
-            background: rgba(239, 68, 68, 0.1);
-        }
-
-        .note-delete svg {
-            width: 11px;
-            height: 11px;
-            stroke: currentColor;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        .notes-filter {
-            display: flex;
-            gap: 0.25rem;
-            margin-top: 0.75rem;
-        }
-
-        .notes-filter-btn {
-            padding: 0.2rem 0.625rem;
-            background: transparent;
-            border: 1px solid transparent;
-            border-radius: var(--radius-full);
-            color: var(--text-muted);
-            font-size: var(--font-xs);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-
-        .notes-filter-btn:hover { color: var(--text-secondary); }
-
-        .notes-filter-btn.active {
-            background: var(--surface-tertiary);
-            border-color: var(--border-medium);
-            color: var(--text-primary);
-        }
-
-        /* ── Toast ───────────────────────────────────────────────────── */
-        .toast-container {
-            position: fixed;
-            bottom: 1.25rem;
-            right: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            z-index: 2000;
-            pointer-events: none;
-        }
-
-        .toast {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0.875rem;
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-md);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-            font-size: var(--font-sm);
-            color: var(--text-primary);
-            animation: toast-in 200ms ease-out forwards;
-            max-width: 260px;
-        }
-
-        .toast.leaving {
-            animation: toast-out 200ms ease-in forwards;
-        }
-
-        @keyframes toast-in {
-            from { opacity: 0; transform: translateY(8px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        @keyframes toast-out {
-            from { opacity: 1; transform: translateY(0) scale(1); }
-            to { opacity: 0; transform: translateY(4px) scale(0.97); }
-        }
-
-        .toast svg {
-            width: 14px;
-            height: 14px;
-            stroke: var(--brand-primary);
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-            flex-shrink: 0;
-        }
-
-        /* ── Loading / Empty ─────────────────────────────────────────── */
-        .loading-state {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem;
-            color: var(--text-subtle);
-            font-size: var(--font-sm);
-            gap: 0.625rem;
-        }
-
-        .spinner {
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--border-medium);
-            border-top-color: var(--brand-primary);
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem;
-            color: var(--text-subtle);
-            font-size: var(--font-sm);
-            gap: 0.5rem;
-            text-align: center;
-        }
-
-        .empty-icon {
-            font-size: 2rem;
-            margin-bottom: 0.25rem;
-            opacity: 0.5;
-        }
-
-        /* ── Category Groups ──────────────────────────────────────────── */
-        .categories-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .category-group {
-            margin-bottom: 1.75rem;
-        }
-
-        .category-group.collapsed .category-grid,
-        .category-group.collapsed .project-list {
-            display: none;
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
-            padding: 0.5rem 0.75rem;
-            margin-bottom: 0.75rem;
-            cursor: pointer;
-            user-select: none;
-            border-radius: var(--radius-md);
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--border-subtle);
-            transition: all var(--transition-fast);
-        }
-
-        .category-header:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: var(--border-medium);
-        }
-
-        .category-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .category-name {
-            font-size: var(--font-sm);
-            font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: -0.01em;
-        }
-
-        .category-count {
-            font-size: var(--font-xs);
-            color: var(--text-subtle);
-            font-weight: 400;
-        }
-
-        .category-chevron {
-            margin-left: auto;
-            width: 14px;
-            height: 14px;
-            stroke: var(--text-subtle);
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-            transition: transform var(--transition-fast);
-        }
-
-        .category-group.collapsed .category-chevron {
-            transform: rotate(-90deg);
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 0.875rem;
-        }
-
-        /* ── Category Filter Chips ───────────────────────────────────── */
-        .filter-chips {
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.625rem 2rem;
-            overflow-x: auto;
-            scrollbar-width: none;
-            border-bottom: 1px solid var(--border-subtle);
-            background: var(--surface-secondary);
-            flex-shrink: 0;
-        }
-
-        .filter-chips::-webkit-scrollbar { display: none; }
-
-        .filter-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.25rem 0.75rem;
-            background: transparent;
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-full);
-            color: var(--text-muted);
-            font-size: var(--font-xs);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .filter-chip:hover {
-            color: var(--text-secondary);
-            background: var(--surface-hover);
-            border-color: var(--border-strong);
-        }
-
-        .filter-chip.active {
-            color: var(--brand-primary);
-            border-color: rgba(78, 205, 196, 0.4);
-            background: var(--brand-subtle);
-        }
-
-        .filter-chip-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .filter-chip-count {
-            font-size: 10px;
-            color: var(--text-subtle);
-            font-weight: 400;
-        }
-
-        .filter-chip.active .filter-chip-count {
-            color: rgba(78, 205, 196, 0.7);
-        }
-
-        /* ── Responsive ──────────────────────────────────────────────── */
-        @media (max-width: 640px) {
-            .project-grid,
-            .category-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .content-scroll {
-                padding: 1rem 1rem;
-            }
-
-            .filter-chips {
-                padding: 0.5rem 1rem;
-            }
-
-            .detail-panel {
-                width: 96%;
-                max-height: 90vh;
-            }
-
-            .topbar-title { display: none; }
-
-            .list-stats, .list-time { display: none; }
-        }
-
-        /* ── Stack badge ─────────────────────────────────────────────── */
-        .stack-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.375rem;
-            margin-top: 0.5rem;
-        }
-
-        .stack-tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.175rem 0.5rem;
-            background: var(--surface-tertiary);
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-full);
-            font-size: var(--font-xs);
-            color: var(--text-muted);
-        }
-
-        /* ── Archived badge on card ──────────────────────────────────── */
-        .archived-badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            padding: 0.175rem 0.5rem;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-full);
-            font-size: var(--font-xs);
-            color: var(--text-subtle);
-            backdrop-filter: blur(4px);
-        }
-    </style>
+    <title>Watchpost - Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../dusk-tokens.css">
+    <link rel="stylesheet" href="dusk.css">
 </head>
 <body>
 
-<!-- Top bar -->
-<div class="topbar">
-    <span class="topbar-title">Control <span>Room</span></span>
-
-    <div class="search-wrap">
-        <svg viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="8"/>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input class="search-input" id="searchInput" type="text" placeholder="Filter projects...">
-    </div>
+<!-- Toolbar: title on the left, quiet icon tools on the right -->
+<header class="topbar">
+    <h1 class="topbar-title">Projects <span class="count" id="projectCount">—</span></h1>
 
     <div class="topbar-spacer"></div>
 
-    <label class="archived-toggle" title="Show archived projects">
-        <input type="checkbox" id="showArchived">
-        <span class="toggle-track"></span>
-        Archived
+    <label class="search-wrap" title="Filter projects">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>
+        <input class="search-input" id="searchInput" type="text" placeholder="Filter projects" aria-label="Filter projects" autocomplete="off">
     </label>
 
-    <div class="view-toggle">
-        <button class="view-btn active" id="viewGrid" title="Grid view">
-            <svg viewBox="0 0 24 24">
-                <rect x="3" y="3" width="7" height="7" rx="1"/>
-                <rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/>
-                <rect x="14" y="14" width="7" height="7" rx="1"/>
-            </svg>
+    <label class="tb archived-toggle" title="Show archived projects">
+        <input type="checkbox" id="showArchived" aria-label="Show archived projects">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="5" rx="2"/><path d="M5 9.5v8a2 2 0 002 2h10a2 2 0 002-2v-8M10 13.5h4"/></svg>
+        <span class="mark" aria-hidden="true"></span>
+    </label>
+
+    <div class="view-toggle" role="group" aria-label="Layout">
+        <button class="view-btn active" id="viewGrid" title="Grid view" aria-label="Grid view">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>
         </button>
-        <button class="view-btn" id="viewList" title="List view">
-            <svg viewBox="0 0 24 24">
-                <line x1="8" y1="6" x2="21" y2="6"/>
-                <line x1="8" y1="12" x2="21" y2="12"/>
-                <line x1="8" y1="18" x2="21" y2="18"/>
-                <line x1="3" y1="6" x2="3.01" y2="6"/>
-                <line x1="3" y1="12" x2="3.01" y2="12"/>
-                <line x1="3" y1="18" x2="3.01" y2="18"/>
-            </svg>
+        <button class="view-btn" id="viewList" title="List view" aria-label="List view">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><path d="M4.5 6.5h.01M4.5 12h.01M4.5 17.5h.01" stroke-width="2.6"/></svg>
         </button>
     </div>
 
-    <select class="sort-dropdown" id="groupBySelect" title="Group projects by">
-        <option value="category">Group: Category</option>
-        <option value="activity">Group: Activity</option>
-        <option value="status">Group: Task Status</option>
-        <option value="none">Group: None</option>
-    </select>
+    <label class="tb tb-select tb-group" title="Group projects by">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 4-8 4-8-4z"/><path d="M4 12l8 4 8-4M4 16l8 4 8-4"/></svg>
+        <span class="mark" aria-hidden="true"></span>
+        <select class="sort-dropdown" id="groupBySelect" aria-label="Group projects by">
+            <option value="category">Group: Category</option>
+            <option value="activity">Group: Activity</option>
+            <option value="status">Group: Task Status</option>
+            <option value="none">Group: None</option>
+        </select>
+    </label>
 
-    <select class="sort-dropdown" id="sortSelect" title="Sort projects">
-        <option value="lastActive">Last Active</option>
-        <option value="nameAZ">Name A-Z</option>
-        <option value="nameZA">Name Z-A</option>
-        <option value="mostTasks">Most Tasks</option>
-        <option value="custom">Custom Order</option>
-    </select>
-</div>
+    <label class="tb tb-select tb-sort" title="Sort projects">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16M3.5 16.5L7 20l3.5-3.5"/><path d="M14 7h6M14 12h4.5M14 17h3"/></svg>
+        <span class="mark" aria-hidden="true"></span>
+        <select class="sort-dropdown" id="sortSelect" aria-label="Sort projects">
+            <option value="lastActive">Last Active</option>
+            <option value="nameAZ">Name A-Z</option>
+            <option value="nameZA">Name Z-A</option>
+            <option value="mostTasks">Most Tasks</option>
+            <option value="custom">Custom Order</option>
+        </select>
+    </label>
+</header>
 
-<!-- Category filter chips -->
-<div class="filter-chips" id="filterChips">
+<!-- Category / group filter pills -->
+<nav class="filter-chips" id="filterChips" aria-label="Filter by group">
     <button class="filter-chip active" data-category="all">All</button>
-</div>
+</nav>
 
-<!-- Main layout -->
-<div class="layout">
+<!-- Main layout: projects on the left, notes beside them on wide screens -->
+<main class="layout">
     <div class="content-scroll" id="contentScroll">
-        <!-- Projects label -->
-        <div class="section-label">
-            <span>Projects</span>
-            <span class="count" id="projectCount">—</span>
-        </div>
-
-        <!-- Categorized grid view -->
         <div id="categorizedGrid">
-            <div class="loading-state"><div class="spinner"></div> Loading projects...</div>
+            <div class="loading-state"><div class="spinner"></div> Loading projects</div>
         </div>
 
         <!-- Legacy flat containers (used internally by category renderer) -->
         <div class="project-grid hidden" id="projectGrid"></div>
         <div class="project-list hidden" id="projectList"></div>
 
-        <!-- Personal Notes section -->
-        <div class="notes-section" id="notesSection">
+        <!-- Personal notes -->
+        <aside class="notes-section" id="notesSection" aria-label="My notes and tasks">
             <div class="notes-header" id="notesHeaderToggle">
-                <div class="section-label" style="margin-bottom:0; border:none; padding:0;">
-                    <span>My Notes &amp; Tasks</span>
-                </div>
-                <button class="notes-toggle-btn" id="notesToggleBtn" title="Collapse">
-                    <svg viewBox="0 0 24 24">
-                        <polyline points="6 9 12 15 18 9"/>
-                    </svg>
+                <h2 class="section-label">
+                    <svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8a3 3 0 013 3v10a3 3 0 01-3 3H8a3 3 0 01-3-3V7a3 3 0 013-3z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>
+                    <span>Notes &amp; tasks</span>
+                </h2>
+                <button class="notes-toggle-btn" id="notesToggleBtn" title="Collapse" aria-label="Collapse notes" aria-expanded="true" aria-controls="notesBody">
+                    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
                 </button>
             </div>
             <div class="notes-body" id="notesBody">
                 <div class="notes-add-row">
-                    <input class="notes-input" id="noteInput" type="text" placeholder="Add a note or task... (Enter to save)">
-                    <button class="notes-add-btn" id="noteAddBtn" title="Add">+</button>
+                    <input class="notes-input" id="noteInput" type="text" placeholder="Add a note, press Enter" aria-label="New note" autocomplete="off">
+                    <button class="notes-add-btn" id="noteAddBtn" title="Add" aria-label="Add note">
+                        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                    </button>
+                </div>
+                <div class="notes-filter" id="notesFilter" role="group" aria-label="Show notes">
+                    <button class="notes-filter-btn active" data-filter="all">All</button>
+                    <button class="notes-filter-btn" data-filter="active">Open</button>
+                    <button class="notes-filter-btn" data-filter="done">Done</button>
                 </div>
                 <div class="notes-list" id="notesList">
                     <div class="loading-state"><div class="spinner"></div></div>
                 </div>
-                <div class="notes-filter" id="notesFilter">
-                    <button class="notes-filter-btn active" data-filter="all">All</button>
-                    <button class="notes-filter-btn" data-filter="active">Active</button>
-                    <button class="notes-filter-btn" data-filter="done">Done</button>
-                </div>
             </div>
-        </div>
+        </aside>
     </div>
-</div>
+</main>
 
 <!-- Detail panel -->
 <div class="detail-overlay" id="detailOverlay">
-    <div class="detail-panel" id="detailPanel">
+    <div class="detail-panel" id="detailPanel" role="dialog" aria-modal="true" aria-label="Project details">
         <div class="detail-scroll" id="detailScroll">
             <!-- Filled dynamically — cover + close button injected here -->
         </div>
@@ -1609,10 +121,10 @@
 </div>
 
 <!-- Context menu -->
-<div class="context-menu" id="contextMenu" style="display:none;"></div>
+<div class="context-menu" id="contextMenu" role="menu" style="display:none;"></div>
 
 <!-- Toast container -->
-<div class="toast-container" id="toastContainer"></div>
+<div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
 
 <script>
 // ── Utilities ──────────────────────────────────────────────────────────────
@@ -1621,7 +133,8 @@ function projectGradient(name) {
     for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
     const h1 = Math.abs(hash % 360);
     const h2 = (h1 + 40) % 360;
-    return `linear-gradient(135deg, hsl(${h1}, 60%, 18%), hsl(${h2}, 50%, 13%))`;
+    // Dusk: low-saturation tints so placeholder covers stay calm next to real ones
+    return `linear-gradient(135deg, hsl(${h1}, 26%, 30%), hsl(${h2}, 22%, 21%))`;
 }
 
 function timeAgo(dateStr) {
@@ -1644,11 +157,13 @@ function showToast(message, iconType = 'clipboard') {
     toast.className = 'toast';
 
     const iconSvgs = {
-        clipboard: '<svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>',
-        rocket: '<svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>',
-        check: '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
-        error: '<svg viewBox="0 0 24 24" style="stroke: var(--color-danger)"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
+        clipboard: '<svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg>',
+        rocket: '<svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/></svg>',
+        check: '<svg viewBox="0 0 24 24"><path d="M5.5 12.5l4 4 9-9"/></svg>',
+        error: '<svg viewBox="0 0 24 24" style="stroke: var(--color-danger)"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v4.5M12 16h.01"/></svg>',
     };
+    iconSvgs.warning = iconSvgs.error;
+    if (iconType === 'error' || iconType === 'warning') toast.classList.add('error');
 
     toast.innerHTML = (iconSvgs[iconType] || iconSvgs.check) + `<span>${escHtml(message)}</span>`;
     container.appendChild(toast);
@@ -1683,26 +198,27 @@ const CATEGORY_FOLDER_MAP = {
 };
 
 const CATEGORY_COLORS = {
-    'Bots & Automation': '#e06c75',
-    'Content Creation': '#c678dd',
-    'Productivity': '#4ECDC4',
-    'Freelance': '#e5c07b',
-    'Game Dev': '#56b6c2',
-    'DevOps': '#61afef',
-    'Linux Tools': '#98c379',
-    'Misc': '#8b949e',
-    'Uncategorized': '#6e7681',
+    // Dusk palette: soft, low-contrast hues
+    'Bots & Automation': '#D58E8E',
+    'Content Creation': '#B59AD9',
+    'Productivity': '#7CC3B3',
+    'Freelance': '#D9B26F',
+    'Game Dev': '#8FBCC8',
+    'DevOps': '#8DA2CB',
+    'Linux Tools': '#8DBF9A',
+    'Misc': '#868DA2',
+    'Uncategorized': '#6B7186',
 };
 
 const GROUP_COLORS = {
-    'High Activity': '#4ECDC4',
-    'Medium Activity': '#e5c07b',
-    'Low Activity': '#8b949e',
-    'In Progress': '#61afef',
-    'Planned': '#c678dd',
-    'Completed': '#98c379',
-    'No Tasks': '#6e7681',
-    'All Projects': '#8b949e',
+    'High Activity': '#7CC3B3',
+    'Medium Activity': '#D9B26F',
+    'Low Activity': '#868DA2',
+    'In Progress': '#D9B26F',
+    'Planned': '#8DA2CB',
+    'Completed': '#8DBF9A',
+    'No Tasks': '#6B7186',
+    'All Projects': '#868DA2',
 };
 
 function getGroupColor(groupName) {
@@ -1771,7 +287,7 @@ async function loadProjects() {
             });
         } else {
             document.getElementById('categorizedGrid').innerHTML =
-                '<div class="empty-state"><div class="empty-icon">📭</div><p>No projects found</p><p style="color:var(--text-subtle);font-size:11px;margin-top:4px;">Start by registering a project with Watchpost</p></div>';
+                '<div class="empty-state"><div class="empty-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><path d="M16.5 13.5v6M13.5 16.5h6"/></svg></div><p>No projects yet</p><p class="empty-sub">Register a project with Watchpost to see it here</p></div>';
             document.getElementById('projectCount').textContent = '0';
             return;
         }
@@ -1981,7 +497,7 @@ function renderProjects() {
     const container = document.getElementById('categorizedGrid');
 
     if (!projects.length) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><p>No matching projects</p></div>';
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></div><p>No matching projects</p></div>';
         return;
     }
 
@@ -2004,11 +520,11 @@ function renderProjects() {
         const color = getGroupColor(cat);
         const isCollapsed = collapsedCategories.has(cat);
         html += `<div class="category-group${isCollapsed ? ' collapsed' : ''}" data-category="${escHtml(cat)}">`;
-        html += `<div class="category-header" data-toggle-category="${escHtml(cat)}">
+        html += `<div class="category-header" data-toggle-category="${escHtml(cat)}" role="button" tabindex="0" aria-expanded="${isCollapsed ? 'false' : 'true'}" title="${isCollapsed ? 'Show' : 'Hide'} ${escHtml(cat)}">
             <span class="category-dot" style="background:${color}"></span>
             <span class="category-name">${escHtml(cat)}</span>
-            <span class="category-count">${catProjects.length} project${catProjects.length !== 1 ? 's' : ''}</span>
-            <svg class="category-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            <span class="category-count" aria-label="${catProjects.length} project${catProjects.length !== 1 ? 's' : ''}">${catProjects.length}</span>
+            <svg class="category-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </div>`;
 
         if (currentView === 'grid') {
@@ -2038,6 +554,10 @@ function renderProjects() {
                 collapsedCategories.add(cat);
                 group.classList.add('collapsed');
             }
+            header.setAttribute('aria-expanded', String(!collapsedCategories.has(cat)));
+        });
+        header.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); header.click(); }
         });
     });
 
@@ -2120,82 +640,89 @@ function cardHtml(p) {
     const total = p.stats.done + p.stats.active + p.stats.planned || 1;
     const initial = p.name.charAt(0);
     const gradient = projectGradient(p.name);
-    const coverStyle = p.cover ? `background: url(${escHtml(p.cover)}) center/cover no-repeat` : `background: ${gradient}`;
+    const coverStyle = p.cover ? `background: url(${escHtml(p.cover)}) center/cover no-repeat, ${gradient}` : `background: ${gradient}`;
 
+    const realTotal = p.stats.done + p.stats.active + p.stats.planned;
+    const pct = realTotal ? Math.round((p.stats.done / realTotal) * 100) : 0;
+    const open = p.stats.active + p.stats.planned;
+    const breakdown = `${p.stats.done} done · ${p.stats.active} active · ${p.stats.planned} planned`;
+
+    // Quiet tile: cover, name, one line of status, a done-ring. Actions appear on hover.
     return `
-    <div class="project-card${p.archived ? ' archived' : ''}" data-name="${escHtml(p.name)}">
+    <div class="project-card${p.archived ? ' archived' : ''}" data-name="${escHtml(p.name)}" tabindex="0" aria-label="Open ${escHtml(p.name)} on the board">
         <div class="card-cover">
             <div class="card-cover-gradient" style="${coverStyle}">
                 ${!p.cover ? `<span class="card-cover-initial">${escHtml(initial)}</span>` : ''}
             </div>
-            ${p.archived ? '<span class="archived-badge">Archived</span>' : ''}
+            ${p.archived ? `<span class="archived-badge" title="Archived" aria-label="Archived">${ICONS.archive}</span>` : ''}
         </div>
         <div class="card-body" data-action="open">
             <div class="card-name">${escHtml(p.name)}</div>
-            <div class="card-stats">
-                <span class="stat-dot done">${p.stats.done} done</span>
-                <span class="stat-dot active">${p.stats.active} active</span>
-                <span class="stat-dot planned">${p.stats.planned} planned</span>
+            <div class="card-stats" title="${breakdown}">
+                ${p.stats.active ? `<span class="stat-live" aria-label="${p.stats.active} active"></span>` : ''}
+                <span class="stat-open">${realTotal ? open + ' open' : 'No tasks'}</span>
+                <span class="card-time">${p.updatedAt ? timeAgo(p.updatedAt) : ''}</span>
             </div>
-            <div class="card-time">${p.updatedAt ? 'Updated ' + timeAgo(p.updatedAt) : 'Never updated'}</div>
         </div>
+        <span class="ring${realTotal ? '' : ' empty'}" style="--p:${pct}" title="${realTotal ? pct + '% done' : 'No tasks'}" aria-hidden="true"><span>${realTotal ? pct : ''}</span></span>
         <div class="card-actions">
-            <button class="action-btn primary" data-action="copy-path" title="Copy cd path">
-                <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-                Copy path
-            </button>
-            <button class="action-btn primary" data-action="kickstart" title="Copy kickstart prompt">
-                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                Kickstart
-            </button>
-            <span class="action-spacer"></span>
-            <button class="more-btn" data-action="more" title="More options">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="5" r="1" fill="currentColor"/>
-                    <circle cx="12" cy="12" r="1" fill="currentColor"/>
-                    <circle cx="12" cy="19" r="1" fill="currentColor"/>
-                </svg>
-            </button>
+            <button class="action-btn primary" data-action="copy-path" title="Copy cd path" aria-label="Copy cd path">${ICONS.copy}</button>
+            <button class="action-btn primary" data-action="kickstart" title="Copy kickstart prompt" aria-label="Copy kickstart prompt">${ICONS.spark}</button>
+            <button class="more-btn" data-action="more" title="More: details, cover, archive" aria-label="More options" aria-haspopup="menu">${ICONS.more}</button>
         </div>
     </div>`;
 }
 
+// Shared line icons (Dusk set)
+const ICONS = {
+    copy: '<svg class="ic" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg>',
+    spark: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 16.5v4M16.5 18.5h4"/></svg>',
+    info: '<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg>',
+    more: '<svg class="ic" viewBox="0 0 24 24"><path d="M6 12h.01M12 12h.01M18 12h.01" stroke-width="2.8"/></svg>',
+    archive: '<svg class="ic" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="5" rx="2"/><path d="M5 9.5v8a2 2 0 002 2h10a2 2 0 002-2v-8M10 13.5h4"/></svg>',
+    image: '<svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9.5" cy="9.5" r="1.5"/><path d="M20 15l-4.5-4.5L6 20"/></svg>',
+    trash: '<svg class="ic" viewBox="0 0 24 24"><path d="M4.5 7h15M10 4h4M6.5 7l.8 11.2a2 2 0 002 1.8h5.4a2 2 0 002-1.8L17.5 7"/></svg>',
+    folder: '<svg class="ic" viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 016.5 5H10l2 2h5.5A2.5 2.5 0 0120 9.5v7a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 014 16.5z"/></svg>',
+    close: '<svg class="ic" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>',
+};
+
 function listRowHtml(p) {
     const initial = p.name.charAt(0);
     const gradient = projectGradient(p.name);
-    const coverStyle = p.cover ? `background: url(${escHtml(p.cover)}) center/cover no-repeat` : `background: ${gradient}`;
+    const coverStyle = p.cover ? `background: url(${escHtml(p.cover)}) center/cover no-repeat, ${gradient}` : `background: ${gradient}`;
 
     return `
-    <div class="list-row${p.archived ? ' archived' : ''}" data-name="${escHtml(p.name)}">
+    <div class="list-row${p.archived ? ' archived' : ''}" data-name="${escHtml(p.name)}" tabindex="0" aria-label="Open ${escHtml(p.name)} on the board">
         <div class="list-thumb" style="${coverStyle}">
             ${!p.cover ? `<span class="list-thumb-initial">${escHtml(initial)}</span>` : ''}
         </div>
-        <span class="list-name" data-action="open">${escHtml(p.name)}</span>
-        <div class="list-stats">
+        <span class="list-name" data-action="open">${escHtml(p.name)}${p.archived ? `<span class="list-archived" title="Archived" aria-label="Archived">${ICONS.archive}</span>` : ''}</span>
+        <div class="list-stats" title="${p.stats.done} done · ${p.stats.active} active · ${p.stats.planned} planned">
             <span class="list-stat done">${p.stats.done}</span>
             <span class="list-stat active">${p.stats.active}</span>
             <span class="list-stat planned">${p.stats.planned}</span>
         </div>
         <span class="list-time">${timeAgo(p.updatedAt)}</span>
         <div class="list-actions">
-            <button class="action-btn primary" data-action="copy-path" style="padding:0.25rem 0.5rem;" title="Copy path">
-                <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-            </button>
-            <button class="action-btn primary" data-action="kickstart" style="padding:0.25rem 0.5rem;" title="Kickstart">
-                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </button>
-            <button class="more-btn" data-action="more" title="More options">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="5" r="1" fill="currentColor"/>
-                    <circle cx="12" cy="12" r="1" fill="currentColor"/>
-                    <circle cx="12" cy="19" r="1" fill="currentColor"/>
-                </svg>
-            </button>
+            <button class="action-btn primary" data-action="copy-path" title="Copy path" aria-label="Copy cd path">${ICONS.copy}</button>
+            <button class="action-btn primary" data-action="kickstart" title="Kickstart" aria-label="Copy kickstart prompt">${ICONS.spark}</button>
+            <button class="action-btn" data-action="details" title="Details" aria-label="Project details">${ICONS.info}</button>
+            <button class="more-btn" data-action="more" title="More options" aria-label="More options" aria-haspopup="menu">${ICONS.more}</button>
         </div>
     </div>`;
 }
 
 function bindCardEvents(container, rowSelector) {
+    // The container persists across renders: bind once, otherwise every re-render
+    // stacked another listener and one click fired several activations/toasts.
+    if (container._crCardsBound) return;
+    container._crCardsBound = true;
+    container.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        if (!e.target.matches('.project-card, .list-row')) return;
+        e.preventDefault();
+        activateProject(e.target.dataset.name);
+    });
     container.addEventListener('click', async (e) => {
         const row = e.target.closest(`[data-name]`);
         if (!row) return;
@@ -2276,27 +803,13 @@ function showContextMenu(e, projectName) {
     const isArchived = project?.archived;
 
     menu.innerHTML = `
-        <div class="context-item" data-cmd="copy-path">
-            <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-            Copy path
-        </div>
-        <div class="context-item" data-cmd="kickstart">
-            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            Copy kickstart
-        </div>
-        <div class="context-divider"></div>
-        <div class="context-item" data-cmd="generate-cover">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            ${project?.cover ? 'Regenerate Cover' : 'Create Cover'}
-        </div>
-        <div class="context-item" data-cmd="${isArchived ? 'unarchive' : 'archive'}">
-            <svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-            ${isArchived ? 'Unarchive' : 'Archive'}
-        </div>
-        <div class="context-item danger" data-cmd="delete">
-            <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-            Delete project
-        </div>
+        <button type="button" class="context-item" role="menuitem" data-cmd="details">${ICONS.info}Details</button>
+        <button type="button" class="context-item" role="menuitem" data-cmd="copy-path">${ICONS.copy}Copy path</button>
+        <button type="button" class="context-item" role="menuitem" data-cmd="kickstart">${ICONS.spark}Copy kickstart</button>
+        <div class="context-divider" role="separator"></div>
+        <button type="button" class="context-item" role="menuitem" data-cmd="generate-cover">${ICONS.image}${project?.cover ? 'Regenerate cover' : 'Create cover'}</button>
+        <button type="button" class="context-item" role="menuitem" data-cmd="${isArchived ? 'unarchive' : 'archive'}">${ICONS.archive}${isArchived ? 'Unarchive' : 'Archive'}</button>
+        <button type="button" class="context-item danger" role="menuitem" data-cmd="delete">${ICONS.trash}Delete project</button>
     `;
 
     const btn = e.target.closest('[data-action="more"]');
@@ -2305,8 +818,8 @@ function showContextMenu(e, projectName) {
     let left = rect.left;
 
     // Viewport edge detection
-    const menuW = 200;
-    const menuH = 190;
+    const menuW = 236;
+    const menuH = 280;
     if (left + menuW > window.innerWidth) left = window.innerWidth - menuW - 8;
     if (top + menuH > window.innerHeight) top = rect.top - menuH - 4;
 
@@ -2336,7 +849,10 @@ async function handleContextCommand(cmd, projectName) {
     const project = allProjects.find(p => p.name === projectName);
     if (!project) return;
 
-    if (cmd === 'copy-path') {
+    if (cmd === 'details') {
+        openDetail(projectName);
+
+    } else if (cmd === 'copy-path') {
         await copyText('cd ' + project.root);
         showToast('Path copied!', 'clipboard');
 
@@ -2360,7 +876,7 @@ async function handleContextCommand(cmd, projectName) {
         const origContent = coverEl?.innerHTML;
         if (coverEl) {
             coverEl.style.position = 'relative';
-            coverEl.insertAdjacentHTML('beforeend', '<div class="cover-generating" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);border-radius:inherit;"><div class="spinner"></div><span style="margin-left:8px;font-size:11px;color:#ccc;">Generating...</span></div>');
+            coverEl.insertAdjacentHTML('beforeend', '<div class="cover-generating" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(22,24,31,0.72);border-radius:inherit;" title="Generating cover"><div class="spinner"></div></div>');
         }
         showToast('Generating AI cover...', 'rocket');
         let res;
@@ -2402,7 +918,7 @@ async function openDetail(name) {
 
     // Show skeleton first
     const gradient = projectGradient(project.name);
-    const coverStyle = project.cover ? `background: url(${escHtml(project.cover)}) center/cover no-repeat` : `background: ${gradient}`;
+    const coverStyle = project.cover ? `background: url(${escHtml(project.cover)}) center/cover no-repeat, ${gradient}` : `background: ${gradient}`;
     const total = project.stats.done + project.stats.active + project.stats.planned || 1;
     const doneW = Math.round((project.stats.done / total) * 100);
     const activeW = Math.round((project.stats.active / total) * 100);
@@ -2413,29 +929,23 @@ async function openDetail(name) {
             <div class="detail-cover-gradient" style="${coverStyle}">
                 ${!project.cover ? `<span class="detail-cover-initial">${escHtml(project.name.charAt(0))}</span>` : ''}
             </div>
-            <button class="detail-cover-close" id="detailClose" title="Close (Esc)">
-                <svg viewBox="0 0 24 24">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-            </button>
+            <button class="detail-cover-close" id="detailClose" title="Close (Esc)" aria-label="Close details">${ICONS.close}</button>
         </div>
         <div class="detail-info">
-            <div class="detail-name">${escHtml(project.name)}</div>
-            <div class="detail-path" id="detailPath" data-path="${escHtml(project.root)}" title="Click to copy">
-                <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                ${escHtml(project.root || '—')}
-            </div>
+            <h2 class="detail-name">${escHtml(project.name)}</h2>
+            <button type="button" class="detail-path" id="detailPath" data-path="${escHtml(project.root)}" title="Click to copy cd path">
+                ${ICONS.folder}<span>${escHtml(project.root || '—')}</span>
+            </button>
             ${project.stack?.length ? `<div class="stack-tags">${project.stack.map(s => `<span class="stack-tag">${escHtml(s)}</span>`).join('')}</div>` : ''}
         </div>
 
         <div class="detail-section" id="detailSummarySection">
-            <div class="detail-section-title">7-Day Summary</div>
+            <div class="detail-section-title">Last 7 days</div>
             <div class="detail-summary-text" id="detailSummaryText" style="color:var(--text-subtle);font-style:italic;">Loading...</div>
         </div>
 
         <div class="detail-section">
-            <div class="detail-section-title">Task Breakdown</div>
+            <div class="detail-section-title">Tasks</div>
             <div class="detail-bar-wrap">
                 <div class="detail-bar-seg done" style="width:${doneW}%"></div>
                 <div class="detail-bar-seg active" style="width:${activeW}%"></div>
@@ -2444,12 +954,12 @@ async function openDetail(name) {
             <div class="detail-bar-legend">
                 <span class="legend-item"><span class="legend-dot" style="background:var(--color-success)"></span>${project.stats.done} done</span>
                 <span class="legend-item"><span class="legend-dot" style="background:var(--color-warning)"></span>${project.stats.active} active</span>
-                <span class="legend-item"><span class="legend-dot" style="background:var(--text-subtle)"></span>${project.stats.planned} planned</span>
+                <span class="legend-item"><span class="legend-dot" style="background:var(--plan)"></span>${project.stats.planned} planned</span>
             </div>
         </div>
 
         <div class="detail-section" id="detailCommitsSection">
-            <div class="detail-section-title">Recent Commits</div>
+            <div class="detail-section-title">Recent commits</div>
             <div class="detail-commits" id="detailCommits">
                 <div style="color:var(--text-subtle);font-size:var(--font-sm);font-style:italic;">Loading...</div>
             </div>
@@ -2483,27 +993,12 @@ async function openDetail(name) {
     });
 
     footer.innerHTML = `
-        <button class="detail-action-btn primary" id="detailCopyPath">
-            <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-            Copy path
-        </button>
-        <button class="detail-action-btn primary" id="detailKickstart">
-            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            Kickstart
-        </button>
-        <button class="detail-action-btn" id="detailGenCover">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            AI Cover
-        </button>
+        <button class="detail-action-btn sq" id="detailCopyPath" title="Copy cd path" aria-label="Copy cd path">${ICONS.copy}</button>
+        <button class="detail-action-btn sq" id="detailGenCover" title="${project.cover ? 'Regenerate AI cover' : 'Create AI cover'}" aria-label="${project.cover ? 'Regenerate AI cover' : 'Create AI cover'}">${ICONS.image}</button>
+        <button class="detail-action-btn sq${project.archived ? ' on' : ''}" id="detailArchive" title="${project.archived ? 'Unarchive' : 'Archive'}" aria-label="${project.archived ? 'Unarchive project' : 'Archive project'}">${ICONS.archive}</button>
+        <button class="detail-action-btn sq danger" id="detailDelete" title="Delete from Watchpost" aria-label="Delete project from Watchpost">${ICONS.trash}</button>
         <span style="flex:1"></span>
-        <button class="detail-action-btn" id="detailArchive">
-            <svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5" rx="1"/></svg>
-            ${project.archived ? 'Unarchive' : 'Archive'}
-        </button>
-        <button class="detail-action-btn danger" id="detailDelete">
-            <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
-            Delete
-        </button>
+        <button class="detail-action-btn primary" id="detailKickstart" title="Copy kickstart prompt">${ICONS.spark}Kickstart</button>
     `;
 
     document.getElementById('detailCopyPath')?.addEventListener('click', async () => {
@@ -2521,7 +1016,7 @@ async function openDetail(name) {
     document.getElementById('detailGenCover')?.addEventListener('click', async () => {
         const btn = document.getElementById('detailGenCover');
         const origText = btn.innerHTML;
-        btn.innerHTML = '<svg viewBox="0 0 24 24" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg> Generating...';
+        btn.innerHTML = '<svg class="ic" viewBox="0 0 24 24" style="animation:spin 1s linear infinite"><path d="M12 4v3M12 17v3M4 12h3M17 12h3M6.3 6.3l2.1 2.1M15.6 15.6l2.1 2.1"/></svg>';
         btn.disabled = true;
         try {
             const result = await apiFetch(`/api/projects/${encodeURIComponent(name)}/generate-cover`, {
@@ -2619,17 +1114,15 @@ function renderNotes() {
     if (notesFilter === 'done') filtered = notes.filter(n => n.done);
 
     if (!filtered.length) {
-        list.innerHTML = '<div class="empty-state" style="padding:1rem;"><p>' + (notes.length ? 'No items in this filter.' : 'No notes yet. Add one above!') + '</p></div>';
+        list.innerHTML = '<div class="empty-state small"><p>' + (notes.length ? 'Nothing here' : 'No notes yet') + '</p></div>';
         return;
     }
 
     list.innerHTML = filtered.map(n => `
         <div class="note-item" data-id="${escHtml(String(n.id))}">
-            <input type="checkbox" class="note-check" ${n.done ? 'checked' : ''} data-note-id="${escHtml(String(n.id))}">
+            <input type="checkbox" class="note-check" ${n.done ? 'checked' : ''} data-note-id="${escHtml(String(n.id))}" aria-label="Mark done">
             <span class="note-text${n.done ? ' done' : ''}">${escHtml(n.text || n.title || n.content || '')}</span>
-            <button class="note-delete" data-note-id="${escHtml(String(n.id))}" title="Delete">
-                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
+            <button class="note-delete" data-note-id="${escHtml(String(n.id))}" title="Delete" aria-label="Delete note">${ICONS.close}</button>
         </div>
     `).join('');
 }
@@ -2759,6 +1252,9 @@ document.getElementById('notesToggleBtn').addEventListener('click', () => {
         btn.classList.remove('collapsed');
         btn.title = 'Collapse';
     }
+    btn.setAttribute('aria-expanded', String(!notesCollapsed));
+    btn.setAttribute('aria-label', notesCollapsed ? 'Expand notes' : 'Collapse notes');
+    document.getElementById('notesSection').classList.toggle('is-collapsed', notesCollapsed);
 });
 
 document.getElementById('noteInput').addEventListener('keydown', async (e) => {
