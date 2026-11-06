@@ -35,3 +35,16 @@ describe('every button class on a page has Dusk styles', () => {
         expect(missing).toEqual([]);
     });
 });
+
+describe('flow task cards and panel', () => {
+    const flow = fs.readFileSync(path.join(root, 'flow/index.html'), 'utf8');
+    it('clicking a task step copies its context for an agent', () => {
+        expect(flow).toContain('function buildTaskContext');
+        expect(flow).toMatch(/pick = \(\) => \{ openTaskDetail\(el\.dataset\.id\); copyTaskContext/);
+    });
+    it('the side panel has no sentence banner or score bar', () => {
+        const panel = flow.slice(flow.indexOf('function renderSidePanel'), flow.indexOf('function renderSidePanel') + 9000);
+        expect(panel).not.toContain('banner');
+        expect(panel).not.toContain('score-bar');
+    });
+});

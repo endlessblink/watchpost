@@ -2487,11 +2487,13 @@
         });
       });
       root.querySelectorAll('.flow-node[data-id], .flow-backlog-item[data-id], .flow-chip[data-id], .agent-track-headline[data-id]:not([data-id=""])').forEach(el => {
-        el.addEventListener('click', () => openTaskDetail(el.dataset.id));
+        // A click opens the task and also puts its context on the clipboard, ready to paste into an agent.
+        const pick = () => { openTaskDetail(el.dataset.id); copyTaskContext(el.dataset.id, el); };
+        el.addEventListener('click', pick);
         el.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            openTaskDetail(el.dataset.id);
+            pick();
           }
         });
       });
@@ -2519,6 +2521,34 @@
       root.querySelectorAll('.blocker[data-id]').forEach(chip => {
         chip.addEventListener('click', () => openTaskDetail(chip.dataset.id));
       });
+    }
+
+    // Everything an agent needs to pick the task up cold.
+    function buildTaskContext(task) {
+      const taskById = new Map(allTasks.map(x => [x.id, x]));
+      const deps = (task.dependsOn || []).map(id => `${id}${taskById.get(id) ? ` (${taskById.get(id).status})` : ''}`);
+      const root = currentProjectRoot || '';
+      const lines = [
+        `Task ${task.id}: ${task.title || ''}`.trim(),
+        `Status: ${statusLabel(task.status)}${task.priority ? ` | Priority: ${task.priority}` : ''}${task.lane ? ` | Lane: ${task.lane}` : ''}`,
+      ];
+      if (deps.length) lines.push(`Depends on: ${deps.join(', ')}`);
+      if (root) lines.push(`Project: ${root}`, `Plan file: ${root}/MASTER_PLAN.md`);
+      const body = String(task.body || '').trim();
+      if (body) lines.push('', body);
+      return lines.join('\n');
+    }
+
+    async function copyTaskContext(id, el) {
+      const task = allTasks.find(x => x.id === id);
+      if (!task) return;
+      try {
+        await navigator.clipboard.writeText(buildTaskContext(task));
+        if (el) { el.classList.add('copied'); setTimeout(() => el.classList.remove('copied'), 900); }
+        showToast(`Copied ${id} context`, 'success');
+      } catch {
+        showToast('Clipboard copy failed', 'error');
+      }
     }
 
     function openTaskDetail(id) {
@@ -2753,56 +2783,67 @@
         .filter(id => taskById.has(id));
       const inferredChips = inferredIds.map(id => mkChip(id, 'inferred')).join('');
 
-      const scorePct = Math.min(100, Math.round(((task.score || 0) / 120) * 100));
       const overdue = task.dueDate && task.dueDate < new Date() && task.status !== 'done';
       const dueStr = task.dueDate ? task.dueDate.toISOString().slice(0, 10) : null;
 
-      // Readiness banner — the headline answer to "can I start this in parallel?"
-      let readinessBanner = '';
-      if (task.status === 'done') {
-        readinessBanner = `<div class="banner done">Already done.</div>`;
-      } else if (task.isReady) {
-        readinessBanner = `
-          <div class="banner ready">
-            <span class="dot"></span>
-            <span><b>Unblocked.</b> No unfinished blockers are currently stopping this task.</span>
-          </div>`;
-      } else if (task.isBlocked) {
-        readinessBanner = `
-          <div class="banner blocked">
-            <span class="dot"></span>
-            <span><b>Blocked.</b> Waiting on ${task.unfinishedBlockerIds.length} task${task.unfinishedBlockerIds.length === 1 ? '' : 's'}.</span>
-          </div>`;
-      }
+      // Plain text for display: the plan is markdown, the panel should not show its punctuation.
+      const plain = (t) => String(t || '').replace(/`/g, '').replace(/\*\*/g, '').replace(/^#+\s*/gm, '').replace(/^\s*[-*]\s+/gm, '').trim();
+      const IC = {
+        copy: '<rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/>',
+        board: '<rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/>',
+        flag: '<path d="M6 21V4M6 4h11l-2.5 4L17 12H6"/>',
+        clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+        bolt: '<path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/>',
+        check: '<circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/>',
+        lock: '<rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 018 0v3"/>',
+        next: '<path d="M5 12h13M13 6l6 6-6 6"/>',
+        link: '<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3A4 4 0 0011 18.7l1-1"/>'
+      };
+      const ico = (name) => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${IC[name]}</svg>`;
+      const fact = (cls, icon, text, label) => `<span class="td-fact ${cls}" title="${escapeAttr(label)}" aria-label="${escapeAttr(label)}">${ico(icon)}${text ? `<span>${escapeHtml(text)}</span>` : ''}</span>`;
 
-      // Unfinished blockers only
-      const unfinishedBlockerChips = task.unfinishedBlockerIds.map(id => mkChip(id)).join('');
-      const unblocksChips = task.unblocks.map(id => mkChip(id)).join('');
+      // One row of icon facts replaces the banner sentence, the score bar and the pills.
+      const readiness = task.status === 'done' ? null
+        : task.isBlocked ? fact('bad', 'lock', String(task.unfinishedBlockerIds.length), `Blocked: waiting on ${task.unfinishedBlockerIds.length}`)
+        : task.isReady ? fact('good', 'check', '', 'Ready: nothing is blocking this task') : null;
+      const facts = [
+        `<span class="td-fact status-${task.status}" title="${escapeAttr(statusLabel(task.status))}"><i class="td-dot"></i><span>${escapeHtml(statusLabel(task.status))}</span></span>`,
+        task.priority ? fact(`priority-${task.priority}`, 'flag', String(task.priority), `Priority ${task.priority}`) : '',
+        dueStr ? fact(overdue ? 'bad' : '', 'clock', dueStr, overdue ? `Overdue since ${dueStr}` : `Due ${dueStr}`) : '',
+        readiness || '',
+        task.score ? fact('', 'bolt', String(task.score), `Next-up score ${task.score}`) : ''
+      ].join('');
+
+      // Relations: each row is an icon and chips, no text label. Declared, inferred and unblocking links are deduped.
+      const shown = new Set([task.id]);
+      const row = (icon, label, ids, extra = '') => {
+        const list = ids.filter(id => !shown.has(id));
+        list.forEach(id => shown.add(id));
+        return list.length ? `<div class="td-rel" role="group" aria-label="${escapeAttr(label)}" title="${escapeAttr(label)}">${ico(icon)}<div class="dep-list">${list.map(id => mkChip(id, extra)).join('')}</div></div>` : '';
+      };
+      const relations = [
+        row('lock', 'Waiting on', task.unfinishedBlockerIds),
+        row('next', 'Finishing this unblocks', task.unblocks),
+        row('link', 'Related', [...task.dependsOn, ...task.blocks, ...inferredIds], 'inferred')
+      ].join('');
+
+      // Description: first paragraph, the rest folded away.
+      const paragraphs = plain(task.body).split(/\n\s*\n/).map(x => x.replace(/\s*\n\s*/g, ' ').trim()).filter(Boolean);
+      const description = paragraphs.length
+        ? `<div class="td-desc"><p>${escapeHtml(paragraphs[0])}</p>${paragraphs.length > 1 ? `<details><summary aria-label="Show the rest"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>${paragraphs.slice(1).map(x => `<p>${escapeHtml(x)}</p>`).join('')}</details>` : ''}</div>`
+        : '';
 
       pane.innerHTML = `
         <div class="task-detail">
-          <h2>${task.id}</h2>
-          <h3>${escapeHtml(task.title)}</h3>
-          <div class="meta">
-            <span class="pill status-${task.status}">${statusLabel(task.status)}</span>
-            ${task.priority ? `<span class="pill priority-${task.priority}">${task.priority}</span>` : ''}
-            ${dueStr ? `<span class="pill ${overdue ? 'overdue' : ''}">due ${dueStr}</span>` : ''}
+          <div class="td-head">
+            <span class="td-id">${escapeHtml(task.id)}</span>
+            <button id="copy-context" class="td-btn" type="button" title="Copy task context for an agent" aria-label="Copy task context for an agent">${ico('copy')}</button>
+            <button id="jump-kanban" class="td-btn" type="button" title="Open in Kanban" aria-label="Open in Kanban">${ico('board')}</button>
           </div>
-          ${readinessBanner}
-          <div class="score-row">
-            <span>Next-up score</span>
-            <div class="score-bar"><div class="score-fill" style="width: ${scorePct}%"></div></div>
-            <span>${task.score || 0}</span>
-          </div>
-          ${unfinishedBlockerChips ? `<div class="dep-block"><div class="label">Must finish first</div><div class="dep-list">${unfinishedBlockerChips}</div></div>` : ''}
-          ${unblocksChips ? `<div class="dep-block"><div class="label">Finishing this unblocks</div><div class="dep-list">${unblocksChips}</div></div>` : ''}
-          ${dependsChips ? `<div class="dep-block"><div class="label">Declared depends-on</div><div class="dep-list">${dependsChips}</div></div>` : ''}
-          ${blocksChips ? `<div class="dep-block"><div class="label">Declared blocks</div><div class="dep-list">${blocksChips}</div></div>` : ''}
-          ${inferredChips ? `<div class="dep-block"><div class="label">Mentioned in body</div><div class="dep-list">${inferredChips}</div></div>` : ''}
-          ${task.body.trim() ? `<div class="body-preview">${escapeHtml(task.body.trim().slice(0, 800))}${task.body.trim().length > 800 ? '…' : ''}</div>` : ''}
-          <div class="actions">
-            <button id="jump-kanban" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/></svg>Open in Kanban</button>
-          </div>
+          <h3>${escapeHtml(plain(task.title))}</h3>
+          <div class="td-facts">${facts}</div>
+          ${relations ? `<div class="td-rels">${relations}</div>` : ''}
+          ${description}
         </div>
       `;
 
@@ -2814,6 +2855,8 @@
           centerOnNode(id);
         });
       });
+      const copyBtn = document.getElementById('copy-context');
+      if (copyBtn) copyBtn.addEventListener('click', () => copyTaskContext(task.id, copyBtn));
       const jumpBtn = document.getElementById('jump-kanban');
       if (jumpBtn) {
         jumpBtn.addEventListener('click', () => {
