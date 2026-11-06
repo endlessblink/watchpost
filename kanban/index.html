@@ -1183,6 +1183,7 @@
               managedPlan: task.managed_plan || false,
               archivedAt: task.archived_at || null,
               archiveDisposition: task.archive_disposition || 'completed',
+              auditLabel: task.audit_note && /stale_in_progress/.test(task.audit_note) ? 'Claim needs recheck' : task.audit_note && /needs_verification/.test(task.audit_note) ? 'Verification pending' : task.audit_note && task.status === 'in_progress' ? 'Activity unverified' : '',
               notes: [task.audit_note, task.archive_reason].filter(Boolean).map(value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))).join('<br><br>'),
               section: 'activeWork',
               description: '',
@@ -1397,6 +1398,7 @@
               card.innerHTML = `
               <div class="task-kicker">${task.id}${task.lane ? ' · ' + task.lane : ''}</div>
               <div class="task-title">${cardTitle(task)}</div>
+              ${task.auditLabel ? `<div class="task-sub">${task.auditLabel}</div>` : ''}
               ${cardSubtitle(task) ? `<div class="task-sub">${cardSubtitle(task)}</div>` : ''}
               ${showProgress ? `<div class="task-progress" title="Progress ${progress}%">
                 <div class="progress-bar"><div class="task-progress-bar ${progressClass}" style="width: ${progress}%"></div></div>
