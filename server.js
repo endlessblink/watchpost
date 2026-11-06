@@ -6,7 +6,6 @@ const { execSync } = require('child_process');
 require('dotenv').config();
 const taskEngine = require('./modules/task-engine');
 const projectScanner = require('./modules/project-scanner');
-const changelogEngine = require('./modules/changelog-engine');
 const { resolveMasterPlanPath } = require('./modules/master-plan-path');
 const { resolveBindHost } = require('./modules/network-access');
 const mountControlRoomRoutes = require('./controlroom/api');
@@ -128,7 +127,6 @@ const healthScansRunning = new Set(); // project roots being scanned right now
 
 // SSE Clients
 let clients = [];
-let changelogClients = [];
 
 // Helper to broadcast logs to SSE clients
 const broadcastLog = (message) => {
@@ -267,7 +265,7 @@ app.get('/api/discover', (req, res) => {
     const pkg = require('./package.json');
     res.json({
         name: 'Watchpost',
-        description: 'AI orchestration dashboard and task management for multi-project development. Tracks tasks from MASTER_PLAN.md, provides health scanning, agent orchestration, changelog tracking, and cross-project context.',
+        description: 'AI orchestration dashboard and task management for multi-project development. Tracks tasks from MASTER_PLAN.md, provides health scanning, agent orchestration, and cross-project context.',
         version: pkg.version,
         port: PORT,
         endpoints: {
@@ -288,7 +286,7 @@ app.get('/api/discover', (req, res) => {
             'beads-graph': { method: 'GET', path: '/api/beads/graph', description: 'Full task dependency graph' },
             'beads-claim': { method: 'POST', path: '/api/beads/claim/:id', description: 'Claim a task (sets IN PROGRESS)' },
             'beads-close': { method: 'POST', path: '/api/beads/close/:id', description: 'Close a task (sets DONE)' },
-            changelog: { method: 'GET', path: '/api/changelog', description: 'Session changelog data' },
+            activity: { method: 'GET', path: '/api/changelog', description: 'Recent agent activity from session logs (read-only)' },
             events: { method: 'GET', path: '/api/events', description: 'Server-sent events stream for live updates' }
         },
         cli: {
@@ -296,7 +294,6 @@ app.get('/api/discover', (req, res) => {
             commands: ['tui', 'dashboard', 'status', 'stop', 'install', 'archive', 'discover', 'help']
         },
         data: {
-            changelog_db: '~/.watchpost/data/changelog.db',
             projects_registry: '~/.watchpost/projects.json',
             per_project_db: '.watchpost/db.sqlite'
         },
@@ -305,8 +302,7 @@ app.get('/api/discover', (req, res) => {
             'Use /api/master-plan to get all tasks without reading the markdown file',
             'Use /api/outlook for a cross-project digest (all registered projects, task counts, git activity)',
             'Use /api/beads/ready to find tasks you can start immediately',
-            'Use /api/health/quick for a fast project health assessment',
-            'The changelog.db SQLite has session history across all projects'
+            'Use /api/health/quick for a fast project health assessment'
         ]
     });
 });
@@ -3912,84 +3908,6 @@ app.post('/api/tasks/sync', requireTaskEngine, (req, res) => {
     }
 });
 
-// ============================================================================
-// CHANGELOG API — Agent action audit trail
-// ============================================================================
-
-// GET /api/changelog/actions - Query actions with filters
-app.get('/api/changelog/actions', (req, res) => {
-  try {
-    const actions = changelogEngine.queryActions({
-      project: req.query.project,
-      session: req.query.session,
-      tool: req.query.tool,
-      file: req.query.file,
-      since: req.query.since,
-      until: req.query.until,
-      limit: parseInt(req.query.limit) || 100,
-      offset: parseInt(req.query.offset) || 0
-    });
-    res.json({ success: true, count: actions.length, actions });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// GET /api/changelog/sessions - List sessions
-app.get('/api/changelog/sessions', (req, res) => {
-  try {
-    const sessions = changelogEngine.querySessions({
-      project: req.query.project,
-      limit: parseInt(req.query.limit) || 20
-    });
-    res.json({ success: true, count: sessions.length, sessions });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// GET /api/changelog/file-history - All changes to a file
-app.get('/api/changelog/file-history', (req, res) => {
-  try {
-    if (!req.query.file) return res.status(400).json({ error: 'file parameter required' });
-    const history = changelogEngine.queryFileHistory({
-      file: req.query.file,
-      project: req.query.project,
-      limit: parseInt(req.query.limit) || 50
-    });
-    res.json({ success: true, count: history.length, history });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// GET /api/changelog/stats - Action statistics
-app.get('/api/changelog/stats', (req, res) => {
-  try {
-    const stats = changelogEngine.queryStats({
-      project: req.query.project,
-      period: req.query.period || '24h'
-    });
-    res.json({ success: true, stats });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// GET /api/changelog/events - SSE stream for real-time changelog
-app.get('/api/changelog/events', (req, res) => {
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-  res.write(`data: ${JSON.stringify({ type: 'connected' })}\n\n`);
-  changelogClients.push(res);
-  const keepAlive = setInterval(() => res.write(': keep-alive\n\n'), 15000);
-  req.on('close', () => {
-    clearInterval(keepAlive);
-    changelogClients = changelogClients.filter(c => c !== res);
-  });
-});
-
 app.listen(PORT, HOST, () => {
     const url = `http://localhost:${PORT}`;
     // Cyan + underline + OSC 8 hyperlink for maximum terminal compatibility
@@ -4036,62 +3954,6 @@ app.listen(PORT, HOST, () => {
         console.log('[Periodic] Running worktree cleanup...');
         cleanupStaleWorktrees(4); // 4 hour threshold (reduced from 24)
     }, 60 * 60 * 1000); // 1 hour
-
-    // Initialize changelog engine
-    try {
-        const changelogDbPath = path.join(__dirname, 'data', 'changelog.db');
-        changelogEngine.initDb(changelogDbPath);
-        console.log('[Changelog] Database initialized');
-
-        // Initial ingestion
-        const initialCount = changelogEngine.ingestNewEntries();
-        if (initialCount > 0) {
-            console.log(`[Changelog] Ingested ${initialCount} entries from JSONL files`);
-            // Enrich agent IDs from Claude session data
-            try {
-                const enriched = changelogEngine.enrichAgentIds();
-                if (enriched > 0) console.log(`[Changelog] Enriched ${enriched} entries with agent IDs`);
-            } catch (err) {
-                console.error('[Changelog] Enrichment error:', err.message);
-            }
-        }
-
-        // Poll for new entries every 5 seconds
-        setInterval(() => {
-            try {
-                const newEntries = changelogEngine.ingestNewEntries();
-                if (newEntries > 0) {
-                    // Enrich agent IDs from Claude session data
-                    try {
-                        const enriched = changelogEngine.enrichAgentIds();
-                        if (enriched > 0) console.log(`[Changelog] Enriched ${enriched} entries with agent IDs`);
-                    } catch (err) {
-                        console.error('[Changelog] Enrichment error:', err.message);
-                    }
-                    // Broadcast to SSE clients
-                    const payload = JSON.stringify({ type: 'new-actions', count: newEntries });
-                    changelogClients.forEach(client => {
-                        try { client.write(`data: ${payload}\n\n`); } catch {}
-                    });
-                }
-            } catch (err) {
-                console.error('[Changelog] Ingestion error:', err.message);
-            }
-        }, 5000);
-
-        // Weekly cleanup (90 day retention)
-        setInterval(() => {
-            try {
-                const deleted = changelogEngine.cleanup(90);
-                const rotated = changelogEngine.rotateJsonlFiles(30);
-                if (deleted > 0 || rotated > 0) {
-                    console.log(`[Changelog] Cleaned ${deleted} DB entries, rotated ${rotated} JSONL files`);
-                }
-            } catch {}
-        }, 7 * 24 * 60 * 60 * 1000);
-    } catch (err) {
-        console.error('[Changelog] Failed to initialize:', err.message);
-    }
 
     // Auto-discover projects on startup
     if (localConfig.projectAutoScan !== false) {
