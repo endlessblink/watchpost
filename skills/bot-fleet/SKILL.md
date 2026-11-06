@@ -5,39 +5,66 @@ description: Use when asked about any of Noam's bots or bot personas — "diet b
 
 # Bot fleet
 
-Noam's bots are spread across a VPS, this workstation, several repos, and — for the
-Telegram ones — several *personas inside a single process*. A bot's own repo doc is
-not reliable: personas move between config keys, and repo notes go stale within days.
-Watchpost keeps a live catalog. Use it.
+Noam's bots span the VPS, workstation, source checkouts, installed environments
+and personas within shared gateways. Resolve the bot in the maintained registry
+first, then verify the actual path and current runtime. Watchpost is supporting
+discovery evidence; a generated catalog or a running PID can be stale or select a
+different release from the source checkout.
 
 ## How to answer a question about a bot
 
-1. **Read the generated index first** — `~/.claude/knowledge/bot-fleet.md`. It covers
+1. **Resolve the registry reference first** — read
+   `/media/endlessblink/data/my-projects/ai-development/bots+automation/bots-directory/bot-registry.yaml`.
+   Select one `workflow_references.id`, read its identity entry and matching
+   `runtime_surfaces`, and confirm the actual path's source/release/runtime role.
+   Keep dormant rebuilds and intentionally retired pollers separate. Unknown
+   identity, owner, path or revision stays unknown; do not invent a match from a name.
+
+2. **Run the explicit non-mutating workflow check before edits:**
+   ```bash
+   python3 /media/endlessblink/data/my-projects/ai-development/bots+automation/bots-directory/tools/check_bot_workflow.py \
+     --bot paper-bot \
+     --checkout /media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot
+   ```
+   Use the resolved ID and actual local checkout, not the example when working
+   on another bot. Missing/ambiguous/stale references or path mismatches require
+   bounded reconciliation. Read-only discovery can continue. This checker
+   enforces references only when invoked; it is not permission, a read receipt,
+   universal managed-dot enforcement, or a reason to install global hooks.
+
+3. **Use the generated index as supporting evidence** — `~/.claude/knowledge/bot-fleet.md`. It covers
    every bot: platform, where it runs, repo path, personas with topic ids, lifecycle,
    and any drift between what's documented and what's deployed. This works even when
    Watchpost is stopped.
 
-2. **For a single bot or persona, resolve it directly** (Watchpost running):
-   ```bash
-   curl -s "localhost:6010/api/bots/resolve?q=diet+bot"
-   ```
-   Alias-aware — "diet bot", "diet-bot" and "food bot" all resolve to the bot that
-   actually serves that persona. The response includes the live system prompt.
+4. **For a single bot or persona, resolve it directly** (Watchpost running):
+   Use `GET /api/bots/resolve?q=diet+bot` on the existing private Watchpost surface.
+   Alias-aware — "diet bot", "diet-bot" and "food bot" resolve a catalog candidate.
+   The response includes a live system prompt: inspect only needed non-secret
+   identity/path/routing fields; never copy prompts, credentials or raw private
+   chat into the registry. Compare the result with the registry and actual runtime.
 
-3. **For the whole fleet with current runtime status:**
-   ```bash
-   curl -s localhost:6010/api/bots | head -c 4000     # JSON
-   curl -s localhost:6010/api/bots/index.md           # markdown, also rewrites the file above
-   ```
+5. **For the whole fleet with current runtime status:**
+   Use `GET /api/bots` for catalog metadata or the existing generated index for
+   a dated summary. Extract only necessary identity/path/state fields before
+   reporting. `GET /api/bots/index.md` also regenerates the index file; do not
+   call it merely to prove a registry read or treat its timestamp as identity proof.
 
-If Watchpost is not running, the generated file is still the best source; say that
-its runtime status may be stale rather than guessing.
+If Watchpost is not running, continue from the registry and dated generated file;
+state the scope/date of the observation and verify the actual service path. A
+loopback health/dashboard URL is on the recorded host, not automatically local.
 
 ## Rules
 
-- **Live config beats repo docs.** Personas are read from each bot's running config.
-  Where a repo's CLAUDE.md/README disagrees, the catalog is right and the repo is stale
-  — say so, and offer to fix the repo doc.
+- **Verified runtime provenance beats an assumed checkout.** Compare bounded
+  non-secret current service/config/artifact evidence with the registry and catalog.
+  An installed interpreter may import an editable source elsewhere. Disk HEAD,
+  image ID, process health, loaded revision, authenticated visual acceptance and
+  delivered behavior are distinct evidence; do not upgrade one from another.
+  When evidence disagrees, report and reconcile the exact drift before acting.
+- **Preserve dated evidence.** Update the matching registry record with sources,
+  timestamps and next check; historical identity or WORKING claims keep their old
+  dates unless revalidated. Do not overwrite unrelated workers' files or state.
 - **A persona is not a bot.** "Diet Bot" is a Telegram topic persona served by the
   `hermes-gateway` process, not its own deployment. Answer at the level asked, but make
   the relationship clear before anyone tries to restart "the diet bot".

@@ -1182,7 +1182,8 @@
               lane: task.lane || '',
               managedPlan: task.managed_plan || false,
               archivedAt: task.archived_at || null,
-              notes: String(task.archive_reason || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])),
+              archiveDisposition: task.archive_disposition || 'completed',
+              notes: [task.audit_note, task.archive_reason].filter(Boolean).map(value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))).join('<br><br>'),
               section: 'activeWork',
               description: '',
               subtasks: [],
@@ -1733,11 +1734,11 @@
 
       // Include persisted archives while retaining the existing completed view.
       const completedTasks = [
-        ...data.activeWork.filter(i => i.status === 'done'),
-        ...data.bugs.filter(i => i.status === 'done'),
-        ...data.issues.filter(i => i.status === 'done'),
-        ...data.roadmap.nearTerm.filter(i => i.status === 'done'),
-        ...data.roadmap.later.filter(i => i.status === 'done')
+        ...data.activeWork.filter(i => i.archivedAt || i.status === 'done'),
+        ...data.bugs.filter(i => i.archivedAt || i.status === 'done'),
+        ...data.issues.filter(i => i.archivedAt || i.status === 'done'),
+        ...data.roadmap.nearTerm.filter(i => i.archivedAt || i.status === 'done'),
+        ...data.roadmap.later.filter(i => i.archivedAt || i.status === 'done')
       ];
 
       const columns = {
@@ -1789,7 +1790,7 @@
                 complexity.toLowerCase() === 'complex' ? 'complex' : 'unknown';
 
             // Get type badge based on ID prefix
-            const typeLabel = task.id.startsWith('BUG-') ? `${ICONS.bug}Bug Fixed` :
+            const typeLabel = task.archivedAt && task.archiveDisposition !== 'completed' ? `Archived · ${task.archiveDisposition} · ${task.status}` : task.id.startsWith('BUG-') ? `${ICONS.bug}Bug Fixed` :
               task.id.startsWith('ROAD-') ? `${ICONS.roadmap}Roadmap` :
                 task.id.startsWith('TASK-') ? `${ICONS.done}Task` : `${ICONS.done}Done`;
 

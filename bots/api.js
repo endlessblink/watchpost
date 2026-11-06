@@ -23,7 +23,10 @@ const controlRoomHelpers = require('../controlroom/api').helpers;
 const { sshRun, loadBots, computeStatus, getDiscoverySnapshot } = vpsHelpers;
 const { getGitInfo, loadProjects } = controlRoomHelpers;
 
-const MANIFEST_RELATIVE_PATH = path.join('.watchpost', 'bot.json');
+const MANIFEST_DIR = '.watchpost';
+// A repo may describe several bots as sibling files: bot.json plus bot.<slug>.json.
+// Without this a second manifest in the same repo is silently ignored.
+const MANIFEST_FILE_PATTERN = /^bot(\.[A-Za-z0-9._-]+)?\.json$/;
 const PERSONA_CACHE_TTL_MS = 60000;
 const CATALOG_CACHE_TTL_MS = 20000;
 
@@ -83,6 +86,23 @@ function extraManifestRoots() {
 // Walk projects.json (plus any extra roots) and pick up every repo carrying a
 // bot manifest. New bots appear the moment they add the file — no edit to
 // Watchpost required.
+// Every bot manifest in a repo's .watchpost directory: bot.json first (so it keeps
+// its historical precedence), then bot.<slug>.json siblings in stable order.
+function manifestFilesIn(root) {
+    const dir = path.join(root, MANIFEST_DIR);
+    let names;
+    try {
+        names = fs.readdirSync(dir);
+    } catch {
+        return [];
+    }
+
+    return names
+        .filter(name => MANIFEST_FILE_PATTERN.test(name))
+        .sort((a, b) => (a === 'bot.json' ? -1 : b === 'bot.json' ? 1 : a.localeCompare(b)))
+        .map(name => path.join(dir, name));
+}
+
 function discoverManifests() {
     const manifests = [];
     const scanned = new Set();
@@ -91,35 +111,35 @@ function discoverManifests() {
         if (!project || !project.root) continue;
         if (scanned.has(project.root)) continue;
         scanned.add(project.root);
-        const manifestPath = path.join(project.root, MANIFEST_RELATIVE_PATH);
 
-        let parsed;
-        try {
-            if (!fs.existsSync(manifestPath)) continue;
-            parsed = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-        } catch (err) {
-            manifests.push({
-                id: `${project.name}-invalid`,
-                name: project.name,
-                aliases: [],
-                platform: 'unknown',
-                lifecycle: 'unknown',
-                deployment: { kind: 'local' },
-                chats: [],
-                personas: [],
-                docs: [],
-                projectName: project.name,
-                projectRoot: project.root,
-                manifestError: err.message.slice(0, 200)
-            });
-            continue;
-        }
+        for (const manifestPath of manifestFilesIn(project.root)) {
+            let parsed;
+            try {
+                parsed = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            } catch (err) {
+                manifests.push({
+                    id: `${project.name}-invalid`,
+                    name: project.name,
+                    aliases: [],
+                    platform: 'unknown',
+                    lifecycle: 'unknown',
+                    deployment: { kind: 'local' },
+                    chats: [],
+                    personas: [],
+                    docs: [],
+                    projectName: project.name,
+                    projectRoot: project.root,
+                    manifestError: err.message.slice(0, 200)
+                });
+                continue;
+            }
 
-        // A repo may host more than one bot (array form).
-        const entries = Array.isArray(parsed) ? parsed : [parsed];
-        for (const entry of entries) {
-            const normalized = normalizeManifest(entry, project);
-            if (normalized) manifests.push(normalized);
+            // A repo may host more than one bot (array form).
+            const entries = Array.isArray(parsed) ? parsed : [parsed];
+            for (const entry of entries) {
+                const normalized = normalizeManifest(entry, project);
+                if (normalized) manifests.push(normalized);
+            }
         }
     }
 

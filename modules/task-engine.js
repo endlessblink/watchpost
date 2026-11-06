@@ -7,6 +7,7 @@ const fs = require('fs');
 // the module-level exports below are a default engine kept for existing callers.
 function createEngine() {
 let db = null;
+let commentContentColumn = 'content';
 
 // ── Database lifecycle ──────────────────────────────────────────────
 
@@ -44,9 +45,27 @@ function initDb(dbPath) {
     );
   `);
 
+  // Older project databases use body (including a NOT NULL constraint).
+  const commentColumns = db.prepare('PRAGMA table_info(comments)').all().map(column => column.name);
+  commentContentColumn = commentColumns.includes('content') ? 'content' : 'body';
+
   const columns = db.prepare("PRAGMA table_info(tasks)").all().map(column => column.name);
   if (!columns.includes('lane')) {
     db.exec('ALTER TABLE tasks ADD COLUMN lane TEXT');
+  }
+  if (!columns.includes('archived_at')) {
+    db.exec('ALTER TABLE tasks ADD COLUMN archived_at TEXT');
+  }
+  if (!columns.includes('archive_reason')) {
+    db.exec('ALTER TABLE tasks ADD COLUMN archive_reason TEXT');
+  }
+  if (!columns.includes('archive_status')) {
+    db.exec('ALTER TABLE tasks ADD COLUMN archive_status TEXT');
+    db.exec('UPDATE tasks SET archive_status = status WHERE archived_at IS NOT NULL');
+  }
+  if (!columns.includes('archive_disposition')) {
+    db.exec('ALTER TABLE tasks ADD COLUMN archive_disposition TEXT');
+    db.exec("UPDATE tasks SET archive_disposition = 'completed' WHERE archived_at IS NOT NULL");
   }
 
   return db;
@@ -61,14 +80,14 @@ function closeDb() {
 
 // ── MD Parsing ──────────────────────────────────────────────────────
 
-const TASK_ID_SOURCE = '[A-Z][A-Z0-9]*-\\d+';
-const TASK_HEADER_RE = new RegExp(`^###\\s+(~~)?(${TASK_ID_SOURCE})(~~)?(?:\\s*[:\\-–—]\\s*|\\s+)(.+?)(?:\\s*\\(([^)]+)\\))?\\s*$`);
-const FIELD_RE = /^\*\*([\w \/]+):?\*\*:?\s*(.*)/;
+const TASK_ID_SOURCE = '[A-Z][A-Z0-9]*-\\d+[a-z]?';
+const TASK_HEADER_RE = new RegExp('^#{2,6}\\s+((?:(?:~~|\\*\\*|`))*)(' + TASK_ID_SOURCE + ')((?:(?:~~|\\*\\*|`))*)(?:\\s*[:\\-–—]\\s*|\\s+)(.+?)(?:\\s*\\(([^)]+)\\))?\\s*$');
+const FIELD_RE = /^\s*(?:[-*]\s+)?(?:\*\*([\w \/]+):?\*\*:?|([\w \/]+):)\s*(.*)/;
 
 // Table row: | ID | title | priority | status | deps |
 // Handles: bold (**TASK-001**), strikethrough (~~TASK-001~~), combined (~~**TASK-001**~~)
 // Cells may be wrapped in ~~ and/or ** for done tasks
-const TABLE_ROW_RE = new RegExp('^\\|\\s*(?:~~)?(?:\\*\\*)?(?:`?)?(' + TASK_ID_SOURCE + ')(?:`?)?(?:\\*\\*)?(?:~~)?\\s*\\|');
+const TABLE_ROW_RE = new RegExp('^\\|\\s*(?:(?:~~|\\*\\*|`))*(' + TASK_ID_SOURCE + ')(?:(?:~~|\\*\\*|`))*\\s*\\|');
 
 const STATUS_EMOJI_MAP = {
   '🔄 IN PROGRESS': 'in_progress',
@@ -83,9 +102,12 @@ const STATUS_EMOJI_MAP = {
 const STATUS_TEXT_MAP = {
   'in progress': 'in_progress',
   'in_progress': 'in_progress',
+  'doing': 'in_progress',
+  'wip': 'in_progress',
   'planned': 'planned',
   'todo': 'planned',
   'paused': 'paused',
+  'blocked': 'paused',
   'review': 'review',
   'done': 'done',
   'complete': 'done',
@@ -98,21 +120,29 @@ const PRIORITY_TEXT_MAP = {
   'critical': 'P0',
 };
 
-function parseStatus(headerEmoji, statusFieldValue) {
-  // Status field takes priority if present
+function parseStatus(headerEmoji, statusFieldValue, fallback = 'planned') {
+  const normalize = (value) => value.replace(/\*\*|~~|`/g, '').trim().replace(/^(?:✅|🔄|⏸️?|👀|🚧)\s*/u, '').trim().toLowerCase();
+  const parse = (value) => {
+    const lower = normalize(value);
+    if (STATUS_TEXT_MAP[lower]) return STATUS_TEXT_MAP[lower];
+    const dated = lower.match(/^(in[ _-]progress|planned|todo|paused|blocked|review)\b(?:\s*\(|\s*[-—:]|$)/);
+    if (dated) return STATUS_TEXT_MAP[dated[1].replace(/[_-]/g, ' ')] || 'planned';
+    if (/^(done|complete|completed)\b/.test(lower)) {
+      // Completion claims with outstanding acceptance must stay visible.
+      if (/\b(locally|local only|awaiting|pending|remaining|unverified|not deployed|not verified)\b/.test(lower)) return 'review';
+      return 'done';
+    }
+    return null;
+  };
   if (statusFieldValue) {
-    const lower = statusFieldValue.trim().toLowerCase();
-    if (STATUS_TEXT_MAP[lower]) return STATUS_TEXT_MAP[lower];
+    const status = parse(statusFieldValue);
+    if (status) return status;
   }
-  // Try header emoji
   if (headerEmoji) {
-    const trimmed = headerEmoji.trim();
-    if (STATUS_EMOJI_MAP[trimmed]) return STATUS_EMOJI_MAP[trimmed];
-    // Try case-insensitive text match
-    const lower = trimmed.toLowerCase();
-    if (STATUS_TEXT_MAP[lower]) return STATUS_TEXT_MAP[lower];
+    const status = STATUS_EMOJI_MAP[headerEmoji.trim()] || parse(headerEmoji);
+    if (status) return status;
   }
-  return 'planned';
+  return fallback;
 }
 
 function parsePriority(value) {
@@ -123,15 +153,16 @@ function parsePriority(value) {
 
 function parseDeps(value) {
   if (!value) return [];
-  return value.split(',')
-    .map(s => s.trim())
-    .filter(s => new RegExp(`^${TASK_ID_SOURCE}$`).test(s));
+  if (/^(?:none|no dependencies|[-—])(?:\s|$)/i.test(value.trim())) return [];
+  return [...new Set(value.match(new RegExp('(?:[a-zA-Z0-9_./-]+:)?' + TASK_ID_SOURCE + '\\b', 'g')) || [])];
 }
 
 function parseMarkdown(mdContent) {
   const lines = mdContent.split('\n');
   const tasks = [];
   let current = null;
+  let fence = null;
+  let tableColumns = null;
 
   const flush = () => {
     if (current) tasks.push(current);
@@ -139,20 +170,37 @@ function parseMarkdown(mdContent) {
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+    const marker = line.match(/^\s*(`{3,}|~{3,})/);
+    if (marker) {
+      if (!fence) fence = marker[1];
+      else if (marker[1][0] === fence[0] && marker[1].length >= fence.length) fence = null;
+      continue;
+    }
+    if (fence) continue;
+
+    const splitCells = value => value.split(/(?<!\\)\|/).slice(1, -1).map(cell => cell.trim());
+    if (/^\s*\|/.test(line)) {
+      const names = splitCells(line).map(cell => cell.replace(/\*\*|`/g, '').trim().toLowerCase());
+      if (names[0] === 'id') tableColumns = names;
+    } else if (line.trim()) tableColumns = null;
 
     const headerMatch = line.match(TASK_HEADER_RE);
     if (headerMatch) {
       flush();
-      const isStrikethrough = !!headerMatch[1];
+      const isStrikethrough = headerMatch[1].includes('~~');
       const id = headerMatch[2];
-      const title = headerMatch[4].trim();
-      const emojiStatus = headerMatch[5] || null;
+      let title = headerMatch[4].trim();
+      const suffix = title.match(/\s+[-–—]\s+((?:DONE|COMPLETED?|IN[ _]PROGRESS|REVIEW|PAUSED|PLANNED)\b.*)$/i);
+      const emojiStatus = headerMatch[5] || suffix?.[1] || null;
+      if (suffix) title = title.slice(0, suffix.index).trim();
+      const headerStatus = emojiStatus ? parseStatus(emojiStatus.replace(/^P[0-4]\s*[,|]\s*/i, ''), null, null) : null;
 
       current = {
         id,
         title,
-        status: isStrikethrough ? 'done' : parseStatus(emojiStatus, null),
-        priority: 'P2',
+        status: isStrikethrough ? 'done' : headerStatus || 'planned',
+        statusExplicit: isStrikethrough || !!headerStatus,
+        priority: /^P[0-4]\b/i.test(emojiStatus || '') ? parsePriority(emojiStatus.slice(0, 2)) : 'P2',
         lane: '',
         deps: [],
       };
@@ -162,6 +210,9 @@ function parseMarkdown(mdContent) {
     // ── Table row parsing ────────────────────────────────────────────
     const tableMatch = line.match(TABLE_ROW_RE);
     if (tableMatch) {
+      // The personal asks register may be embedded in a plan, but is not its
+      // development backlog. Its linked Task column points at real task cards.
+      if (tableColumns?.includes('kind') && tableColumns.includes('what')) continue;
       flush();
       current = null; // table rows are standalone, not nested under headers
 
@@ -169,7 +220,7 @@ function parseMarkdown(mdContent) {
       const isStrikethrough = line.includes('~~');
 
       // Split cells by |, trim each, filter empties
-      const cells = line.split('|').map(c => c.trim()).filter(Boolean);
+      const cells = splitCells(line);
       // cells[0] = ID (possibly wrapped in ~~ or **)
       // Remaining cells vary by format — detect which format we have
 
@@ -182,22 +233,36 @@ function parseMarkdown(mdContent) {
       // Clean markdown formatting from a cell value
       const clean = (s) => s.replace(/\*\*/g, '').replace(/~~/g, '').replace(/`/g, '').trim();
 
-      if (cells.length >= 6 && /^P[0-4]$/i.test(clean(cells[4]))) {
+      const titleIndex = tableColumns?.findIndex(name => /^(title|task|description|task \/ issue)$/.test(name));
+      const statusIndex = tableColumns?.indexOf('status');
+      if (titleIndex >= 0 && statusIndex >= 0 && statusIndex < cells.length) {
+        title = clean(cells[titleIndex] || '');
+        const priorityIndex = tableColumns.indexOf('priority');
+        if (priorityIndex >= 0) priority = parsePriority(clean(cells[priorityIndex] || ''));
+        const parsedStatus = parseStatus(null, clean(cells[statusIndex] || ''));
+        if (!isStrikethrough || parsedStatus === 'review') status = parsedStatus;
+        const depsIndex = tableColumns.findIndex(name => /^(deps|dependencies|depends)$/.test(name));
+        if (depsIndex >= 0) deps = parseDeps(clean(cells[depsIndex] || ''));
+        const laneIndex = tableColumns.indexOf('lane');
+        if (laneIndex >= 0) lane = clean(cells[laneIndex] || '');
+      } else if (cells.length >= 6 && /^P[0-4]$/i.test(clean(cells[4]))) {
         // Format A1: ID | Lane | Task | Status | Priority | Deps
         lane = clean(cells[1]);
         title = clean(cells[2]);
         priority = parsePriority(clean(cells[4]));
         const rawStatus = clean(cells[3]);
-        if (!isStrikethrough) status = parseStatus(null, rawStatus);
+        const parsedStatus = parseStatus(null, rawStatus);
+        if (!isStrikethrough || parsedStatus === 'review') status = parsedStatus;
         const depStr = clean(cells[5]);
         if (depStr && depStr !== '-' && depStr !== '—') deps = parseDeps(depStr);
-      } else if (cells.length >= 5) {
+      } else if (cells.length >= 5 || (cells.length >= 4 && /^P[0-4]$/i.test(clean(cells[2])))) {
         // Format A: ID | Title | Priority | Status | Deps
         title = clean(cells[1]);
         priority = parsePriority(clean(cells[2]));
         const rawStatus = clean(cells[3]);
-        if (!isStrikethrough) status = parseStatus(null, rawStatus);
-        const depStr = clean(cells[4]);
+        const parsedStatus = parseStatus(null, rawStatus);
+        if (!isStrikethrough || parsedStatus === 'review') status = parsedStatus;
+        const depStr = clean(cells[4] || '');
         if (depStr && depStr !== '-') deps = parseDeps(depStr);
       } else if (cells.length >= 3) {
         // Format B: ID | Priority | Title (with possible emoji status)
@@ -228,6 +293,7 @@ function parseMarkdown(mdContent) {
       } else if (cells.length >= 2) {
         // Format C: ID | Title (no status/priority)
         title = clean(cells[1]);
+        status = parseStatus(null, title, null) || status;
       }
 
       // Strip leading emoji status markers from title
@@ -235,7 +301,8 @@ function parseMarkdown(mdContent) {
 
       // Skip template/example rows
       if (title && !taskId.includes('XXX')) {
-        tasks.push({ id: taskId, title, status, priority, lane, deps });
+        const statusExplicit = isStrikethrough || (statusIndex >= 0) || status !== 'planned' || /\b(TODO|PLANNED)\b/i.test(cells.slice(1).join(' '));
+        tasks.push({ id: taskId, title, status, statusExplicit, priority, lane, deps });
       }
       continue;
     }
@@ -249,17 +316,21 @@ function parseMarkdown(mdContent) {
 
     if (!current) continue;
 
-    const fieldMatch = line.match(FIELD_RE);
-    if (fieldMatch) {
-      const name = fieldMatch[1].trim();
-      const value = fieldMatch[2].trim();
+    for (const part of line.split(/\s*\|\s*(?=\*\*[\w /]+:?\*\*)/)) {
+      const fieldMatch = part.match(FIELD_RE);
+      if (!fieldMatch) continue;
+      const name = (fieldMatch[1] || fieldMatch[2]).trim();
+      const value = fieldMatch[3].trim();
 
       if (name === 'Status') {
-        const parsed = parseStatus(null, value);
-        if (current.status !== 'done') current.status = parsed; // strikethrough wins
+        const parsed = parseStatus(null, value, null);
+        if (parsed) {
+          current.statusExplicit = true;
+          if (current.status !== 'done' || parsed === 'review') current.status = parsed;
+        }
       } else if (name === 'Priority') {
         current.priority = parsePriority(value);
-      } else if (name === 'Depends') {
+      } else if (['depends', 'dependencies', 'depends on', 'blocked by'].includes(name.toLowerCase())) {
         current.deps = parseDeps(value);
       }
     }
@@ -280,6 +351,7 @@ function syncFromMarkdown(mdPath) {
     taskMap.set(task.id, existing ? {
       ...existing,
       ...task,
+      status: task.statusExplicit ? task.status : existing.status,
       deps: task.deps.length > 0 ? task.deps : existing.deps,
       lane: task.lane || existing.lane,
     } : task);
@@ -296,7 +368,11 @@ function syncFromMarkdown(mdPath) {
       priority = @priority,
       lane = @lane,
       updated_at = @now,
-      closed_at = CASE WHEN @status = 'done' THEN COALESCE(tasks.closed_at, @now) ELSE NULL END
+      closed_at = CASE WHEN @status = 'done' THEN COALESCE(tasks.closed_at, @now) ELSE NULL END,
+      archived_at = CASE WHEN @status = tasks.archive_status THEN tasks.archived_at ELSE NULL END,
+      archive_reason = CASE WHEN @status = tasks.archive_status THEN tasks.archive_reason ELSE NULL END,
+      archive_disposition = CASE WHEN @status = tasks.archive_status THEN tasks.archive_disposition ELSE NULL END,
+      archive_status = CASE WHEN @status = tasks.archive_status THEN tasks.archive_status ELSE NULL END
   `);
 
   const deleteDeps = db.prepare('DELETE FROM deps WHERE task_id = ?');
@@ -388,9 +464,13 @@ function writeBackStatus(mdPath, taskId, newStatus) {
 // ── Query functions ─────────────────────────────────────────────────
 
 function getTasks(filters) {
-  let sql = 'SELECT * FROM tasks';
+  let sql = `SELECT tasks.*, (SELECT ${commentContentColumn} FROM comments WHERE task_id = tasks.id
+    AND ${commentContentColumn} LIKE '[Task audit %' ORDER BY id DESC LIMIT 1) AS audit_note FROM tasks`;
   const conditions = [];
   const params = {};
+
+  if (filters?.archivedOnly) conditions.push('archived_at IS NOT NULL');
+  else if (!filters?.includeArchived) conditions.push('archived_at IS NULL');
 
   if (filters) {
     if (filters.status) {
@@ -413,7 +493,8 @@ function getTask(id) {
   const task = db.prepare('SELECT * FROM tasks WHERE id = ?').get(id);
   if (!task) return null;
   task.deps = db.prepare('SELECT depends_on FROM deps WHERE task_id = ?').all(id).map(r => r.depends_on);
-  task.comments = db.prepare('SELECT * FROM comments WHERE task_id = ? ORDER BY created_at').all(id);
+  task.comments = db.prepare(`SELECT *, ${commentContentColumn} AS content FROM comments WHERE task_id = ? ORDER BY created_at, id`).all(id);
+  task.audit_note = [...task.comments].reverse().find(comment => comment.content?.startsWith('[Task audit '))?.content || null;
   return task;
 }
 
@@ -422,7 +503,7 @@ function getReady() {
   // to claim. A prerequisite resolves only when its existing record is done.
   return db.prepare(`
     SELECT t.* FROM tasks t
-    WHERE t.status = 'planned'
+    WHERE t.status = 'planned' AND t.archived_at IS NULL
       AND NOT EXISTS (
         SELECT 1 FROM deps d
         LEFT JOIN tasks dt ON dt.id = d.depends_on
@@ -437,7 +518,7 @@ function getReady() {
 function getBlocked() {
   return db.prepare(`
     SELECT t.* FROM tasks t
-    WHERE t.status != 'done'
+    WHERE t.status != 'done' AND t.archived_at IS NULL
       AND EXISTS (
         SELECT 1 FROM deps d
         LEFT JOIN tasks dt ON dt.id = d.depends_on
@@ -454,10 +535,11 @@ function getGraph() {
 }
 
 function getStats() {
-  const byStatus = db.prepare('SELECT status, COUNT(*) as count FROM tasks GROUP BY status').all();
-  const byPriority = db.prepare('SELECT priority, COUNT(*) as count FROM tasks GROUP BY priority').all();
-  const total = db.prepare('SELECT COUNT(*) as count FROM tasks').get().count;
-  return { total, byStatus, byPriority };
+  const byStatus = db.prepare('SELECT status, COUNT(*) as count FROM tasks WHERE archived_at IS NULL GROUP BY status').all();
+  const byPriority = db.prepare('SELECT priority, COUNT(*) as count FROM tasks WHERE archived_at IS NULL GROUP BY priority').all();
+  const total = db.prepare('SELECT COUNT(*) as count FROM tasks WHERE archived_at IS NULL').get().count;
+  const archived = db.prepare('SELECT COUNT(*) as count FROM tasks WHERE archived_at IS NOT NULL').get().count;
+  return { total, byStatus, byPriority, archived };
 }
 
 // ── Mutations ───────────────────────────────────────────────────────
@@ -466,9 +548,28 @@ function updateStatus(id, status) {
   const now = new Date().toISOString();
   const closedAt = status === 'done' ? now : null;
   return db.prepare(`
-    UPDATE tasks SET status = ?, updated_at = ?, closed_at = COALESCE(?, closed_at)
-    WHERE id = ?
-  `).run(status, now, closedAt, id);
+    UPDATE tasks SET status = @status, updated_at = @now, closed_at = @closedAt,
+      archived_at = CASE WHEN @status = 'done' THEN archived_at ELSE NULL END,
+      archive_reason = CASE WHEN @status = 'done' THEN archive_reason ELSE NULL END,
+      archive_status = CASE WHEN @status = 'done' THEN archive_status ELSE NULL END,
+      archive_disposition = CASE WHEN @status = 'done' THEN archive_disposition ELSE NULL END
+    WHERE id = @id
+  `).run({ status, now, closedAt, id });
+}
+
+function archiveTask(id, reason = '', disposition = 'completed') {
+  const task = getTask(id);
+  if (!task) throw new Error('Task not found');
+  if (!['completed', 'superseded', 'duplicate', 'rejected'].includes(disposition)) throw new Error('Invalid archive disposition');
+  if (disposition === 'completed' && task.status !== 'done') throw new Error('Only completed tasks can be archived as completed');
+  if (disposition !== 'completed' && !reason.trim()) throw new Error('An archive reason is required');
+  const now = new Date().toISOString();
+  return db.prepare('UPDATE tasks SET archived_at = COALESCE(archived_at, ?), archive_reason = ?, archive_status = status, archive_disposition = ? WHERE id = ?')
+    .run(now, reason, disposition, id);
+}
+
+function restoreTask(id) {
+  return db.prepare('UPDATE tasks SET archived_at = NULL, archive_reason = NULL, archive_status = NULL, archive_disposition = NULL WHERE id = ?').run(id);
 }
 
 function addDep(taskId, dependsOn) {
@@ -484,7 +585,7 @@ function removeDep(taskId, dependsOn) {
 
 function addComment(taskId, content) {
   const now = new Date().toISOString();
-  return db.prepare('INSERT INTO comments (task_id, content, created_at) VALUES (?, ?, ?)').run(taskId, content, now);
+  return db.prepare(`INSERT INTO comments (task_id, ${commentContentColumn}, created_at) VALUES (?, ?, ?)`).run(taskId, content, now);
 }
 
 // ── Cycle detection ─────────────────────────────────────────────────
@@ -536,6 +637,8 @@ return {
   getGraph,
   getStats,
   updateStatus,
+  archiveTask,
+  restoreTask,
   addDep,
   removeDep,
   addComment,

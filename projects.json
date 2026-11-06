@@ -29,33 +29,9 @@
       "addedAt": "2026-03-07"
     },
     {
-      "name": "dev-board",
-      "root": "/media/endlessblink/data/my-projects/ai-development/cc-linux-enhancments/dev-board",
-      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/cc-linux-enhancments/dev-board/MASTER_PLAN.md",
-      "modules": [],
-      "source": "auto-discovered",
-      "addedAt": "2026-03-07"
-    },
-    {
       "name": "action!",
       "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/action!",
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/action!/MASTER_PLAN.md",
-      "modules": [],
-      "source": "auto-discovered",
-      "addedAt": "2026-03-07"
-    },
-    {
-      "name": "capture-studio",
-      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/capture-studio",
-      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/capture-studio/MASTER_PLAN.md",
-      "modules": [],
-      "source": "auto-discovered",
-      "addedAt": "2026-03-07"
-    },
-    {
-      "name": "legacy_v1",
-      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/capture-studio/legacy_v1",
-      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/capture-studio/legacy_v1/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
       "addedAt": "2026-03-07"
@@ -96,14 +72,6 @@
       "name": "master_plan_demo",
       "root": "/media/endlessblink/data/my-projects/ai-development/misc/master_plan_demo",
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/misc/master_plan_demo/MASTER_PLAN.md",
-      "modules": [],
-      "source": "auto-discovered",
-      "addedAt": "2026-03-07"
-    },
-    {
-      "name": "templates",
-      "root": "/media/endlessblink/data/my-projects/ai-development/productivity/master-plan/templates",
-      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/productivity/master-plan/templates/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
       "addedAt": "2026-03-07"
@@ -160,22 +128,6 @@
       "name": "arthouse",
       "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/arthouse",
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/arthouse/MASTER_PLAN.md",
-      "modules": [],
-      "source": "auto-discovered",
-      "addedAt": "2026-05-15"
-    },
-    {
-      "name": "capture-studio-react",
-      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/capture-studio-react",
-      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/capture-studio-react/MASTER_PLAN.md",
-      "modules": [],
-      "source": "auto-discovered",
-      "addedAt": "2026-05-15"
-    },
-    {
-      "name": "capture-studio-react/legacy_v1",
-      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/capture-studio-react/legacy_v1",
-      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/capture-studio-react/legacy_v1/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
       "addedAt": "2026-05-15"
@@ -266,7 +218,8 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/misc/Archive/master_plan_demo/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-15"
+      "addedAt": "2026-05-15",
+      "archived": true
     },
     {
       "name": "Archive/templates",
@@ -274,7 +227,8 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/productivity/master-plan/Archive/templates/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-15"
+      "addedAt": "2026-05-15",
+      "archived": true
     },
     {
       "name": "rtl-tools",
@@ -311,7 +265,7 @@
     {
       "name": "cc-linux-enhancments",
       "root": "/media/endlessblink/data/my-projects/ai-development/cc-linux-enhancments",
-      "masterPlan": null,
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/cc-linux-enhancments/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
       "addedAt": "2026-05-15"
@@ -959,15 +913,7 @@
     {
       "name": "show-runner",
       "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner",
-      "masterPlan": null,
-      "modules": [],
-      "source": "auto-discovered",
-      "addedAt": "2026-05-18"
-    },
-    {
-      "name": "video-use",
-      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/video-use",
-      "masterPlan": null,
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
       "addedAt": "2026-05-18"
@@ -981,24 +927,1100 @@
       "addedAt": "2026-05-18"
     },
     {
+      "name": "life-os-advisor",
+      "root": "/media/endlessblink/data/my-projects/ai-development/productivity/obsidian-plugins/life-os-advisor",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/productivity/obsidian-plugins/life-os-advisor/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-23"
+    },
+    {
+      "name": "life-os",
+      "root": "/media/endlessblink/data/my-projects/ai-development/productivity/life-os",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/productivity/life-os/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-23"
+    },
+    {
+      "name": "doc-aviv-2026",
+      "root": "/media/endlessblink/data/my-projects/ai-development/misc/doc-aviv-2026",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-24"
+    },
+    {
+      "name": "bina-meatzevet-courses-manual-purchase-profile",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-manual-purchase-profile",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-manual-purchase-profile/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-26"
+    },
+    {
+      "name": "bina-meatzevet-courses-manual-offline-access",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-manual-offline-access",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-manual-offline-access/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-26"
+    },
+    {
+      "name": "bina-meatzevet-courses-subscription-labels",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-subscription-labels",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-subscription-labels/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-26"
+    },
+    {
+      "name": "terminal-workspace-tauri",
+      "root": "/media/endlessblink/data/my-projects/ai-development/cc-linux-enhancments/terminal-workspace-tauri",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/cc-linux-enhancments/terminal-workspace-tauri/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-27"
+    },
+    {
+      "name": "content-creation/frontend-slides",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/frontend-slides",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-27"
+    },
+    {
+      "name": "notion-web-enhancer",
+      "root": "/media/endlessblink/data/my-projects/ai-development/extentions - addons - chrome + zen/notion-web-enhancer",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/extentions - addons - chrome + zen/notion-web-enhancer/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-27"
+    },
+    {
+      "name": "termfleet",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-30"
+    },
+    {
+      "name": "artcraft",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/tools/artcraft",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-30"
+    },
+    {
+      "name": "tools/video-use",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/tools/video-use",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-30"
+    },
+    {
+      "name": "libraries/video-use",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/libraries/video-use",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-30"
+    },
+    {
+      "name": "bina-meatzevet-courses-cloudflare-builds",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-cloudflare-builds",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-cloudflare-builds/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-05-31"
+    },
+    {
+      "name": "bina-meatzevet-courses-business-safe",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-business-safe",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-business-safe/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-06-01"
+    },
+    {
+      "name": "codex-desktop-linux",
+      "root": "/media/endlessblink/data/my-projects/ai-development/codex-desktop-linux",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-06-02"
+    },
+    {
+      "name": "claude-sure-skill",
+      "root": "/media/endlessblink/data/my-projects/ai-development/claude-sure-skill",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-06-06"
+    },
+    {
+      "name": "hermes-agent",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/hermes-agent",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/hermes-agent/MASTER_PLAN.md",
+      "modules": [],
+      "source": "manual",
+      "addedAt": "2026-06-15"
+    },
+    {
+      "name": "token-usage-optimization",
+      "root": "/media/endlessblink/data/my-projects/ai-development/cc-linux-enhancments/token-usage-optimization",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/cc-linux-enhancments/token-usage-optimization/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-06-16"
+    },
+    {
+      "name": "termfleet-wt-tc018",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-wt-tc018",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-wt-tc018/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-06-18"
+    },
+    {
+      "name": "termfleet-tasklist",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-tasklist",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-tasklist/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-06-19"
+    },
+    {
+      "name": "it-takes-resolve",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/it-takes-resolve",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-06-20"
+    },
+    {
+      "name": "bina-meatezvet-bot",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/bina-meatezvet-bot",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/bina-meatezvet-bot/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-06-23"
+    },
+    {
+      "name": "hermes",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-04"
+    },
+    {
+      "name": "designersai",
+      "root": "/media/endlessblink/data/my-projects/ai-development/misc/designersai",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-05"
+    },
+    {
+      "name": "flow-state/watchpost",
+      "root": "/media/endlessblink/data/my-projects/ai-development/productivity/flow-state/watchpost",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-06"
+    },
+    {
+      "name": "bina-live-landing",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-live-landing",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-live-landing/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-10"
+    },
+    {
+      "name": "hermes-agent-capabilities",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/hermes-agent-capabilities",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-13"
+    },
+    {
+      "name": "flowstate-reliability-worktree",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-reliability-worktree",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-reliability-worktree/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-15"
+    },
+    {
+      "name": "hermes-reliability-worktree",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/hermes-reliability-worktree",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-15"
+    },
+    {
+      "name": "flowstate-h0-provenance",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-h0-provenance",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-h0-provenance/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-15"
+    },
+    {
+      "name": "folder-first-mode",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/folder-first-mode",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-16"
+    },
+    {
+      "name": "folder-first-compatible",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/folder-first-compatible",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-16"
+    },
+    {
+      "name": "flowstate-canonical-404",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-canonical-404",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-canonical-404/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-16"
+    },
+    {
+      "name": "hermes-merge-20260717",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes-merge-20260717",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-16"
+    },
+    {
+      "name": "telegram-personal-assistant",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/telegram-personal-assistant",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-18"
+    },
+    {
+      "name": "live-compaction-confidence",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/live-compaction-confidence",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-19"
+    },
+    {
+      "name": "recreational",
+      "root": "/media/endlessblink/data/my-projects/ai-development/recreational",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-19"
+    },
+    {
+      "name": "repo",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/repo",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/repo/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-21"
+    },
+    {
+      "name": "flowstate-duration-current",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-duration-current",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-duration-current/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-23"
+    },
+    {
+      "name": "exercise-library",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/exercise-library",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-25"
+    },
+    {
+      "name": "jellyfin-worker",
+      "root": "/media/endlessblink/data/my-projects/ai-development/recreational/jellyfin-worker",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-27"
+    },
+    {
+      "name": "hermes-browser-extension",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/hermes-browser-extension",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-07-27"
+    },
+    {
+      "name": "pronto",
+      "root": "/media/endlessblink/data/my-projects/ai-development/productivity/pronto",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/productivity/pronto/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-02"
+    },
+    {
+      "name": "bina-meatzevet-courses-prod-carousel",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-prod-carousel",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-prod-carousel/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-03"
+    },
+    {
+      "name": "bina-meatzevet-courses-prod-carousel2",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-prod-carousel2",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-prod-carousel2/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-03"
+    },
+    {
+      "name": "personal-planning-agent",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/personal-planning-agent",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-04"
+    },
+    {
+      "name": "email-center-e2e-clean",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/email-center-e2e-clean",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/email-center-e2e-clean/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-08"
+    },
+    {
+      "name": "showtime-bot",
+      "root": "/media/endlessblink/data/my-projects/ai-development/recreational/showtime-bot",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-08"
+    },
+    {
+      "name": "placement-worktree",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/placement-worktree",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/placement-worktree/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-08"
+    },
+    {
+      "name": "bina-campaign-stage1",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-campaign-stage1",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-campaign-stage1/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-09"
+    },
+    {
+      "name": "bina-email-center",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-email-center",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-email-center/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-09"
+    },
+    {
+      "name": "resolve-align",
+      "root": "/media/endlessblink/data/my-projects/ai-development/app-plugins/resolve-align",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-10"
+    },
+    {
+      "name": "jobrunner",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/jobrunner",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-10"
+    },
+    {
+      "name": "lifeboat-live",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-live",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-live/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-11"
+    },
+    {
+      "name": "bots-directory",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots-directory",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-12"
+    },
+    {
+      "name": "bots+automation/bots-directory",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/bots-directory",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-12"
+    },
+    {
+      "name": "directive-validation-harness",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/directive-validation-harness",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-16"
+    },
+    {
+      "name": "bina-meatzevet-courses-vps-ci",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-vps-ci",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-vps-ci/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-16"
+    },
+    {
+      "name": "content-maker",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/content-maker",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/content-maker/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-16"
+    },
+    {
+      "name": "libraries/video-use",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/content-maker/libraries/video-use",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-16"
+    },
+    {
+      "name": "bina-release",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-release",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-release/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-17"
+    },
+    {
+      "name": "lifeboat-task-map-ui",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-task-map-ui",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-18"
+    },
+    {
+      "name": "lifeboat-emotional-candidate-capture",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-emotional-candidate-capture",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-18"
+    },
+    {
+      "name": "lifeboat-response-reviewer",
+      "root": "/media/endlessblink/data/my-projects/ai-development/lifeboat-response-reviewer",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-20"
+    },
+    {
+      "name": "directive-validation-harness.disabled-backup-20260820/directive-validation-harness",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/directive-validation-harness.disabled-backup-20260820/directive-validation-harness",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-20"
+    },
+    {
+      "name": "agent-ops",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/agent-ops",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/agent-ops/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-20"
+    },
+    {
+      "name": "hermes-upstream-botmode-20260822",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/update-safety-worktrees/hermes-upstream-botmode-20260822",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-22"
+    },
+    {
+      "name": "mixboard",
+      "root": "/media/endlessblink/data/my-projects/ai-development/misc/mixboard",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "name": "codex-live-boundary-final",
+      "root": "/media/endlessblink/data/my-projects/ai-development/productivity/codex-live-boundary-final",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/productivity/codex-live-boundary-final/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "name": "flowstate-canonical-404.git-cleaning-crew-quarantine-20260829",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-canonical-404.git-cleaning-crew-quarantine-20260829",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-canonical-404.git-cleaning-crew-quarantine-20260829/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-29"
+    },
+    {
+      "name": "flowstate-duration-current.git-cleaning-crew-quarantine-20260829",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-duration-current.git-cleaning-crew-quarantine-20260829",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-duration-current.git-cleaning-crew-quarantine-20260829/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-29"
+    },
+    {
+      "name": "flowstate-h0-provenance.git-cleaning-crew-quarantine-20260829",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-h0-provenance.git-cleaning-crew-quarantine-20260829",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-h0-provenance.git-cleaning-crew-quarantine-20260829/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-29"
+    },
+    {
+      "name": "flowstate-reliability-worktree.git-cleaning-crew-quarantine-20260829",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-reliability-worktree.git-cleaning-crew-quarantine-20260829",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-reliability-worktree.git-cleaning-crew-quarantine-20260829/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-08-29"
+    },
+    {
+      "name": "hermes-port-rtl",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/hermes-port-rtl",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-02"
+    },
+    {
+      "name": "hermes-upstream-main-20260903",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/update-safety-worktrees/hermes-upstream-main-20260903",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-03"
+    },
+    {
+      "name": "Happy",
+      "root": "/media/endlessblink/data/my-projects/ai-development/claude-code-tools/Happy",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-05"
+    },
+    {
+      "name": "pc-organization",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/pc-organization",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-05"
+    },
+    {
+      "name": "bots+automation",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-12"
+    },
+    {
+      "name": "content-creation",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-14"
+    },
+    {
+      "name": "04_סוכנים",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-management-vault/04_סוכנים",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-management-vault/04_סוכנים/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-17"
+    },
+    {
+      "name": "freelance-desk",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-22"
+    },
+    {
+      "name": "in-control-kernel",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/in-control-kernel",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-22"
+    },
+    {
+      "name": "shuffleboard",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-actual-courses/shuffleboard",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-22"
+    },
+    {
+      "name": "my-pc/pc-organization",
+      "root": "/media/endlessblink/data/my-projects/ai-development/my-pc/pc-organization",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-24"
+    },
+    {
+      "name": "freelance-desk/life-os",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/life-os",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/life-os/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-24"
+    },
+    {
+      "name": "freelance-desk/jobrunner",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/jobrunner",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-24"
+    },
+    {
+      "name": "freelance-desk-jobfinder-trial",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-jobfinder-trial",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-jobfinder-trial/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-09-28"
+    },
+    {
+      "name": "apps-and-tools/arthouse",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/arthouse",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/arthouse/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-01",
+      "archived": true
+    },
+    {
+      "name": "apps-and-tools/content-maker",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/content-maker",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/content-maker/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-01",
+      "archived": true
+    },
+    {
+      "name": "apps-and-tools/inner-dialouge",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/inner-dialouge",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/inner-dialouge/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-01",
+      "archived": true
+    },
+    {
+      "name": "apps-and-tools/rough-cut-mvp",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/rough-cut-mvp",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/rough-cut-mvp/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-01",
+      "archived": true
+    },
+    {
+      "name": "apps-and-tools/frontend-slides",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/frontend-slides",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-01"
+    },
+    {
+      "name": "apps-and-tools/it-takes-resolve",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/it-takes-resolve",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-01"
+    },
+    {
+      "name": "brainiac",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/brainiac",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/brainiac/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-02"
+    },
+    {
+      "name": "assembly-line",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-02"
+    },
+    {
+      "name": "termfleet-design-wt",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-design-wt",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-design-wt/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-02"
+    },
+    {
+      "name": "assembly-line-hardening-wt",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-hardening-wt",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-hardening-wt/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-02"
+    },
+    {
+      "name": "assembly-line-decider-wt",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-decider-wt",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-decider-wt/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-03"
+    },
+    {
+      "name": "assembly-line-nightly-wt",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-nightly-wt",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-nightly-wt/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-03"
+    },
+    {
+      "name": "assembly-line-lanes-wt",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-lanes-wt",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-lanes-wt/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-03"
+    },
+    {
+      "name": "assembly-line-gaps-wt",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-gaps-wt",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-gaps-wt/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-03"
+    },
+    {
+      "name": "claude-code/claude-sure-skill",
+      "root": "/media/endlessblink/data/my-projects/ai-development/claude-code/claude-sure-skill",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-04"
+    },
+    {
+      "name": "hermes/lifeboat-response-reviewer",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-response-reviewer",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-04"
+    },
+    {
+      "name": "onlyoffice-investigation/desktop-sdk",
+      "root": "/media/endlessblink/data/my-projects/ai-development/misc/onlyoffice-investigation/desktop-sdk",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-04"
+    },
+    {
+      "name": "onlyoffice-investigation/sdkjs",
+      "root": "/media/endlessblink/data/my-projects/ai-development/misc/onlyoffice-investigation/sdkjs",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-04"
+    },
+    {
+      "name": "rough-cut-release",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-release",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-release/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-06"
+    },
+    {
+      "name": "freelance-desk-pixel-fixes",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-pixel-fixes",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-pixel-fixes/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-06"
+    },
+    {
+      "name": "ai-development",
+      "root": "/media/endlessblink/data/my-projects/ai-development",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-06"
+    },
+    {
+      "name": "quick-capture",
+      "root": "/media/endlessblink/data/my-projects/ai-development/productivity/quick-capture",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-08"
+    },
+    {
+      "name": "screen-replacement",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/screen-replacement",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-10"
+    },
+    {
+      "name": "jr-base-0910",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/jr-base-0910",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-10"
+    },
+    {
+      "name": "paper-bot-wt-source-image",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot-wt-source-image",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot-wt-source-image/docs/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-10"
+    },
+    {
+      "name": "freelance-desk-wt-desc",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-wt-desc",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-wt-desc/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-11"
+    },
+    {
+      "name": "rc-readme-wt",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rc-readme-wt",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-11"
+    },
+    {
+      "name": "botson-xevents",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/botson-xevents",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/botson-xevents/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "name": "termfleet-unread",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-unread",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-unread/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "name": "termfleet-grill-me",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-grill-me",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-grill-me/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "name": "termfleet-close",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-close",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-close/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "name": "politic-fighter",
+      "root": "/media/endlessblink/data/my-projects/ai-development/game-dev/politic-fighter",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "name": "politic-fighter-title-sample",
+      "root": "/media/endlessblink/data/my-projects/ai-development/game-dev/politic-fighter-title-sample",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-21"
+    },
+    {
+      "name": "bina-ve-ze-free-skills",
+      "root": "/media/endlessblink/data/my-projects/ai-development/web-dev/bina-ve-ze-free-skills",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/web-dev/bina-ve-ze-free-skills/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-24"
+    },
+    {
+      "name": "animation-review",
+      "root": "/media/endlessblink/data/my-projects/ai-development/game-dev/politic-fighter/art/animation-review",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-24"
+    },
+    {
+      "name": "liberman-moves",
+      "root": "/media/endlessblink/data/my-projects/ai-development/game-dev/politic-fighter/art/liberman-moves",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-24"
+    },
+    {
+      "name": "fd-planfix-wt",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-planfix-wt",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-planfix-wt/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-24"
+    },
+    {
+      "name": "fd-planfix-wt/jobrunner",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-planfix-wt/jobrunner",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-24"
+    },
+    {
+      "name": "cac-weight-wt",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/cac-weight-wt",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/cac-weight-wt/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-24"
+    },
+    {
+      "name": "termcontrol",
+      "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet/termcontrol",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-25"
+    },
+    {
+      "name": "fd-fix2-wt",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-fix2-wt",
+      "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-fix2-wt/MASTER_PLAN.md",
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-26"
+    },
+    {
+      "name": "fd-fix2-wt/jobrunner",
+      "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-fix2-wt/jobrunner",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-10-26"
+    },
+    {
       "name": "imaginebox",
       "root": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox",
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md",
       "planCategory": "imagine-box",
+      "planDoor": true,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-11-02",
-      "planDoor": true
+      "addedAt": "2026-11-02"
     },
     {
       "name": "finetuned",
       "root": "/media/endlessblink/scratch/finetuned-quality-redesign-20261028",
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md",
       "planCategory": "finetuned",
+      "planDoor": true,
       "modules": [],
       "source": "owner-request",
-      "addedAt": "2026-11-04",
-      "planDoor": true
+      "addedAt": "2026-11-04"
+    },
+    {
+      "name": "rough-cut-ai-edit",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-ai-edit",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-11-02"
+    },
+    {
+      "name": "motion2mixamo",
+      "root": "/media/endlessblink/data/my-projects/ai-development/misc/motion2mixamo",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-11-02"
+    },
+    {
+      "name": "rough-cut-beta13",
+      "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-beta13",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-11-03"
+    },
+    {
+      "name": "mail-rathon",
+      "root": "/media/endlessblink/data/my-projects/ai-development/freelance/mail-rathon",
+      "masterPlan": null,
+      "modules": [],
+      "source": "auto-discovered",
+      "addedAt": "2026-11-05"
     }
   ]
 }

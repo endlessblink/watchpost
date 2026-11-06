@@ -1,9 +1,10 @@
 #!/bin/bash
 # Watchpost — Smart Launcher
-# Usage: watchpost [tui|dashboard|both|archive|status|stop]
+# Usage: watchpost [tui|dashboard|both|archive|status|stop|remote]
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 PORT="${PORT:-6010}"
+REMOTE_HTTPS_PORT="${WATCHPOST_REMOTE_PORT:-6010}"
 
 # ─── Colors & Styles ─────────────────────────────────────────────────────────
 RST='\033[0m'
@@ -172,6 +173,51 @@ stop_server() {
     return 1
   fi
   echo -e "  ${BYEL}■${RST} Dashboard stopped"
+}
+
+require_tailscale() {
+  if ! command -v tailscale >/dev/null 2>&1; then
+    echo -e "  ${BRED}✗${RST} Tailscale is not installed or is not in PATH"
+    return 1
+  fi
+}
+
+remote_enable() {
+  require_tailscale || return 1
+  is_server_running || start_server || return 1
+
+  tailscale serve --bg --https="${REMOTE_HTTPS_PORT}" "${PORT}"
+}
+
+remote_disable() {
+  require_tailscale || return 1
+
+  tailscale serve --https="${REMOTE_HTTPS_PORT}" off
+}
+
+remote_status() {
+  require_tailscale || return 1
+
+  tailscale serve status
+}
+
+remote_access() {
+  case "${1:-status}" in
+    enable|on|start)
+      remote_enable
+      ;;
+    disable|off|stop)
+      remote_disable
+      ;;
+    status)
+      remote_status
+      ;;
+    *)
+      echo -e "  ${BRED}Unknown remote command:${RST} $1"
+      echo -e "  Usage: ${BCYN}watchpost remote [enable|disable|status]${RST}"
+      return 1
+      ;;
+  esac
 }
 
 # ─── ASCII Logo ──────────────────────────────────────────────────────────────
@@ -435,6 +481,7 @@ show_help() {
   bline "  ${BCYN}status${RST}        Server info + task stats"
   bline "  ${BCYN}stop${RST}          Stop dashboard server"
   bline "  ${BCYN}restart${RST}       Stop then start the server"
+  bline "  ${BCYN}remote${RST}        Private Tailscale access controls"
   bline "  ${BCYN}install${RST}       Install/configure a project"
   bline "  ${BCYN}archive${RST}       Archive done tasks"
   bline "  ${BCYN}discover${RST}      Scan for new projects"
@@ -475,6 +522,10 @@ case "${1:-}" in
   restart)
     stop_server
     start_server || exit 1
+    ;;
+  remote)
+    shift
+    remote_access "$@"
     ;;
   archive)
     shift

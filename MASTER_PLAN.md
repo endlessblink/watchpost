@@ -14,13 +14,13 @@ These four tasks together close the "who's working on what right now?" gap in Wa
 
 ### Active Tasks
 
-| ID       | Title                                                                  | Priority | Status   | Dependencies |
-| -------- | ---------------------------------------------------------------------- | -------- | -------- | ------------ |
-| TASK-001 | API: Add `/api/dirty-attribution?cwd=` for git-vs-changelog join       | P0       | DONE     | -            |
-| TASK-002 | API: Add `/api/active-sessions?cwd=` for sub-15min session liveness    | P0       | DONE     | -            |
-| TASK-003 | API: Add `POST /api/sessions/heartbeat` + JSONL persistence            | P0       | DONE     | -            |
-| TASK-004 | Hooks: Wire SessionStart/Stop hooks to POST heartbeat from sessions    | P1       | DONE     | TASK-003     |
-| TASK-1771 | API: Daily-rotate heartbeats.jsonl into `data/heartbeats/YYYY-MM-DD.jsonl` | P2  | DONE     | TASK-003 |
+| ID        | Title                                                                      | Priority | Status | Dependencies |
+| --------- | -------------------------------------------------------------------------- | -------- | ------ | ------------ |
+| TASK-001  | API: Add `/api/dirty-attribution?cwd=` for git-vs-changelog join           | P0       | DONE   | -            |
+| TASK-002  | API: Add `/api/active-sessions?cwd=` for sub-15min session liveness        | P0       | DONE   | -            |
+| TASK-003  | API: Add `POST /api/sessions/heartbeat` + JSONL persistence                | P0       | DONE   | -            |
+| TASK-004  | Hooks: Wire SessionStart/Stop hooks to POST heartbeat from sessions        | P1       | DONE   | TASK-003     |
+| TASK-1771 | API: Daily-rotate heartbeats.jsonl into `data/heartbeats/YYYY-MM-DD.jsonl` | P2       | DONE   | TASK-003     |
 
 ---
 
@@ -28,9 +28,9 @@ These four tasks together close the "who's working on what right now?" gap in Wa
 
 ### Active Tasks
 
-| ID        | Title                                                                  | Priority | Status | Dependencies |
-| --------- | ---------------------------------------------------------------------- | -------- | ------ | ------------ |
-| TASK-1774 | Rotate & retire exposed Anytype + Notion API tokens (post-consolidation) | P2     | TODO   | -            |
+| ID        | Title                                                                    | Priority | Status | Dependencies |
+| --------- | ------------------------------------------------------------------------ | -------- | ------ | ------------ |
+| TASK-1774 | Rotate & retire exposed Anytype + Notion API tokens (post-consolidation) | P2       | TODO   | -            |
 
 ### TASK-1774: Rotate & retire exposed Anytype + Notion API tokens
 
@@ -213,9 +213,9 @@ TASK-003 shipped a single unbounded `data/heartbeats.jsonl`. With TASK-004's Ses
 
 ## Flow View Redesign
 
-| ID        | Title                                                                  | Priority | Status  | Dependencies |
-| --------- | ---------------------------------------------------------------------- | -------- | ------- | ------------ |
-| TASK-1772 | Flow: make active-instances per-lane sequence the default Flow view    | P2       | DONE        | -            |
+| ID        | Title                                                               | Priority | Status | Dependencies |
+| --------- | ------------------------------------------------------------------- | -------- | ------ | ------------ |
+| TASK-1772 | Flow: make active-instances per-lane sequence the default Flow view | P2       | DONE   | -            |
 
 ### TASK-1772: Flow: make active-instances per-lane sequence the default Flow view
 
@@ -223,7 +223,7 @@ TASK-003 shipped a single unbounded `data/heartbeats.jsonl`. With TASK-004's Ses
 
 #### Goal
 
-Make the delivery-lane / active-instances rendering (`renderDeliveryView()` in `flow/index.html`) the unconditional default for the Flow tab — including for projects whose MASTER_PLAN.md has no delivery lines, sprint framing, or derivable lines today. Currently the lane view is *already* the default for projects with lines (e.g. rough-cut), but Flow falls back to a dagre DAG ("streams" mode) when none parse.
+Make the delivery-lane / active-instances rendering (`renderDeliveryView()` in `flow/index.html`) the unconditional default for the Flow tab — including for projects whose MASTER*PLAN.md has no delivery lines, sprint framing, or derivable lines today. Currently the lane view is \_already* the default for projects with lines (e.g. rough-cut), but Flow falls back to a dagre DAG ("streams" mode) when none parse.
 
 #### Current state (verified by code map of `flow/index.html`)
 
@@ -246,6 +246,7 @@ Make the delivery-lane / active-instances rendering (`renderDeliveryView()` in `
 #### What "different from what we have" actually means
 
 Comparing the screenshot (rough-cut, delivery view) to a project without delivery lines:
+
 - Today: the screenshot view is rough-cut-only (it has explicit delivery lines in its MASTER_PLAN). Other projects render the dagre DAG by default.
 - Goal: the lane / active-instances rendering is the universal landing view, with the DAG retained as an optional drilldown rather than the no-lines fallback.
 
@@ -276,8 +277,8 @@ Comparing the screenshot (rough-cut, delivery view) to a project without deliver
 
 ## Project Discovery
 
-| ID        | Title                                                              | Priority | Status         | Dependencies |
-| --------- | ------------------------------------------------------------------ | -------- | -------------- | ------------ |
+| ID            | Title                                                          | Priority | Status               | Dependencies |
+| ------------- | -------------------------------------------------------------- | -------- | -------------------- | ------------ |
 | ~~TASK-1773~~ | ✅ Auto-discover projects from Claude Code session transcripts | P1       | ✅ DONE (2026-05-09) | -            |
 
 ### ~~TASK-1773~~: Auto-discover projects from Claude Code session transcripts (✅ DONE)
@@ -287,6 +288,7 @@ Comparing the screenshot (rough-cut, delivery view) to a project without deliver
 #### Problem
 
 Watchpost only learned about projects via two paths:
+
 1. Bulk seed from `data/outlook.json` (`server.js:122-178`) — but `outlook.json` is written by an external producer that doesn't enumerate every project on disk. `rough-cut-mvp` (156KB MASTER_PLAN.md, active git repo, daily Claude sessions) was missing from its payload, so it stayed invisible.
 2. On-demand `findProjectForCwd()` (`server.js:243-310`) — only fires when an API request arrives with `?cwd=…` inside the project. Projects never queried that way stayed invisible forever.
 
@@ -303,6 +305,7 @@ Added `discoverFromClaudeTranscripts()` to `server.js`:
 - Source per machine: transcripts are local, so no `mapPathToCurrentOS()` needed for the discovered cwd itself, but stored existing-project paths are still mapped before comparison.
 
 Wiring:
+
 - Runs once at server startup (gated `if (require.main === module)` so tests can require `server.js` without listening).
 - New endpoints: `POST /api/discover/refresh`, `GET /api/discover/status`.
 - `server.js` now exports `{ discoverFromClaudeTranscripts, getRegisteredProjects, findProjectForCwd }`.
@@ -327,23 +330,23 @@ Wiring:
 
 These entries were moved from `flow-state/docs/MASTER_PLAN.md` so Watchpost work is tracked in the Watchpost repo. Source IDs and completion statuses are preserved.
 
-| ID             | Title                                                        | Priority | Status  |
-| -------------- | ------------------------------------------------------------ | -------- | ------- |
-| ~~TASK-1770~~  | Watchpost VPS Server monitoring panel                        | P2       | DONE    |
-| ~~TASK-1755~~  | Watchpost Control Room UI redesign + smart project switcher  | P2       | DONE    |
-| ~~TASK-1751~~  | AI cover generation improvements + cover gallery            | P3       | DONE    |
-| ~~TASK-1754~~  | Drag-to-reorder projects in Control Room                     | P3       | DONE    |
-| ~~TASK-1745~~  | Restore BUG-1716 parser fix — #### headers + column-order    | P1       | DONE    |
-| ~~TASK-1746~~  | Add Changelog/Logs tab to Watchpost dashboard                | P2       | DONE    |
-| ~~TASK-1747~~  | Watchpost cover art API integration                          | P3       | DONE    |
-| ~~TASK-1748~~  | Watchpost project detail panel — summary + cover upload      | P2       | DONE    |
-| ~~TASK-1749~~  | Mark TASK-303 orchestrator section as archived               | P3       | DONE    |
-| ~~TASK-1752~~  | Control Room activity views + combinable filters             | P2       | DONE    |
-| ~~TASK-1750~~  | Create favicon for Watchpost dashboard                       | P3       | DONE    |
-| ~~TASK-1483~~  | Redesign Watchpost Dashboard UI                              | P2       | DONE    |
-| ~~BUG-1716~~   | Watchpost parser shows priority as workspace task title      | P1       | DONE    |
-| ~~BUG-1113~~   | Stale worktrees not cleaned up                               | P0       | DONE    |
-| TASK-1462      | Watchpost TUI — Multi-Project Support                        | P2       | PLANNED |
+| ID            | Title                                                       | Priority | Status  |
+| ------------- | ----------------------------------------------------------- | -------- | ------- |
+| ~~TASK-1770~~ | Watchpost VPS Server monitoring panel                       | P2       | DONE    |
+| ~~TASK-1755~~ | Watchpost Control Room UI redesign + smart project switcher | P2       | DONE    |
+| ~~TASK-1751~~ | AI cover generation improvements + cover gallery            | P3       | DONE    |
+| ~~TASK-1754~~ | Drag-to-reorder projects in Control Room                    | P3       | DONE    |
+| ~~TASK-1745~~ | Restore BUG-1716 parser fix — #### headers + column-order   | P1       | DONE    |
+| ~~TASK-1746~~ | Add Changelog/Logs tab to Watchpost dashboard               | P2       | DONE    |
+| ~~TASK-1747~~ | Watchpost cover art API integration                         | P3       | DONE    |
+| ~~TASK-1748~~ | Watchpost project detail panel — summary + cover upload     | P2       | DONE    |
+| ~~TASK-1749~~ | Mark TASK-303 orchestrator section as archived              | P3       | DONE    |
+| ~~TASK-1752~~ | Control Room activity views + combinable filters            | P2       | DONE    |
+| ~~TASK-1750~~ | Create favicon for Watchpost dashboard                      | P3       | DONE    |
+| ~~TASK-1483~~ | Redesign Watchpost Dashboard UI                             | P2       | DONE    |
+| ~~BUG-1716~~  | Watchpost parser shows priority as workspace task title     | P1       | DONE    |
+| ~~BUG-1113~~  | Stale worktrees not cleaned up                              | P0       | DONE    |
+| TASK-1462     | Watchpost TUI — Multi-Project Support                       | P2       | PLANNED |
 
 ### ~~TASK-1770~~: Watchpost VPS Server monitoring panel
 
@@ -634,6 +637,6 @@ Make `watchpost tui` work with any project that has a `MASTER_PLAN.md` by parsin
 
 ## Foundation (DONE / Pre-existing)
 
-| ID           | Title                                              | Priority | Status |
-| ------------ | -------------------------------------------------- | -------- | ------ |
-| ~~TASK-000~~ | Initial import from flow-state subtree             | P0       | DONE   |
+| ID           | Title                                  | Priority | Status |
+| ------------ | -------------------------------------- | -------- | ------ |
+| ~~TASK-000~~ | Initial import from flow-state subtree | P0       | DONE   |
