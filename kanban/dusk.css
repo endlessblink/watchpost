@@ -74,7 +74,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-
 .collapse-toggle:hover{background:var(--card);color:var(--text)}
 .column-content{display:flex;flex-direction:column;gap:8px;min-height:44px}
 .column-content.collapsed{display:none}
-.column-content.drag-over{background:var(--accent-soft);border-radius:14px;outline:2px dashed var(--accent);outline-offset:-2px}
+.column-content.drag-over{background:var(--accent-soft);border-radius:14px;outline:1.5px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:2px;transition:background .15s}
 .empty-state{border:1px dashed var(--line);border-radius:12px;padding:20px 12px;display:grid;justify-items:center;gap:8px;color:var(--text-3);font-size:13px}
 .empty-state .inline-icon{width:20px;height:20px;opacity:.7}
 .done-column-hidden{display:none}
@@ -90,7 +90,8 @@ svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-
 /* cards: title first, icons only where they say something */
 .task-card{background:var(--card);border-radius:var(--r-card);padding:12px 14px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 2px rgba(0,0,0,.25),0 6px 12px -8px rgba(0,0,0,.45);position:relative;cursor:pointer;transition:background .15s,transform .15s}
 .task-card:hover{background:var(--card-2)}
-.task-card.dragging{opacity:.45;transform:rotate(1.5deg)}
+.task-card.dragging{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line);cursor:grabbing}
+.task-card.dragging>*{opacity:.18}
 .task-card.filter-hidden{display:none}
 .task-card.search-highlight{box-shadow:0 0 0 2px var(--accent)}
 .task-title{font-weight:500;font-size:14.5px;line-height:1.35;text-wrap:pretty;overflow-wrap:anywhere;padding-right:4px}
@@ -193,3 +194,8 @@ svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-
 .task-sub{font-size:12.5px;line-height:1.4;color:var(--text-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty}
 .task-progress{margin-top:4px}
 .task-id{display:none}
+
+/* drag picture: off-screen copy used only as the drag image */
+.drag-ghost{position:fixed;top:-9999px;left:-9999px;padding:18px;pointer-events:none}
+.drag-ghost-card{background:var(--card-2);transform:rotate(2deg);box-shadow:0 18px 32px -10px rgba(0,0,0,.7),0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent);opacity:1;cursor:grabbing}
+.drag-ghost-card .task-copy-btn{display:none}

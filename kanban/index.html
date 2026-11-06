@@ -15,11 +15,12 @@
 
 <body>
   <div class="container">
-    <div class="nav-tabs"><button class="nav-tab active" data-view="kanban" tabindex="-1" aria-hidden="true"></button></div>
     <div class="main-content">
       <div class="header">
         <h1 id="view-title">Board</h1>
         <div class="header-actions">
+          <button class="nav-tab active" data-view="kanban">Board</button>
+          <button class="nav-tab" data-view="archive">Archive</button>
           <div class="search-container" id="search-box">
             <span class="search-icon" onclick="document.getElementById('search-input').focus()"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></span>
             <input type="text" id="search-input" class="search-input" placeholder="Search tasks" aria-label="Search tasks" oninput="handleSearch(this.value)">
@@ -1181,7 +1182,7 @@
               lane: task.lane || '',
               managedPlan: task.managed_plan || false,
               archivedAt: task.archived_at || null,
-              notes: task.archive_reason || '',
+              notes: String(task.archive_reason || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])),
               section: 'activeWork',
               description: '',
               subtasks: [],
@@ -3215,28 +3216,58 @@
 
       cards.forEach(card => {
         card.addEventListener('dragstart', (e) => {
-          card.classList.add('dragging');
-          e.dataTransfer.setData('text/plain', card.querySelector('.task-id')?.textContent || '');
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', card.getAttribute('data-id') || '');
+
+          // Drag picture: a dedicated copy at full strength with room for its shadow,
+          // not the browser's snapshot of the (already faded) source card.
+          const rect = card.getBoundingClientRect();
+          const pad = 18;
+          const ghost = document.createElement('div');
+          ghost.className = 'drag-ghost';
+          ghost.style.width = rect.width + pad * 2 + 'px';
+          const copy = card.cloneNode(true);
+          copy.classList.remove('dragging');
+          copy.classList.add('drag-ghost-card');
+          ghost.appendChild(copy);
+          document.body.appendChild(ghost);
+          e.dataTransfer.setDragImage(ghost, e.clientX - rect.left + pad, e.clientY - rect.top + pad);
+          setTimeout(() => ghost.remove(), 0);
+
+          // Fade the source only after the picture has been taken.
+          requestAnimationFrame(() => card.classList.add('dragging'));
+          document.body.classList.add('is-dragging');
         });
 
         card.addEventListener('dragend', () => {
           card.classList.remove('dragging');
-          columns.forEach(col => col.classList.remove('drag-over'));
+          document.body.classList.remove('is-dragging');
+          columns.forEach(col => { col.classList.remove('drag-over'); col._dragDepth = 0; });
         });
       });
 
       columns.forEach(column => {
-        column.addEventListener('dragover', (e) => {
+        column._dragDepth = 0;
+        column.addEventListener('dragenter', (e) => {
           e.preventDefault();
+          column._dragDepth++;
           column.classList.add('drag-over');
         });
 
+        column.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+        });
+
         column.addEventListener('dragleave', () => {
-          column.classList.remove('drag-over');
+          // dragleave also fires when the pointer moves onto a child, so count enters and leaves.
+          column._dragDepth = Math.max(0, column._dragDepth - 1);
+          if (column._dragDepth === 0) column.classList.remove('drag-over');
         });
 
         column.addEventListener('drop', async (e) => {
           e.preventDefault();
+          column._dragDepth = 0;
           column.classList.remove('drag-over');
 
           const card = document.querySelector('.dragging');
