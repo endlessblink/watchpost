@@ -16,7 +16,7 @@ body{overflow:auto}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* layout */
-.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(480px,100%),1fr));gap:16px;padding:6px 24px 56px;max-width:1480px;align-items:stretch}
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(480px,100%),1fr));gap:16px;padding:6px 24px 56px;align-items:stretch}
 .stack{display:flex;flex-direction:column;gap:16px;min-width:0}
 .stack .pane{flex:1}
 .pane{background:var(--surface);border-radius:var(--r-col);padding:18px 20px;display:flex;flex-direction:column;gap:14px;min-width:0}

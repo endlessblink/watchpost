@@ -40,7 +40,6 @@
             <button class="tab projects" data-panel="projects" title="Projects" aria-label="Projects"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg></span><span class="label">Projects</span></button>
             <button class="tab kanban active" data-panel="kanban" title="Board" aria-label="Board"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/></svg></span><span class="label">Board</span></button>
             <button class="tab flow" data-panel="flow" title="Flow" aria-label="Flow"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M18 11.5c0 4-12 1-12 4"/></svg></span><span class="label">Flow</span></button>
-            <button class="tab changelog" data-panel="changelog" title="Agent log" aria-label="Agent log"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h11a2 2 0 012 2v11a3 3 0 01-3 3H7a3 3 0 01-3-3V7"/><path d="M4 7a3 3 0 013-3M9 9h7M9 13h7"/></svg></span><span class="label">Agent log</span></button>
             <button class="tab docs" data-panel="docs" title="Docs" aria-label="Docs"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h11"/></svg></span><span class="label">Docs</span></button>
             <button class="tab skills" data-panel="skills" title="Skills" aria-label="Skills"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span><span class="label">Skills</span></button>
             <button class="tab stats" data-panel="stats" title="Stats" aria-label="Stats"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-8M12 20V4M19 20v-5"/></svg></span><span class="label">Stats</span></button>
@@ -116,10 +115,6 @@
         <div id="health" class="panel">
             <!-- Lazy load: src set on first tab activation -->
             <iframe data-src="health/index.html" title="Health Dashboard"></iframe>
-        </div>
-        <div id="changelog" class="panel">
-            <!-- Lazy load: src set on first tab activation -->
-            <iframe data-src="changelog/index.html" title="Agent Changelog"></iframe>
         </div>
         <div id="vps" class="panel">
             <!-- Lazy load: src set on first tab activation -->

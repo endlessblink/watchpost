@@ -1449,8 +1449,12 @@ function markSkillTried(rawName, source = 'manual') {
 
 // GET /api/skills - Dynamically scan .claude/skills/ directory
 app.get('/api/skills', (req, res) => {
-    const masterPlanPath = process.env.MASTER_PLAN_PATH || '';
-    const projectRoot = masterPlanPath ? getProjectRoot(masterPlanPath) : path.join(__dirname, '..');
+    // Same resolver as every other route: which project does this request mean?
+    const selectedProject = projectForRequest(req);
+    const masterPlanPath = resolvePlanForRequest(req) || '';
+    const projectRoot = selectedProject?.root || (masterPlanPath ? getProjectRoot(masterPlanPath) : path.join(__dirname, '..'));
+    // "This project" = the project's own skills; "Every project" = also the global ones.
+    const skillScope = req.query.scope === 'all-projects' ? 'all-projects' : 'active-project';
 
     try {
         const nodes = [];
@@ -1481,6 +1485,7 @@ app.get('/api/skills', (req, res) => {
         const seenRoots = new Set();
         const skillEntries = [];
         for (const skillRoot of skillRoots) {
+            if (skillScope === 'active-project' && !skillRoot.source.startsWith('project')) continue;
             try {
                 if (!fs.existsSync(skillRoot.root)) continue;
                 const realRoot = fs.realpathSync.native(path.resolve(skillRoot.root));
@@ -1567,6 +1572,8 @@ app.get('/api/skills', (req, res) => {
         const uniqueCategories = [...new Set(nodes.map(n => n.category))];
         const stats = {
             totalSkills: nodes.length,
+            scope: skillScope,
+            projectName: selectedProject?.name || '',
             totalCommands: 0,
             categories: uniqueCategories,
             sources: [...new Set(nodes.map(node => node.source))].sort(),

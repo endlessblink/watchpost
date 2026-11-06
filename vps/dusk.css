@@ -31,14 +31,15 @@ svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ── error banner ── */
-.error-banner{display:none;align-items:center;gap:10px;margin:0 24px 14px;padding:10px 16px;border-radius:var(--r-card);background:rgba(217,178,111,.08);color:var(--act);font-size:13.5px;max-width:1180px}
+.error-banner{display:none;align-items:center;gap:10px;margin:0 24px 14px;padding:10px 16px;border-radius:var(--r-card);background:rgba(217,178,111,.08);color:var(--act);font-size:13.5px}
 .error-banner.visible{display:flex}
 .error-banner svg{width:16px;height:16px;flex:0 0 auto}
 
 /* ── panels ── */
 .tab-panel{display:none;padding:8px 24px 56px}
 .tab-panel.active{display:block}
-.service-grid,.health-layout{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:16px;max-width:1180px;align-items:start}
+.service-grid,.health-layout{columns:380px;column-gap:16px;width:100%}
+.service-grid>*,.health-layout>*{break-inside:avoid;display:block;margin:0 0 16px}
 .pane,.category-section{background:var(--surface);border-radius:18px;padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .pane h3,.category-header{margin:0 0 4px;padding:2px 4px;font-size:13px;font-weight:600;color:var(--text-2);display:flex;align-items:center;gap:8px}
 .category-icon{display:inline-flex;color:var(--text-3)}
@@ -140,3 +141,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-
   .pane,.category-section{padding:14px 10px 12px}
   .svc-row{gap:10px;padding:8px 6px 8px 8px}
 }
+/* groups may split across columns (rows stay whole), so columns fill evenly with no gaps */
+.service-grid>.category-section,.health-layout>*{break-inside:auto;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.category-header{break-after:avoid}
+.service-card{break-inside:avoid}

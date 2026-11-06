@@ -371,6 +371,15 @@
             });
         }
 
+        function emptyInventoryText() {
+            const mine = rawData.stats?.scope === 'active-project';
+            if (mine && !(rawData.stats?.totalSkills > 0)) {
+                const who = rawData.stats?.projectName ? escapeHtml(rawData.stats.projectName) : 'This project';
+                return `${who} has no skills of its own. Use the layers button to see every project's skills.`;
+            }
+            return 'No skills match the current filters.';
+        }
+
         function renderInventory() {
             const rows = filteredLogicalSkills();
             const tbody = document.getElementById('inventoryRows');
@@ -381,7 +390,7 @@
                     <td class="sk-flags">${inventoryFlags(skill)}</td>
                     <td class="sk-use ${skill.usage > 0 ? 'on' : ''}" aria-label="${skill.usage} uses">${skill.usage}</td>
                 </tr>
-            `).join('') || '<tr><td colspan="4"><div class="empty">No skills match the current filters.</div></td></tr>';
+            `).join('') || `<tr><td colspan="4"><div class="empty">${emptyInventoryText()}</div></td></tr>`;
 
             tbody.querySelectorAll('tr[data-skill]').forEach(row => {
                 row.addEventListener('click', () => selectSkill(row.dataset.skill));

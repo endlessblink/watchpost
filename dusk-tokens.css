@@ -17,3 +17,8 @@ a{color:inherit;text-decoration:none}
 svg.ic,.ic{width:18px;height:18px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 *:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* Shared fluid layout: items flow into as many columns as fit, balanced by height,
+   so groups of different sizes leave no dead space and nothing is capped to a fixed width. */
+.fluid-columns{columns:360px;column-gap:16px;width:100%}
+.fluid-columns>*{break-inside:avoid;display:block;margin:0 0 16px}

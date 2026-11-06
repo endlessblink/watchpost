@@ -8,7 +8,7 @@ body{overflow:auto}
 .page{display:flex;flex-direction:column;min-height:100vh}
 
 /* toolbar */
-.bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:14px 24px;max-width:1080px;width:100%}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:14px 24px;width:100%}
 .bar h1{margin:0 8px 0 0;font-size:19px;font-weight:600;letter-spacing:-.01em}
 .grow{flex:1}
 .views{display:flex;gap:2px;padding:3px;border-radius:12px;background:var(--surface);margin-right:6px}
@@ -26,7 +26,7 @@ body{overflow:auto}
 .btn-primary:hover{filter:brightness(1.06)}
 .btn:disabled{background:var(--card-2);color:var(--text-2);cursor:progress}
 
-.wrap{padding:6px 24px 64px;max-width:1080px;width:100%;display:flex;flex-direction:column;gap:22px}
+.wrap{padding:6px 24px 64px;width:100%;display:flex;flex-direction:column;gap:22px}
 
 /* summary: score ring + one calm sentence */
 .status-banner{display:flex;align-items:center;gap:18px;background:var(--surface);border-radius:18px;padding:16px 20px}
@@ -101,3 +101,20 @@ body{overflow:auto}
   .score-circle{width:56px;height:56px;flex-basis:56px}
   .metric-card{column-gap:12px}
 }
+
+/* why this score */
+.score-why{margin-top:10px;color:var(--text-2);font-size:13.5px}
+.score-why[hidden]{display:none}
+.score-why summary{cursor:pointer;color:var(--accent);font-weight:500;list-style:none;display:inline-flex;align-items:center;gap:6px}
+.score-why summary::-webkit-details-marker{display:none}
+.score-why summary::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px;transition:transform .2s}
+.score-why[open] summary::after{transform:rotate(-135deg);margin-top:3px}
+.why-note{margin:10px 0 6px;color:var(--text-3)}
+.why-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.why-list li{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:baseline;padding:7px 10px;border-radius:10px}
+.why-list li:nth-child(odd){background:rgba(255,255,255,.03)}
+.why-list li.off{opacity:.6}
+.why-name{color:var(--text);font-weight:500}
+.why-detail{color:var(--text-2)}
+.why-pts{text-align:right;font-family:var(--f-mono);color:var(--text)}
+@media (max-width:760px){.why-list li{grid-template-columns:1fr auto}.why-detail{grid-column:1/-1;order:3}}

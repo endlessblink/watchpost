@@ -57,6 +57,11 @@
                     </div>
                     <div class="status-subtitle" id="statusSubtitle">Click Scan to check system health</div>
                     <div class="last-scan" id="lastScan"></div>
+                    <details class="score-why" id="scoreWhy" hidden>
+                        <summary><span id="whySummary">Why this score?</span></summary>
+                        <div class="why-note" id="whyNote"></div>
+                        <ul class="why-list" id="whyList"></ul>
+                    </details>
                 </div>
             </section>
 
@@ -364,6 +369,25 @@
             }
         }
 
+        // Explain the number: every check, its weight, and how many points it gave.
+        function renderWhy(health) {
+            const box = document.getElementById('scoreWhy');
+            if (!health || !Array.isArray(health.explain)) { box.hidden = true; return; }
+            box.hidden = false;
+            const left = health.explain.filter(r => !r.measured);
+            document.getElementById('whySummary').textContent =
+                `Why ${health.score}? Based on ${health.measuredChecks} of ${health.totalChecks} checks`;
+            document.getElementById('whyNote').textContent = left.length
+                ? `Not measured, so left out: ${left.map(r => r.label.toLowerCase()).join(', ')}. The score covers only what could be checked.`
+                : 'Every check was measured. Each check scores 0 to 100 and counts by its weight.';
+            document.getElementById('whyList').innerHTML = health.explain.map(r => `
+                <li class="${r.measured ? '' : 'off'}">
+                    <span class="why-name">${escapeHtml(r.label)}</span>
+                    <span class="why-detail">${escapeHtml(r.note)}</span>
+                    <span class="why-pts">${r.measured ? `${r.points} of ${r.weight}` : 'left out'}</span>
+                </li>`).join('');
+        }
+
         function renderResults(data) {
             if (!data) return;
 
@@ -392,6 +416,8 @@
                     'Critical issues found';
             document.getElementById('statusTitle').textContent = statusText;
             document.getElementById('statusSubtitle').textContent = `Scan completed in ${data.duration ?? 'unknown '}ms`;
+
+            renderWhy(data.health);
 
             // Update last scan time
             if (data.timestamp) {

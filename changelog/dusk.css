@@ -75,7 +75,7 @@ strong{font-weight:600;color:var(--text)}
 .timeline-container{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:4px 24px 64px;scrollbar-width:thin;scrollbar-color:var(--card) transparent}
 .timeline-container::-webkit-scrollbar,.detail-panel::-webkit-scrollbar{width:8px}
 .timeline-container::-webkit-scrollbar-thumb,.detail-panel::-webkit-scrollbar-thumb{background:var(--card);border-radius:8px}
-#timeline-content{max-width:980px}
+#timeline-content{width:100%}
 
 /* session group: quiet sticky label, no rules or caps */
 .session-group{margin-bottom:18px}

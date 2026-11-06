@@ -448,24 +448,63 @@ function calculateHealthScore(results) {
     };
 
     const scores = {
-        typescript: results.typescript?.count === 0 ? 100 : Math.max(0, 100 - results.typescript.count * 5),
+        typescript: results.typescript?.count === 0 ? 100 : Math.max(0, 100 - (results.typescript?.count || 0) * 5),
         eslint: Math.max(0, 100 - (results.eslint?.errors || 0) * 10 - (results.eslint?.warnings || 0) * 2),
         deadCode: Math.max(0, 100 - (results.deadCode?.files || 0) * 5),
         coverage: results.coverage?.coverage || 0,
-        bundleSize: results.bundleSize?.totalMB < 1.5 ? 100 : Math.max(0, 100 - (results.bundleSize.totalMB - 1.5) * 50),
+        bundleSize: (results.bundleSize?.totalMB ?? 0) < 1.5 ? 100 : Math.max(0, 100 - (results.bundleSize.totalMB - 1.5) * 50),
         audit: results.audit?.total === 0 ? 100 : Math.max(0, 100 - (results.audit?.critical || 0) * 30 - (results.audit?.high || 0) * 15),
         outdated: Math.max(0, 100 - (results.outdated?.count || 0) * 3)
     };
 
-    let totalScore = 0;
-    for (const [key, weight] of Object.entries(WEIGHTS)) {
-        totalScore += (scores[key] || 0) * weight;
-    }
+    // Plain-language reasons, so the number can always be explained.
+    const measured = {
+        typescript: results.typescript?.count !== undefined,
+        eslint: results.eslint?.errors !== undefined || results.eslint?.warnings !== undefined,
+        deadCode: results.deadCode?.files !== undefined,
+        coverage: typeof results.coverage?.coverage === 'number',
+        bundleSize: typeof results.bundleSize?.totalMB === 'number',
+        audit: results.audit?.total !== undefined,
+        outdated: results.outdated?.count !== undefined
+    };
+    const notes = {
+        typescript: measured.typescript ? (results.typescript.count === 0 ? 'No type errors.' : `${results.typescript.count} type errors, 5 points off each.`) : 'Not measured.',
+        eslint: measured.eslint ? `${results.eslint?.errors || 0} errors (10 off each) and ${results.eslint?.warnings || 0} warnings (2 off each).` : 'Not measured.',
+        deadCode: measured.deadCode ? `${results.deadCode.files} unused files, 5 points off each.` : 'Not measured.',
+        coverage: measured.coverage ? `${results.coverage.coverage}% of the code is covered by tests.` : 'No coverage report found, so it counts as 0.',
+        bundleSize: measured.bundleSize ? `${results.bundleSize.totalMB} MB; full marks under 1.5 MB.` : 'No build size found.',
+        audit: measured.audit ? `${results.audit?.critical || 0} critical and ${results.audit?.high || 0} high security issues.` : 'Not measured.',
+        outdated: measured.outdated ? `${results.outdated.count} outdated packages, 3 points off each.` : 'Not measured.'
+    };
+    const labels = { typescript: 'Type errors', eslint: 'Lint issues', deadCode: 'Dead code', coverage: 'Test coverage', bundleSize: 'Bundle size', audit: 'Security', outdated: 'Outdated packages' };
+    // Only checks that were actually measured count; their weights are rescaled to 100%.
+    // A missing tool (for example no coverage report) is left out, never scored as zero.
+    const measuredKeys = Object.keys(WEIGHTS).filter(key => measured[key]);
+    const measuredWeight = measuredKeys.reduce((sum, key) => sum + WEIGHTS[key], 0);
+    const totalScore = measuredWeight
+        ? measuredKeys.reduce((sum, key) => sum + (scores[key] || 0) * WEIGHTS[key], 0) / measuredWeight
+        : 0;
+
+    const explain = Object.keys(WEIGHTS).map(key => {
+        const weightShare = measured[key] && measuredWeight ? WEIGHTS[key] / measuredWeight : 0;
+        return {
+            key,
+            label: labels[key],
+            weight: Math.round(weightShare * 100),
+            score: measured[key] ? Math.round(scores[key] || 0) : null,
+            points: Math.round((measured[key] ? (scores[key] || 0) * weightShare : 0) * 10) / 10,
+            measured: measured[key],
+            note: measured[key] ? notes[key] : 'Not measured, so it is left out of the score.'
+        };
+    });
 
     return {
         score: Math.round(totalScore),
         grade: totalScore >= 90 ? 'A' : totalScore >= 80 ? 'B' : totalScore >= 60 ? 'C' : totalScore >= 40 ? 'D' : 'E',
-        breakdown: scores
+        breakdown: scores,
+        measuredChecks: measuredKeys.length,
+        totalChecks: Object.keys(WEIGHTS).length,
+        explain
     };
 }
 
