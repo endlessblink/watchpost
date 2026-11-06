@@ -11,18 +11,22 @@ function createPlanDoorEngine(project, run = execFileSync) {
     const state = JSON.parse(run('/usr/bin/python3', [path.join(root, 'tools/plan_tracker.py'), 'list'], { cwd: root, encoding: 'utf8', timeout: 10000, maxBuffer: 8 * 1024 * 1024 }));
     const all = Object.entries(state.tasks).map(([id, task]) => ({ id, title: task.title, priority: task.priority, status: statusMap[task.status], original_status: task.status, lane: task.category, deps: task.dependencies, evidence: state.evidence[id] || null, revision: state.revision, managed_plan: true }));
     const tasks = all.filter(task => task.lane === project.planCategory);
+    // Watchpost archives completed presentation records without modifying the
+    // evidence-gated tracker. Canonical records still satisfy dependencies.
+    const active = tasks.filter(task => task.status !== 'done');
+    const archived = tasks.filter(task => task.status === 'done');
     const done = new Set(all.filter(task => task.status === 'done').map(task => task.id));
     const ready = task => task.deps.every(dep => done.has(dep));
     const reject = () => { throw new Error(gateMessage); };
     return {
         managedPlan: true,
-        getTasks: filters => tasks.filter(task => (!filters?.status || task.status === filters.status) && (!filters?.priority || task.priority === filters.priority)),
+        getTasks: filters => (filters?.archivedOnly ? archived : filters?.includeArchived ? tasks : active).filter(task => (!filters?.status || task.status === filters.status) && (!filters?.priority || task.priority === filters.priority)),
         getTask: id => tasks.find(task => task.id === id) || null,
-        getReady: () => tasks.filter(task => task.status !== 'done' && ready(task)),
+        getReady: () => active.filter(task => task.status === 'planned' && ready(task)),
         getBlocked: () => tasks.filter(task => task.status !== 'done' && !ready(task)),
         getGraph: () => ({ nodes: tasks, links: tasks.flatMap(task => task.deps.map(dep => ({ source: dep, target: task.id }))) }),
-        getStats: () => ({ total: tasks.length, byStatus: counts(tasks, 'status'), byPriority: counts(tasks, 'priority') }),
-        projectStats: () => ({ total: tasks.length, done: tasks.filter(t => t.status === 'done').length, inProgress: tasks.filter(t => t.status === 'in_progress').length, planned: tasks.filter(t => t.status === 'planned').length, paused: 0, review: tasks.filter(t => t.status === 'review').length }),
+        getStats: () => ({ total: active.length, archived: archived.length, byStatus: counts(active, 'status'), byPriority: counts(active, 'priority') }),
+        projectStats: () => ({ total: active.length, done: 0, archived: archived.length, inProgress: active.filter(t => t.status === 'in_progress').length, planned: active.filter(t => t.status === 'planned').length, paused: 0, review: active.filter(t => t.status === 'review').length }),
         updateStatus: reject, writeBackStatus: reject, addDep: reject, removeDep: reject, addComment: reject,
         syncFromMarkdown: () => tasks.length,
         closeDb: () => {},

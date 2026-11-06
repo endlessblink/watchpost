@@ -1,0 +1,2269 @@
+{
+  "auditedAt": "2026-11-06",
+  "state": "in_progress for overall Watchpost goal; parent owns application and final browser verification",
+  "taskCount": 45,
+  "classificationCounts": {
+    "superseded": 3,
+    "declared_done_unverified": 21,
+    "unfinished": 15,
+    "needs_verification": 4,
+    "verified_done": 2
+  },
+  "tasks": [
+    {
+      "project": "watchpost",
+      "id": "BUG-1113",
+      "title": "Stale Worktrees Not Cleaned Up - Forces Claude Code Context Bloat",
+      "currentStatus": "done",
+      "classification": "superseded",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.462Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:348: | ~~BUG-1113~~  | Stale worktrees not cleaned up                              | P0       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:587: ### ~~BUG-1113~~: Stale Worktrees Not Cleaned Up - Forces Claude Code Context Bloat",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:601-603: likely resolved or superseded by orchestrator removal"
+      ],
+      "rationale": "Detail line603 says likely resolved or superseded by orchestrator removal. Current source no longer establishes an active orchestrator cleanup obligation; do not claim the requested cleanup behavior was implemented.",
+      "nextAction": "Keep archived as superseded historical orchestrator scope; preserve original status and explanation.",
+      "sourceOccurrences": [
+        {
+          "line": 348,
+          "text": "| ~~BUG-1113~~  | Stale worktrees not cleaned up                              | P0       | DONE    |"
+        },
+        {
+          "line": 587,
+          "text": "### ~~BUG-1113~~: Stale Worktrees Not Cleaned Up - Forces Claude Code Context Bloat"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "BUG-1716",
+      "title": "Watchpost parser shows \"P1\" as title for workspace tasks",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.464Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:339: | ~~TASK-1745~~ | Restore BUG-1716 parser fix — #### headers + column-order   | P1       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:347: | ~~BUG-1716~~  | Watchpost parser shows priority as workspace task title     | P1       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:431: ### ~~TASK-1745~~: Restore BUG-1716 parser fix — #### headers + column-order",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:437: BUG-1716 fix was marked DONE but lost when Watchpost files reverted to pre-edit state. Needed to re-apply parser fixes."
+      ],
+      "rationale": "BUG-1716: Watchpost parser shows \"P1\" as title for workspace tasks. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 339,
+          "text": "| ~~TASK-1745~~ | Restore BUG-1716 parser fix — #### headers + column-order   | P1       | DONE    |"
+        },
+        {
+          "line": 347,
+          "text": "| ~~BUG-1716~~  | Watchpost parser shows priority as workspace task title     | P1       | DONE    |"
+        },
+        {
+          "line": 431,
+          "text": "### ~~TASK-1745~~: Restore BUG-1716 parser fix — #### headers + column-order"
+        },
+        {
+          "line": 437,
+          "text": "BUG-1716 fix was marked DONE but lost when Watchpost files reverted to pre-edit state. Needed to re-apply parser fixes."
+        },
+        {
+          "line": 573,
+          "text": "### ~~BUG-1716~~: Watchpost parser shows \"P1\" as title for workspace tasks"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-000",
+      "title": "Initial import from flow-state subtree",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.467Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:642: | ~~TASK-000~~ | Initial import from flow-state subtree | P0       | DONE   |"
+      ],
+      "rationale": "TASK-000: Initial import from flow-state subtree. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 642,
+          "text": "| ~~TASK-000~~ | Initial import from flow-state subtree | P0       | DONE   |"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-001",
+      "title": "API: Add `/api/dirty-attribution?cwd=` for git-vs-changelog join",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.385Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:19: | TASK-001  | API: Add `/api/dirty-attribution?cwd=` for git-vs-changelog join           | P0       | DONE   | -            |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:67: ### TASK-001: API: Add `/api/dirty-attribution?cwd=` for git-vs-changelog join",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:112: - `~/.watchpost/controlroom/api.js` — handler next to TASK-001's.",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:257: - Audit `deriveLineStates()` to confirm its data sources (`activeLocks`, `activityEntries`) are wired to the same feeds as `/api/active-sessions` and `/api/dirty-attribution` (TASK-001/002/003), so liveness signals stay consistent across the dashboard. If they diverge, file a follow-up rather than rewiring inside this task."
+      ],
+      "rationale": "TASK-001: API: Add `/api/dirty-attribution?cwd=` for git-vs-changelog join. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 19,
+          "text": "| TASK-001  | API: Add `/api/dirty-attribution?cwd=` for git-vs-changelog join           | P0       | DONE   | -            |"
+        },
+        {
+          "line": 67,
+          "text": "### TASK-001: API: Add `/api/dirty-attribution?cwd=` for git-vs-changelog join"
+        },
+        {
+          "line": 112,
+          "text": "- `~/.watchpost/controlroom/api.js` — handler next to TASK-001's."
+        },
+        {
+          "line": 257,
+          "text": "- Audit `deriveLineStates()` to confirm its data sources (`activeLocks`, `activityEntries`) are wired to the same feeds as `/api/active-sessions` and `/api/dirty-attribution` (TASK-001/002/003), so liveness signals stay consistent across the dashboard. If they diverge, file a follow-up rather than rewiring inside this task."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-002",
+      "title": "API: Add `/api/active-sessions?cwd=` for sub-15min session liveness",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.387Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:20: | TASK-002  | API: Add `/api/active-sessions?cwd=` for sub-15min session liveness        | P0       | DONE   | -            |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:95: ### TASK-002: API: Add `/api/active-sessions?cwd=` for sub-15min session liveness",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:133: - `/api/active-sessions` (TASK-002) reads from this map merged with the changelog-derived liveness.",
+        "commit d383e2406a82b8e197f9863d2c83e7cd02bb5453 2026-04-27 wip(TASK-002): save session liveness progress",
+        "2026-11-06 GET localhost:6010/api/active-sessions?cwd=watchpost returned session records; supports endpoint existence, not complete liveness semantics"
+      ],
+      "rationale": "TASK-002: API: Add `/api/active-sessions?cwd=` for sub-15min session liveness. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 20,
+          "text": "| TASK-002  | API: Add `/api/active-sessions?cwd=` for sub-15min session liveness        | P0       | DONE   | -            |"
+        },
+        {
+          "line": 95,
+          "text": "### TASK-002: API: Add `/api/active-sessions?cwd=` for sub-15min session liveness"
+        },
+        {
+          "line": 133,
+          "text": "- `/api/active-sessions` (TASK-002) reads from this map merged with the changelog-derived liveness."
+        }
+      ],
+      "commitSubjects": [
+        "d383e2406a82b8e197f9863d2c83e7cd02bb5453 2026-04-27 wip(TASK-002): save session liveness progress"
+      ],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-003",
+      "title": "API: Add `POST /api/sessions/heartbeat` + JSONL persistence",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.389Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:21: | TASK-003  | API: Add `POST /api/sessions/heartbeat` + JSONL persistence                | P0       | DONE   | -            |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:22: | TASK-004  | Hooks: Wire SessionStart/Stop hooks to POST heartbeat from sessions        | P1       | DONE   | TASK-003     |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:23: | TASK-1771 | API: Daily-rotate heartbeats.jsonl into `data/heartbeats/YYYY-MM-DD.jsonl` | P2       | DONE   | TASK-003     |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:108: - Optionally merge with the heartbeat layer from TASK-003 (so a session that hasn't made a tool call but is still alive shows up).",
+        "commit af3547ac9cd98238115aa74f297caf0ca5f0d7ad 2026-04-27 feat(TASK-003): add POST /api/sessions/heartbeat with JSONL persistence"
+      ],
+      "rationale": "TASK-003: API: Add `POST /api/sessions/heartbeat` + JSONL persistence. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 21,
+          "text": "| TASK-003  | API: Add `POST /api/sessions/heartbeat` + JSONL persistence                | P0       | DONE   | -            |"
+        },
+        {
+          "line": 22,
+          "text": "| TASK-004  | Hooks: Wire SessionStart/Stop hooks to POST heartbeat from sessions        | P1       | DONE   | TASK-003     |"
+        },
+        {
+          "line": 23,
+          "text": "| TASK-1771 | API: Daily-rotate heartbeats.jsonl into `data/heartbeats/YYYY-MM-DD.jsonl` | P2       | DONE   | TASK-003     |"
+        },
+        {
+          "line": 108,
+          "text": "- Optionally merge with the heartbeat layer from TASK-003 (so a session that hasn't made a tool call but is still alive shows up)."
+        },
+        {
+          "line": 121,
+          "text": "### TASK-003: API: Add `POST /api/sessions/heartbeat` + JSONL persistence"
+        },
+        {
+          "line": 157,
+          "text": "**Depends on:** TASK-003"
+        },
+        {
+          "line": 187,
+          "text": "**Depends on:** TASK-003"
+        },
+        {
+          "line": 191,
+          "text": "TASK-003 shipped a single unbounded `data/heartbeats.jsonl`. With TASK-004's SessionStart+Stop hooks now active and PostToolUse expansion possible, the file grows linearly with session count. Boot replay scans the whole file every time. Spec called this out under \"Side effects to watch\" but deferred to a follow-up."
+        }
+      ],
+      "commitSubjects": [
+        "af3547ac9cd98238115aa74f297caf0ca5f0d7ad 2026-04-27 feat(TASK-003): add POST /api/sessions/heartbeat with JSONL persistence"
+      ],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-004",
+      "title": "Hooks: Wire SessionStart/Stop hooks to POST heartbeat from sessions",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.392Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:22: | TASK-004  | Hooks: Wire SessionStart/Stop hooks to POST heartbeat from sessions        | P1       | DONE   | TASK-003     |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:153: ### TASK-004: Hooks: Wire SessionStart/Stop hooks to POST heartbeat from sessions",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:191: TASK-003 shipped a single unbounded `data/heartbeats.jsonl`. With TASK-004's SessionStart+Stop hooks now active and PostToolUse expansion possible, the file grows linearly with session count. Boot replay scans the whole file every time. Spec called this out under \"Side effects to watch\" but deferred to a follow-up.",
+        "commit 956312093037b4a5c80136ff572457953f0878b8 2026-04-27 chore(TASK-004): mark hooks task done"
+      ],
+      "rationale": "TASK-004: Hooks: Wire SessionStart/Stop hooks to POST heartbeat from sessions. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 22,
+          "text": "| TASK-004  | Hooks: Wire SessionStart/Stop hooks to POST heartbeat from sessions        | P1       | DONE   | TASK-003     |"
+        },
+        {
+          "line": 153,
+          "text": "### TASK-004: Hooks: Wire SessionStart/Stop hooks to POST heartbeat from sessions"
+        },
+        {
+          "line": 191,
+          "text": "TASK-003 shipped a single unbounded `data/heartbeats.jsonl`. With TASK-004's SessionStart+Stop hooks now active and PostToolUse expansion possible, the file grows linearly with session count. Boot replay scans the whole file every time. Spec called this out under \"Side effects to watch\" but deferred to a follow-up."
+        }
+      ],
+      "commitSubjects": [
+        "956312093037b4a5c80136ff572457953f0878b8 2026-04-27 chore(TASK-004): mark hooks task done"
+      ],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1462",
+      "title": "Watchpost TUI — Multi-Project Support",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:349: | TASK-1462     | Watchpost TUI — Multi-Project Support                       | P2       | PLANNED |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:611: ### TASK-1462: Watchpost TUI — Multi-Project Support",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/watchpost:92,125: WATCHPOST_CWD launch/export",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/tui/src/lib/masterplan-parser.js:289: MAESTRO_CWD read",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/tui/src/lib/bd-client.js:100: MAESTRO_CWD read"
+      ],
+      "rationale": "Direct Markdown TUI parser exists, but source reads MAESTRO_CWD while current Watchpost launcher exports WATCHPOST_CWD. Multi-project launch propagation is not proved, and the task remains actionable.",
+      "nextAction": "Verify a private noninteractive TUI read for two non-FlowState projects; resolve launch environment mismatch without activating another user project.",
+      "sourceOccurrences": [
+        {
+          "line": 349,
+          "text": "| TASK-1462     | Watchpost TUI — Multi-Project Support                       | P2       | PLANNED |"
+        },
+        {
+          "line": 611,
+          "text": "### TASK-1462: Watchpost TUI — Multi-Project Support"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1483",
+      "title": "Redesign Watchpost Dashboard UI",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.469Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:346: | ~~TASK-1483~~ | Redesign Watchpost Dashboard UI                             | P2       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:563: ### ~~TASK-1483~~: Redesign Watchpost Dashboard UI"
+      ],
+      "rationale": "TASK-1483: Redesign Watchpost Dashboard UI. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 346,
+          "text": "| ~~TASK-1483~~ | Redesign Watchpost Dashboard UI                             | P2       | DONE    |"
+        },
+        {
+          "line": 563,
+          "text": "### ~~TASK-1483~~: Redesign Watchpost Dashboard UI"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1745",
+      "title": "Restore BUG-1716 parser fix — #### headers + column-order",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.472Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:339: | ~~TASK-1745~~ | Restore BUG-1716 parser fix — #### headers + column-order   | P1       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:431: ### ~~TASK-1745~~: Restore BUG-1716 parser fix — #### headers + column-order"
+      ],
+      "rationale": "TASK-1745: Restore BUG-1716 parser fix — #### headers + column-order. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 339,
+          "text": "| ~~TASK-1745~~ | Restore BUG-1716 parser fix — #### headers + column-order   | P1       | DONE    |"
+        },
+        {
+          "line": 431,
+          "text": "### ~~TASK-1745~~: Restore BUG-1716 parser fix — #### headers + column-order"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1746",
+      "title": "Add Changelog/Logs tab to Watchpost dashboard",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.474Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:340: | ~~TASK-1746~~ | Add Changelog/Logs tab to Watchpost dashboard               | P2       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:452: ### ~~TASK-1746~~: Add Changelog/Logs tab to Watchpost dashboard"
+      ],
+      "rationale": "TASK-1746: Add Changelog/Logs tab to Watchpost dashboard. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 340,
+          "text": "| ~~TASK-1746~~ | Add Changelog/Logs tab to Watchpost dashboard               | P2       | DONE    |"
+        },
+        {
+          "line": 452,
+          "text": "### ~~TASK-1746~~: Add Changelog/Logs tab to Watchpost dashboard"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1747",
+      "title": "Watchpost cover art API integration",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.476Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:341: | ~~TASK-1747~~ | Watchpost cover art API integration                         | P3       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:471: ### ~~TASK-1747~~: Watchpost cover art API integration"
+      ],
+      "rationale": "TASK-1747: Watchpost cover art API integration. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 341,
+          "text": "| ~~TASK-1747~~ | Watchpost cover art API integration                         | P3       | DONE    |"
+        },
+        {
+          "line": 471,
+          "text": "### ~~TASK-1747~~: Watchpost cover art API integration"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1748",
+      "title": "Watchpost project detail panel — summary + cover upload",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.479Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:342: | ~~TASK-1748~~ | Watchpost project detail panel — summary + cover upload     | P2       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:490: ### ~~TASK-1748~~: Watchpost project detail panel — summary + cover upload"
+      ],
+      "rationale": "TASK-1748: Watchpost project detail panel — summary + cover upload. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 342,
+          "text": "| ~~TASK-1748~~ | Watchpost project detail panel — summary + cover upload     | P2       | DONE    |"
+        },
+        {
+          "line": 490,
+          "text": "### ~~TASK-1748~~: Watchpost project detail panel — summary + cover upload"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1749",
+      "title": "Mark TASK-303 orchestrator section as archived in MASTER_PLAN",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.481Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:343: | ~~TASK-1749~~ | Mark TASK-303 orchestrator section as archived              | P3       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:508: ### ~~TASK-1749~~: Mark TASK-303 orchestrator section as archived in MASTER_PLAN"
+      ],
+      "rationale": "TASK-1749: Mark TASK-303 orchestrator section as archived in MASTER_PLAN. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 343,
+          "text": "| ~~TASK-1749~~ | Mark TASK-303 orchestrator section as archived              | P3       | DONE    |"
+        },
+        {
+          "line": 508,
+          "text": "### ~~TASK-1749~~: Mark TASK-303 orchestrator section as archived in MASTER_PLAN"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1750",
+      "title": "Create favicon for Watchpost dashboard",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.483Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:345: | ~~TASK-1750~~ | Create favicon for Watchpost dashboard                      | P3       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:544: ### ~~TASK-1750~~: Create favicon for Watchpost dashboard"
+      ],
+      "rationale": "TASK-1750: Create favicon for Watchpost dashboard. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 345,
+          "text": "| ~~TASK-1750~~ | Create favicon for Watchpost dashboard                      | P3       | DONE    |"
+        },
+        {
+          "line": 544,
+          "text": "### ~~TASK-1750~~: Create favicon for Watchpost dashboard"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1751",
+      "title": "AI cover generation improvements + cover gallery",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.485Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:337: | ~~TASK-1751~~ | AI cover generation improvements + cover gallery            | P3       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:397: ### ~~TASK-1751~~: AI cover generation improvements + cover gallery",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:403: The source FlowState plan used duplicate `TASK-1755` IDs for this and the Control Room redesign. Assigned `TASK-1751` here so the migrated task keeps a valid unique task ID."
+      ],
+      "rationale": "TASK-1751: AI cover generation improvements + cover gallery. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 337,
+          "text": "| ~~TASK-1751~~ | AI cover generation improvements + cover gallery            | P3       | DONE    |"
+        },
+        {
+          "line": 397,
+          "text": "### ~~TASK-1751~~: AI cover generation improvements + cover gallery"
+        },
+        {
+          "line": 403,
+          "text": "The source FlowState plan used duplicate `TASK-1755` IDs for this and the Control Room redesign. Assigned `TASK-1751` here so the migrated task keeps a valid unique task ID."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1752",
+      "title": "Control Room — Activity-based project views + combinable filters",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.487Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:344: | ~~TASK-1752~~ | Control Room activity views + combinable filters            | P2       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:526: ### ~~TASK-1752~~: Control Room — Activity-based project views + combinable filters"
+      ],
+      "rationale": "TASK-1752: Control Room — Activity-based project views + combinable filters. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 344,
+          "text": "| ~~TASK-1752~~ | Control Room activity views + combinable filters            | P2       | DONE    |"
+        },
+        {
+          "line": 526,
+          "text": "### ~~TASK-1752~~: Control Room — Activity-based project views + combinable filters"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1754",
+      "title": "Drag-to-reorder projects in Control Room",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.489Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:338: | ~~TASK-1754~~ | Drag-to-reorder projects in Control Room                    | P3       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:416: ### ~~TASK-1754~~: Drag-to-reorder projects in Control Room",
+        "commit 6402822d66af24a1fe262b497259ff7a3caeea0e 2026-04-05 feat: drag-to-reorder projects in Control Room (TASK-1754)"
+      ],
+      "rationale": "TASK-1754: Drag-to-reorder projects in Control Room. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 338,
+          "text": "| ~~TASK-1754~~ | Drag-to-reorder projects in Control Room                    | P3       | DONE    |"
+        },
+        {
+          "line": 416,
+          "text": "### ~~TASK-1754~~: Drag-to-reorder projects in Control Room"
+        }
+      ],
+      "commitSubjects": [
+        "6402822d66af24a1fe262b497259ff7a3caeea0e 2026-04-05 feat: drag-to-reorder projects in Control Room (TASK-1754)"
+      ],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1755",
+      "title": "Watchpost Control Room UI redesign + smart project switcher",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.492Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:336: | ~~TASK-1755~~ | Watchpost Control Room UI redesign + smart project switcher | P2       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:380: ### ~~TASK-1755~~: Watchpost Control Room UI redesign + smart project switcher",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:403: The source FlowState plan used duplicate `TASK-1755` IDs for this and the Control Room redesign. Assigned `TASK-1751` here so the migrated task keeps a valid unique task ID."
+      ],
+      "rationale": "TASK-1755: Watchpost Control Room UI redesign + smart project switcher. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 336,
+          "text": "| ~~TASK-1755~~ | Watchpost Control Room UI redesign + smart project switcher | P2       | DONE    |"
+        },
+        {
+          "line": 380,
+          "text": "### ~~TASK-1755~~: Watchpost Control Room UI redesign + smart project switcher"
+        },
+        {
+          "line": 403,
+          "text": "The source FlowState plan used duplicate `TASK-1755` IDs for this and the Control Room redesign. Assigned `TASK-1751` here so the migrated task keeps a valid unique task ID."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1770",
+      "title": "Watchpost VPS Server monitoring panel",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.494Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:335: | ~~TASK-1770~~ | Watchpost VPS Server monitoring panel                       | P2       | DONE    |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:351: ### ~~TASK-1770~~: Watchpost VPS Server monitoring panel"
+      ],
+      "rationale": "TASK-1770: Watchpost VPS Server monitoring panel. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 335,
+          "text": "| ~~TASK-1770~~ | Watchpost VPS Server monitoring panel                       | P2       | DONE    |"
+        },
+        {
+          "line": 351,
+          "text": "### ~~TASK-1770~~: Watchpost VPS Server monitoring panel"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1771",
+      "title": "API: Daily-rotate heartbeats.jsonl into `data/heartbeats/YYYY-MM-DD.jsonl`",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.394Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:23: | TASK-1771 | API: Daily-rotate heartbeats.jsonl into `data/heartbeats/YYYY-MM-DD.jsonl` | P2       | DONE   | TASK-003     |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:183: ### TASK-1771: API: Daily-rotate heartbeats.jsonl into `data/heartbeats/YYYY-MM-DD.jsonl`",
+        "commit 90fe58725b519ab7c4e20c665bbf8e8437e21c53 2026-04-27 chore(TASK-1771): flip status to DONE",
+        "commit 84f1606ddf9a5b79cd39f738fd28f92c5b1dec42 2026-04-27 feat(TASK-1771): rotate heartbeats.jsonl into daily date-stamped files"
+      ],
+      "rationale": "TASK-1771: API: Daily-rotate heartbeats.jsonl into `data/heartbeats/YYYY-MM-DD.jsonl`. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 23,
+          "text": "| TASK-1771 | API: Daily-rotate heartbeats.jsonl into `data/heartbeats/YYYY-MM-DD.jsonl` | P2       | DONE   | TASK-003     |"
+        },
+        {
+          "line": 183,
+          "text": "### TASK-1771: API: Daily-rotate heartbeats.jsonl into `data/heartbeats/YYYY-MM-DD.jsonl`"
+        }
+      ],
+      "commitSubjects": [
+        "90fe58725b519ab7c4e20c665bbf8e8437e21c53 2026-04-27 chore(TASK-1771): flip status to DONE",
+        "84f1606ddf9a5b79cd39f738fd28f92c5b1dec42 2026-04-27 feat(TASK-1771): rotate heartbeats.jsonl into daily date-stamped files"
+      ],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1772",
+      "title": "Flow: make active-instances per-lane sequence the default Flow view",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.397Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:218: | TASK-1772 | Flow: make active-instances per-lane sequence the default Flow view | P2       | DONE   | -            |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:220: ### TASK-1772: Flow: make active-instances per-lane sequence the default Flow view"
+      ],
+      "rationale": "TASK-1772: Flow: make active-instances per-lane sequence the default Flow view. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 218,
+          "text": "| TASK-1772 | Flow: make active-instances per-lane sequence the default Flow view | P2       | DONE   | -            |"
+        },
+        {
+          "line": 220,
+          "text": "### TASK-1772: Flow: make active-instances per-lane sequence the default Flow view"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1773",
+      "title": "Auto-discover projects from Claude Code session transcripts",
+      "currentStatus": "done",
+      "classification": "declared_done_unverified",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.496Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:282: | ~~TASK-1773~~ | ✅ Auto-discover projects from Claude Code session transcripts | P1       | ✅ DONE (2026-05-09) | -            |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:284: ### ~~TASK-1773~~: Auto-discover projects from Claude Code session transcripts (✅ DONE)",
+        "commit 4d67a37c3d390e06618a24e11701d58da7044848 2026-05-09 feat(TASK-1773): auto-discover projects from Claude Code transcripts"
+      ],
+      "rationale": "TASK-1773: Auto-discover projects from Claude Code session transcripts. Source status is done; no independent full original acceptance was demonstrated by this inventory review.",
+      "nextAction": "Retain task-specific acceptance and history; archive declared completion without implying fresh runtime acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 282,
+          "text": "| ~~TASK-1773~~ | ✅ Auto-discover projects from Claude Code session transcripts | P1       | ✅ DONE (2026-05-09) | -            |"
+        },
+        {
+          "line": 284,
+          "text": "### ~~TASK-1773~~: Auto-discover projects from Claude Code session transcripts (✅ DONE)"
+        }
+      ],
+      "commitSubjects": [
+        "4d67a37c3d390e06618a24e11701d58da7044848 2026-05-09 feat(TASK-1773): auto-discover projects from Claude Code transcripts"
+      ],
+      "dependencies": []
+    },
+    {
+      "project": "watchpost",
+      "id": "TASK-1774",
+      "title": "Rotate & retire exposed Anytype + Notion API tokens",
+      "currentStatus": "planned",
+      "classification": "needs_verification",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:33: | TASK-1774 | Rotate & retire exposed Anytype + Notion API tokens (post-consolidation) | P2       | TODO   | -            |",
+        "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/MASTER_PLAN.md:35: ### TASK-1774: Rotate & retire exposed Anytype + Notion API tokens",
+        "commit a5f519d3ccefed7eff760159f0877b7cf0e1eb1a 2026-06-05 wip(TASK-1774): track Anytype/Notion token rotation as future task"
+      ],
+      "rationale": "The plan explicitly says exposed tokens were consolidated but not rotated. Current rotation requires provider-owner access and cannot be inferred from old config cleanup or source age.",
+      "nextAction": "Keep the exact rotation/retirement task; verify only provider-side revocation/rotation evidence through authorized access. Never inspect or copy secret values during board cleanup.",
+      "sourceOccurrences": [
+        {
+          "line": 33,
+          "text": "| TASK-1774 | Rotate & retire exposed Anytype + Notion API tokens (post-consolidation) | P2       | TODO   | -            |"
+        },
+        {
+          "line": 35,
+          "text": "### TASK-1774: Rotate & retire exposed Anytype + Notion API tokens"
+        }
+      ],
+      "commitSubjects": [
+        "a5f519d3ccefed7eff760159f0877b7cf0e1eb1a 2026-06-05 wip(TASK-1774): track Anytype/Notion token rotation as future task"
+      ],
+      "dependencies": []
+    },
+    {
+      "project": "Archive/master_plan_demo",
+      "id": "TASK-001",
+      "title": "Creating a todo app dashboard",
+      "currentStatus": "done",
+      "classification": "superseded",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.635Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/misc/Archive/master_plan_demo/MASTER_PLAN.md:17: - IDs are sequential (TASK-001, TASK-002...)",
+        "/media/endlessblink/data/my-projects/ai-development/misc/Archive/master_plan_demo/MASTER_PLAN.md:18: - Completed: ~~TASK-001~~ with strikethrough + DONE",
+        "/media/endlessblink/data/my-projects/ai-development/misc/Archive/master_plan_demo/MASTER_PLAN.md:25: | ~~**TASK-001**~~ | ~~**Creating a todo app dashboard**~~ | **P2** | DONE (2026-02-24) | - |"
+      ],
+      "rationale": "This is an archived task-system demonstration, not a live user delivery project. Both sample rows are already done and archived; retaining searchable history avoids polluting active work.",
+      "nextAction": "Keep project and sample tasks archived; no implementation, repository deletion or data cleanup is required.",
+      "sourceOccurrences": [
+        {
+          "line": 17,
+          "text": "- IDs are sequential (TASK-001, TASK-002...)"
+        },
+        {
+          "line": 18,
+          "text": "- Completed: ~~TASK-001~~ with strikethrough + DONE"
+        },
+        {
+          "line": 25,
+          "text": "| ~~**TASK-001**~~ | ~~**Creating a todo app dashboard**~~ | **P2** | DONE (2026-02-24) | - |"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "Archive/master_plan_demo",
+      "id": "TASK-003",
+      "title": "Create recurring tasks",
+      "currentStatus": "done",
+      "classification": "superseded",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": "2026-11-06T20:47:42.637Z",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/misc/Archive/master_plan_demo/MASTER_PLAN.md:26: | ~~**TASK-003**~~ | ~~**Create recurring tasks**~~ | **P2** | DONE (2026-02-24) | - |"
+      ],
+      "rationale": "This is an archived task-system demonstration, not a live user delivery project. Both sample rows are already done and archived; retaining searchable history avoids polluting active work.",
+      "nextAction": "Keep project and sample tasks archived; no implementation, repository deletion or data cleanup is required.",
+      "sourceOccurrences": [
+        {
+          "line": 26,
+          "text": "| ~~**TASK-003**~~ | ~~**Create recurring tasks**~~ | **P2** | DONE (2026-02-24) | - |"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": []
+    },
+    {
+      "project": "imaginebox",
+      "id": "INQUIRY-001",
+      "title": "Agree on shot and camera lifecycles",
+      "currentStatus": "done",
+      "classification": "verified_done",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:87: | INQUIRY-001 | Agree on shot and camera lifecycles | P1 | DONE | — | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:89: | FEATURE-003 | Create shots and attach camera sources | P1 | READY | INQUIRY-001 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:90: | BUG-004 | Synchronize current camera availability | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:91: | FEATURE-005 | Create, view and fly a camera reliably | P1 | IN PROGRESS | INQUIRY-001 | imagine-box |",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show INQUIRY-001: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "Completion is the bounded planning decision contract, distinct from product acceptance. Current managed authority retains owner acceptance and a matching actual plan readback artifact.",
+      "nextAction": "Retain completed planning decision and its deferred questions as historical prerequisites; do not infer product camera/workflow acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 87,
+          "text": "| INQUIRY-001 | Agree on shot and camera lifecycles | P1 | DONE | — | imagine-box |"
+        },
+        {
+          "line": 89,
+          "text": "| FEATURE-003 | Create shots and attach camera sources | P1 | READY | INQUIRY-001 | imagine-box |"
+        },
+        {
+          "line": 90,
+          "text": "| BUG-004 | Synchronize current camera availability | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |"
+        },
+        {
+          "line": 91,
+          "text": "| FEATURE-005 | Create, view and fly a camera reliably | P1 | IN PROGRESS | INQUIRY-001 | imagine-box |"
+        },
+        {
+          "line": 92,
+          "text": "| FEATURE-006 | Attach exact script passages to shots | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |"
+        },
+        {
+          "line": 93,
+          "text": "| FEATURE-007 | Assign characters by scene and shot | P2 | PLANNED | INQUIRY-001, FEATURE-003, INQUIRY-017 | imagine-box |"
+        },
+        {
+          "line": 97,
+          "text": "| INQUIRY-011 | Design the complete camera scene shot and script journey | P1 | DONE | INQUIRY-001 | imagine-box |"
+        },
+        {
+          "line": 103,
+          "text": "| INQUIRY-017 | Agree on scene character inheritance and shot exceptions | P2 | PLANNED | INQUIRY-001 | imagine-box |"
+        },
+        {
+          "line": 109,
+          "text": "### INQUIRY-001 — Agree on shot and camera lifecycles"
+        },
+        {
+          "line": 167,
+          "text": "or deletion lifecycle was inferred; INQUIRY-001 and FEATURE-003 remain unfinished and dependencies"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "DONE",
+      "evidenceContract": {
+        "revision": "3c09a8a8487f4f3beaf412fac6a15e3827a2c87f5ae2f6d5bf45a47bc42dd85d",
+        "checks": [
+          {
+            "command": "python3 tests/test_plan_tracker.py (17 tests)",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 tools/plan_tracker.py check (revision 23 matches)",
+            "exit_code": 0
+          }
+        ],
+        "live": {
+          "surface": "Actual project plan CLI core design read-back; not product runtime",
+          "artifact": "docs/plan-evidence/structural-design/core-readback.json",
+          "sha256": "e9f7d6935a7b730295e33b1f444281f7973678a582846d9ef8ad477bfe4cf9a5"
+        },
+        "task_contract_sha256": "ba8a4f3ac2069b39f69a6855ec3a7356ebb79971a1b4d6f8d92b1a0fa18d24a3",
+        "owner_acceptance": "Owner core lifecycle accepted in 13 explicit dropdown selections in this thread, followed by attached overnight instruction to implement the agreed model on 2026-11-05. Character inheritance explicitly deferred to INQUIRY-017; no product or unseen prototype acceptance claimed."
+      },
+      "artifactChecks": [
+        {
+          "path": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/docs/plan-evidence/structural-design/core-readback.json",
+          "exists": true,
+          "expectedSha256": "e9f7d6935a7b730295e33b1f444281f7973678a582846d9ef8ad477bfe4cf9a5",
+          "actualSha256": "e9f7d6935a7b730295e33b1f444281f7973678a582846d9ef8ad477bfe4cf9a5",
+          "matches": true
+        }
+      ],
+      "acceptance": "",
+      "requirements": [],
+      "detailsSha256": "f14ceb033eafb5eaa86d7f622d9eec814f1742b9219593590f54b3e9d4c9e8b7",
+      "detailsSummary": "Core lifecycle reviewed through 13 explicit owner dropdown answers and the owner's subsequent overnight instruction to implement the agreed model. Concrete relationships, transitions and preservation rules are recorded below and in [the structural design](docs/STRUCTURAL-WORKSPACE.md). This is acceptance of the recorded core behavior, not acceptance of an unbuilt product or unseen prototype.\n\nAgreement must cover:\n\n1. Creating an empty shot with no camera, script passage or character yet.\n2. Attaching/replacing/detaching a camera without changing the shot's identity, prompts, takes or order.\n3. Reusing a camera while composing different shots, including what is saved versus only previewed.\n4. Camera rename, movement, scene unlinking, object deletion, file reopening and undo/redo.\n5. Removi"
+    },
+    {
+      "project": "imaginebox",
+      "id": "TASK-002",
+      "title": "Keep project tasks and verification evidence organized",
+      "currentStatus": "review",
+      "classification": "needs_verification",
+      "recommendedStatus": "review",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:88: | TASK-002 | Keep project tasks and verification evidence organized | P1 | READY | — | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:125: ### TASK-002 — Keep project tasks and verification evidence organized",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show TASK-002: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "Managed READY maps to Watchpost REVIEW: built evidence is recorded, while actual owner acceptance required for DONE remains absent. Existing category and dependency scope is correct.",
+      "nextAction": "Keep review visible; obtain only the missing actual acceptance through the supported revision-checked plan door.",
+      "sourceOccurrences": [
+        {
+          "line": 88,
+          "text": "| TASK-002 | Keep project tasks and verification evidence organized | P1 | READY | — | imagine-box |"
+        },
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 125,
+          "text": "### TASK-002 — Keep project tasks and verification evidence organized"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "READY",
+      "evidenceContract": {
+        "revision": "aa19852ae7d801603967bcdc71f048759f9a74102ce2f1905687cd2d0531fb06",
+        "checks": [
+          {
+            "command": "python3 tests/test_plan_tracker.py (17 passing regression tests)",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 tools/verify_plan_live.py (14 actual commands plus exact backup recovery)",
+            "exit_code": 0
+          },
+          {
+            "command": "Watchpost native selector, category-scoped tasks, normal Kanban and Docs browser E2E, independent native-interface visual review and live read-back",
+            "exit_code": 0
+          }
+        ],
+        "live": {
+          "surface": "Actual project SQLite/CLI and normal Watchpost task and Docs APIs",
+          "artifact": "docs/plan-evidence/native-live-readback.json",
+          "sha256": "978c8d521e2db589ecdbca2cd3013152303f43d56a8b6a75225d2ad27b991bc9"
+        },
+        "supporting_artifacts": [
+          "docs/plan-evidence/cli-readback.json",
+          "docs/plan-evidence/watchpost-native-plan-e2e.json",
+          "docs/plan-evidence/native-visual-review.json"
+        ],
+        "task_contract_sha256": "d7ed0d46afd85011d7783a792993a97b611c65530c966f4b2fdf87e245171462"
+      },
+      "artifactChecks": [
+        {
+          "path": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/docs/plan-evidence/native-live-readback.json",
+          "exists": true,
+          "expectedSha256": "978c8d521e2db589ecdbca2cd3013152303f43d56a8b6a75225d2ad27b991bc9",
+          "actualSha256": "978c8d521e2db589ecdbca2cd3013152303f43d56a8b6a75225d2ad27b991bc9",
+          "matches": true
+        }
+      ],
+      "acceptance": "",
+      "requirements": [
+        "R-23906",
+        "R-23907",
+        "R-23880",
+        "R-23881",
+        "R-23883"
+      ],
+      "detailsSha256": "3bf1cefab1cef10c25e60cfa787b7db0583e00829f0e50f4e8c7e3a79a878e48",
+      "detailsSummary": "**Accepted interface requirement:** Owner feedback R-23906/R-23907 rejects standalone table pages. Finetuned and ImagineBox use Watchpost's normal project selector, task/Kanban and master-plan/Docs interface, with category-scoped canonical SQLite data. Native browser and independent visual checks now pass. Earlier standalone screenshots and receipts are historical superseded evidence, not owner acceptance. Owner trial remains pending.\n\nAuthority: `.plan/plan.sqlite3`, with this complete generated Markdown view. Product/film storage is separate. Owner requirements R-23880/R-23881: use SQLite for agent-readable tasks and the discussed checks; R-23883: separate Finetuned and ImagineBox categories.\n\nImplemented: SQLite task/category/dependency queries, complete generated Markdown, explicit rev"
+    },
+    {
+      "project": "imaginebox",
+      "id": "FEATURE-003",
+      "title": "Create shots and attach camera sources",
+      "currentStatus": "review",
+      "classification": "needs_verification",
+      "recommendedStatus": "review",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:89: | FEATURE-003 | Create shots and attach camera sources | P1 | READY | INQUIRY-001 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:90: | BUG-004 | Synchronize current camera availability | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:92: | FEATURE-006 | Attach exact script passages to shots | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:93: | FEATURE-007 | Assign characters by scene and shot | P2 | PLANNED | INQUIRY-001, FEATURE-003, INQUIRY-017 | imagine-box |",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show FEATURE-003: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "Managed READY maps to Watchpost REVIEW: built evidence is recorded, while actual owner acceptance required for DONE remains absent. Existing category and dependency scope is correct.",
+      "nextAction": "Keep review visible; obtain only the missing actual acceptance through the supported revision-checked plan door.",
+      "sourceOccurrences": [
+        {
+          "line": 89,
+          "text": "| FEATURE-003 | Create shots and attach camera sources | P1 | READY | INQUIRY-001 | imagine-box |"
+        },
+        {
+          "line": 90,
+          "text": "| BUG-004 | Synchronize current camera availability | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |"
+        },
+        {
+          "line": 92,
+          "text": "| FEATURE-006 | Attach exact script passages to shots | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |"
+        },
+        {
+          "line": 93,
+          "text": "| FEATURE-007 | Assign characters by scene and shot | P2 | PLANNED | INQUIRY-001, FEATURE-003, INQUIRY-017 | imagine-box |"
+        },
+        {
+          "line": 94,
+          "text": "| TASK-008 | Reconcile Finetuned's existing shots without loss | P1 | PLANNED | FEATURE-003, BUG-004 | finetuned |"
+        },
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 99,
+          "text": "| FEATURE-013 | Show Blender cameras above shots grouped by scene | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-004, BUG-012 | imagine-box |"
+        },
+        {
+          "line": 100,
+          "text": "| FEATURE-014 | Open delete and recover shots and scenes | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-012 | imagine-box |"
+        },
+        {
+          "line": 101,
+          "text": "| FEATURE-015 | Assign cameras to selected shots from the context menu | P1 | PLANNED | INQUIRY-011, FEATURE-003, FEATURE-013 | imagine-box |"
+        },
+        {
+          "line": 167,
+          "text": "or deletion lifecycle was inferred; INQUIRY-001 and FEATURE-003 remain unfinished and dependencies"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "INQUIRY-001"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "READY",
+      "evidenceContract": {
+        "revision": "3808208b571a5e06cd8b4e74b5a80eca29f85b3a805d5109b9447e04fba3c188",
+        "checks": [
+          {
+            "command": "python3 -m unittest test_story_validation test_story_store test_story_api test_story_structure test_camera_identity test_story_camera_bridge test_native_story_guards test_build_release",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 tests/test_plan_tracker.py",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 -m py_compile source/film.py source/story_store.py source/story_api.py source/camera_identity.py source/film_server.py source/addon.py source/build_release.py tools/plan_tracker.py tools/verify_packaged_story_blender.py tools/verify_legacy_story_loading.py",
+            "exit_code": 0
+          },
+          {
+            "command": "node --check source/studio/story-workspace.js",
+            "exit_code": 0
+          },
+          {
+            "command": "git diff --check",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 tools/plan_tracker.py check",
+            "exit_code": 0
+          },
+          {
+            "command": "verify archive, current runtime and saved package receipt hashes",
+            "exit_code": 0
+          }
+        ],
+        "live": {
+          "surface": "Actual standard-loader disposable Blender profile, native HTTP/discovery and camera assignment; owner profile unchanged",
+          "artifact": "docs/plan-evidence/structural-design/packaging/disposable-profile-readback.json",
+          "sha256": "862db79e983259b32ba715a8442fd68f2b12a06d9f58555ad20bb00cccc9047f"
+        },
+        "supporting_artifacts": [
+          "docs/plan-evidence/structural-design/final-checks.json",
+          "docs/plan-evidence/structural-design/packaging/disposable-profile-readback.json",
+          "docs/plan-evidence/structural-design/packaging/evidence-manifest.json",
+          "docs/plan-evidence/structural-design/loading-diagnosis.json",
+          "docs/plan-evidence/story-workspace/current-live-readback.json",
+          "docs/plan-evidence/structural-design/story-camera-readback.json"
+        ],
+        "scope": "Independent shot creation/attachment foundation only. Private opt-in workspace is not creative-workflow parity or owner acceptance.",
+        "task_contract_sha256": "1a26732533c544aa3a23cb53de7b65ad2deb10d7e1cf0c40ff2897e2d8dfe1cb"
+      },
+      "artifactChecks": [
+        {
+          "path": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/docs/plan-evidence/structural-design/packaging/disposable-profile-readback.json",
+          "exists": true,
+          "expectedSha256": "862db79e983259b32ba715a8442fd68f2b12a06d9f58555ad20bb00cccc9047f",
+          "actualSha256": "862db79e983259b32ba715a8442fd68f2b12a06d9f58555ad20bb00cccc9047f",
+          "matches": true
+        }
+      ],
+      "acceptance": "Create an independent shot before its attachments; attach, replace and detach a camera; retain shot identity and unrelated content; save/reopen without re-creating unwanted shots. Test storage and actual UI/Blender bridge.",
+      "requirements": [],
+      "detailsSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "detailsSummary": ""
+    },
+    {
+      "project": "imaginebox",
+      "id": "BUG-004",
+      "title": "Synchronize current camera availability",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:90: | BUG-004 | Synchronize current camera availability | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:94: | TASK-008 | Reconcile Finetuned's existing shots without loss | P1 | PLANNED | FEATURE-003, BUG-004 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:99: | FEATURE-013 | Show Blender cameras above shots grouped by scene | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-004, BUG-012 | imagine-box |",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show BUG-004: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 90,
+          "text": "| BUG-004 | Synchronize current camera availability | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |"
+        },
+        {
+          "line": 94,
+          "text": "| TASK-008 | Reconcile Finetuned's existing shots without loss | P1 | PLANNED | FEATURE-003, BUG-004 | finetuned |"
+        },
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 99,
+          "text": "| FEATURE-013 | Show Blender cameras above shots grouped by scene | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-004, BUG-012 | imagine-box |"
+        },
+        {
+          "line": 102,
+          "text": "| FEATURE-016 | Keep the camera count live and label it correctly | P1 | PLANNED | BUG-004, BUG-012, FEATURE-013 | imagine-box |"
+        },
+        {
+          "line": 162,
+          "text": "### BUG-004 — Synchronize current camera availability"
+        },
+        {
+          "line": 236,
+          "text": "| BUG-004 | Add, rename, unlink/delete and undo a camera in a disposable Blender file; current-camera inventory updates without rendering; unrelated shots/takes remain; clicking an unavailable source cannot change the live scene camera to an orphan. Verify disconnected/reconnected and correct-project behavior. |"
+        },
+        {
+          "line": 294,
+          "text": "Extend BUG-004's inventory through the actual served UI. Label it Cameras (never Shots) and compute it from camera objects linked into the current Blender source scene, independently of saved storyboard records, hidden state or rendering. Owner selected current active Blender scene as the default scope, with its file and scene name visible. Disconnected/stale state is explicit rather than an apparently live zero or old count."
+        },
+        {
+          "line": 339,
+          "text": "- BUG-004: retain its existing partial evidence and protections; FEATURE-016 owns the additional visible count/label contract, without claiming the broader lifecycle is finished."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "FEATURE-003",
+        "INQUIRY-001"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "Add, rename, unlink/delete and undo a camera in a disposable Blender file; current-camera inventory updates without rendering; unrelated shots/takes remain; clicking an unavailable source cannot change the live scene camera to an orphan. Verify disconnected/reconnected and correct-project behavior.",
+      "requirements": [
+        "R-23948",
+        "R-23949",
+        "R-23961"
+      ],
+      "detailsSha256": "a7b7d3e68ccadcb641b4a641e34fbfeef26066f0795ef3e9dfbad518790080e0",
+      "detailsSummary": "Owner selected this bounded bug in R-23948/R-23949; Allow receipt 38512758d390 verified Genuine.\nImplemented read-only current-camera inventory independently of rendering, stopped automatic\ncamera-to-shot creation, and guarded orphan-camera activation/capture/generation. No shot-attachment\nor deletion lifecycle was inferred; INQUIRY-001 and FEATURE-003 remain unfinished and dependencies\nare unchanged. Evidence: [camera availability verification](docs/plan-evidence/bug004/README.md).\n614 Python tests, 17 tracker tests, two headless browser suites and source/installed disposable\nBlender 5.0.1 behavior plus HTTP read-back passed. Owner-runtime read-back preserves all 17 shots.\nState: in_progress, live and ready for owner trial. Owner confirmed restarted it in R-23961;\nnew Blender process and "
+    },
+    {
+      "project": "imaginebox",
+      "id": "FEATURE-005",
+      "title": "Create, view and fly a camera reliably",
+      "currentStatus": "in_progress",
+      "classification": "unfinished",
+      "recommendedStatus": "in_progress",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:91: | FEATURE-005 | Create, view and fly a camera reliably | P1 | IN PROGRESS | INQUIRY-001 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:177: ### FEATURE-005 — Create, view and fly a camera reliably",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:237: | FEATURE-005 | From an ordinary current viewport, create a genuinely new camera, look through the intended camera at a useful size, and navigate with actual configured Fly/Walk controls. Verify camera selection, pose effects, camera identity, and preserved unrelated edits. Do not substitute a preference flag for a functional movement test. |",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show FEATURE-005: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "This is recent active structural/product integration, with delivered slices and explicit unresolved owner/runtime gates in the current task narrative. It is not an obsolete age-only progress claim.",
+      "nextAction": "Preserve accepted bounded camera recovery; finish remaining lifecycle/loaded-owner-workspace camera proof without restoring older scene state.",
+      "sourceOccurrences": [
+        {
+          "line": 91,
+          "text": "| FEATURE-005 | Create, view and fly a camera reliably | P1 | IN PROGRESS | INQUIRY-001 | imagine-box |"
+        },
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 177,
+          "text": "### FEATURE-005 — Create, view and fly a camera reliably"
+        },
+        {
+          "line": 237,
+          "text": "| FEATURE-005 | From an ordinary current viewport, create a genuinely new camera, look through the intended camera at a useful size, and navigate with actual configured Fly/Walk controls. Verify camera selection, pose effects, camera identity, and preserved unrelated edits. Do not substitute a preference flag for a functional movement test. |"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "INQUIRY-001"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "IN PROGRESS",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "From an ordinary current viewport, create a genuinely new camera, look through the intended camera at a useful size, and navigate with actual configured Fly/Walk controls. Verify camera selection, pose effects, camera identity, and preserved unrelated edits. Do not substitute a preference flag for a functional movement test.",
+      "requirements": [
+        "R-23963",
+        "R-23964",
+        "R-23965",
+        "R-23966",
+        "R-23975",
+        "R-23979",
+        "R-23981",
+        "R-23983",
+        "R-23984"
+      ],
+      "detailsSha256": "e1797df2928b9939cbe4b8ac8cb114f8d32cc9a7385633f5fcee952ad1ff518c",
+      "detailsSummary": "Owner clarified in R-23963/R-23964 that cameras in ImagineBox projects must remain ordinary\nBlender cameras, including cameras with no shot attachment. Saved-project diagnosis found an\nunlinked active scene camera while the selected, linked camera was different. The sidebar\naction depended on a saved shot and only changed a viewport flag, leaving the stale camera.\nThe bounded fix explicitly views the selected linked camera (or the linked scene camera)\nthrough Blender's native camera operators, fitting the invoking view without moving the\ncamera, jumping frames, creating shots or changing native shortcuts. No passive scene repair.\n\nEvidence: [normal camera verification](docs/plan-evidence/native-camera/README.md). All 619 Python\ntests pass. Source and installed Blender 5.0.1 private-display"
+    },
+    {
+      "project": "imaginebox",
+      "id": "FEATURE-006",
+      "title": "Attach exact script passages to shots",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:92: | FEATURE-006 | Attach exact script passages to shots | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:238: | FEATURE-006 | Open the complete script, select exact text with the mouse and explicitly attach it to the intended shot. Preview, edit and remove links; distinguish repeated passages using document position/revision; cover Hebrew/RTL and multi-paragraph selection. Save/reopen and scene/shot navigation preserve links and drafts without overwriting another shot. Changed script text produces a clear review state rather than silent reassignment. Resolve multiple-passage/shared-passage semantics in INQUIRY-011. |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:306: - FEATURE-006: a mouse-selected passage opens a small action menu for the current shot, chosen shots or creating a new shot; preview targets and exact text before saving. Multiple passages and shared passages are allowed. Preserve linked snapshots and flag changed/ambiguous text after script updates; explicit relinking resolves review. Creating a shot from text creates no Blender camera.",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show FEATURE-006: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 92,
+          "text": "| FEATURE-006 | Attach exact script passages to shots | P1 | PLANNED | INQUIRY-001, FEATURE-003 | imagine-box |"
+        },
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 238,
+          "text": "| FEATURE-006 | Open the complete script, select exact text with the mouse and explicitly attach it to the intended shot. Preview, edit and remove links; distinguish repeated passages using document position/revision; cover Hebrew/RTL and multi-paragraph selection. Save/reopen and scene/shot navigation preserve links and drafts without overwriting another shot. Changed script text produces a clear review state rather than silent reassignment. Resolve multiple-passage/shared-passage semantics in INQUIRY-011. |"
+        },
+        {
+          "line": 306,
+          "text": "- FEATURE-006: a mouse-selected passage opens a small action menu for the current shot, chosen shots or creating a new shot; preview targets and exact text before saving. Multiple passages and shared passages are allowed. Preserve linked snapshots and flag changed/ambiguous text after script updates; explicit relinking resolves review. Creating a shot from text creates no Blender camera."
+        },
+        {
+          "line": 340,
+          "text": "- FEATURE-006: open the complete script, use mouse text selection and an explicit action to attach it to the intended shot; preview exact selected text, distinguish repeated passages by document positions/revision, and support edit/remove. Specify Unicode/Hebrew/RTL and selection across paragraphs. Save/reopen preserves exact links; script edits create review states rather than silent reassignment. Integrate with the new scene/shot navigation without losing the current selection or draft."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "FEATURE-003",
+        "INQUIRY-001"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "Open the complete script, select exact text with the mouse and explicitly attach it to the intended shot. Preview, edit and remove links; distinguish repeated passages using document position/revision; cover Hebrew/RTL and multi-paragraph selection. Save/reopen and scene/shot navigation preserve links and drafts without overwriting another shot. Changed script text produces a clear review state rather than silent reassignment. Resolve multiple-passage/shared-passage semantics in INQUIRY-011.",
+      "requirements": [],
+      "detailsSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "detailsSummary": ""
+    },
+    {
+      "project": "imaginebox",
+      "id": "FEATURE-007",
+      "title": "Assign characters by scene and shot",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:93: | FEATURE-007 | Assign characters by scene and shot | P2 | PLANNED | INQUIRY-001, FEATURE-003, INQUIRY-017 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:239: | FEATURE-007 | Apply a character to selected shots or a story scene; preserve per-shot exceptions; distinguish visible/offscreen/reference roles; verify existing and future-shot behavior explicitly. |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:396: Deferred from INQUIRY-001 without discarding its requirement. Interview scene defaults, existing versus future shots, per-shot overrides and visible/offscreen/reference roles before changing character lifecycle. Acceptance: explicit owner decisions and examples; unchanged current character behavior until then. This inquiry gates FEATURE-007, not unrelated camera/scene/script foundations.",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show FEATURE-007: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 93,
+          "text": "| FEATURE-007 | Assign characters by scene and shot | P2 | PLANNED | INQUIRY-001, FEATURE-003, INQUIRY-017 | imagine-box |"
+        },
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 239,
+          "text": "| FEATURE-007 | Apply a character to selected shots or a story scene; preserve per-shot exceptions; distinguish visible/offscreen/reference roles; verify existing and future-shot behavior explicitly. |"
+        },
+        {
+          "line": 396,
+          "text": "Deferred from INQUIRY-001 without discarding its requirement. Interview scene defaults, existing versus future shots, per-shot overrides and visible/offscreen/reference roles before changing character lifecycle. Acceptance: explicit owner decisions and examples; unchanged current character behavior until then. This inquiry gates FEATURE-007, not unrelated camera/scene/script foundations."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "FEATURE-003",
+        "INQUIRY-001",
+        "INQUIRY-017"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "Apply a character to selected shots or a story scene; preserve per-shot exceptions; distinguish visible/offscreen/reference roles; verify existing and future-shot behavior explicitly.",
+      "requirements": [],
+      "detailsSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "detailsSummary": ""
+    },
+    {
+      "project": "imaginebox",
+      "id": "INQUIRY-009",
+      "title": "Reconcile the earlier roadmap and issues",
+      "currentStatus": "review",
+      "classification": "needs_verification",
+      "recommendedStatus": "review",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:95: | INQUIRY-009 | Reconcile the earlier roadmap and issues | P2 | READY | — | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:241: | INQUIRY-009 | Reconcile the expansion plan, product specification, earlier prompt/conversation requests and design-continuity obligation. Preserve prior evidence; do not claim it proves the current installed state. Record independent work separately from owner-gated work. |",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show INQUIRY-009: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "Managed READY maps to Watchpost REVIEW: built evidence is recorded, while actual owner acceptance required for DONE remains absent. Existing category and dependency scope is correct.",
+      "nextAction": "Keep review visible; obtain only the missing actual acceptance through the supported revision-checked plan door.",
+      "sourceOccurrences": [
+        {
+          "line": 95,
+          "text": "| INQUIRY-009 | Reconcile the earlier roadmap and issues | P2 | READY | — | imagine-box |"
+        },
+        {
+          "line": 241,
+          "text": "| INQUIRY-009 | Reconcile the expansion plan, product specification, earlier prompt/conversation requests and design-continuity obligation. Preserve prior evidence; do not claim it proves the current installed state. Record independent work separately from owner-gated work. |"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "READY",
+      "evidenceContract": {
+        "revision": "3808208b571a5e06cd8b4e74b5a80eca29f85b3a805d5109b9447e04fba3c188",
+        "checks": [
+          {
+            "command": "python3 -m unittest test_story_validation test_story_store test_story_api test_story_structure test_camera_identity test_story_camera_bridge test_native_story_guards test_build_release",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 tests/test_plan_tracker.py",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 -m py_compile source/film.py source/story_store.py source/story_api.py source/camera_identity.py source/film_server.py source/addon.py source/build_release.py tools/plan_tracker.py tools/verify_packaged_story_blender.py tools/verify_legacy_story_loading.py",
+            "exit_code": 0
+          },
+          {
+            "command": "node --check source/studio/story-workspace.js",
+            "exit_code": 0
+          },
+          {
+            "command": "git diff --check",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 tools/plan_tracker.py check",
+            "exit_code": 0
+          },
+          {
+            "command": "verify archive, current runtime and saved package receipt hashes",
+            "exit_code": 0
+          }
+        ],
+        "live": {
+          "surface": "Reviewed requirements audit and canonical task CLI",
+          "artifact": "docs/plan-evidence/structural-design/roadmap-readback.json",
+          "sha256": "f02d271df02624c327b0a6ff86a06e04f0215acbb89ca054afb03dfa5d940249"
+        },
+        "supporting_artifacts": [
+          "docs/plan-evidence/structural-design/final-checks.json",
+          "docs/plan-evidence/structural-design/packaging/disposable-profile-readback.json",
+          "docs/plan-evidence/structural-design/packaging/evidence-manifest.json",
+          "docs/plan-evidence/structural-design/loading-diagnosis.json"
+        ],
+        "task_contract_sha256": "67004abb3046e0d876fcb2d6833f8eb42a7f9e20643efe6ebb5e19467375c872"
+      },
+      "artifactChecks": [
+        {
+          "path": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/docs/plan-evidence/structural-design/roadmap-readback.json",
+          "exists": true,
+          "expectedSha256": "f02d271df02624c327b0a6ff86a06e04f0215acbb89ca054afb03dfa5d940249",
+          "actualSha256": "f02d271df02624c327b0a6ff86a06e04f0215acbb89ca054afb03dfa5d940249",
+          "matches": true
+        }
+      ],
+      "acceptance": "Reconcile the expansion plan, product specification, earlier prompt/conversation requests and design-continuity obligation. Preserve prior evidence; do not claim it proves the current installed state. Record independent work separately from owner-gated work.",
+      "requirements": [],
+      "detailsSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "detailsSummary": ""
+    },
+    {
+      "project": "imaginebox",
+      "id": "INQUIRY-011",
+      "title": "Design the complete camera scene shot and script journey",
+      "currentStatus": "done",
+      "classification": "verified_done",
+      "recommendedStatus": "done",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:97: | INQUIRY-011 | Design the complete camera scene shot and script journey | P1 | DONE | INQUIRY-001 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:98: | BUG-012 | Load the intended scene and restore its workspace reliably | P1 | PLANNED | INQUIRY-011 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:99: | FEATURE-013 | Show Blender cameras above shots grouped by scene | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-004, BUG-012 | imagine-box |",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show INQUIRY-011: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "Completion is the bounded planning decision contract, distinct from product acceptance. Current managed authority retains owner acceptance and a matching actual plan readback artifact.",
+      "nextAction": "Retain completed planning decision and its deferred questions as historical prerequisites; do not infer product camera/workflow acceptance.",
+      "sourceOccurrences": [
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 97,
+          "text": "| INQUIRY-011 | Design the complete camera scene shot and script journey | P1 | DONE | INQUIRY-001 | imagine-box |"
+        },
+        {
+          "line": 98,
+          "text": "| BUG-012 | Load the intended scene and restore its workspace reliably | P1 | PLANNED | INQUIRY-011 | imagine-box |"
+        },
+        {
+          "line": 99,
+          "text": "| FEATURE-013 | Show Blender cameras above shots grouped by scene | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-004, BUG-012 | imagine-box |"
+        },
+        {
+          "line": 100,
+          "text": "| FEATURE-014 | Open delete and recover shots and scenes | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-012 | imagine-box |"
+        },
+        {
+          "line": 101,
+          "text": "| FEATURE-015 | Assign cameras to selected shots from the context menu | P1 | PLANNED | INQUIRY-011, FEATURE-003, FEATURE-013 | imagine-box |"
+        },
+        {
+          "line": 104,
+          "text": "| TASK-018 | Preserve the creative workflow during structural integration | P1 | IN PROGRESS | INQUIRY-011 | imagine-box |"
+        },
+        {
+          "line": 238,
+          "text": "| FEATURE-006 | Open the complete script, select exact text with the mouse and explicitly attach it to the intended shot. Preview, edit and remove links; distinguish repeated passages using document position/revision; cover Hebrew/RTL and multi-paragraph selection. Save/reopen and scene/shot navigation preserve links and drafts without overwriting another shot. Changed script text produces a clear review state rather than silent reassignment. Resolve multiple-passage/shared-passage semantics in INQUIRY-011. |"
+        },
+        {
+          "line": 246,
+          "text": "Overnight execution authority: owner pasted instructions on 2026-11-05 explicitly authorize reliable structural implementation using the recorded interview decisions, preserving data and task gates. [Structural design and diagnosed boundaries](docs/STRUCTURAL-WORKSPACE.md) guide implementation. INQUIRY-011's private prototype has independent source, browser and visual review; owner interface acceptance remains pending. The interview does not accept an unseen UI. Pure domain work under FEATURE-003 can proceed after core lifecycle acceptance without claiming the later interface gate is passed."
+        },
+        {
+          "line": 250,
+          "text": "### INQUIRY-011 — Design the complete camera scene shot and script journey"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "INQUIRY-001"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "DONE",
+      "evidenceContract": {
+        "revision": "3808208b571a5e06cd8b4e74b5a80eca29f85b3a805d5109b9447e04fba3c188",
+        "checks": [
+          {
+            "command": "python3 -m unittest test_story_validation test_story_store test_story_api test_story_structure test_camera_identity test_story_camera_bridge test_native_story_guards test_build_release",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 tests/test_plan_tracker.py",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 -m py_compile source/film.py source/story_store.py source/story_api.py source/camera_identity.py source/film_server.py source/addon.py source/build_release.py tools/plan_tracker.py tools/verify_packaged_story_blender.py tools/verify_legacy_story_loading.py",
+            "exit_code": 0
+          },
+          {
+            "command": "node --check source/studio/story-workspace.js",
+            "exit_code": 0
+          },
+          {
+            "command": "git diff --check",
+            "exit_code": 0
+          },
+          {
+            "command": "python3 tools/plan_tracker.py check",
+            "exit_code": 0
+          },
+          {
+            "command": "verify archive, current runtime and saved package receipt hashes",
+            "exit_code": 0
+          }
+        ],
+        "live": {
+          "surface": "Actual disposable HTTP/browser structural prototype, not owner-profile acceptance",
+          "artifact": "docs/plan-evidence/story-workspace/current-live-readback.json",
+          "sha256": "38fa4078bff8e333113c1c72690342064851c875100622ce6a22a617e62d7d7c"
+        },
+        "supporting_artifacts": [
+          "docs/plan-evidence/structural-design/final-checks.json",
+          "docs/plan-evidence/structural-design/packaging/disposable-profile-readback.json",
+          "docs/plan-evidence/structural-design/packaging/evidence-manifest.json",
+          "docs/plan-evidence/structural-design/loading-diagnosis.json"
+        ],
+        "task_contract_sha256": "1e4ace3dad955e0c1bf7009857a8ad96ec98f2254449ab01915ec000c4395787",
+        "owner_acceptance": "Native dropdown structural_direction selected Finish this structure (Recommended) after opening the live isolated sample preview http://127.0.0.1:37655/workspace on 2026-11-05; accepts structural design direction only, not product functionality or owner runtime acceptance."
+      },
+      "artifactChecks": [
+        {
+          "path": "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/docs/plan-evidence/story-workspace/current-live-readback.json",
+          "exists": true,
+          "expectedSha256": "38fa4078bff8e333113c1c72690342064851c875100622ce6a22a617e62d7d7c",
+          "actualSha256": "38fa4078bff8e333113c1c72690342064851c875100622ce6a22a617e62d7d7c",
+          "matches": true
+        }
+      ],
+      "acceptance": "",
+      "requirements": [],
+      "detailsSha256": "9e93cab5ee54c755001d7a868c0d823a86b95796d46a1e2d587d362746c91bc8",
+      "detailsSummary": "Produce a reviewed interaction/state specification, data relationships, migration approach and private prototype before implementation. Reuse the existing product/research documents; preserve approved visual language and existing prompt, source/result, take and character workflows. Document desktop interaction and an accessible alternative to right-click.\n\nProposed model: an ImagineBox project has story scenes containing independently identified shots. Blender files and Blender scene datablocks supply camera sources through explicit references; camera names alone are insufficient identity. A camera can supply several shots; a shot may have no camera. Do not equate a story scene with a Blender datablock until agreed. Script links reference a document revision and exact passage. Takes and ed"
+    },
+    {
+      "project": "imaginebox",
+      "id": "BUG-012",
+      "title": "Load the intended scene and restore its workspace reliably",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:98: | BUG-012 | Load the intended scene and restore its workspace reliably | P1 | PLANNED | INQUIRY-011 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:99: | FEATURE-013 | Show Blender cameras above shots grouped by scene | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-004, BUG-012 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:100: | FEATURE-014 | Open delete and recover shots and scenes | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-012 | imagine-box |",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show BUG-012: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 98,
+          "text": "| BUG-012 | Load the intended scene and restore its workspace reliably | P1 | PLANNED | INQUIRY-011 | imagine-box |"
+        },
+        {
+          "line": 99,
+          "text": "| FEATURE-013 | Show Blender cameras above shots grouped by scene | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-004, BUG-012 | imagine-box |"
+        },
+        {
+          "line": 100,
+          "text": "| FEATURE-014 | Open delete and recover shots and scenes | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-012 | imagine-box |"
+        },
+        {
+          "line": 102,
+          "text": "| FEATURE-016 | Keep the camera count live and label it correctly | P1 | PLANNED | BUG-004, BUG-012, FEATURE-013 | imagine-box |"
+        },
+        {
+          "line": 268,
+          "text": "### BUG-012 — Load the intended scene and restore its workspace reliably"
+        },
+        {
+          "line": 305,
+          "text": "- BUG-012 / FEATURE-013: remember the last opened shot independently for each story scene. If it is missing/trashed or the scene has no shots, show that scene's list rather than another scene's content. This navigation does not activate a Blender camera."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "INQUIRY-011"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "",
+      "requirements": [],
+      "detailsSha256": "46f5f396ad53e93ce4c9374e60051c2aac0b9c2ab507c4ddce52e0c9f5933479",
+      "detailsSummary": "Owner clarified through dropdown: the reported loading failure is wrong or missing shot content when opening a scene. This is distinct from historical old-interface requests or an assumed bridge-connection failure. First diagnose current routes, stored selection and bridge responses; record expected versus actual scene identity without modifying the owner's scene. Candidate: validate and restore explicit project/story-scene/Blender-source identities as one coherent transition, reject stale responses and show recoverable errors rather than mixing content from different scenes.\n\nAcceptance: two projects and two similarly named scenes load their own shots, camera inventory, script context and saved content; refresh, save/reopen, rapid switching, delayed/out-of-order responses, missing file/so"
+    },
+    {
+      "project": "imaginebox",
+      "id": "FEATURE-013",
+      "title": "Show Blender cameras above shots grouped by scene",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:99: | FEATURE-013 | Show Blender cameras above shots grouped by scene | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-004, BUG-012 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:101: | FEATURE-015 | Assign cameras to selected shots from the context menu | P1 | PLANNED | INQUIRY-011, FEATURE-003, FEATURE-013 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:102: | FEATURE-016 | Keep the camera count live and label it correctly | P1 | PLANNED | BUG-004, BUG-012, FEATURE-013 | imagine-box |",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show FEATURE-013: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 99,
+          "text": "| FEATURE-013 | Show Blender cameras above shots grouped by scene | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-004, BUG-012 | imagine-box |"
+        },
+        {
+          "line": 101,
+          "text": "| FEATURE-015 | Assign cameras to selected shots from the context menu | P1 | PLANNED | INQUIRY-011, FEATURE-003, FEATURE-013 | imagine-box |"
+        },
+        {
+          "line": 102,
+          "text": "| FEATURE-016 | Keep the camera count live and label it correctly | P1 | PLANNED | BUG-004, BUG-012, FEATURE-013 | imagine-box |"
+        },
+        {
+          "line": 274,
+          "text": "### FEATURE-013 — Show Blender cameras above shots grouped by scene"
+        },
+        {
+          "line": 305,
+          "text": "- BUG-012 / FEATURE-013: remember the last opened shot independently for each story scene. If it is missing/trashed or the scene has no shots, show that scene's list rather than another scene's content. This navigation does not activate a Blender camera."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "BUG-004",
+        "BUG-012",
+        "FEATURE-003",
+        "INQUIRY-011"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "",
+      "requirements": [],
+      "detailsSha256": "b16a4a007243abf2c8e457b81f8c7eebe3cee0bd958e95bb56e9cdd5f5f17ef5",
+      "detailsSummary": "Provide a separate camera section above story scenes and their shots. Show camera scope (connected Blender file and active source scene), actual camera names, availability and current camera indicator. Below it, expose scenes and their shots with independent counts and open/delete actions. Browsing, selecting a camera and opening a shot must have explicit, distinguishable effects. Do not recreate shots from camera enumeration or hide saved shot content because its source is missing.\n\nAcceptance: zero cameras with existing shots, cameras with no shots, one camera shared by several shots, missing camera sources and multiple scenes remain understandable. Test mouse/keyboard operation, selection persistence, empty/loading/error/offline states, desktop and narrow layouts. Private visual review "
+    },
+    {
+      "project": "imaginebox",
+      "id": "FEATURE-014",
+      "title": "Open delete and recover shots and scenes",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:100: | FEATURE-014 | Open delete and recover shots and scenes | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-012 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:280: ### FEATURE-014 — Open delete and recover shots and scenes",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:304: - FEATURE-014: persistent trash has no automatic expiry; explicit confirmed emptying removes story records only. Restore a scene and its shots together with original identities, order and attachments. Removing one shot uses the same recoverable lifecycle.",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show FEATURE-014: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 100,
+          "text": "| FEATURE-014 | Open delete and recover shots and scenes | P1 | PLANNED | INQUIRY-011, FEATURE-003, BUG-012 | imagine-box |"
+        },
+        {
+          "line": 280,
+          "text": "### FEATURE-014 — Open delete and recover shots and scenes"
+        },
+        {
+          "line": 304,
+          "text": "- FEATURE-014: persistent trash has no automatic expiry; explicit confirmed emptying removes story records only. Restore a scene and its shots together with original identities, order and attachments. Removing one shot uses the same recoverable lifecycle."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "BUG-012",
+        "FEATURE-003",
+        "INQUIRY-011"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "",
+      "requirements": [],
+      "detailsSha256": "5b5e2821fd784adadb9396601c8ddfd4fe512aa0354735fa04e47fbe996f404c",
+      "detailsSummary": "Define shot opening versus camera activation, and story-scene opening versus Blender-scene activation. Proposed deletion contract: show affected records and links, confirm scene-wide impact, perform one recoverable operation and select a surviving record predictably. A shot deletion changes its workspace membership; it does not delete its camera or generated files. Scene removal must not cascade through shared references or other projects. Permanent media removal is outside this request.\n\nAcceptance: delete the selected shot, last shot, empty scene, populated scene and a scene containing shots with shared cameras/script passages/takes; cancel leaves state identical. Recovery restores identity, grouping, order and attachments after reopen. Interrupted writes, stale selection, duplicate requ"
+    },
+    {
+      "project": "imaginebox",
+      "id": "FEATURE-015",
+      "title": "Assign cameras to selected shots from the context menu",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:101: | FEATURE-015 | Assign cameras to selected shots from the context menu | P1 | PLANNED | INQUIRY-011, FEATURE-003, FEATURE-013 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:286: ### FEATURE-015 — Assign cameras to selected shots from the context menu",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show FEATURE-015: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 101,
+          "text": "| FEATURE-015 | Assign cameras to selected shots from the context menu | P1 | PLANNED | INQUIRY-011, FEATURE-003, FEATURE-013 | imagine-box |"
+        },
+        {
+          "line": 286,
+          "text": "### FEATURE-015 — Assign cameras to selected shots from the context menu"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "FEATURE-003",
+        "FEATURE-013",
+        "INQUIRY-011"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "",
+      "requirements": [],
+      "detailsSha256": "a550a2d522d8748064296cbdb33702954395937b237dfd98b9865e448cd6dda2",
+      "detailsSummary": "Support multi-selection with a visible selected count and right-click → Assign camera → named available camera. Show the target shots and source scene; define whether right-clicking an unselected row replaces selection. Owner selected cross-story-scene assignment within the current ImagineBox project: show affected scenes and confirm before replacing existing links. Provide a visible menu/button and keyboard alternative. Replacing existing attachments must preserve prompts, takes, script links and per-shot intent; unavailable or cross-source cameras need explicit handling.\n\nAcceptance: single/multiple selection, mixed existing attachments, missing camera, camera deletion during selection, cancel, undo/recovery and save/reopen. Persist all selected assignments atomically or report precise p"
+    },
+    {
+      "project": "imaginebox",
+      "id": "FEATURE-016",
+      "title": "Keep the camera count live and label it correctly",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:102: | FEATURE-016 | Keep the camera count live and label it correctly | P1 | PLANNED | BUG-004, BUG-012, FEATURE-013 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:292: ### FEATURE-016 — Keep the camera count live and label it correctly",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:339: - BUG-004: retain its existing partial evidence and protections; FEATURE-016 owns the additional visible count/label contract, without claiming the broader lifecycle is finished.",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show FEATURE-016: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 102,
+          "text": "| FEATURE-016 | Keep the camera count live and label it correctly | P1 | PLANNED | BUG-004, BUG-012, FEATURE-013 | imagine-box |"
+        },
+        {
+          "line": 292,
+          "text": "### FEATURE-016 — Keep the camera count live and label it correctly"
+        },
+        {
+          "line": 339,
+          "text": "- BUG-004: retain its existing partial evidence and protections; FEATURE-016 owns the additional visible count/label contract, without claiming the broader lifecycle is finished."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "BUG-004",
+        "BUG-012",
+        "FEATURE-013"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "",
+      "requirements": [],
+      "detailsSha256": "19185f82282e535356f20e32d84c51f837228b75091a63a5c781ff5a1349b323",
+      "detailsSummary": "Extend BUG-004's inventory through the actual served UI. Label it Cameras (never Shots) and compute it from camera objects linked into the current Blender source scene, independently of saved storyboard records, hidden state or rendering. Owner selected current active Blender scene as the default scope, with its file and scene name visible. Disconnected/stale state is explicit rather than an apparently live zero or old count.\n\nAcceptance: after add/duplicate/rename/unlink/delete/undo/redo, source-scene switch and file reopening, visible names and count equal actual scene camera-object membership. Agree a measurable refresh budget before implementation (proposal: within two seconds while connected, without manual refresh or rendering). Zero cameras with 17 saved shots must show 0 cameras an"
+    },
+    {
+      "project": "imaginebox",
+      "id": "INQUIRY-017",
+      "title": "Agree on scene character inheritance and shot exceptions",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:93: | FEATURE-007 | Assign characters by scene and shot | P2 | PLANNED | INQUIRY-001, FEATURE-003, INQUIRY-017 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:103: | INQUIRY-017 | Agree on scene character inheritance and shot exceptions | P2 | PLANNED | INQUIRY-001 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:121: 7. Story-scene character defaults, shot overrides and visible/offscreen roles were not resolved by the camera/script interview. Explicitly defer these to INQUIRY-017 under the owner's instruction to defer ambiguous product decisions and continue independent work; retain existing character behavior.",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:391: Character semantics remain in INQUIRY-017; installed source discovery/undo, realistic",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show INQUIRY-017: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 93,
+          "text": "| FEATURE-007 | Assign characters by scene and shot | P2 | PLANNED | INQUIRY-001, FEATURE-003, INQUIRY-017 | imagine-box |"
+        },
+        {
+          "line": 103,
+          "text": "| INQUIRY-017 | Agree on scene character inheritance and shot exceptions | P2 | PLANNED | INQUIRY-001 | imagine-box |"
+        },
+        {
+          "line": 121,
+          "text": "7. Story-scene character defaults, shot overrides and visible/offscreen roles were not resolved by the camera/script interview. Explicitly defer these to INQUIRY-017 under the owner's instruction to defer ambiguous product decisions and continue independent work; retain existing character behavior."
+        },
+        {
+          "line": 391,
+          "text": "Character semantics remain in INQUIRY-017; installed source discovery/undo, realistic"
+        },
+        {
+          "line": 394,
+          "text": "### INQUIRY-017 — Agree on scene character inheritance and shot exceptions"
+        },
+        {
+          "line": 515,
+          "text": "| 2026-11-05 | Authorize structural overnight implementation of agreed behavior; preserve all current work, defer genuinely ambiguous product parts, verify source and actual surfaces separately. Keep unresolved character design in INQUIRY-017 and private prototype gate in INQUIRY-011. | Owner's attached overnight goal after the 13-answer interview |"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "INQUIRY-001"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "",
+      "requirements": [],
+      "detailsSha256": "5ce38d4d6db9d2d0be24aa17f493c78c6c55ad873ec2fd066037ee5b99903a86",
+      "detailsSummary": "Deferred from INQUIRY-001 without discarding its requirement. Interview scene defaults, existing versus future shots, per-shot overrides and visible/offscreen/reference roles before changing character lifecycle. Acceptance: explicit owner decisions and examples; unchanged current character behavior until then. This inquiry gates FEATURE-007, not unrelated camera/scene/script foundations."
+    },
+    {
+      "project": "imaginebox",
+      "id": "TASK-018",
+      "title": "Preserve the creative workflow during structural integration",
+      "currentStatus": "in_progress",
+      "classification": "unfinished",
+      "recommendedStatus": "in_progress",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:29: Previous production slice, 2026-11-05: frozen v14 serves the [explicit saved-project workspace](https://endlessblink.tail07658e.ts.net:8810/workspace?project=%2Fmedia%2Fendlessblink%2Fdata%2Fmy-projects%2Fai-development%2Fapp-plugins%2Fblender%2Fimaginebox%2Freleases%2Ffilm-projects%2Ffinetuned%2Ffinetuned-oct25.film). Cut now has explicit multi-selection and one confirmed, revision-pinned atomic bulk-trash action with restore. Save, Conversation, References and Import take share a compact aligned icon toolbar; top Trash is icon-only and accessible. Original dark/orange identity remains. Twent",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:104: | TASK-018 | Preserve the creative workflow during structural integration | P1 | IN PROGRESS | INQUIRY-011 | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:390: TASK-018 explicitly gates final delivery on creative-workflow preservation.",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show TASK-018: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "This is recent active structural/product integration, with delivered slices and explicit unresolved owner/runtime gates in the current task narrative. It is not an obsolete age-only progress claim.",
+      "nextAction": "Verify original creative flows on actual packaged/loaded path and preserve scripts, references, takes, conversations and owner data through structural integration.",
+      "sourceOccurrences": [
+        {
+          "line": 29,
+          "text": "Previous production slice, 2026-11-05: frozen v14 serves the [explicit saved-project workspace](https://endlessblink.tail07658e.ts.net:8810/workspace?project=%2Fmedia%2Fendlessblink%2Fdata%2Fmy-projects%2Fai-development%2Fapp-plugins%2Fblender%2Fimaginebox%2Freleases%2Ffilm-projects%2Ffinetuned%2Ffinetuned-oct25.film). Cut now has explicit multi-selection and one confirmed, revision-pinned atomic bulk-trash action with restore. Save, Conversation, References and Import take share a compact aligned icon toolbar; top Trash is icon-only and accessible. Original dark/orange identity remains. Twent"
+        },
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 104,
+          "text": "| TASK-018 | Preserve the creative workflow during structural integration | P1 | IN PROGRESS | INQUIRY-011 | imagine-box |"
+        },
+        {
+          "line": 390,
+          "text": "TASK-018 explicitly gates final delivery on creative-workflow preservation."
+        },
+        {
+          "line": 398,
+          "text": "### TASK-018 — Preserve the creative workflow during structural integration"
+        },
+        {
+          "line": 400,
+          "text": "Integrate the approved structural model with the existing creative workflow before offering owner-project conversion or replacement of the everyday workspace. Entry requires fresh successful foundation regressions and actual source/bridge read-back; record that evidence before starting integration. Implementation follows the accepted design in INQUIRY-011 while FEATURE-003 may remain READY for functional acceptance. Final delivery TASK-010 still requires FEATURE-003 and TASK-018 to be DONE; no owner acceptance is inferred from design approval. This scheduling adjustment responds to the owner's"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "INQUIRY-011"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "IN PROGRESS",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "",
+      "requirements": [],
+      "detailsSha256": "74acaafda8e94417d618067b2625c3b25b5b8a953a91db6d2f35d8b3ab6e65a1",
+      "detailsSummary": "Integrate the approved structural model with the existing creative workflow before offering owner-project conversion or replacement of the everyday workspace. Entry requires fresh successful foundation regressions and actual source/bridge read-back; record that evidence before starting integration. Implementation follows the accepted design in INQUIRY-011 while FEATURE-003 may remain READY for functional acceptance. Final delivery TASK-010 still requires FEATURE-003 and TASK-018 to be DONE; no owner acceptance is inferred from design approval. This scheduling adjustment responds to the owner's explicit request for a production build they can test end to end; it changes implementation order, not final acceptance or preservation gates. This is preservation and integration of existing capabil"
+    },
+    {
+      "project": "imaginebox",
+      "id": "TASK-019",
+      "title": "Redesign the everyday workspace for simple creative work",
+      "currentStatus": "in_progress",
+      "classification": "unfinished",
+      "recommendedStatus": "in_progress",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:29: Previous production slice, 2026-11-05: frozen v14 serves the [explicit saved-project workspace](https://endlessblink.tail07658e.ts.net:8810/workspace?project=%2Fmedia%2Fendlessblink%2Fdata%2Fmy-projects%2Fai-development%2Fapp-plugins%2Fblender%2Fimaginebox%2Freleases%2Ffilm-projects%2Ffinetuned%2Ffinetuned-oct25.film). Cut now has explicit multi-selection and one confirmed, revision-pinned atomic bulk-trash action with restore. Save, Conversation, References and Import take share a compact aligned icon toolbar; top Trash is icon-only and accessible. Original dark/orange identity remains. Twent",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:105: | TASK-019 | Redesign the everyday workspace for simple creative work | P1 | IN PROGRESS | — | imagine-box |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:404: ### TASK-019 — Redesign the everyday workspace for simple creative work",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:408: Actual INSTALLED-PATH Eevee native HTTP → standalone HTTP → browser proof also passes from the user-default extension: colored geometry, camera/material frame changes, full-frame/wrong-camera guards, zero full renders, unchanged dirty state and Scene/Image membership, cleanup and all 81 installed files identical before/after/frozen release. Evidence: `docs/plan-evidence/production-v24/installed-rendered-live.json`, `installed-identity.json`, `installed-visual-review.json`. Performance remains unresolved: first frame 23.422 seconds, camera-pose update 13.102 seconds and material update 5.807 se",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show TASK-019: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryimagine-box returns only its own tasks"
+      ],
+      "rationale": "This is recent active structural/product integration, with delivered slices and explicit unresolved owner/runtime gates in the current task narrative. It is not an obsolete age-only progress claim.",
+      "nextAction": "Preserve concept-versus-production acceptance distinction; obtain direction and actual delivered workspace acceptance before closing.",
+      "sourceOccurrences": [
+        {
+          "line": 29,
+          "text": "Previous production slice, 2026-11-05: frozen v14 serves the [explicit saved-project workspace](https://endlessblink.tail07658e.ts.net:8810/workspace?project=%2Fmedia%2Fendlessblink%2Fdata%2Fmy-projects%2Fai-development%2Fapp-plugins%2Fblender%2Fimaginebox%2Freleases%2Ffilm-projects%2Ffinetuned%2Ffinetuned-oct25.film). Cut now has explicit multi-selection and one confirmed, revision-pinned atomic bulk-trash action with restore. Save, Conversation, References and Import take share a compact aligned icon toolbar; top Trash is icon-only and accessible. Original dark/orange identity remains. Twent"
+        },
+        {
+          "line": 105,
+          "text": "| TASK-019 | Redesign the everyday workspace for simple creative work | P1 | IN PROGRESS | — | imagine-box |"
+        },
+        {
+          "line": 404,
+          "text": "### TASK-019 — Redesign the everyday workspace for simple creative work"
+        },
+        {
+          "line": 408,
+          "text": "Actual INSTALLED-PATH Eevee native HTTP → standalone HTTP → browser proof also passes from the user-default extension: colored geometry, camera/material frame changes, full-frame/wrong-camera guards, zero full renders, unchanged dirty state and Scene/Image membership, cleanup and all 81 installed files identical before/after/frozen release. Evidence: `docs/plan-evidence/production-v24/installed-rendered-live.json`, `installed-identity.json`, `installed-visual-review.json`. Performance remains unresolved: first frame 23.422 seconds, camera-pose update 13.102 seconds and material update 5.807 se"
+        },
+        {
+          "line": 410,
+          "text": "2026-11-06 v23 candidate is frozen, NOT installed. Both source and packaged suites pass 849 tests (one Blender-only skip); actual private Blender passes 23/23 with four GPU projection/aspect samples. The exact packaged Rendered native HTTP → standalone HTTP → headless browser test passes camera/material edits, real colored geometry, full-frame guards, no full renders, clean dirty flag and unchanged Scene/Image membership for every conversion, unchanged film/blend bytes, callback cleanup and all 81 package files matching both the archive and frozen release before/after. Evidence: `docs/plan-evi"
+        },
+        {
+          "line": 418,
+          "text": "R-24611 actual generation refusal diagnosed read-only: the saved shot prompt is empty. Native validation correctly refuses it before rendering/provider work, but the bridge discards its plain-text explanation. Source repair rejects empty/whitespace/overlong prompts before creating a receipt or calling native, and forwards bounded safe native guard text. Ten focused generation-bridge tests pass with fake transports. Frontend source now validates the saved prompt before Make and reuses the existing error parser rather than displaying JSON. Headless intercepted browser proof covers empty/overlong"
+        },
+        {
+          "line": 422,
+          "text": "Concrete repair candidate: raise the bounded preview from 320 pixels to at most 960 pixels per edge / 640,000 pixels; compute projection from actual render dimensions and pixel aspect, normalize camera transforms, and retain full-frame containment. For Material/Rendered shading, read the already displayed linked camera framebuffer through a lazy draw callback instead of starting another render. Require matching physical source, scene and camera, a complete visible camera border, bounded reads, stale-frame rejection, inactivity limits and callback cleanup. Preserve owner scene/view/shading, fil"
+        },
+        {
+          "line": 426,
+          "text": "Actual INSTALLED add-on loading proof also passes from the real user-default extension path in isolated factory Blender, through native/standalone HTTP into a real headless browser: automatic camera-pose update, lens/pose PNG differences, unchanged-frame node preservation, six live/one removed fixture records preserved, no native state/film mutation and zero full renders. All 81 installed files match the frozen package and before/after installed manifests. Evidence: `docs/plan-evidence/production-v19b/installed-preview-live-e2e.json`, `installed-preview-live-browser.png`, `installed-preview-ma"
+        },
+        {
+          "line": 430,
+          "text": "Installation gate: final native preview is NOT yet installed. Only the owner's Blender process remains running; the normal installer refuses active Blender replacement. The owner has been asked through the question tool to save/close Blender. On reply, review/apply `releases/production/20261105-v19b/PREPARE.json` with the pinned SHA above, then require actual local/private delivery, installed-file read-back, normal owner reopen/connect/identity/link flow and actual owner-scene preview performance before READY. Do not hot-inject, restore removed shots, weaken source guards or infer owner accept"
+        },
+        {
+          "line": 434,
+          "text": "Automatic-preview implementation uses a read-only 320×180 GPU viewport frame, never repeated full renders, generation, film writes or restored shot imports. Private native module proof observes camera-pose/lens refresh, unchanged-frame cache, unchanged scene/view/selection and bounded drawing; browser regressions verify exact project/shot/camera/source matching, one request at a time, hidden-view pause, stale-response rejection and preserved prompt focus/manual captures. The standalone bridge revalidates the current linked camera and source before and after native transport. Full packaged inte"
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "IN PROGRESS",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "",
+      "requirements": [
+        "R-24619",
+        "R-24620",
+        "R-24611",
+        "R-24557",
+        "R-24558",
+        "R-24494",
+        "R-24523",
+        "R-24524",
+        "R-24494",
+        "R-24468",
+        "R-24468",
+        "R-24468",
+        "R-24448",
+        "R-24468",
+        "R-24448",
+        "R-24405",
+        "R-24405",
+        "R-24365",
+        "R-24366",
+        "R-24367",
+        "R-24368",
+        "R-24305",
+        "R-24306",
+        "R-24307",
+        "R-24288",
+        "R-24289",
+        "R-24290",
+        "R-24291",
+        "R-24286",
+        "R-24287",
+        "R-24280",
+        "R-24178",
+        "R-24186"
+      ],
+      "detailsSha256": "2ea50a0ee86cc460955fd2b7af68a32272db01afd513c0290d89c889815a01ed",
+      "detailsSummary": "2026-11-06 v24 INSTALLED AND LIVE, not owner-accepted: resumed goal found Blender closed. V23 activation correctly refused a stale service/process snapshot after restart; its /tmp build copy was gone. A fresh v24 preparation used the unchanged frozen v23 archive (SHA-256 `1ff39186e86318114efb2f779802f580371d82837ce1022d20d7462a7a6ff57c`), current backups and exact owner/installed manifests. Full review and guarded activation pass; PREPARE SHA-256 `e48a7388a6f93ca6369707579dc280f89db1dca2267b95e1265716a31bf6e9e9`. Normal service now executes frozen v24, and the actual installed extension matches it. Localhost/private HTTPS read-back proves exact served assets, preserved original files, 2 scenes/6 live shots and safe unauthorized-POST rejection; actual desktop/mobile headless and independent"
+    },
+    {
+      "project": "finetuned",
+      "id": "TASK-008",
+      "title": "Reconcile Finetuned's existing shots without loss",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:94: | TASK-008 | Reconcile Finetuned's existing shots without loss | P1 | PLANNED | FEATURE-003, BUG-004 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:240: | TASK-008 | Inventory legacy records and media first; present proposed mapping/archive choices; back up current state; apply only agreed migration; verify stable IDs, prompts, selected takes, files and other scenes/projects; prove recovery using a disposable copy. |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:307: - TASK-008: keep existing scene assignments and content; place only shots of unknown scene membership in Unassigned for owner organization. No automatic deletion, invented grouping or blanket reassignment of existing shots.",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show TASK-008: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryfinetuned returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 94,
+          "text": "| TASK-008 | Reconcile Finetuned's existing shots without loss | P1 | PLANNED | FEATURE-003, BUG-004 | finetuned |"
+        },
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 240,
+          "text": "| TASK-008 | Inventory legacy records and media first; present proposed mapping/archive choices; back up current state; apply only agreed migration; verify stable IDs, prompts, selected takes, files and other scenes/projects; prove recovery using a disposable copy. |"
+        },
+        {
+          "line": 307,
+          "text": "- TASK-008: keep existing scene assignments and content; place only shots of unknown scene membership in Unassigned for owner organization. No automatic deletion, invented grouping or blanket reassignment of existing shots."
+        },
+        {
+          "line": 341,
+          "text": "- TASK-008: inventory and preview mappings before migrating legacy shots into the agreed scene grouping. No automatic removal of the existing retained shots."
+        }
+      ],
+      "commitSubjects": [],
+      "dependencies": [
+        "BUG-004",
+        "FEATURE-003"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "Inventory legacy records and media first; present proposed mapping/archive choices; back up current state; apply only agreed migration; verify stable IDs, prompts, selected takes, files and other scenes/projects; prove recovery using a disposable copy.",
+      "requirements": [],
+      "detailsSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "detailsSummary": ""
+    },
+    {
+      "project": "finetuned",
+      "id": "TASK-010",
+      "title": "Verify and deliver the complete workflow in Finetuned",
+      "currentStatus": "planned",
+      "classification": "unfinished",
+      "recommendedStatus": "planned",
+      "canonicalTask": null,
+      "archivedAt": null,
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:96: | TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:242: | TASK-010 | Exercise the agreed whole journey: correct scene loading, separate camera inventory and live count, shots grouped by scene, independent shot creation, single/bulk camera assignment, mouse-selected script passages, character attachment, composition, saved take selection, scene/shot opening, deletion/recovery and reopen. Cover failures, stale responses, reconnection and preservation. Relevant regression checks, installed build/module provenance, actual authenticated production surface read-back and independent visual evidence must pass. Verify the normal launch path and the actual o",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:342: - TASK-010: include the whole example journey above, bulk assignment, scene switching, deletion/recovery and script-text selection. Run failure/reconnect/persistence cases, preservation checks and installed surface read-back; record owner acceptance separately. Never use destructive owner-data trials as acceptance evidence.",
+        "/media/endlessblink/data/my-projects/ai-development/app-plugins/blender/imaginebox/MASTER_PLAN.md:400: Integrate the approved structural model with the existing creative workflow before offering owner-project conversion or replacement of the everyday workspace. Entry requires fresh successful foundation regressions and actual source/bridge read-back; record that evidence before starting integration. Implementation follows the accepted design in INQUIRY-011 while FEATURE-003 may remain READY for functional acceptance. Final delivery TASK-010 still requires FEATURE-003 and TASK-018 to be DONE; no owner acceptance is inferred from design approval. This scheduling adjustment responds to the owner's",
+        "commit 564c6890ed656a86be8c038ecf29e652e6f8a0c9 2026-05-30 docs(plan): add TASK-010 — install libraries/ tooling (resume after restart)",
+        "2026-11-06 supported plan_tracker.py check: revision68 integrityok, Markdownmatches",
+        "2026-11-06 supported plan_tracker.py show TASK-010: full task details/acceptance/dependencies inspected",
+        "2026-11-06 native Watchpost GET tasks/list: categoryfinetuned returns only its own tasks"
+      ],
+      "rationale": "The managed task retains its distinct current product or film acceptance scope and explicit prerequisites. Deployed partial slices do not prove the full contract; keep planned until the owning plan door records sufficient evidence.",
+      "nextAction": "Preserve this category-specific scope and dependency set; update only through the supported current-revision plan door after task-specific proof.",
+      "sourceOccurrences": [
+        {
+          "line": 96,
+          "text": "| TASK-010 | Verify and deliver the complete workflow in Finetuned | P1 | PLANNED | TASK-002, FEATURE-003, BUG-004, FEATURE-005, FEATURE-006, FEATURE-007, TASK-008, INQUIRY-011, BUG-012, FEATURE-013, FEATURE-014, FEATURE-015, FEATURE-016, TASK-018 | finetuned |"
+        },
+        {
+          "line": 242,
+          "text": "| TASK-010 | Exercise the agreed whole journey: correct scene loading, separate camera inventory and live count, shots grouped by scene, independent shot creation, single/bulk camera assignment, mouse-selected script passages, character attachment, composition, saved take selection, scene/shot opening, deletion/recovery and reopen. Cover failures, stale responses, reconnection and preservation. Relevant regression checks, installed build/module provenance, actual authenticated production surface read-back and independent visual evidence must pass. Verify the normal launch path and the actual o"
+        },
+        {
+          "line": 342,
+          "text": "- TASK-010: include the whole example journey above, bulk assignment, scene switching, deletion/recovery and script-text selection. Run failure/reconnect/persistence cases, preservation checks and installed surface read-back; record owner acceptance separately. Never use destructive owner-data trials as acceptance evidence."
+        },
+        {
+          "line": 400,
+          "text": "Integrate the approved structural model with the existing creative workflow before offering owner-project conversion or replacement of the everyday workspace. Entry requires fresh successful foundation regressions and actual source/bridge read-back; record that evidence before starting integration. Implementation follows the accepted design in INQUIRY-011 while FEATURE-003 may remain READY for functional acceptance. Final delivery TASK-010 still requires FEATURE-003 and TASK-018 to be DONE; no owner acceptance is inferred from design approval. This scheduling adjustment responds to the owner's"
+        }
+      ],
+      "commitSubjects": [
+        "564c6890ed656a86be8c038ecf29e652e6f8a0c9 2026-05-30 docs(plan): add TASK-010 — install libraries/ tooling (resume after restart)"
+      ],
+      "dependencies": [
+        "BUG-004",
+        "BUG-012",
+        "FEATURE-003",
+        "FEATURE-005",
+        "FEATURE-006",
+        "FEATURE-007",
+        "FEATURE-013",
+        "FEATURE-014",
+        "FEATURE-015",
+        "FEATURE-016",
+        "INQUIRY-011",
+        "TASK-002",
+        "TASK-008",
+        "TASK-018"
+      ],
+      "managedPlan": true,
+      "revision": 68,
+      "originalStatus": "PLANNED",
+      "evidenceContract": null,
+      "artifactChecks": [],
+      "acceptance": "Exercise the agreed whole journey: correct scene loading, separate camera inventory and live count, shots grouped by scene, independent shot creation, single/bulk camera assignment, mouse-selected script passages, character attachment, composition, saved take selection, scene/shot opening, deletion/recovery and reopen. Cover failures, stale responses, reconnection and preservation. Relevant regression checks, installed build/module provenance, actual authenticated production surface read-back and independent visual evidence must pass. Verify the normal launch path and the actual owner workspace with Blender connected; provide its exact working production URL and a short E2E checklist. A private/sample environment is supporting evidence only. Preserve existing creative controls and all owner content, use disposable copies for destructive cases, and document recoverable activation. Keep final delivery open through owner testing and record actual acceptance separately.",
+      "requirements": [],
+      "detailsSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "detailsSummary": ""
+    }
+  ],
+  "managedPlanReadback": {
+    "revision": 68,
+    "integrity": "ok",
+    "markdown": "matches",
+    "imagineboxCount": 17,
+    "finetunedCount": 2
+  },
+  "limitations": "No source/runtime mutations in this extension; no Blender scene operations, model calls, sends or secret inspection. Native completed task labels are not independently accepted runtime proof. Managed category ownership and READY versus DONE semantics preserved."
+}

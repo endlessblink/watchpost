@@ -34,7 +34,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/action!/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-03-07"
+      "addedAt": "2026-03-07",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "remote-control",
@@ -58,7 +61,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/kanopia/palladio-flow/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-03-07"
+      "addedAt": "2026-03-07",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "Claude-of-war",
@@ -66,7 +72,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/game-dev/Claude-of-war/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-03-07"
+      "addedAt": "2026-03-07",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "master_plan_demo",
@@ -74,7 +83,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/misc/master_plan_demo/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-03-07"
+      "addedAt": "2026-03-07",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "botson",
@@ -114,7 +126,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot-v2/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-15"
+      "addedAt": "2026-05-15",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "fine-cut",
@@ -194,7 +209,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/kanopia/Archive/palladio-flow/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-15"
+      "addedAt": "2026-05-15",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "steady-stream",
@@ -308,7 +326,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-15"
+      "addedAt": "2026-05-15",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "rough-cut",
@@ -412,7 +433,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-15"
+      "addedAt": "2026-05-15",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "sdkjs",
@@ -420,7 +444,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-15"
+      "addedAt": "2026-05-15",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "frontend-slides",
@@ -916,7 +943,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-18"
+      "addedAt": "2026-05-18",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "show-runner/video-use",
@@ -924,7 +954,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-18"
+      "addedAt": "2026-05-18",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "life-os-advisor",
@@ -940,7 +973,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/productivity/life-os/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-23"
+      "addedAt": "2026-05-23",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "doc-aviv-2026",
@@ -956,7 +992,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-manual-purchase-profile/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-26"
+      "addedAt": "2026-05-26",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "bina-meatzevet-courses-manual-offline-access",
@@ -964,7 +1003,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-manual-offline-access/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-26"
+      "addedAt": "2026-05-26",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "bina-meatzevet-courses-subscription-labels",
@@ -972,7 +1014,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-subscription-labels/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-26"
+      "addedAt": "2026-05-26",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "terminal-workspace-tauri",
@@ -1012,7 +1057,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-30"
+      "addedAt": "2026-05-30",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "tools/video-use",
@@ -1020,7 +1068,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-30"
+      "addedAt": "2026-05-30",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "libraries/video-use",
@@ -1028,7 +1079,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-30"
+      "addedAt": "2026-05-30",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "bina-meatzevet-courses-cloudflare-builds",
@@ -1036,7 +1090,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-cloudflare-builds/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-05-31"
+      "addedAt": "2026-05-31",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "bina-meatzevet-courses-business-safe",
@@ -1044,7 +1101,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-business-safe/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-06-01"
+      "addedAt": "2026-06-01",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "codex-desktop-linux",
@@ -1052,7 +1112,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-06-02"
+      "addedAt": "2026-06-02",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "claude-sure-skill",
@@ -1060,7 +1123,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-06-06"
+      "addedAt": "2026-06-06",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "hermes-agent",
@@ -1084,7 +1150,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-wt-tc018/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-06-18"
+      "addedAt": "2026-06-18",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "termfleet-tasklist",
@@ -1092,7 +1161,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-tasklist/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-06-19"
+      "addedAt": "2026-06-19",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "it-takes-resolve",
@@ -1140,7 +1212,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-live-landing/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-10"
+      "addedAt": "2026-07-10",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "hermes-agent-capabilities",
@@ -1156,7 +1231,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-reliability-worktree/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-15"
+      "addedAt": "2026-07-15",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "hermes-reliability-worktree",
@@ -1164,7 +1242,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-15"
+      "addedAt": "2026-07-15",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "flowstate-h0-provenance",
@@ -1172,7 +1253,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-h0-provenance/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-15"
+      "addedAt": "2026-07-15",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "folder-first-mode",
@@ -1180,7 +1264,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-16"
+      "addedAt": "2026-07-16",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "folder-first-compatible",
@@ -1188,7 +1275,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-16"
+      "addedAt": "2026-07-16",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "flowstate-canonical-404",
@@ -1196,7 +1286,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-canonical-404/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-16"
+      "addedAt": "2026-07-16",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "hermes-merge-20260717",
@@ -1204,7 +1297,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-16"
+      "addedAt": "2026-07-16",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:24:28.691Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work."
     },
     {
       "name": "telegram-personal-assistant",
@@ -1212,7 +1308,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-18"
+      "addedAt": "2026-07-18",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:24:28.693Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work."
     },
     {
       "name": "live-compaction-confidence",
@@ -1220,7 +1319,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-19"
+      "addedAt": "2026-07-19",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:24:28.694Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work."
     },
     {
       "name": "recreational",
@@ -1236,7 +1338,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/repo/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-21"
+      "addedAt": "2026-07-21",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "flowstate-duration-current",
@@ -1244,7 +1349,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-duration-current/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-23"
+      "addedAt": "2026-07-23",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "exercise-library",
@@ -1252,7 +1360,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-07-25"
+      "addedAt": "2026-07-25",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:24:28.696Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work."
     },
     {
       "name": "jellyfin-worker",
@@ -1284,7 +1395,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-prod-carousel/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-03"
+      "addedAt": "2026-08-03",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "bina-meatzevet-courses-prod-carousel2",
@@ -1292,7 +1406,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-prod-carousel2/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-03"
+      "addedAt": "2026-08-03",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "personal-planning-agent",
@@ -1308,7 +1425,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/email-center-e2e-clean/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-08"
+      "addedAt": "2026-08-08",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "showtime-bot",
@@ -1324,7 +1444,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/placement-worktree/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-08"
+      "addedAt": "2026-08-08",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "bina-campaign-stage1",
@@ -1332,7 +1455,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-campaign-stage1/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-09"
+      "addedAt": "2026-08-09",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "bina-email-center",
@@ -1340,7 +1466,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-email-center/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-09"
+      "addedAt": "2026-08-09",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "resolve-align",
@@ -1356,7 +1485,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-10"
+      "addedAt": "2026-08-10",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "lifeboat-live",
@@ -1372,7 +1504,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-12"
+      "addedAt": "2026-08-12",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.531Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "bots+automation/bots-directory",
@@ -1396,7 +1531,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-vps-ci/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-16"
+      "addedAt": "2026-08-16",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "content-maker",
@@ -1420,7 +1558,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-release/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-17"
+      "addedAt": "2026-08-17",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "lifeboat-task-map-ui",
@@ -1428,7 +1569,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-18"
+      "addedAt": "2026-08-18",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "lifeboat-emotional-candidate-capture",
@@ -1436,7 +1580,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-18"
+      "addedAt": "2026-08-18",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "lifeboat-response-reviewer",
@@ -1444,7 +1591,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-20"
+      "addedAt": "2026-08-20",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "directive-validation-harness.disabled-backup-20260820/directive-validation-harness",
@@ -1468,7 +1618,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-22"
+      "addedAt": "2026-08-22",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:24:28.697Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work."
     },
     {
       "name": "mixboard",
@@ -1476,7 +1629,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-25"
+      "addedAt": "2026-08-25",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "codex-live-boundary-final",
@@ -1484,7 +1640,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/productivity/codex-live-boundary-final/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-25"
+      "addedAt": "2026-08-25",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "flowstate-canonical-404.git-cleaning-crew-quarantine-20260829",
@@ -1492,7 +1651,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-canonical-404.git-cleaning-crew-quarantine-20260829/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-29"
+      "addedAt": "2026-08-29",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "flowstate-duration-current.git-cleaning-crew-quarantine-20260829",
@@ -1500,7 +1662,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-duration-current.git-cleaning-crew-quarantine-20260829/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-29"
+      "addedAt": "2026-08-29",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "flowstate-h0-provenance.git-cleaning-crew-quarantine-20260829",
@@ -1508,7 +1673,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-h0-provenance.git-cleaning-crew-quarantine-20260829/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-29"
+      "addedAt": "2026-08-29",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "flowstate-reliability-worktree.git-cleaning-crew-quarantine-20260829",
@@ -1516,7 +1684,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-reliability-worktree.git-cleaning-crew-quarantine-20260829/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-08-29"
+      "addedAt": "2026-08-29",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "hermes-port-rtl",
@@ -1524,7 +1695,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-09-02"
+      "addedAt": "2026-09-02",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:24:28.699Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work."
     },
     {
       "name": "hermes-upstream-main-20260903",
@@ -1532,7 +1706,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-09-03"
+      "addedAt": "2026-09-03",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:24:28.700Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work."
     },
     {
       "name": "Happy",
@@ -1548,7 +1725,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-09-05"
+      "addedAt": "2026-09-05",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "bots+automation",
@@ -1628,7 +1808,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-jobfinder-trial/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-09-28"
+      "addedAt": "2026-09-28",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "apps-and-tools/arthouse",
@@ -1672,7 +1855,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-01"
+      "addedAt": "2026-10-01",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.603Z",
+      "archiveReason": "Task audit 2026-11-06: exact filesystem alias of content-creation/frontend-slides; same root and plan authority."
     },
     {
       "name": "apps-and-tools/it-takes-resolve",
@@ -1680,7 +1866,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-01"
+      "addedAt": "2026-10-01",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.603Z",
+      "archiveReason": "Task audit 2026-11-06: exact filesystem alias of it-takes-resolve; same root and plan authority."
     },
     {
       "name": "brainiac",
@@ -1704,7 +1893,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-design-wt/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-02"
+      "addedAt": "2026-10-02",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "assembly-line-hardening-wt",
@@ -1712,7 +1904,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-hardening-wt/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-02"
+      "addedAt": "2026-10-02",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.536Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work."
     },
     {
       "name": "assembly-line-decider-wt",
@@ -1720,7 +1915,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-decider-wt/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-03"
+      "addedAt": "2026-10-03",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.536Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work."
     },
     {
       "name": "assembly-line-nightly-wt",
@@ -1728,7 +1926,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-nightly-wt/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-03"
+      "addedAt": "2026-10-03",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.537Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work."
     },
     {
       "name": "assembly-line-lanes-wt",
@@ -1736,7 +1937,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-lanes-wt/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-03"
+      "addedAt": "2026-10-03",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.538Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work."
     },
     {
       "name": "assembly-line-gaps-wt",
@@ -1744,7 +1948,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-gaps-wt/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-03"
+      "addedAt": "2026-10-03",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.540Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work."
     },
     {
       "name": "claude-code/claude-sure-skill",
@@ -1784,7 +1991,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-release/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-06"
+      "addedAt": "2026-10-06",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.554Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in rough-cut-mvp. Preserve checkout, branch and dirty work."
     },
     {
       "name": "freelance-desk-pixel-fixes",
@@ -1792,7 +2002,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-pixel-fixes/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-06"
+      "addedAt": "2026-10-06",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "ai-development",
@@ -1824,7 +2037,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-10"
+      "addedAt": "2026-10-10",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.560Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in freelance-desk. Preserve checkout, branch and dirty work."
     },
     {
       "name": "paper-bot-wt-source-image",
@@ -1832,7 +2048,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot-wt-source-image/docs/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-10"
+      "addedAt": "2026-10-10",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.566Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in paper-bot. Preserve checkout, branch and dirty work."
     },
     {
       "name": "freelance-desk-wt-desc",
@@ -1840,7 +2059,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-wt-desc/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-11"
+      "addedAt": "2026-10-11",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "rc-readme-wt",
@@ -1848,7 +2070,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-11"
+      "addedAt": "2026-10-11",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "botson-xevents",
@@ -1872,7 +2097,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-grill-me/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-20"
+      "addedAt": "2026-10-20",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:32:25.993Z",
+      "archiveReason": "Task audit 2026-11-06: all224 historical task records and full plan bytes match termfleet-unread before its TC-033 residual-review qualification. Keep that reconciliation view; preserve this checkout and branch."
     },
     {
       "name": "termfleet-close",
@@ -1880,7 +2108,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-close/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-20"
+      "addedAt": "2026-10-20",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:32:25.993Z",
+      "archiveReason": "Task audit 2026-11-06: all224 historical task records and full plan bytes match termfleet-unread before its TC-033 residual-review qualification. Keep that reconciliation view; preserve this checkout and branch."
     },
     {
       "name": "politic-fighter",
@@ -1904,7 +2135,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/web-dev/bina-ve-ze-free-skills/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-24"
+      "addedAt": "2026-10-24",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.571Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in bina-ve-ze. Preserve checkout, branch and dirty work."
     },
     {
       "name": "animation-review",
@@ -1936,7 +2170,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-24"
+      "addedAt": "2026-10-24",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.603Z",
+      "archiveReason": "Task audit 2026-11-06: exact filesystem alias of freelance-desk/jobrunner; same root and plan authority."
     },
     {
       "name": "cac-weight-wt",
@@ -1944,7 +2181,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/cac-weight-wt/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-24"
+      "addedAt": "2026-10-24",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.577Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in claude-and-conquer. Preserve checkout, branch and dirty work."
     },
     {
       "name": "termcontrol",
@@ -1960,7 +2200,10 @@
       "masterPlan": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-fix2-wt/MASTER_PLAN.md",
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-26"
+      "addedAt": "2026-10-26",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "fd-fix2-wt/jobrunner",
@@ -1968,7 +2211,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-10-26"
+      "addedAt": "2026-10-26",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.532Z",
+      "archiveReason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns."
     },
     {
       "name": "imaginebox",
@@ -1996,7 +2242,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-11-02"
+      "addedAt": "2026-11-02",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.590Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in rough-cut-mvp. Preserve checkout, branch and dirty work."
     },
     {
       "name": "motion2mixamo",
@@ -2012,7 +2261,10 @@
       "masterPlan": null,
       "modules": [],
       "source": "auto-discovered",
-      "addedAt": "2026-11-03"
+      "addedAt": "2026-11-03",
+      "archived": true,
+      "archivedAt": "2026-11-06T21:23:53.602Z",
+      "archiveReason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in rough-cut-mvp. Preserve checkout, branch and dirty work."
     },
     {
       "name": "mail-rathon",

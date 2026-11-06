@@ -8,6 +8,15 @@ const end = html.indexOf('// Render kanban board', start);
 const loader = html.slice(start, end);
 
 describe('native archive board loading', () => {
+  it('retains retirement meaning and shows one escaped audit note', async () => {
+    const note='[Task audit 2026-11-06] Superseded <old> workflow';
+    const context=vm.createContext({CONFIG:{useApi:true},API_BASE:'',Date,AbortSignal,console,
+      fetch:async()=>({ok:true,json:async()=>({tasks:[{id:'TASK-002',title:'Old work',status:'planned',archived_at:'2026-11-06',archive_disposition:'superseded',audit_note:note,archive_reason:note}]})})});
+    vm.runInContext(loader,context);
+    const task=(await context.loadTaskApiKanbanData(true)).activeWork[0];
+    expect(task).toMatchObject({status:'todo',archiveDisposition:'superseded'});
+    expect(task.notes).toBe(note.replace('<old>','&lt;old&gt;'));
+  });
   it('keeps a successful empty task list authoritative instead of resurrecting source tasks', async () => {
     const context = vm.createContext({ CONFIG: { useApi: true }, API_BASE: '', Date, AbortSignal,
       fetch: async () => ({ ok: true, json: async () => ({ tasks: [] }) }), console });

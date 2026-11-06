@@ -1,0 +1,821 @@
+{
+  "at": "2026-11-06T21:36:10.016Z",
+  "projects": [
+    {
+      "project": "flow-state",
+      "active": 165,
+      "archived": 624,
+      "retained": 789,
+      "audited": 789,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 70
+        },
+        {
+          "status": "paused",
+          "count": 2
+        },
+        {
+          "status": "planned",
+          "count": 70
+        },
+        {
+          "status": "review",
+          "count": 23
+        }
+      ]
+    },
+    {
+      "project": "claude-and-conquer",
+      "active": 43,
+      "archived": 104,
+      "retained": 147,
+      "audited": 147,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 10
+        },
+        {
+          "status": "planned",
+          "count": 25
+        },
+        {
+          "status": "review",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "project": "newsletter-maker",
+      "active": 13,
+      "archived": 10,
+      "retained": 23,
+      "audited": 23,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "project": "bina-meatzevet-courses",
+      "active": 139,
+      "archived": 558,
+      "retained": 697,
+      "audited": 697,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 19
+        },
+        {
+          "status": "paused",
+          "count": 10
+        },
+        {
+          "status": "planned",
+          "count": 110
+        }
+      ]
+    },
+    {
+      "project": "botson",
+      "active": 54,
+      "archived": 136,
+      "retained": 190,
+      "audited": 190,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 53
+        },
+        {
+          "status": "review",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "project": "design-ai-bot",
+      "active": 1,
+      "archived": 0,
+      "retained": 1,
+      "audited": 1,
+      "byStatus": [
+        {
+          "status": "paused",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "project": "paper-bot",
+      "active": 4,
+      "archived": 68,
+      "retained": 72,
+      "audited": 72,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 3
+        },
+        {
+          "status": "review",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "project": "fine-cut",
+      "active": 11,
+      "archived": 37,
+      "retained": 48,
+      "audited": 48,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 11
+        }
+      ]
+    },
+    {
+      "project": "arthouse",
+      "active": 26,
+      "archived": 129,
+      "retained": 155,
+      "audited": 155,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 2
+        },
+        {
+          "status": "planned",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "project": "inner-dialouge",
+      "active": 12,
+      "archived": 106,
+      "retained": 118,
+      "audited": 118,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "project": "rough-cut-mvp",
+      "active": 114,
+      "archived": 161,
+      "retained": 275,
+      "audited": 275,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 9
+        },
+        {
+          "status": "paused",
+          "count": 1
+        },
+        {
+          "status": "planned",
+          "count": 102
+        },
+        {
+          "status": "review",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "project": "Uatu",
+      "active": 43,
+      "archived": 0,
+      "retained": 43,
+      "audited": 43,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 43
+        }
+      ]
+    },
+    {
+      "project": "watchpost",
+      "active": 2,
+      "archived": 22,
+      "retained": 24,
+      "audited": 24,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "project": "contractor",
+      "active": 25,
+      "archived": 27,
+      "retained": 52,
+      "audited": 52,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 24
+        },
+        {
+          "status": "review",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "project": "income-zen",
+      "active": 16,
+      "archived": 2,
+      "retained": 18,
+      "audited": 18,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 2
+        },
+        {
+          "status": "planned",
+          "count": 14
+        }
+      ]
+    },
+    {
+      "project": "steady-stream",
+      "active": 5,
+      "archived": 4,
+      "retained": 9,
+      "audited": 9,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "project": "Archive/Claude-of-war",
+      "active": 34,
+      "archived": 0,
+      "retained": 34,
+      "audited": 34,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 34
+        }
+      ]
+    },
+    {
+      "project": "Archive/master_plan_demo",
+      "active": 0,
+      "archived": 2,
+      "retained": 2,
+      "audited": 2,
+      "byStatus": []
+    },
+    {
+      "project": "rtl-tools",
+      "active": 3,
+      "archived": 1,
+      "retained": 4,
+      "audited": 4,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "project": "bina-bekitzur",
+      "active": 10,
+      "archived": 0,
+      "retained": 10,
+      "audited": 10,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "project": "bina-ve-ze",
+      "active": 44,
+      "archived": 49,
+      "retained": 93,
+      "audited": 93,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 6
+        },
+        {
+          "status": "paused",
+          "count": 1
+        },
+        {
+          "status": "planned",
+          "count": 34
+        },
+        {
+          "status": "review",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "project": "cc-linux-enhancments",
+      "active": 2,
+      "archived": 0,
+      "retained": 2,
+      "audited": 2,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 1
+        },
+        {
+          "status": "review",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "project": "secured-chain",
+      "active": 4,
+      "archived": 0,
+      "retained": 4,
+      "audited": 4,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "project": "ghost-in-the-vault",
+      "active": 3,
+      "archived": 67,
+      "retained": 70,
+      "audited": 70,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "project": "personal-brand",
+      "active": 13,
+      "archived": 0,
+      "retained": 13,
+      "audited": 13,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "project": "life-os-advisor",
+      "active": 1,
+      "archived": 13,
+      "retained": 14,
+      "audited": 14,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "project": "terminal-workspace-tauri",
+      "active": 2,
+      "archived": 19,
+      "retained": 21,
+      "audited": 21,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "project": "notion-web-enhancer",
+      "active": 8,
+      "archived": 4,
+      "retained": 12,
+      "audited": 12,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "project": "termfleet",
+      "active": 167,
+      "archived": 0,
+      "retained": 167,
+      "audited": 167,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 73
+        },
+        {
+          "status": "review",
+          "count": 94
+        }
+      ]
+    },
+    {
+      "project": "hermes-agent",
+      "active": 2,
+      "archived": 1,
+      "retained": 3,
+      "audited": 3,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 1
+        },
+        {
+          "status": "review",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "project": "token-usage-optimization",
+      "active": 0,
+      "archived": 5,
+      "retained": 5,
+      "audited": 5,
+      "byStatus": []
+    },
+    {
+      "project": "bina-meatezvet-bot",
+      "active": 7,
+      "archived": 6,
+      "retained": 13,
+      "audited": 13,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 3
+        },
+        {
+          "status": "planned",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "project": "pronto",
+      "active": 7,
+      "archived": 0,
+      "retained": 7,
+      "audited": 7,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 2
+        },
+        {
+          "status": "review",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "project": "lifeboat-live",
+      "active": 3,
+      "archived": 0,
+      "retained": 3,
+      "audited": 3,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 1
+        },
+        {
+          "status": "review",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "project": "content-maker",
+      "active": 6,
+      "archived": 4,
+      "retained": 10,
+      "audited": 10,
+      "byStatus": [
+        {
+          "status": "paused",
+          "count": 1
+        },
+        {
+          "status": "planned",
+          "count": 4
+        },
+        {
+          "status": "review",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "project": "agent-ops",
+      "active": 87,
+      "archived": 14,
+      "retained": 101,
+      "audited": 101,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 55
+        },
+        {
+          "status": "paused",
+          "count": 2
+        },
+        {
+          "status": "planned",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "project": "04_סוכנים",
+      "active": 1,
+      "archived": 1,
+      "retained": 2,
+      "audited": 2,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "project": "freelance-desk",
+      "active": 131,
+      "archived": 51,
+      "retained": 182,
+      "audited": 182,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 7
+        },
+        {
+          "status": "planned",
+          "count": 99
+        },
+        {
+          "status": "review",
+          "count": 25
+        }
+      ]
+    },
+    {
+      "project": "freelance-desk/life-os",
+      "active": 21,
+      "archived": 34,
+      "retained": 55,
+      "audited": 55,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 21
+        }
+      ]
+    },
+    {
+      "project": "brainiac",
+      "active": 27,
+      "archived": 1,
+      "retained": 28,
+      "audited": 28,
+      "byStatus": [
+        {
+          "status": "planned",
+          "count": 25
+        },
+        {
+          "status": "review",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "project": "paper-bot-wt-source-image",
+      "active": 0,
+      "archived": 71,
+      "retained": 71,
+      "audited": 71,
+      "byStatus": []
+    },
+    {
+      "project": "botson-xevents",
+      "active": 0,
+      "archived": 183,
+      "retained": 183,
+      "audited": 183,
+      "byStatus": []
+    },
+    {
+      "project": "termfleet-unread",
+      "active": 151,
+      "archived": 73,
+      "retained": 224,
+      "audited": 224,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 6
+        },
+        {
+          "status": "planned",
+          "count": 142
+        },
+        {
+          "status": "review",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "project": "termfleet-grill-me",
+      "active": 0,
+      "archived": 224,
+      "retained": 224,
+      "audited": 224,
+      "byStatus": []
+    },
+    {
+      "project": "termfleet-close",
+      "active": 0,
+      "archived": 224,
+      "retained": 224,
+      "audited": 224,
+      "byStatus": []
+    },
+    {
+      "project": "bina-ve-ze-free-skills",
+      "active": 0,
+      "archived": 92,
+      "retained": 92,
+      "audited": 92,
+      "byStatus": []
+    },
+    {
+      "project": "fd-planfix-wt",
+      "active": 105,
+      "archived": 30,
+      "retained": 135,
+      "audited": 135,
+      "byStatus": [
+        {
+          "status": "in_progress",
+          "count": 1
+        },
+        {
+          "status": "planned",
+          "count": 104
+        }
+      ]
+    },
+    {
+      "project": "cac-weight-wt",
+      "active": 0,
+      "archived": 99,
+      "retained": 99,
+      "audited": 99,
+      "byStatus": []
+    },
+    {
+      "project": "imaginebox",
+      "managed": true,
+      "active": 15,
+      "archived": 2,
+      "retained": 17,
+      "audited": 17,
+      "revision": 68,
+      "sourceAuthority": "Unchanged evidence-gated tracker; archive is a read-only presentation projection"
+    },
+    {
+      "project": "finetuned",
+      "managed": true,
+      "active": 2,
+      "archived": 0,
+      "retained": 2,
+      "audited": 2,
+      "revision": 68,
+      "sourceAuthority": "Unchanged evidence-gated tracker; archive is a read-only presentation projection"
+    }
+  ],
+  "errors": [],
+  "totals": {
+    "active": 1529,
+    "archived": 3258,
+    "retained": 4787,
+    "audited": 4787
+  },
+  "dependencyIssues": [
+    {
+      "project": "claude-and-conquer",
+      "id": "TASK-085",
+      "prerequisite": "BUG-041",
+      "kind": "retired_unfinished_prerequisite",
+      "disposition": "superseded"
+    },
+    {
+      "project": "claude-and-conquer",
+      "id": "TASK-085",
+      "prerequisite": "BUG-042",
+      "kind": "retired_unfinished_prerequisite",
+      "disposition": "superseded"
+    },
+    {
+      "project": "claude-and-conquer",
+      "id": "TASK-087",
+      "prerequisite": "BUG-041",
+      "kind": "retired_unfinished_prerequisite",
+      "disposition": "superseded"
+    },
+    {
+      "project": "paper-bot",
+      "id": "TASK-066",
+      "prerequisite": "TASK-056",
+      "kind": "retired_unfinished_prerequisite",
+      "disposition": "superseded"
+    },
+    {
+      "project": "paper-bot",
+      "id": "TASK-066",
+      "prerequisite": "TASK-062",
+      "kind": "retired_unfinished_prerequisite",
+      "disposition": "superseded"
+    },
+    {
+      "project": "ghost-in-the-vault",
+      "id": "GTV-056",
+      "prerequisite": "GTV-047",
+      "kind": "retired_unfinished_prerequisite",
+      "disposition": "superseded"
+    },
+    {
+      "project": "life-os-advisor",
+      "id": "LOA-056",
+      "prerequisite": "LOA-047",
+      "kind": "retired_unfinished_prerequisite",
+      "disposition": "superseded"
+    },
+    {
+      "project": "fd-planfix-wt",
+      "id": "INT-71",
+      "prerequisite": "INT-58",
+      "kind": "missing_reference"
+    },
+    {
+      "project": "fd-planfix-wt",
+      "id": "INT-72",
+      "prerequisite": "INT-57",
+      "kind": "missing_reference"
+    },
+    {
+      "project": "fd-planfix-wt",
+      "id": "INT-77",
+      "prerequisite": "INT-58",
+      "kind": "missing_reference"
+    }
+  ]
+}

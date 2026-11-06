@@ -1,0 +1,193 @@
+[
+  {
+    "project": "claude-and-conquer",
+    "taskCount": 147,
+    "checks": [
+      {
+        "id": "FEATURE-021",
+        "expected": "review",
+        "actual": "review"
+      },
+      {
+        "id": "TASK-082",
+        "expected": "review",
+        "actual": "review"
+      },
+      {
+        "id": "TASK-118",
+        "expected": "review",
+        "actual": "review"
+      },
+      {
+        "id": "TASK-119",
+        "expected": "planned",
+        "actual": "planned"
+      },
+      {
+        "id": "TASK-121",
+        "expected": "review",
+        "actual": "review"
+      },
+      {
+        "id": "TASK-122",
+        "expected": "review",
+        "actual": "review"
+      }
+    ]
+  },
+  {
+    "project": "newsletter-maker",
+    "taskCount": 23,
+    "checks": []
+  },
+  {
+    "project": "botson",
+    "taskCount": 190,
+    "checks": [
+      {
+        "id": "T-097",
+        "expected": "review",
+        "actual": "review"
+      }
+    ]
+  },
+  {
+    "project": "design-ai-bot",
+    "taskCount": 1,
+    "checks": [
+      {
+        "id": "BOT-001",
+        "expected": "paused",
+        "actual": "paused"
+      }
+    ]
+  },
+  {
+    "project": "paper-bot",
+    "taskCount": 72,
+    "checks": [
+      {
+        "id": "TASK-066",
+        "expected": "review",
+        "actual": "review"
+      }
+    ]
+  },
+  {
+    "project": "Uatu",
+    "taskCount": 43,
+    "checks": []
+  },
+  {
+    "project": "contractor",
+    "taskCount": 52,
+    "checks": [
+      {
+        "id": "TASK-044",
+        "expected": "review",
+        "actual": "review"
+      }
+    ]
+  },
+  {
+    "project": "income-zen",
+    "taskCount": 18,
+    "checks": []
+  },
+  {
+    "project": "steady-stream",
+    "taskCount": 9,
+    "checks": [
+      {
+        "id": "T-005",
+        "expected": "planned",
+        "actual": "planned"
+      }
+    ]
+  },
+  {
+    "project": "cc-linux-enhancments",
+    "taskCount": 2,
+    "checks": [
+      {
+        "id": "TASK-002",
+        "expected": "review",
+        "actual": "review"
+      }
+    ]
+  },
+  {
+    "project": "hermes-agent",
+    "taskCount": 3,
+    "checks": [
+      {
+        "id": "HERMES-002",
+        "expected": "review",
+        "actual": "review"
+      }
+    ]
+  },
+  {
+    "project": "pronto",
+    "taskCount": 7,
+    "checks": [
+      {
+        "id": "PRONTO-001",
+        "expected": "review",
+        "actual": "review"
+      },
+      {
+        "id": "PRONTO-002",
+        "expected": "review",
+        "actual": "review"
+      },
+      {
+        "id": "PRONTO-003",
+        "expected": "review",
+        "actual": "review"
+      },
+      {
+        "id": "PRONTO-004",
+        "expected": "review",
+        "actual": "review"
+      },
+      {
+        "id": "PRONTO-006",
+        "expected": "review",
+        "actual": "review"
+      }
+    ]
+  },
+  {
+    "project": "lifeboat-live",
+    "taskCount": 3,
+    "checks": [
+      {
+        "id": "TASK-2",
+        "expected": "review",
+        "actual": "review"
+      },
+      {
+        "id": "TASK-3",
+        "expected": "review",
+        "actual": "review"
+      }
+    ]
+  },
+  {
+    "project": "brainiac",
+    "taskCount": 28,
+    "checks": [
+      {
+        "id": "BRN-001",
+        "expected": "review",
+        "actual": "review"
+      },
+      {
+        "id": "BRN-002",
+        "expected": "review",
+        "actual": "review"
+      }
+    ]
+  }
+]

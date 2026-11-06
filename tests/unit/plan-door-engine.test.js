@@ -6,6 +6,19 @@ const projects = [{ name: 'imaginebox', root: '/product', masterPlan: '/product/
 const state = { revision: 6, tasks: { 'TASK-001': { title: 'Product', status: 'READY', priority: 'P1', category: 'imagine-box', dependencies: [] }, 'TASK-002': { title: 'Film', status: 'PLANNED', priority: 'P1', category: 'finetuned', dependencies: ['TASK-001'] } }, evidence: {} };
 
 describe('native plan-door engine', () => {
+    it('archives accepted history in the view while retaining canonical dependency completion', () => {
+        const snapshot=structuredClone(state);
+        snapshot.tasks['TASK-001'].status='DONE';
+        snapshot.tasks['TASK-003']={title:'Next product task',status:'PLANNED',priority:'P1',category:'imagine-box',dependencies:['TASK-001']};
+        const engine=createPlanDoorEngine(projects[0],()=>JSON.stringify(snapshot));
+        expect(engine.getTasks().map(t=>t.id)).toEqual(['TASK-003']);
+        expect(engine.getTasks({archivedOnly:true}).map(t=>t.id)).toEqual(['TASK-001']);
+        expect(engine.getTasks({includeArchived:true})).toHaveLength(2);
+        expect(engine.getReady().map(t=>t.id)).toEqual(['TASK-003']);
+        expect(engine.getStats()).toMatchObject({total:1,archived:1});
+        expect(engine.getTask('TASK-001').original_status).toBe('DONE');
+        expect(()=>engine.updateStatus('TASK-001','planned')).toThrow('evidence-gated');
+    });
     it('uses canonical CLI JSON, scopes categories and preserves READY', () => {
         const calls = [];
         const engine = createPlanDoorEngine(projects[0], (...args) => { calls.push(args); return JSON.stringify(state); });

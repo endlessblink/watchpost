@@ -1,0 +1,305 @@
+{
+  "at": "2026-11-06T21:36:58.725Z",
+  "results": [
+    {
+      "project": "flow-state",
+      "active": 165,
+      "archived": 624,
+      "passed": true
+    },
+    {
+      "project": "claude-and-conquer",
+      "active": 43,
+      "archived": 104,
+      "passed": true
+    },
+    {
+      "project": "newsletter-maker",
+      "active": 13,
+      "archived": 10,
+      "passed": true
+    },
+    {
+      "project": "bina-meatzevet-courses",
+      "active": 139,
+      "archived": 558,
+      "passed": true
+    },
+    {
+      "project": "botson",
+      "active": 54,
+      "archived": 136,
+      "passed": true
+    },
+    {
+      "project": "design-ai-bot",
+      "active": 1,
+      "archived": 0,
+      "passed": true
+    },
+    {
+      "project": "paper-bot",
+      "active": 4,
+      "archived": 68,
+      "passed": true
+    },
+    {
+      "project": "fine-cut",
+      "active": 11,
+      "archived": 37,
+      "passed": true
+    },
+    {
+      "project": "arthouse",
+      "active": 26,
+      "archived": 129,
+      "passed": true
+    },
+    {
+      "project": "inner-dialouge",
+      "active": 12,
+      "archived": 106,
+      "passed": true
+    },
+    {
+      "project": "rough-cut-mvp",
+      "active": 114,
+      "archived": 161,
+      "passed": true
+    },
+    {
+      "project": "Uatu",
+      "active": 43,
+      "archived": 0,
+      "passed": true
+    },
+    {
+      "project": "watchpost",
+      "active": 2,
+      "archived": 22,
+      "passed": true
+    },
+    {
+      "project": "contractor",
+      "active": 25,
+      "archived": 27,
+      "passed": true
+    },
+    {
+      "project": "income-zen",
+      "active": 16,
+      "archived": 2,
+      "passed": true
+    },
+    {
+      "project": "steady-stream",
+      "active": 5,
+      "archived": 4,
+      "passed": true
+    },
+    {
+      "project": "Archive/Claude-of-war",
+      "active": 34,
+      "archived": 0,
+      "passed": true
+    },
+    {
+      "project": "Archive/master_plan_demo",
+      "active": 0,
+      "archived": 2,
+      "passed": true
+    },
+    {
+      "project": "rtl-tools",
+      "active": 3,
+      "archived": 1,
+      "passed": true
+    },
+    {
+      "project": "bina-bekitzur",
+      "active": 10,
+      "archived": 0,
+      "passed": true
+    },
+    {
+      "project": "bina-ve-ze",
+      "active": 44,
+      "archived": 49,
+      "passed": true
+    },
+    {
+      "project": "cc-linux-enhancments",
+      "active": 2,
+      "archived": 0,
+      "passed": true
+    },
+    {
+      "project": "secured-chain",
+      "active": 4,
+      "archived": 0,
+      "passed": true
+    },
+    {
+      "project": "ghost-in-the-vault",
+      "active": 3,
+      "archived": 67,
+      "passed": true
+    },
+    {
+      "project": "personal-brand",
+      "active": 13,
+      "archived": 0,
+      "passed": true
+    },
+    {
+      "project": "life-os-advisor",
+      "active": 1,
+      "archived": 13,
+      "passed": true
+    },
+    {
+      "project": "terminal-workspace-tauri",
+      "active": 2,
+      "archived": 19,
+      "passed": true
+    },
+    {
+      "project": "notion-web-enhancer",
+      "active": 8,
+      "archived": 4,
+      "passed": true
+    },
+    {
+      "project": "termfleet",
+      "active": 167,
+      "archived": 0,
+      "passed": true
+    },
+    {
+      "project": "hermes-agent",
+      "active": 2,
+      "archived": 1,
+      "passed": true
+    },
+    {
+      "project": "token-usage-optimization",
+      "active": 0,
+      "archived": 5,
+      "passed": true
+    },
+    {
+      "project": "bina-meatezvet-bot",
+      "active": 7,
+      "archived": 6,
+      "passed": true
+    },
+    {
+      "project": "pronto",
+      "active": 7,
+      "archived": 0,
+      "passed": true
+    },
+    {
+      "project": "lifeboat-live",
+      "active": 3,
+      "archived": 0,
+      "passed": true
+    },
+    {
+      "project": "content-maker",
+      "active": 6,
+      "archived": 4,
+      "passed": true
+    },
+    {
+      "project": "agent-ops",
+      "active": 87,
+      "archived": 14,
+      "passed": true
+    },
+    {
+      "project": "04_סוכנים",
+      "active": 1,
+      "archived": 1,
+      "passed": true
+    },
+    {
+      "project": "freelance-desk",
+      "active": 131,
+      "archived": 51,
+      "passed": true
+    },
+    {
+      "project": "freelance-desk/life-os",
+      "active": 21,
+      "archived": 34,
+      "passed": true
+    },
+    {
+      "project": "brainiac",
+      "active": 27,
+      "archived": 1,
+      "passed": true
+    },
+    {
+      "project": "paper-bot-wt-source-image",
+      "active": 0,
+      "archived": 71,
+      "passed": true
+    },
+    {
+      "project": "botson-xevents",
+      "active": 0,
+      "archived": 183,
+      "passed": true
+    },
+    {
+      "project": "termfleet-unread",
+      "active": 151,
+      "archived": 73,
+      "passed": true
+    },
+    {
+      "project": "termfleet-grill-me",
+      "active": 0,
+      "archived": 224,
+      "passed": true
+    },
+    {
+      "project": "termfleet-close",
+      "active": 0,
+      "archived": 224,
+      "passed": true
+    },
+    {
+      "project": "bina-ve-ze-free-skills",
+      "active": 0,
+      "archived": 92,
+      "passed": true
+    },
+    {
+      "project": "fd-planfix-wt",
+      "active": 105,
+      "archived": 30,
+      "passed": true
+    },
+    {
+      "project": "cac-weight-wt",
+      "active": 0,
+      "archived": 99,
+      "passed": true
+    },
+    {
+      "project": "imaginebox",
+      "active": 15,
+      "archived": 2,
+      "passed": true
+    },
+    {
+      "project": "finetuned",
+      "active": 2,
+      "archived": 0,
+      "passed": true
+    }
+  ]
+}

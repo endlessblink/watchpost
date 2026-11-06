@@ -21,6 +21,7 @@
         <div class="header-actions">
           <button class="nav-tab active" data-view="kanban">Board</button>
           <button class="nav-tab" data-view="archive">Archive</button>
+          <a class="nav-tab" href="/docs/task-audit-2026-11-06/task-audit.html" target="_blank" rel="noopener" style="text-decoration:none">Task audit</a>
           <div class="search-container" id="search-box">
             <span class="search-icon" onclick="document.getElementById('search-input').focus()"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></span>
             <input type="text" id="search-input" class="search-input" placeholder="Search tasks" aria-label="Search tasks" oninput="handleSearch(this.value)">
@@ -1183,8 +1184,8 @@
               managedPlan: task.managed_plan || false,
               archivedAt: task.archived_at || null,
               archiveDisposition: task.archive_disposition || 'completed',
-              auditLabel: task.audit_note && /stale_in_progress/.test(task.audit_note) ? 'Claim needs recheck' : task.audit_note && /needs_verification/.test(task.audit_note) ? 'Verification pending' : task.audit_note && task.status === 'in_progress' ? 'Activity unverified' : '',
-              notes: [task.audit_note, task.archive_reason].filter(Boolean).map(value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))).join('<br><br>'),
+              auditLabel: task.audit_note && /stale_in_progress/.test(task.audit_note) ? 'Claim needs recheck' : task.audit_note && /needs_verification/.test(task.audit_note) ? 'Verification pending' : task.status === 'in_progress' ? 'Activity unverified' : '',
+              notes: [task.audit_note, task.audit_note?.startsWith(task.archive_reason || '\u0000') ? null : task.archive_reason].filter(Boolean).map(value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))).join('<br><br>'),
               section: 'activeWork',
               description: '',
               subtasks: [],
@@ -1779,6 +1780,7 @@
           taskList.forEach(task => {
             const card = document.createElement('div');
             card.className = 'task-card';
+            card.setAttribute('data-id', task.id);
 
             const priority = task.priority || '';
             const priorityClass = priority.toLowerCase().includes('p1') || priority.toLowerCase().includes('high') ? 'high' :
@@ -1792,21 +1794,17 @@
                 complexity.toLowerCase() === 'complex' ? 'complex' : 'unknown';
 
             // Get type badge based on ID prefix
-            const typeLabel = task.archivedAt && task.archiveDisposition !== 'completed' ? `Archived · ${task.archiveDisposition} · ${task.status}` : task.id.startsWith('BUG-') ? `${ICONS.bug}Bug Fixed` :
-              task.id.startsWith('ROAD-') ? `${ICONS.roadmap}Roadmap` :
-                task.id.startsWith('TASK-') ? `${ICONS.done}Task` : `${ICONS.done}Done`;
+            const dispositionLabel = { completed: 'Completed', superseded: 'Superseded', duplicate: 'Duplicate', rejected: 'Rejected' }[task.archiveDisposition] || 'Completed';
+            const typeLabel = task.archivedAt && task.archiveDisposition !== 'completed' ? `${dispositionLabel} · source status: ${task.status}` : 'Completed · evidence in details';
 
             card.innerHTML = `
-              <div class="task-header">
-                <div class="task-id">${task.id}</div>
-                <div class="task-priority ${priorityClass}">${task.priority || 'UNASSIGNED'}</div>
-                <div class="task-complexity ${complexityClass}">${complexity || 'Unknown'}</div>
-              </div>
-              <div class="task-title">${task.title}</div>
-              ${task.notes ? `<div class="task-description">${task.notes}</div>` : ''}
+              <div class="task-kicker">${escHtml(task.id)} · ${escHtml(task.priority || 'UNASSIGNED')}</div>
+              <div class="task-title">${escHtml(cardTitle(task))}</div>
+              <div class="task-sub">${escHtml(typeLabel)}</div>
+              ${task.notes ? `<div class="task-sub">${cardSubtitle(task)}</div>` : ''}
               <div class="task-footer">
                 <div class="task-meta">
-                  <span class="task-tags">${typeLabel}</span>
+                  <span class="task-tags">Open for evidence and next action</span>
                 </div>
               </div>
             `;

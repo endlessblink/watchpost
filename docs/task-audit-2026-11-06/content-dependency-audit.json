@@ -1,0 +1,2536 @@
+{
+  "auditedAt": "2026-11-06T21:23:48.839Z",
+  "scope": "Current source dependency graph for all12 content projects, parsed into independent in-memory SQLite engines; no source or runtime writes.",
+  "counts": {
+    "projects": 12,
+    "tasks": 1459,
+    "edges": 591,
+    "danglingEdges": 0,
+    "cycles": 0,
+    "duplicateAliasDependencyReferences": 0,
+    "supersededCapabilityDependencies": 0
+  },
+  "projects": [
+    {
+      "project": "bina-meatzevet-courses",
+      "source": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/docs/MASTER_PLAN.md",
+      "taskCount": 697,
+      "edgeCount": 474,
+      "edges": [
+        {
+          "task": "BUG-003",
+          "dependsOn": "BUG-001"
+        },
+        {
+          "task": "BUG-307",
+          "dependsOn": "BUG-305"
+        },
+        {
+          "task": "BUG-353",
+          "dependsOn": "BUG-352"
+        },
+        {
+          "task": "BUG-355",
+          "dependsOn": "BUG-353"
+        },
+        {
+          "task": "BUG-356",
+          "dependsOn": "BUG-355"
+        },
+        {
+          "task": "BUG-357",
+          "dependsOn": "TASK-244"
+        },
+        {
+          "task": "BUG-357",
+          "dependsOn": "TASK-361"
+        },
+        {
+          "task": "BUG-357",
+          "dependsOn": "TASK-368"
+        },
+        {
+          "task": "BUG-460",
+          "dependsOn": "BUG-459"
+        },
+        {
+          "task": "INQUIRY-1826",
+          "dependsOn": "INQUIRY-1822"
+        },
+        {
+          "task": "INQUIRY-1826",
+          "dependsOn": "TASK-1813"
+        },
+        {
+          "task": "TASK-002",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-003",
+          "dependsOn": "TASK-002"
+        },
+        {
+          "task": "TASK-004",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-005",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-006",
+          "dependsOn": "TASK-004"
+        },
+        {
+          "task": "TASK-007",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-008",
+          "dependsOn": "TASK-006"
+        },
+        {
+          "task": "TASK-009",
+          "dependsOn": "TASK-008"
+        },
+        {
+          "task": "TASK-010",
+          "dependsOn": "TASK-008"
+        },
+        {
+          "task": "TASK-011",
+          "dependsOn": "TASK-010"
+        },
+        {
+          "task": "TASK-012",
+          "dependsOn": "TASK-011"
+        },
+        {
+          "task": "TASK-013",
+          "dependsOn": "TASK-012"
+        },
+        {
+          "task": "TASK-014",
+          "dependsOn": "TASK-012"
+        },
+        {
+          "task": "TASK-015",
+          "dependsOn": "TASK-011"
+        },
+        {
+          "task": "TASK-016",
+          "dependsOn": "TASK-015"
+        },
+        {
+          "task": "TASK-017",
+          "dependsOn": "TASK-016"
+        },
+        {
+          "task": "TASK-018",
+          "dependsOn": "TASK-015"
+        },
+        {
+          "task": "TASK-019",
+          "dependsOn": "TASK-015"
+        },
+        {
+          "task": "TASK-020",
+          "dependsOn": "TASK-005"
+        },
+        {
+          "task": "TASK-021",
+          "dependsOn": "TASK-020"
+        },
+        {
+          "task": "TASK-022",
+          "dependsOn": "TASK-020"
+        },
+        {
+          "task": "TASK-023",
+          "dependsOn": "TASK-006"
+        },
+        {
+          "task": "TASK-023",
+          "dependsOn": "TASK-020"
+        },
+        {
+          "task": "TASK-024",
+          "dependsOn": "TASK-023"
+        },
+        {
+          "task": "TASK-025",
+          "dependsOn": "TASK-020"
+        },
+        {
+          "task": "TASK-026",
+          "dependsOn": "TASK-023"
+        },
+        {
+          "task": "TASK-027",
+          "dependsOn": "TASK-026"
+        },
+        {
+          "task": "TASK-028",
+          "dependsOn": "TASK-026"
+        },
+        {
+          "task": "TASK-029",
+          "dependsOn": "TASK-026"
+        },
+        {
+          "task": "TASK-030",
+          "dependsOn": "TASK-029"
+        },
+        {
+          "task": "TASK-031",
+          "dependsOn": "TASK-029"
+        },
+        {
+          "task": "TASK-032",
+          "dependsOn": "TASK-030"
+        },
+        {
+          "task": "TASK-033",
+          "dependsOn": "TASK-032"
+        },
+        {
+          "task": "TASK-034",
+          "dependsOn": "TASK-032"
+        },
+        {
+          "task": "TASK-035",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-036",
+          "dependsOn": "TASK-035"
+        },
+        {
+          "task": "TASK-037",
+          "dependsOn": "TASK-035"
+        },
+        {
+          "task": "TASK-038",
+          "dependsOn": "TASK-030"
+        },
+        {
+          "task": "TASK-038",
+          "dependsOn": "TASK-036"
+        },
+        {
+          "task": "TASK-039",
+          "dependsOn": "TASK-014"
+        },
+        {
+          "task": "TASK-040",
+          "dependsOn": "TASK-039"
+        },
+        {
+          "task": "TASK-041",
+          "dependsOn": "TASK-039"
+        },
+        {
+          "task": "TASK-042",
+          "dependsOn": "TASK-020"
+        },
+        {
+          "task": "TASK-043",
+          "dependsOn": "TASK-026"
+        },
+        {
+          "task": "TASK-044",
+          "dependsOn": "TASK-026"
+        },
+        {
+          "task": "TASK-048",
+          "dependsOn": "TASK-026"
+        },
+        {
+          "task": "TASK-049",
+          "dependsOn": "TASK-008"
+        },
+        {
+          "task": "TASK-050",
+          "dependsOn": "TASK-049"
+        },
+        {
+          "task": "TASK-051",
+          "dependsOn": "TASK-049"
+        },
+        {
+          "task": "TASK-052",
+          "dependsOn": "TASK-050"
+        },
+        {
+          "task": "TASK-052",
+          "dependsOn": "TASK-051"
+        },
+        {
+          "task": "TASK-053",
+          "dependsOn": "TASK-052"
+        },
+        {
+          "task": "TASK-054",
+          "dependsOn": "TASK-053"
+        },
+        {
+          "task": "TASK-055",
+          "dependsOn": "TASK-030"
+        },
+        {
+          "task": "TASK-055",
+          "dependsOn": "TASK-052"
+        },
+        {
+          "task": "TASK-057",
+          "dependsOn": "TASK-056"
+        },
+        {
+          "task": "TASK-059",
+          "dependsOn": "TASK-058"
+        },
+        {
+          "task": "TASK-060",
+          "dependsOn": "TASK-058"
+        },
+        {
+          "task": "TASK-061",
+          "dependsOn": "TASK-057"
+        },
+        {
+          "task": "TASK-061",
+          "dependsOn": "TASK-058"
+        },
+        {
+          "task": "TASK-062",
+          "dependsOn": "TASK-061"
+        },
+        {
+          "task": "TASK-063",
+          "dependsOn": "TASK-061"
+        },
+        {
+          "task": "TASK-063",
+          "dependsOn": "TASK-062"
+        },
+        {
+          "task": "TASK-064",
+          "dependsOn": "TASK-063"
+        },
+        {
+          "task": "TASK-065",
+          "dependsOn": "TASK-035"
+        },
+        {
+          "task": "TASK-066",
+          "dependsOn": "TASK-011"
+        },
+        {
+          "task": "TASK-067",
+          "dependsOn": "TASK-066"
+        },
+        {
+          "task": "TASK-068",
+          "dependsOn": "TASK-066"
+        },
+        {
+          "task": "TASK-069",
+          "dependsOn": "TASK-068"
+        },
+        {
+          "task": "TASK-070",
+          "dependsOn": "TASK-060"
+        },
+        {
+          "task": "TASK-070",
+          "dependsOn": "TASK-069"
+        },
+        {
+          "task": "TASK-071",
+          "dependsOn": "TASK-070"
+        },
+        {
+          "task": "TASK-072",
+          "dependsOn": "TASK-071"
+        },
+        {
+          "task": "TASK-073",
+          "dependsOn": "TASK-057"
+        },
+        {
+          "task": "TASK-073",
+          "dependsOn": "TASK-067"
+        },
+        {
+          "task": "TASK-074",
+          "dependsOn": "TASK-052"
+        },
+        {
+          "task": "TASK-075",
+          "dependsOn": "TASK-064"
+        },
+        {
+          "task": "TASK-076",
+          "dependsOn": "TASK-075"
+        },
+        {
+          "task": "TASK-077",
+          "dependsOn": "TASK-072"
+        },
+        {
+          "task": "TASK-087",
+          "dependsOn": "TASK-084"
+        },
+        {
+          "task": "TASK-087",
+          "dependsOn": "TASK-085"
+        },
+        {
+          "task": "TASK-087",
+          "dependsOn": "TASK-086"
+        },
+        {
+          "task": "TASK-098",
+          "dependsOn": "TASK-099"
+        },
+        {
+          "task": "TASK-105",
+          "dependsOn": "TASK-104"
+        },
+        {
+          "task": "TASK-157",
+          "dependsOn": "TASK-156"
+        },
+        {
+          "task": "TASK-158",
+          "dependsOn": "TASK-157"
+        },
+        {
+          "task": "TASK-159",
+          "dependsOn": "TASK-157"
+        },
+        {
+          "task": "TASK-160",
+          "dependsOn": "TASK-156"
+        },
+        {
+          "task": "TASK-161",
+          "dependsOn": "TASK-160"
+        },
+        {
+          "task": "TASK-162",
+          "dependsOn": "TASK-158"
+        },
+        {
+          "task": "TASK-162",
+          "dependsOn": "TASK-159"
+        },
+        {
+          "task": "TASK-163",
+          "dependsOn": "TASK-158"
+        },
+        {
+          "task": "TASK-163",
+          "dependsOn": "TASK-159"
+        },
+        {
+          "task": "TASK-164",
+          "dependsOn": "TASK-158"
+        },
+        {
+          "task": "TASK-164",
+          "dependsOn": "TASK-159"
+        },
+        {
+          "task": "TASK-165",
+          "dependsOn": "TASK-157"
+        },
+        {
+          "task": "TASK-166",
+          "dependsOn": "TASK-157"
+        },
+        {
+          "task": "TASK-167",
+          "dependsOn": "TASK-157"
+        },
+        {
+          "task": "TASK-168",
+          "dependsOn": "TASK-157"
+        },
+        {
+          "task": "TASK-169",
+          "dependsOn": "TASK-157"
+        },
+        {
+          "task": "TASK-170",
+          "dependsOn": "TASK-157"
+        },
+        {
+          "task": "TASK-171",
+          "dependsOn": "TASK-157"
+        },
+        {
+          "task": "TASK-172",
+          "dependsOn": "TASK-161"
+        },
+        {
+          "task": "TASK-172",
+          "dependsOn": "TASK-171"
+        },
+        {
+          "task": "TASK-173",
+          "dependsOn": "TASK-172"
+        },
+        {
+          "task": "TASK-1758",
+          "dependsOn": "BUG-348"
+        },
+        {
+          "task": "TASK-1762",
+          "dependsOn": "TASK-1761"
+        },
+        {
+          "task": "TASK-1763",
+          "dependsOn": "TASK-1761"
+        },
+        {
+          "task": "TASK-1764",
+          "dependsOn": "TASK-1761"
+        },
+        {
+          "task": "TASK-1765",
+          "dependsOn": "TASK-1761"
+        },
+        {
+          "task": "TASK-1766",
+          "dependsOn": "TASK-1761"
+        },
+        {
+          "task": "TASK-1767",
+          "dependsOn": "TASK-1761"
+        },
+        {
+          "task": "TASK-1774",
+          "dependsOn": "TASK-1771"
+        },
+        {
+          "task": "TASK-1774",
+          "dependsOn": "TASK-1788"
+        },
+        {
+          "task": "TASK-1777",
+          "dependsOn": "TASK-1776"
+        },
+        {
+          "task": "TASK-1778",
+          "dependsOn": "TASK-1776"
+        },
+        {
+          "task": "TASK-1779",
+          "dependsOn": "TASK-1771"
+        },
+        {
+          "task": "TASK-1785",
+          "dependsOn": "TASK-1784"
+        },
+        {
+          "task": "TASK-1786",
+          "dependsOn": "TASK-1784"
+        },
+        {
+          "task": "TASK-1786",
+          "dependsOn": "TASK-1785"
+        },
+        {
+          "task": "TASK-1787",
+          "dependsOn": "TASK-1770"
+        },
+        {
+          "task": "TASK-1797",
+          "dependsOn": "TASK-1796"
+        },
+        {
+          "task": "TASK-1798",
+          "dependsOn": "TASK-1796"
+        },
+        {
+          "task": "TASK-1798",
+          "dependsOn": "TASK-1797"
+        },
+        {
+          "task": "TASK-1799",
+          "dependsOn": "TASK-1796"
+        },
+        {
+          "task": "TASK-1799",
+          "dependsOn": "TASK-1797"
+        },
+        {
+          "task": "TASK-1800",
+          "dependsOn": "TASK-1799"
+        },
+        {
+          "task": "TASK-1801",
+          "dependsOn": "TASK-1797"
+        },
+        {
+          "task": "TASK-1801",
+          "dependsOn": "TASK-1798"
+        },
+        {
+          "task": "TASK-1801",
+          "dependsOn": "TASK-1799"
+        },
+        {
+          "task": "TASK-1801",
+          "dependsOn": "TASK-1800"
+        },
+        {
+          "task": "TASK-1802",
+          "dependsOn": "TASK-1800"
+        },
+        {
+          "task": "TASK-1803",
+          "dependsOn": "TASK-1800"
+        },
+        {
+          "task": "TASK-1804",
+          "dependsOn": "TASK-1803"
+        },
+        {
+          "task": "TASK-1805",
+          "dependsOn": "TASK-1803"
+        },
+        {
+          "task": "TASK-1805",
+          "dependsOn": "TASK-1804"
+        },
+        {
+          "task": "TASK-1806",
+          "dependsOn": "TASK-1803"
+        },
+        {
+          "task": "TASK-1806",
+          "dependsOn": "TASK-1804"
+        },
+        {
+          "task": "TASK-1807",
+          "dependsOn": "TASK-1803"
+        },
+        {
+          "task": "TASK-1808",
+          "dependsOn": "TASK-1804"
+        },
+        {
+          "task": "TASK-1808",
+          "dependsOn": "TASK-1805"
+        },
+        {
+          "task": "TASK-1809",
+          "dependsOn": "TASK-1805"
+        },
+        {
+          "task": "TASK-1809",
+          "dependsOn": "TASK-1806"
+        },
+        {
+          "task": "TASK-1809",
+          "dependsOn": "TASK-1807"
+        },
+        {
+          "task": "TASK-1809",
+          "dependsOn": "TASK-1808"
+        },
+        {
+          "task": "TASK-1810",
+          "dependsOn": "TASK-1801"
+        },
+        {
+          "task": "TASK-1811",
+          "dependsOn": "TASK-1801"
+        },
+        {
+          "task": "TASK-1815",
+          "dependsOn": "TASK-1812"
+        },
+        {
+          "task": "TASK-1816",
+          "dependsOn": "TASK-1812"
+        },
+        {
+          "task": "TASK-1816",
+          "dependsOn": "TASK-1814"
+        },
+        {
+          "task": "TASK-1817",
+          "dependsOn": "TASK-1816"
+        },
+        {
+          "task": "TASK-182",
+          "dependsOn": "TASK-178"
+        },
+        {
+          "task": "TASK-1827",
+          "dependsOn": "TASK-1801"
+        },
+        {
+          "task": "TASK-1828",
+          "dependsOn": "INQUIRY-1822"
+        },
+        {
+          "task": "TASK-183",
+          "dependsOn": "TASK-178"
+        },
+        {
+          "task": "TASK-1835",
+          "dependsOn": "TASK-1834"
+        },
+        {
+          "task": "TASK-1836",
+          "dependsOn": "TASK-1834"
+        },
+        {
+          "task": "TASK-1837",
+          "dependsOn": "TASK-1834"
+        },
+        {
+          "task": "TASK-1838",
+          "dependsOn": "TASK-1834"
+        },
+        {
+          "task": "TASK-184",
+          "dependsOn": "TASK-178"
+        },
+        {
+          "task": "TASK-184",
+          "dependsOn": "TASK-183"
+        },
+        {
+          "task": "TASK-1840",
+          "dependsOn": "TASK-1834"
+        },
+        {
+          "task": "TASK-1840",
+          "dependsOn": "TASK-1836"
+        },
+        {
+          "task": "TASK-1841",
+          "dependsOn": "TASK-1840"
+        },
+        {
+          "task": "TASK-1842",
+          "dependsOn": "TASK-1840"
+        },
+        {
+          "task": "TASK-1843",
+          "dependsOn": "TASK-1841"
+        },
+        {
+          "task": "TASK-1843",
+          "dependsOn": "TASK-1842"
+        },
+        {
+          "task": "TASK-1844",
+          "dependsOn": "TASK-1843"
+        },
+        {
+          "task": "TASK-1845",
+          "dependsOn": "TASK-1844"
+        },
+        {
+          "task": "TASK-1847",
+          "dependsOn": "TASK-1846"
+        },
+        {
+          "task": "TASK-1848",
+          "dependsOn": "TASK-1847"
+        },
+        {
+          "task": "TASK-1849",
+          "dependsOn": "TASK-1801"
+        },
+        {
+          "task": "TASK-185",
+          "dependsOn": "TASK-178"
+        },
+        {
+          "task": "TASK-185",
+          "dependsOn": "TASK-182"
+        },
+        {
+          "task": "TASK-1850",
+          "dependsOn": "BUG-459"
+        },
+        {
+          "task": "TASK-1850",
+          "dependsOn": "BUG-460"
+        },
+        {
+          "task": "TASK-1854",
+          "dependsOn": "TASK-1853"
+        },
+        {
+          "task": "TASK-1856",
+          "dependsOn": "TASK-1855"
+        },
+        {
+          "task": "TASK-186",
+          "dependsOn": "TASK-179"
+        },
+        {
+          "task": "TASK-187",
+          "dependsOn": "TASK-179"
+        },
+        {
+          "task": "TASK-1871",
+          "dependsOn": "TASK-1870"
+        },
+        {
+          "task": "TASK-1872",
+          "dependsOn": "TASK-1871"
+        },
+        {
+          "task": "TASK-1873",
+          "dependsOn": "TASK-1872"
+        },
+        {
+          "task": "TASK-1874",
+          "dependsOn": "TASK-1801"
+        },
+        {
+          "task": "TASK-1874",
+          "dependsOn": "TASK-1846"
+        },
+        {
+          "task": "TASK-1874",
+          "dependsOn": "TASK-1849"
+        },
+        {
+          "task": "TASK-188",
+          "dependsOn": "TASK-183"
+        },
+        {
+          "task": "TASK-188",
+          "dependsOn": "TASK-186"
+        },
+        {
+          "task": "TASK-1880",
+          "dependsOn": "TASK-1783"
+        },
+        {
+          "task": "TASK-1881",
+          "dependsOn": "TASK-1880"
+        },
+        {
+          "task": "TASK-1882",
+          "dependsOn": "TASK-1881"
+        },
+        {
+          "task": "TASK-189",
+          "dependsOn": "TASK-179"
+        },
+        {
+          "task": "TASK-1895",
+          "dependsOn": "TASK-1893"
+        },
+        {
+          "task": "TASK-1895",
+          "dependsOn": "TASK-1894"
+        },
+        {
+          "task": "TASK-1896",
+          "dependsOn": "TASK-1888"
+        },
+        {
+          "task": "TASK-1896",
+          "dependsOn": "TASK-1893"
+        },
+        {
+          "task": "TASK-1896",
+          "dependsOn": "TASK-1895"
+        },
+        {
+          "task": "TASK-1897",
+          "dependsOn": "TASK-1800"
+        },
+        {
+          "task": "TASK-1897",
+          "dependsOn": "TASK-1801"
+        },
+        {
+          "task": "TASK-1898",
+          "dependsOn": "TASK-1889"
+        },
+        {
+          "task": "TASK-1899",
+          "dependsOn": "TASK-1800"
+        },
+        {
+          "task": "TASK-1899",
+          "dependsOn": "TASK-1801"
+        },
+        {
+          "task": "TASK-1899",
+          "dependsOn": "TASK-1874"
+        },
+        {
+          "task": "TASK-190",
+          "dependsOn": "TASK-178"
+        },
+        {
+          "task": "TASK-190",
+          "dependsOn": "TASK-180"
+        },
+        {
+          "task": "TASK-1900",
+          "dependsOn": "TASK-1899"
+        },
+        {
+          "task": "TASK-1901",
+          "dependsOn": "TASK-1900"
+        },
+        {
+          "task": "TASK-1902",
+          "dependsOn": "TASK-1898"
+        },
+        {
+          "task": "TASK-1902",
+          "dependsOn": "TASK-1901"
+        },
+        {
+          "task": "TASK-1903",
+          "dependsOn": "TASK-1898"
+        },
+        {
+          "task": "TASK-1903",
+          "dependsOn": "TASK-1902"
+        },
+        {
+          "task": "TASK-1904",
+          "dependsOn": "TASK-1901"
+        },
+        {
+          "task": "TASK-1905",
+          "dependsOn": "TASK-1903"
+        },
+        {
+          "task": "TASK-1907",
+          "dependsOn": "TASK-1888"
+        },
+        {
+          "task": "TASK-1907",
+          "dependsOn": "TASK-1896"
+        },
+        {
+          "task": "TASK-1908",
+          "dependsOn": "TASK-1903"
+        },
+        {
+          "task": "TASK-1908",
+          "dependsOn": "TASK-1905"
+        },
+        {
+          "task": "TASK-1908",
+          "dependsOn": "TASK-1906"
+        },
+        {
+          "task": "TASK-1909",
+          "dependsOn": "TASK-1908"
+        },
+        {
+          "task": "TASK-1910",
+          "dependsOn": "TASK-1907"
+        },
+        {
+          "task": "TASK-1911",
+          "dependsOn": "TASK-1910"
+        },
+        {
+          "task": "TASK-1913",
+          "dependsOn": "TASK-1912"
+        },
+        {
+          "task": "TASK-1914",
+          "dependsOn": "TASK-1910"
+        },
+        {
+          "task": "TASK-1915",
+          "dependsOn": "TASK-1914"
+        },
+        {
+          "task": "TASK-1916",
+          "dependsOn": "TASK-1914"
+        },
+        {
+          "task": "TASK-1918",
+          "dependsOn": "TASK-066"
+        },
+        {
+          "task": "TASK-1918",
+          "dependsOn": "TASK-069"
+        },
+        {
+          "task": "TASK-1919",
+          "dependsOn": "TASK-1918"
+        },
+        {
+          "task": "TASK-192",
+          "dependsOn": "TASK-181"
+        },
+        {
+          "task": "TASK-1920",
+          "dependsOn": "TASK-1904"
+        },
+        {
+          "task": "TASK-1922",
+          "dependsOn": "TASK-1918"
+        },
+        {
+          "task": "TASK-1923",
+          "dependsOn": "TASK-1922"
+        },
+        {
+          "task": "TASK-1924",
+          "dependsOn": "TASK-1919"
+        },
+        {
+          "task": "TASK-1925",
+          "dependsOn": "TASK-1908"
+        },
+        {
+          "task": "TASK-1927",
+          "dependsOn": "TASK-1925"
+        },
+        {
+          "task": "TASK-1928",
+          "dependsOn": "TASK-1924"
+        },
+        {
+          "task": "TASK-193",
+          "dependsOn": "TASK-178"
+        },
+        {
+          "task": "TASK-193",
+          "dependsOn": "TASK-190"
+        },
+        {
+          "task": "TASK-1930",
+          "dependsOn": "TASK-1926"
+        },
+        {
+          "task": "TASK-1931",
+          "dependsOn": "TASK-1976"
+        },
+        {
+          "task": "TASK-1933",
+          "dependsOn": "TASK-1932"
+        },
+        {
+          "task": "TASK-1936",
+          "dependsOn": "TASK-1976"
+        },
+        {
+          "task": "TASK-1938",
+          "dependsOn": "TASK-1919"
+        },
+        {
+          "task": "TASK-1938",
+          "dependsOn": "TASK-1924"
+        },
+        {
+          "task": "TASK-1939",
+          "dependsOn": "TASK-1924"
+        },
+        {
+          "task": "TASK-1941",
+          "dependsOn": "TASK-1924"
+        },
+        {
+          "task": "TASK-1941",
+          "dependsOn": "TASK-1928"
+        },
+        {
+          "task": "TASK-1942",
+          "dependsOn": "TASK-1919"
+        },
+        {
+          "task": "TASK-1942",
+          "dependsOn": "TASK-1924"
+        },
+        {
+          "task": "TASK-1943",
+          "dependsOn": "TASK-1940"
+        },
+        {
+          "task": "TASK-1944",
+          "dependsOn": "TASK-1886"
+        },
+        {
+          "task": "TASK-1944",
+          "dependsOn": "TASK-1903"
+        },
+        {
+          "task": "TASK-1945",
+          "dependsOn": "TASK-1918"
+        },
+        {
+          "task": "TASK-1945",
+          "dependsOn": "TASK-1944"
+        },
+        {
+          "task": "TASK-1946",
+          "dependsOn": "TASK-1917"
+        },
+        {
+          "task": "TASK-1947",
+          "dependsOn": "TASK-1944"
+        },
+        {
+          "task": "TASK-1948",
+          "dependsOn": "TASK-1946"
+        },
+        {
+          "task": "TASK-1949",
+          "dependsOn": "TASK-1948"
+        },
+        {
+          "task": "TASK-1950",
+          "dependsOn": "TASK-1948"
+        },
+        {
+          "task": "TASK-1951",
+          "dependsOn": "TASK-1947"
+        },
+        {
+          "task": "TASK-1952",
+          "dependsOn": "TASK-1896"
+        },
+        {
+          "task": "TASK-1953",
+          "dependsOn": "TASK-1952"
+        },
+        {
+          "task": "TASK-1954",
+          "dependsOn": "TASK-1952"
+        },
+        {
+          "task": "TASK-1954",
+          "dependsOn": "TASK-1953"
+        },
+        {
+          "task": "TASK-1955",
+          "dependsOn": "TASK-1952"
+        },
+        {
+          "task": "TASK-1955",
+          "dependsOn": "TASK-1954"
+        },
+        {
+          "task": "TASK-1956",
+          "dependsOn": "TASK-1952"
+        },
+        {
+          "task": "TASK-1956",
+          "dependsOn": "TASK-1955"
+        },
+        {
+          "task": "TASK-1957",
+          "dependsOn": "TASK-1952"
+        },
+        {
+          "task": "TASK-1958",
+          "dependsOn": "TASK-1952"
+        },
+        {
+          "task": "TASK-1958",
+          "dependsOn": "TASK-1957"
+        },
+        {
+          "task": "TASK-1959",
+          "dependsOn": "TASK-1958"
+        },
+        {
+          "task": "TASK-1960",
+          "dependsOn": "TASK-1957"
+        },
+        {
+          "task": "TASK-1960",
+          "dependsOn": "TASK-1958"
+        },
+        {
+          "task": "TASK-1961",
+          "dependsOn": "TASK-1958"
+        },
+        {
+          "task": "TASK-1961",
+          "dependsOn": "TASK-1959"
+        },
+        {
+          "task": "TASK-1961",
+          "dependsOn": "TASK-1960"
+        },
+        {
+          "task": "TASK-1962",
+          "dependsOn": "TASK-1961"
+        },
+        {
+          "task": "TASK-1963",
+          "dependsOn": "TASK-1952"
+        },
+        {
+          "task": "TASK-1964",
+          "dependsOn": "TASK-1962"
+        },
+        {
+          "task": "TASK-1964",
+          "dependsOn": "TASK-1963"
+        },
+        {
+          "task": "TASK-1965",
+          "dependsOn": "TASK-1964"
+        },
+        {
+          "task": "TASK-1966",
+          "dependsOn": "TASK-1965"
+        },
+        {
+          "task": "TASK-1967",
+          "dependsOn": "TASK-1966"
+        },
+        {
+          "task": "TASK-1969",
+          "dependsOn": "TASK-1968"
+        },
+        {
+          "task": "TASK-199",
+          "dependsOn": "TASK-195"
+        },
+        {
+          "task": "TASK-216",
+          "dependsOn": "TASK-198"
+        },
+        {
+          "task": "TASK-225",
+          "dependsOn": "TASK-194"
+        },
+        {
+          "task": "TASK-226",
+          "dependsOn": "TASK-198"
+        },
+        {
+          "task": "TASK-230",
+          "dependsOn": "TASK-227"
+        },
+        {
+          "task": "TASK-230",
+          "dependsOn": "TASK-228"
+        },
+        {
+          "task": "TASK-230",
+          "dependsOn": "TASK-229"
+        },
+        {
+          "task": "TASK-234",
+          "dependsOn": "TASK-232"
+        },
+        {
+          "task": "TASK-235",
+          "dependsOn": "TASK-232"
+        },
+        {
+          "task": "TASK-236",
+          "dependsOn": "TASK-232"
+        },
+        {
+          "task": "TASK-237",
+          "dependsOn": "TASK-232"
+        },
+        {
+          "task": "TASK-238",
+          "dependsOn": "TASK-232"
+        },
+        {
+          "task": "TASK-239",
+          "dependsOn": "TASK-232"
+        },
+        {
+          "task": "TASK-240",
+          "dependsOn": "TASK-232"
+        },
+        {
+          "task": "TASK-241",
+          "dependsOn": "TASK-232"
+        },
+        {
+          "task": "TASK-242",
+          "dependsOn": "TASK-228"
+        },
+        {
+          "task": "TASK-242",
+          "dependsOn": "TASK-229"
+        },
+        {
+          "task": "TASK-251",
+          "dependsOn": "TASK-250"
+        },
+        {
+          "task": "TASK-252",
+          "dependsOn": "TASK-251"
+        },
+        {
+          "task": "TASK-253",
+          "dependsOn": "TASK-252"
+        },
+        {
+          "task": "TASK-254",
+          "dependsOn": "TASK-250"
+        },
+        {
+          "task": "TASK-255",
+          "dependsOn": "TASK-250"
+        },
+        {
+          "task": "TASK-256",
+          "dependsOn": "TASK-250"
+        },
+        {
+          "task": "TASK-257",
+          "dependsOn": "TASK-250"
+        },
+        {
+          "task": "TASK-258",
+          "dependsOn": "TASK-250"
+        },
+        {
+          "task": "TASK-259",
+          "dependsOn": "TASK-253"
+        },
+        {
+          "task": "TASK-259",
+          "dependsOn": "TASK-258"
+        },
+        {
+          "task": "TASK-260",
+          "dependsOn": "TASK-250"
+        },
+        {
+          "task": "TASK-261",
+          "dependsOn": "TASK-250"
+        },
+        {
+          "task": "TASK-262",
+          "dependsOn": "TASK-250"
+        },
+        {
+          "task": "TASK-263",
+          "dependsOn": "TASK-250"
+        },
+        {
+          "task": "TASK-264",
+          "dependsOn": "TASK-251"
+        },
+        {
+          "task": "TASK-265",
+          "dependsOn": "TASK-259"
+        },
+        {
+          "task": "TASK-266",
+          "dependsOn": "TASK-259"
+        },
+        {
+          "task": "TASK-268",
+          "dependsOn": "TASK-267"
+        },
+        {
+          "task": "TASK-269",
+          "dependsOn": "TASK-267"
+        },
+        {
+          "task": "TASK-270",
+          "dependsOn": "TASK-268"
+        },
+        {
+          "task": "TASK-271",
+          "dependsOn": "TASK-270"
+        },
+        {
+          "task": "TASK-272",
+          "dependsOn": "TASK-271"
+        },
+        {
+          "task": "TASK-273",
+          "dependsOn": "TASK-272"
+        },
+        {
+          "task": "TASK-274",
+          "dependsOn": "TASK-273"
+        },
+        {
+          "task": "TASK-275",
+          "dependsOn": "TASK-273"
+        },
+        {
+          "task": "TASK-276",
+          "dependsOn": "TASK-272"
+        },
+        {
+          "task": "TASK-277",
+          "dependsOn": "TASK-271"
+        },
+        {
+          "task": "TASK-281",
+          "dependsOn": "TASK-278"
+        },
+        {
+          "task": "TASK-281",
+          "dependsOn": "TASK-279"
+        },
+        {
+          "task": "TASK-281",
+          "dependsOn": "TASK-280"
+        },
+        {
+          "task": "TASK-282",
+          "dependsOn": "TASK-281"
+        },
+        {
+          "task": "TASK-284",
+          "dependsOn": "TASK-282"
+        },
+        {
+          "task": "TASK-284",
+          "dependsOn": "TASK-283"
+        },
+        {
+          "task": "TASK-285",
+          "dependsOn": "TASK-283"
+        },
+        {
+          "task": "TASK-286",
+          "dependsOn": "TASK-281"
+        },
+        {
+          "task": "TASK-287",
+          "dependsOn": "TASK-281"
+        },
+        {
+          "task": "TASK-288",
+          "dependsOn": "TASK-281"
+        },
+        {
+          "task": "TASK-289",
+          "dependsOn": "TASK-284"
+        },
+        {
+          "task": "TASK-289",
+          "dependsOn": "TASK-286"
+        },
+        {
+          "task": "TASK-289",
+          "dependsOn": "TASK-287"
+        },
+        {
+          "task": "TASK-289",
+          "dependsOn": "TASK-288"
+        },
+        {
+          "task": "TASK-290",
+          "dependsOn": "TASK-289"
+        },
+        {
+          "task": "TASK-291",
+          "dependsOn": "TASK-281"
+        },
+        {
+          "task": "TASK-292",
+          "dependsOn": "TASK-291"
+        },
+        {
+          "task": "TASK-293",
+          "dependsOn": "TASK-291"
+        },
+        {
+          "task": "TASK-294",
+          "dependsOn": "TASK-291"
+        },
+        {
+          "task": "TASK-295",
+          "dependsOn": "TASK-280"
+        },
+        {
+          "task": "TASK-296",
+          "dependsOn": "TASK-295"
+        },
+        {
+          "task": "TASK-297",
+          "dependsOn": "TASK-296"
+        },
+        {
+          "task": "TASK-298",
+          "dependsOn": "TASK-297"
+        },
+        {
+          "task": "TASK-299",
+          "dependsOn": "TASK-298"
+        },
+        {
+          "task": "TASK-300",
+          "dependsOn": "TASK-289"
+        },
+        {
+          "task": "TASK-301",
+          "dependsOn": "TASK-298"
+        },
+        {
+          "task": "TASK-302",
+          "dependsOn": "TASK-289"
+        },
+        {
+          "task": "TASK-302",
+          "dependsOn": "TASK-298"
+        },
+        {
+          "task": "TASK-309",
+          "dependsOn": "TASK-306"
+        },
+        {
+          "task": "TASK-313",
+          "dependsOn": "TASK-305"
+        },
+        {
+          "task": "TASK-320",
+          "dependsOn": "TASK-316"
+        },
+        {
+          "task": "TASK-322",
+          "dependsOn": "TASK-312"
+        },
+        {
+          "task": "TASK-324",
+          "dependsOn": "TASK-232"
+        },
+        {
+          "task": "TASK-325",
+          "dependsOn": "TASK-232"
+        },
+        {
+          "task": "TASK-327",
+          "dependsOn": "TASK-326"
+        },
+        {
+          "task": "TASK-328",
+          "dependsOn": "BUG-305"
+        },
+        {
+          "task": "TASK-330",
+          "dependsOn": "TASK-329"
+        },
+        {
+          "task": "TASK-331",
+          "dependsOn": "FEATURE-012"
+        },
+        {
+          "task": "TASK-335",
+          "dependsOn": "TASK-333"
+        },
+        {
+          "task": "TASK-336",
+          "dependsOn": "TASK-335"
+        },
+        {
+          "task": "TASK-340",
+          "dependsOn": "TASK-337"
+        },
+        {
+          "task": "TASK-347",
+          "dependsOn": "FEATURE-012"
+        },
+        {
+          "task": "TASK-350",
+          "dependsOn": "TASK-388"
+        },
+        {
+          "task": "TASK-351",
+          "dependsOn": "TASK-350"
+        },
+        {
+          "task": "TASK-352",
+          "dependsOn": "TASK-351"
+        },
+        {
+          "task": "TASK-353",
+          "dependsOn": "TASK-352"
+        },
+        {
+          "task": "TASK-354",
+          "dependsOn": "TASK-353"
+        },
+        {
+          "task": "TASK-355",
+          "dependsOn": "TASK-353"
+        },
+        {
+          "task": "TASK-356",
+          "dependsOn": "TASK-354"
+        },
+        {
+          "task": "TASK-356",
+          "dependsOn": "TASK-355"
+        },
+        {
+          "task": "TASK-357",
+          "dependsOn": "FEATURE-012"
+        },
+        {
+          "task": "TASK-358",
+          "dependsOn": "FEATURE-012"
+        },
+        {
+          "task": "TASK-359",
+          "dependsOn": "TASK-358"
+        },
+        {
+          "task": "TASK-360",
+          "dependsOn": "TASK-358"
+        },
+        {
+          "task": "TASK-361",
+          "dependsOn": "TASK-331"
+        },
+        {
+          "task": "TASK-361",
+          "dependsOn": "TASK-357"
+        },
+        {
+          "task": "TASK-362",
+          "dependsOn": "TASK-361"
+        },
+        {
+          "task": "TASK-363",
+          "dependsOn": "TASK-362"
+        },
+        {
+          "task": "TASK-364",
+          "dependsOn": "FEATURE-012"
+        },
+        {
+          "task": "TASK-364",
+          "dependsOn": "TASK-361"
+        },
+        {
+          "task": "TASK-365",
+          "dependsOn": "TASK-358"
+        },
+        {
+          "task": "TASK-366",
+          "dependsOn": "TASK-363"
+        },
+        {
+          "task": "TASK-366",
+          "dependsOn": "TASK-364"
+        },
+        {
+          "task": "TASK-366",
+          "dependsOn": "TASK-365"
+        },
+        {
+          "task": "TASK-368",
+          "dependsOn": "TASK-367"
+        },
+        {
+          "task": "TASK-369",
+          "dependsOn": "TASK-366"
+        },
+        {
+          "task": "TASK-370",
+          "dependsOn": "TASK-364"
+        },
+        {
+          "task": "TASK-371",
+          "dependsOn": "TASK-370"
+        },
+        {
+          "task": "TASK-373",
+          "dependsOn": "TASK-372"
+        },
+        {
+          "task": "TASK-375",
+          "dependsOn": "TASK-368"
+        },
+        {
+          "task": "TASK-388",
+          "dependsOn": "TASK-348"
+        },
+        {
+          "task": "TASK-390",
+          "dependsOn": "TASK-389"
+        },
+        {
+          "task": "TASK-391",
+          "dependsOn": "TASK-389"
+        },
+        {
+          "task": "TASK-392",
+          "dependsOn": "TASK-415"
+        },
+        {
+          "task": "TASK-392",
+          "dependsOn": "TASK-420"
+        },
+        {
+          "task": "TASK-393",
+          "dependsOn": "TASK-392"
+        },
+        {
+          "task": "TASK-394",
+          "dependsOn": "TASK-420"
+        },
+        {
+          "task": "TASK-395",
+          "dependsOn": "TASK-420"
+        },
+        {
+          "task": "TASK-396",
+          "dependsOn": "TASK-392"
+        },
+        {
+          "task": "TASK-396",
+          "dependsOn": "TASK-393"
+        },
+        {
+          "task": "TASK-397",
+          "dependsOn": "TASK-392"
+        },
+        {
+          "task": "TASK-398",
+          "dependsOn": "TASK-397"
+        },
+        {
+          "task": "TASK-399",
+          "dependsOn": "TASK-398"
+        },
+        {
+          "task": "TASK-400",
+          "dependsOn": "TASK-399"
+        },
+        {
+          "task": "TASK-401",
+          "dependsOn": "TASK-399"
+        },
+        {
+          "task": "TASK-402",
+          "dependsOn": "TASK-397"
+        },
+        {
+          "task": "TASK-403",
+          "dependsOn": "TASK-392"
+        },
+        {
+          "task": "TASK-404",
+          "dependsOn": "TASK-403"
+        },
+        {
+          "task": "TASK-405",
+          "dependsOn": "TASK-389"
+        },
+        {
+          "task": "TASK-406",
+          "dependsOn": "TASK-405"
+        },
+        {
+          "task": "TASK-407",
+          "dependsOn": "TASK-406"
+        },
+        {
+          "task": "TASK-408",
+          "dependsOn": "TASK-395"
+        },
+        {
+          "task": "TASK-409",
+          "dependsOn": "TASK-395"
+        },
+        {
+          "task": "TASK-409",
+          "dependsOn": "TASK-408"
+        },
+        {
+          "task": "TASK-410",
+          "dependsOn": "TASK-396"
+        },
+        {
+          "task": "TASK-411",
+          "dependsOn": "TASK-396"
+        },
+        {
+          "task": "TASK-412",
+          "dependsOn": "TASK-410"
+        },
+        {
+          "task": "TASK-413",
+          "dependsOn": "TASK-415"
+        },
+        {
+          "task": "TASK-414",
+          "dependsOn": "TASK-413"
+        },
+        {
+          "task": "TASK-415",
+          "dependsOn": "TASK-389"
+        },
+        {
+          "task": "TASK-416",
+          "dependsOn": "TASK-413"
+        },
+        {
+          "task": "TASK-417",
+          "dependsOn": "TASK-413"
+        },
+        {
+          "task": "TASK-418",
+          "dependsOn": "TASK-397"
+        },
+        {
+          "task": "TASK-419",
+          "dependsOn": "TASK-397"
+        },
+        {
+          "task": "TASK-420",
+          "dependsOn": "TASK-389"
+        },
+        {
+          "task": "TASK-422",
+          "dependsOn": "TASK-421"
+        },
+        {
+          "task": "TASK-423",
+          "dependsOn": "TASK-422"
+        },
+        {
+          "task": "TASK-424",
+          "dependsOn": "TASK-423"
+        },
+        {
+          "task": "TASK-425",
+          "dependsOn": "TASK-424"
+        },
+        {
+          "task": "TASK-426",
+          "dependsOn": "TASK-445"
+        },
+        {
+          "task": "TASK-427",
+          "dependsOn": "TASK-426"
+        },
+        {
+          "task": "TASK-428",
+          "dependsOn": "TASK-427"
+        },
+        {
+          "task": "TASK-429",
+          "dependsOn": "TASK-428"
+        },
+        {
+          "task": "TASK-430",
+          "dependsOn": "TASK-429"
+        },
+        {
+          "task": "TASK-431",
+          "dependsOn": "TASK-430"
+        },
+        {
+          "task": "TASK-432",
+          "dependsOn": "TASK-431"
+        },
+        {
+          "task": "TASK-433",
+          "dependsOn": "TASK-432"
+        },
+        {
+          "task": "TASK-434",
+          "dependsOn": "TASK-433"
+        },
+        {
+          "task": "TASK-435",
+          "dependsOn": "TASK-434"
+        },
+        {
+          "task": "TASK-436",
+          "dependsOn": "TASK-435"
+        },
+        {
+          "task": "TASK-437",
+          "dependsOn": "TASK-436"
+        },
+        {
+          "task": "TASK-438",
+          "dependsOn": "TASK-437"
+        },
+        {
+          "task": "TASK-439",
+          "dependsOn": "TASK-438"
+        },
+        {
+          "task": "TASK-440",
+          "dependsOn": "TASK-439"
+        },
+        {
+          "task": "TASK-441",
+          "dependsOn": "TASK-440"
+        },
+        {
+          "task": "TASK-443",
+          "dependsOn": "TASK-442"
+        },
+        {
+          "task": "TASK-444",
+          "dependsOn": "TASK-443"
+        },
+        {
+          "task": "TASK-445",
+          "dependsOn": "TASK-444"
+        },
+        {
+          "task": "TASK-446",
+          "dependsOn": "TASK-447"
+        },
+        {
+          "task": "TASK-446",
+          "dependsOn": "TASK-448"
+        },
+        {
+          "task": "TASK-446",
+          "dependsOn": "TASK-449"
+        },
+        {
+          "task": "TASK-446",
+          "dependsOn": "TASK-450"
+        },
+        {
+          "task": "TASK-446",
+          "dependsOn": "TASK-451"
+        },
+        {
+          "task": "TASK-455",
+          "dependsOn": "TASK-454"
+        }
+      ],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "fine-cut",
+      "source": "/media/endlessblink/data/my-projects/ai-development/content-creation/Archive/fine-cut/docs/MASTER_PLAN.md",
+      "taskCount": 48,
+      "edgeCount": 9,
+      "edges": [
+        {
+          "task": "TASK-002",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-003",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-004",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-004",
+          "dependsOn": "TASK-002"
+        },
+        {
+          "task": "TASK-004",
+          "dependsOn": "TASK-003"
+        },
+        {
+          "task": "TASK-006",
+          "dependsOn": "TASK-005"
+        },
+        {
+          "task": "TASK-007",
+          "dependsOn": "TASK-005"
+        },
+        {
+          "task": "TASK-010",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-012",
+          "dependsOn": "TASK-011"
+        }
+      ],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "arthouse",
+      "source": "/media/endlessblink/data/my-projects/ai-development/content-creation/arthouse/MASTER_PLAN.md",
+      "taskCount": 155,
+      "edgeCount": 0,
+      "edges": [],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "inner-dialouge",
+      "source": "/media/endlessblink/data/my-projects/ai-development/content-creation/inner-dialouge/MASTER_PLAN.md",
+      "taskCount": 118,
+      "edgeCount": 16,
+      "edges": [
+        {
+          "task": "FEATURE-083",
+          "dependsOn": "FEATURE-069"
+        },
+        {
+          "task": "TASK-105",
+          "dependsOn": "TASK-104"
+        },
+        {
+          "task": "TASK-106",
+          "dependsOn": "TASK-105"
+        },
+        {
+          "task": "TASK-107",
+          "dependsOn": "TASK-105"
+        },
+        {
+          "task": "TASK-108",
+          "dependsOn": "TASK-104"
+        },
+        {
+          "task": "TASK-109",
+          "dependsOn": "TASK-107"
+        },
+        {
+          "task": "TASK-109",
+          "dependsOn": "TASK-108"
+        },
+        {
+          "task": "TASK-110",
+          "dependsOn": "TASK-105"
+        },
+        {
+          "task": "TASK-110",
+          "dependsOn": "TASK-108"
+        },
+        {
+          "task": "TASK-111",
+          "dependsOn": "TASK-105"
+        },
+        {
+          "task": "TASK-112",
+          "dependsOn": "TASK-106"
+        },
+        {
+          "task": "TASK-112",
+          "dependsOn": "TASK-109"
+        },
+        {
+          "task": "TASK-112",
+          "dependsOn": "TASK-111"
+        },
+        {
+          "task": "TASK-113",
+          "dependsOn": "TASK-104"
+        },
+        {
+          "task": "TASK-113",
+          "dependsOn": "TASK-105"
+        },
+        {
+          "task": "TASK-113",
+          "dependsOn": "TASK-110"
+        }
+      ],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "rough-cut-mvp",
+      "source": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp/MASTER_PLAN.md",
+      "taskCount": 275,
+      "edgeCount": 23,
+      "edges": [
+        {
+          "task": "TASK-215",
+          "dependsOn": "TASK-214"
+        },
+        {
+          "task": "TASK-216",
+          "dependsOn": "TASK-214"
+        },
+        {
+          "task": "TASK-217",
+          "dependsOn": "TASK-214"
+        },
+        {
+          "task": "TASK-217",
+          "dependsOn": "TASK-215"
+        },
+        {
+          "task": "TASK-218",
+          "dependsOn": "TASK-216"
+        },
+        {
+          "task": "TASK-219",
+          "dependsOn": "TASK-217"
+        },
+        {
+          "task": "TASK-219",
+          "dependsOn": "TASK-218"
+        },
+        {
+          "task": "TASK-220",
+          "dependsOn": "TASK-217"
+        },
+        {
+          "task": "TASK-220",
+          "dependsOn": "TASK-218"
+        },
+        {
+          "task": "TASK-221",
+          "dependsOn": "TASK-219"
+        },
+        {
+          "task": "TASK-221",
+          "dependsOn": "TASK-220"
+        },
+        {
+          "task": "TASK-222",
+          "dependsOn": "TASK-216"
+        },
+        {
+          "task": "TASK-222",
+          "dependsOn": "TASK-217"
+        },
+        {
+          "task": "TASK-222",
+          "dependsOn": "TASK-221"
+        },
+        {
+          "task": "TASK-223",
+          "dependsOn": "TASK-222"
+        },
+        {
+          "task": "TASK-277",
+          "dependsOn": "TASK-222"
+        },
+        {
+          "task": "TASK-278",
+          "dependsOn": "TASK-277"
+        },
+        {
+          "task": "TASK-279",
+          "dependsOn": "TASK-222"
+        },
+        {
+          "task": "TASK-279",
+          "dependsOn": "TASK-277"
+        },
+        {
+          "task": "TASK-280",
+          "dependsOn": "TASK-279"
+        },
+        {
+          "task": "TASK-281",
+          "dependsOn": "TASK-278"
+        },
+        {
+          "task": "TASK-281",
+          "dependsOn": "TASK-279"
+        },
+        {
+          "task": "TASK-281",
+          "dependsOn": "TASK-280"
+        }
+      ],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "Archive/Claude-of-war",
+      "source": "/media/endlessblink/data/my-projects/ai-development/game-dev/Archive/Claude-of-war/docs/MASTER_PLAN.md",
+      "taskCount": 34,
+      "edgeCount": 0,
+      "edges": [],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "rtl-tools",
+      "source": "/media/endlessblink/data/my-projects/ai-development/productivity/rtl-tools/MASTER_PLAN.md",
+      "taskCount": 4,
+      "edgeCount": 2,
+      "edges": [
+        {
+          "task": "RTL-004",
+          "dependsOn": "RTL-001"
+        },
+        {
+          "task": "RTL-004",
+          "dependsOn": "RTL-002"
+        }
+      ],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "bina-bekitzur",
+      "source": "/media/endlessblink/data/my-projects/ai-development/web-dev/bina-bekitzur/MASTER_PLAN.md",
+      "taskCount": 10,
+      "edgeCount": 8,
+      "edges": [
+        {
+          "task": "TASK-002",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-005",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-005",
+          "dependsOn": "TASK-003"
+        },
+        {
+          "task": "TASK-006",
+          "dependsOn": "TASK-001"
+        },
+        {
+          "task": "TASK-007",
+          "dependsOn": "TASK-006"
+        },
+        {
+          "task": "TASK-008",
+          "dependsOn": "TASK-002"
+        },
+        {
+          "task": "TASK-010",
+          "dependsOn": "TASK-005"
+        },
+        {
+          "task": "TASK-010",
+          "dependsOn": "TASK-008"
+        }
+      ],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "bina-ve-ze",
+      "source": "/media/endlessblink/data/my-projects/ai-development/web-dev/bina-ve-ze/MASTER_PLAN.md",
+      "taskCount": 93,
+      "edgeCount": 50,
+      "edges": [
+        {
+          "task": "T-014",
+          "dependsOn": "T-013"
+        },
+        {
+          "task": "T-015",
+          "dependsOn": "T-010"
+        },
+        {
+          "task": "T-015",
+          "dependsOn": "T-013"
+        },
+        {
+          "task": "T-016",
+          "dependsOn": "T-013"
+        },
+        {
+          "task": "T-018",
+          "dependsOn": "T-017"
+        },
+        {
+          "task": "T-019",
+          "dependsOn": "T-017"
+        },
+        {
+          "task": "T-020",
+          "dependsOn": "T-018"
+        },
+        {
+          "task": "T-020",
+          "dependsOn": "T-019"
+        },
+        {
+          "task": "T-024",
+          "dependsOn": "T-022"
+        },
+        {
+          "task": "T-024",
+          "dependsOn": "T-023"
+        },
+        {
+          "task": "T-037",
+          "dependsOn": "T-036"
+        },
+        {
+          "task": "T-038",
+          "dependsOn": "T-036"
+        },
+        {
+          "task": "T-038",
+          "dependsOn": "T-037"
+        },
+        {
+          "task": "T-039",
+          "dependsOn": "T-037"
+        },
+        {
+          "task": "T-039",
+          "dependsOn": "T-038"
+        },
+        {
+          "task": "T-040",
+          "dependsOn": "T-036"
+        },
+        {
+          "task": "T-040",
+          "dependsOn": "T-038"
+        },
+        {
+          "task": "T-041",
+          "dependsOn": "T-040"
+        },
+        {
+          "task": "T-042",
+          "dependsOn": "T-038"
+        },
+        {
+          "task": "T-042",
+          "dependsOn": "T-039"
+        },
+        {
+          "task": "T-043",
+          "dependsOn": "T-042"
+        },
+        {
+          "task": "T-044",
+          "dependsOn": "T-043"
+        },
+        {
+          "task": "T-045",
+          "dependsOn": "T-038"
+        },
+        {
+          "task": "T-045",
+          "dependsOn": "T-039"
+        },
+        {
+          "task": "T-046",
+          "dependsOn": "T-038"
+        },
+        {
+          "task": "T-046",
+          "dependsOn": "T-039"
+        },
+        {
+          "task": "T-047",
+          "dependsOn": "T-038"
+        },
+        {
+          "task": "T-047",
+          "dependsOn": "T-039"
+        },
+        {
+          "task": "T-048",
+          "dependsOn": "T-037"
+        },
+        {
+          "task": "T-048",
+          "dependsOn": "T-038"
+        },
+        {
+          "task": "T-049",
+          "dependsOn": "T-039"
+        },
+        {
+          "task": "T-050",
+          "dependsOn": "T-038"
+        },
+        {
+          "task": "T-051",
+          "dependsOn": "T-050"
+        },
+        {
+          "task": "T-052",
+          "dependsOn": "T-050"
+        },
+        {
+          "task": "T-052",
+          "dependsOn": "T-051"
+        },
+        {
+          "task": "T-053",
+          "dependsOn": "T-038"
+        },
+        {
+          "task": "T-054",
+          "dependsOn": "T-039"
+        },
+        {
+          "task": "T-054",
+          "dependsOn": "T-049"
+        },
+        {
+          "task": "T-055",
+          "dependsOn": "T-039"
+        },
+        {
+          "task": "T-055",
+          "dependsOn": "T-049"
+        },
+        {
+          "task": "T-056",
+          "dependsOn": "T-054"
+        },
+        {
+          "task": "T-056",
+          "dependsOn": "T-055"
+        },
+        {
+          "task": "T-058",
+          "dependsOn": "T-057"
+        },
+        {
+          "task": "T-059",
+          "dependsOn": "T-058"
+        },
+        {
+          "task": "T-061",
+          "dependsOn": "T-060"
+        },
+        {
+          "task": "T-062",
+          "dependsOn": "T-060"
+        },
+        {
+          "task": "T-063",
+          "dependsOn": "T-060"
+        },
+        {
+          "task": "T-064",
+          "dependsOn": "T-061"
+        },
+        {
+          "task": "T-067",
+          "dependsOn": "T-064"
+        },
+        {
+          "task": "T-067",
+          "dependsOn": "T-066"
+        }
+      ],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "bina-meatezvet-bot",
+      "source": "/media/endlessblink/data/my-projects/ai-development/bots+automation/bina-meatezvet-bot/docs/MASTER_PLAN.md",
+      "taskCount": 13,
+      "edgeCount": 9,
+      "edges": [
+        {
+          "task": "TASK-005",
+          "dependsOn": "TASK-003"
+        },
+        {
+          "task": "TASK-006",
+          "dependsOn": "TASK-003"
+        },
+        {
+          "task": "TASK-007",
+          "dependsOn": "TASK-003"
+        },
+        {
+          "task": "TASK-008",
+          "dependsOn": "TASK-003"
+        },
+        {
+          "task": "TASK-009",
+          "dependsOn": "TASK-003"
+        },
+        {
+          "task": "TASK-010",
+          "dependsOn": "TASK-005"
+        },
+        {
+          "task": "TASK-010",
+          "dependsOn": "TASK-006"
+        },
+        {
+          "task": "TASK-010",
+          "dependsOn": "TASK-007"
+        },
+        {
+          "task": "TASK-011",
+          "dependsOn": "TASK-005"
+        }
+      ],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "content-maker",
+      "source": "/media/endlessblink/data/my-projects/ai-development/content-creation/content-maker/MASTER_PLAN.md",
+      "taskCount": 10,
+      "edgeCount": 0,
+      "edges": [],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    },
+    {
+      "project": "04_סוכנים",
+      "source": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-management-vault/04_סוכנים/MASTER_PLAN.md",
+      "taskCount": 2,
+      "edgeCount": 0,
+      "edges": [],
+      "dangling": [],
+      "cycles": [],
+      "duplicateAliasDependencyReferences": [],
+      "supersededCapabilityDependencies": [],
+      "sourceChanged": false
+    }
+  ],
+  "limitations": [
+    "Source-declared done does not establish current runtime acceptance.",
+    "Dangling IDs are preserved as unresolved prerequisites; no missing task or superseded capability was marked done.",
+    "Only exact duplicate alias dependencies qualify for canonical remapping. Narrative links are not executable dependencies."
+  ]
+}

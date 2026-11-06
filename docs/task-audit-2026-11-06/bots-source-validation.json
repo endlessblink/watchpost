@@ -1,0 +1,100 @@
+[
+  {
+    "project": "claude-and-conquer",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 5
+  },
+  {
+    "project": "newsletter-maker",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 0
+  },
+  {
+    "project": "botson",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 1
+  },
+  {
+    "project": "design-ai-bot",
+    "diffCheckExit": 129,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 1
+  },
+  {
+    "project": "paper-bot",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 3
+  },
+  {
+    "project": "Uatu",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 0
+  },
+  {
+    "project": "contractor",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 1
+  },
+  {
+    "project": "income-zen",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 0
+  },
+  {
+    "project": "steady-stream",
+    "diffCheckExit": 129,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 3
+  },
+  {
+    "project": "cc-linux-enhancments",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 1
+  },
+  {
+    "project": "hermes-agent",
+    "diffCheckExit": 129,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 2
+  },
+  {
+    "project": "pronto",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 5
+  },
+  {
+    "project": "lifeboat-live",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 4
+  },
+  {
+    "project": "brainiac",
+    "diffCheckExit": 0,
+    "diffCheckIssueLines": 0,
+    "originalPreservedInBackup": true,
+    "statusLineEdits": 3
+  }
+]

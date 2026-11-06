@@ -1,0 +1,271 @@
+[
+  {
+    "project": "claude-and-conquer",
+    "path": "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/claude-and-conquer/MASTER_PLAN.md",
+    "beforeSha256": "43de03c0417156b3a5fff6961668016d4cf144f5872f0d12199380e27360e502",
+    "afterSha256": "a987d118dbf83180ebb6bff4fed32bab5e1ebf210703e6c709fab4de94384040",
+    "statusEdits": [
+      {
+        "before": "| **FEATURE-021** | **Health Coach web app (PWA) replacing the Telegram health bots** — plan: `docs/superpowers/specs/2026-10-16-health-app-design.md` | **P0** | IN PROGRESS | - |",
+        "after": "| **FEATURE-021** | **Health Coach web app (PWA) replacing the Telegram health bots** — plan: `docs/superpowers/specs/2026-10-16-health-app-design.md` | **P0** | REVIEW | - |"
+      },
+      {
+        "before": "| **TASK-118** | **Health app step 5: food and workout coach chats via Hermes** | **P0** | DEPLOYED 2026-10-16, awaiting Noam's first live message — no Hermes change/restart was needed: the API server's `X-Hermes-Persona: telegram:-1004230590253:306/303` header answers as the topic with its telegram toolset (health+exercise); session `coachapp-<coach>-<date>`; verified locally vs a fake Hermes (persona/session/stream/MEDIA→animation) and live without AI calls (history 200 with the real key, 401 without login) | TASK-117 |",
+        "after": "| **TASK-118** | **Health app step 5: food and workout coach chats via Hermes** | **P0** | REVIEW — DEPLOYED 2026-10-16, awaiting Noam's first live message — no Hermes change/restart was needed: the API server's `X-Hermes-Persona: telegram:-1004230590253:306/303` header answers as the topic with its telegram toolset (health+exercise); session `coachapp-<coach>-<date>`; verified locally vs a fake Hermes (persona/session/stream/MEDIA→animation) and live without AI calls (history 200 with the real key, 401 without login) | TASK-117 |"
+      },
+      {
+        "before": "| **TASK-121** | **Verified coaching flow (Noam 2026-10-17)**: training profile page (goal, days, minutes, level, gear + weights he can handle, injuries with side/note, never-give list, favourites, notes) stored by the app (`APP_DATA`), fixed weekly program built from it (no randomness) with easy/fine/hard progression from one-at-a-time mode, every workout reply and history checked server-side (blocked exercise swapped, weight capped), profile + today's session sent to the workout coach each turn, coach `PROFILE_UPDATE` lines become approve-cards | **P0** | DEPLOYED 2026-10-18 — unit 25/25; live test copy 68/68; real app read-only 37/37; real profile is an unsaved draft (seeded from Hermes memories, flags the 2 kg dumbbells vs 16 kg kettlebell conflict) until Noam saves it; Telegram untouched | FEATURE-021 |",
+        "after": "| **TASK-121** | **Verified coaching flow (Noam 2026-10-17)**: training profile page (goal, days, minutes, level, gear + weights he can handle, injuries with side/note, never-give list, favourites, notes) stored by the app (`APP_DATA`), fixed weekly program built from it (no randomness) with easy/fine/hard progression from one-at-a-time mode, every workout reply and history checked server-side (blocked exercise swapped, weight capped), profile + today's session sent to the workout coach each turn, coach `PROFILE_UPDATE` lines become approve-cards | **P0** | REVIEW — DEPLOYED 2026-10-18 — unit 25/25; live test copy 68/68; real app read-only 37/37; real profile is an unsaved draft (seeded from Hermes memories, flags the 2 kg dumbbells vs 16 kg kettlebell conflict) until Noam saves it; Telegram untouched | FEATURE-021 |"
+      },
+      {
+        "before": "| **TASK-122** | **Saved product library (Noam 2026-10-20)**: send label/front photos, barcode, name or a screenshot in the app or Diet Bot; agent reads or searches free sources, saves calories/protein/carbs/fat (+fiber/sugar/sodium) per 100 g and per serving with an online picture; \"I ate X\" uses it and asks the amount; \"My products\" page; protein/carbs/fat day totals; vegetarian warning — spec: `docs/superpowers/specs/2026-10-20-health-app-product-library.md` | **P1** | BUILT, ON TEST COPY 2026-10-20 — bot tools in `health-app/hermes-overlay` (image `hermes-agent:health-products-20261020`, also restores the health tools the 2026-08-29 image dropped: no meals logged since 2026-08-27); bot tests 14/14, app unit 43/43, products e2e 25/25 on https://api.in-theflow.com/coach-staging/ (own code dir + test passcode now), full e2e 100/102 (2 workout-chat fails also fail on the old code). LIVE 2026-10-20 14:35 (Noam's go): gateway+dashboard on the new image (rollback: `docker-compose.yml.bak-products-20261020-143447`), Diet Bot prompt replaced (`config.yaml.bak-products-20261020-143447`), app deployed; live tools + read-only API checked. FIX 2026-10-21 (Noam: \"can't add a product photo\"): no add button on My products, a photo with no words was sent as \"what I just ate\", and the bot's web search needed a paid key (VPS SearXNG mostly rate-limited). Now: \"+ הוספת מוצר מתמונה\" button, \"שמור כמוצר / אכלתי את זה\" choices on an attached photo, free `health_product_web_search` (SearXNG, Yandex fallback) + `health_product_read_page` tools, prompt says front-only photo → identify and look values up. Live image `hermes-agent:health-products-20261021` (rollback `*.bak-20261021-searchfix`); e2e `health-app/e2e/add-product.mjs` 14/14 on test copy, 12/12 look-only on live. His WIN! blondie-pretzel bar saved from the exact online label (240 kcal, 20 g protein per 64 g bar). Awaiting his first real add from the app/bot. 2026-10-21 later (Noam: Ctrl+V did nothing): paste (Ctrl/Cmd+V) and drag-and-drop of a picture in both coach chats (same preview/✕/choices) and on My products (same as the add button); `e2e/paste.mjs` real-clipboard desktop test 14/14 on test copy, look-only 11/11 on live. 2026-10-21 night (Noam: My products into settings + real segmentation/filters for many products, via impeccable): new Settings page (gear on Today) with My products, profile, plan, stretch breaks; reusable `public/listview.js` (search with Hebrew prefixes, category chips with counts, filter sheet on phone / side rail on computer, sort, paging, remembered choices); categories from one shared list `hermes-overlay/agent/product_categories.json` (bot assigns on save, app falls back, editable; bot keeps his category/star on updates), favorites (star), usage from the food log (recently/most eaten). Live bot image `hermes-agent:health-products-20261021b` (rollback `docker-compose.yml.bak-20261021-categories`), 17 bot tests, 48 app tests; test copy seeded with 101 products (`scripts/seed-staging-products.mjs`), `e2e/products-list.mjs` all pass on test copy and look-only on live (phone + computer) | FEATURE-021 |",
+        "after": "| **TASK-122** | **Saved product library (Noam 2026-10-20)**: send label/front photos, barcode, name or a screenshot in the app or Diet Bot; agent reads or searches free sources, saves calories/protein/carbs/fat (+fiber/sugar/sodium) per 100 g and per serving with an online picture; \"I ate X\" uses it and asks the amount; \"My products\" page; protein/carbs/fat day totals; vegetarian warning — spec: `docs/superpowers/specs/2026-10-20-health-app-product-library.md` | **P1** | REVIEW — BUILT, ON TEST COPY 2026-10-20 — bot tools in `health-app/hermes-overlay` (image `hermes-agent:health-products-20261020`, also restores the health tools the 2026-08-29 image dropped: no meals logged since 2026-08-27); bot tests 14/14, app unit 43/43, products e2e 25/25 on https://api.in-theflow.com/coach-staging/ (own code dir + test passcode now), full e2e 100/102 (2 workout-chat fails also fail on the old code). LIVE 2026-10-20 14:35 (Noam's go): gateway+dashboard on the new image (rollback: `docker-compose.yml.bak-products-20261020-143447`), Diet Bot prompt replaced (`config.yaml.bak-products-20261020-143447`), app deployed; live tools + read-only API checked. FIX 2026-10-21 (Noam: \"can't add a product photo\"): no add button on My products, a photo with no words was sent as \"what I just ate\", and the bot's web search needed a paid key (VPS SearXNG mostly rate-limited). Now: \"+ הוספת מוצר מתמונה\" button, \"שמור כמוצר / אכלתי את זה\" choices on an attached photo, free `health_product_web_search` (SearXNG, Yandex fallback) + `health_product_read_page` tools, prompt says front-only photo → identify and look values up. Live image `hermes-agent:health-products-20261021` (rollback `*.bak-20261021-searchfix`); e2e `health-app/e2e/add-product.mjs` 14/14 on test copy, 12/12 look-only on live. His WIN! blondie-pretzel bar saved from the exact online label (240 kcal, 20 g protein per 64 g bar). Awaiting his first real add from the app/bot. 2026-10-21 later (Noam: Ctrl+V did nothing): paste (Ctrl/Cmd+V) and drag-and-drop of a picture in both coach chats (same preview/✕/choices) and on My products (same as the add button); `e2e/paste.mjs` real-clipboard desktop test 14/14 on test copy, look-only 11/11 on live. 2026-10-21 night (Noam: My products into settings + real segmentation/filters for many products, via impeccable): new Settings page (gear on Today) with My products, profile, plan, stretch breaks; reusable `public/listview.js` (search with Hebrew prefixes, category chips with counts, filter sheet on phone / side rail on computer, sort, paging, remembered choices); categories from one shared list `hermes-overlay/agent/product_categories.json` (bot assigns on save, app falls back, editable; bot keeps his category/star on updates), favorites (star), usage from the food log (recently/most eaten). Live bot image `hermes-agent:health-products-20261021b` (rollback `docker-compose.yml.bak-20261021-categories`), 17 bot tests, 48 app tests; test copy seeded with 101 products (`scripts/seed-staging-products.mjs`), `e2e/products-list.mjs` all pass on test copy and look-only on live (phone + computer) | FEATURE-021 |"
+      },
+      {
+        "before": "| **TASK-119** | **Redraw 6 approved animations with printed captions or cut edges (Barbell_Bench_Press_-_Medium_Grip, Dumbbell_Bench_Press, Kettlebell_Pistol_Squat, Kettlebell_Turkish_Get-Up_Squat_style, One-Arm_Kettlebell_Floor_Press, Wrist_Extension_Isometric)** | **P1** | IN PROGRESS | - |",
+        "after": "| **TASK-119** | **Redraw 6 approved animations with printed captions or cut edges (Barbell_Bench_Press_-_Medium_Grip, Dumbbell_Bench_Press, Kettlebell_Pistol_Squat, Kettlebell_Turkish_Get-Up_Squat_style, One-Arm_Kettlebell_Floor_Press, Wrist_Extension_Isometric)** | **P1** | PLANNED | - |"
+      },
+      {
+        "before": "### TASK-082–084: Exercise animation production, review, and browser control (IN PROGRESS)",
+        "after": "### TASK-082–084: Exercise animation production, review, and browser control (REVIEW)"
+      }
+    ],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "newsletter-maker",
+    "path": "/media/endlessblink/data/my-projects/ai-development/bots+automation/newsletter-maker/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/newsletter-maker/MASTER_PLAN.md",
+    "beforeSha256": "c310f91e91b022112991a618b0160961fa8007d76360535ce7aa62140291bb88",
+    "afterSha256": "58ff3e456082d8f97dad00523e3673f5b0aa47947bb9e410a4fca519cb422026",
+    "statusEdits": [],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "botson",
+    "path": "/media/endlessblink/data/my-projects/ai-development/bots+automation/botson/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/botson/MASTER_PLAN.md",
+    "beforeSha256": "99656ec5a850c256dd00761322cbd55ab166625a859dfaf6061c99f0c2df75f1",
+    "afterSha256": "a25b72f3fd0c538105bb0eb686eb98c0ebf3e96e6a4b12529462fbcb03d402fa",
+    "statusEdits": [
+      {
+        "before": "| T-097 | 16 | Free Games: daily GG.deals feed with LLM reranker | IN PROGRESS | P2 | T-005 |",
+        "after": "| T-097 | 16 | Free Games: daily GG.deals feed with LLM reranker | REVIEW | P2 | T-005 |"
+      }
+    ],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "design-ai-bot",
+    "path": "/media/endlessblink/data/my-projects/ai-development/bots+automation/design-ai-bot/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/design-ai-bot/MASTER_PLAN.md",
+    "beforeSha256": "e1c6cd349059acf09877ff30a0c290d38360edcd2f45278b7feac8ed7c75c59f",
+    "afterSha256": "69e9219726bfb351f3dc40600b87f0e36a30e6ef37522437fe88d5e21f44c3e4",
+    "statusEdits": [
+      {
+        "before": "| **BOT-001** | **Migrate bot from Kapso to WAHA using real eSIM** | **P1** | IN PROGRESS |",
+        "after": "| **BOT-001** | **Migrate bot from Kapso to WAHA using real eSIM** | **P1** | PAUSED |"
+      }
+    ],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "paper-bot",
+    "path": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot/docs/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/paper-bot/MASTER_PLAN.md",
+    "beforeSha256": "f6c7f013a0e4083f25107c7e3a0b70315ab782283743c7a63d29032bd8572453",
+    "afterSha256": "25bea8f68b160292d8285998bf0113e57b63fd2e399c617492f72f6745b6f2cf",
+    "statusEdits": [
+      {
+        "before": "| **TASK-066** | Add source expansion and pruning workflow | **P1** | IN PROGRESS | TASK-056, TASK-062 |",
+        "after": "| **TASK-066** | Add source expansion and pruning workflow | **P1** | REVIEW | TASK-056, TASK-062 |"
+      },
+      {
+        "before": "### TASK-066: Add source expansion and pruning workflow (IN PROGRESS)",
+        "after": "### TASK-066: Add source expansion and pruning workflow (REVIEW)"
+      },
+      {
+        "before": "**Status**: IN PROGRESS",
+        "after": "**Status**: REVIEW"
+      }
+    ],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "Uatu",
+    "path": "/media/endlessblink/data/my-projects/ai-development/devops/Uatu/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/Uatu/MASTER_PLAN.md",
+    "beforeSha256": "5d5ce98dd2281953063b24b7655cd249fa73f2629a2b81c6f693ce71b4c1965e",
+    "afterSha256": "dcdb5ec017c914a9a1d33bc6fde365dd820236cadc35c26e7c5b88d0bd51d45e",
+    "statusEdits": [],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "contractor",
+    "path": "/media/endlessblink/data/my-projects/ai-development/freelance/contractor/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/contractor/MASTER_PLAN.md",
+    "beforeSha256": "05a9201aa639185e5263c64445fb8d13ae74e6cdee68d50e3d2b292edefaf9b5",
+    "afterSha256": "42cc4fc320070a291626b2c3082ee130de23702f30d05cbde772dabc548cd2d1",
+    "statusEdits": [
+      {
+        "before": "| **TASK-044** | **Unified light workspace system** — replace mixed dark/light surfaces across header, rail, sidebars, panels, cards, modals, and forms | **P0** | IN PROGRESS |",
+        "after": "| **TASK-044** | **Unified light workspace system** — replace mixed dark/light surfaces across header, rail, sidebars, panels, cards, modals, and forms | **P0** | REVIEW |"
+      }
+    ],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "income-zen",
+    "path": "/media/endlessblink/data/my-projects/ai-development/freelance/income-zen/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/income-zen/MASTER_PLAN.md",
+    "beforeSha256": "7c3ae40efad7bb3f1ab757ce2158fda666f8fbd20fb829e5f1ab81e2b1969ddc",
+    "afterSha256": "2b7df04b83cd244b3111980776041d225f94c12779cb18b5ed0d680f5f26bde9",
+    "statusEdits": [],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "steady-stream",
+    "path": "/media/endlessblink/data/my-projects/ai-development/freelance/steady-stream/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/steady-stream/MASTER_PLAN.md",
+    "beforeSha256": "379c5913a46fadf02d1415353457213a1cb76f5cb4f9bd7d09a1233b29652bdd",
+    "afterSha256": "921c3e1b4438a8e36a9c9115778955ca437891145294ab7fe5dbabe48ed94315",
+    "statusEdits": [
+      {
+        "before": "| T-005 | IN PROGRESS | Integrate `ollama-parse.js` into `ledger-desktop.jsx` paste flow |",
+        "after": "| T-005 | PLANNED | Integrate `ollama-parse.js` into `ledger-desktop.jsx` paste flow |"
+      },
+      {
+        "before": "**Status:** IN PROGRESS — **next session starts here**",
+        "after": "**Status:** PLANNED — IN PROGRESS — **next session starts here**"
+      },
+      {
+        "before": "**Status:** PLANNED — IN PROGRESS — **next session starts here**",
+        "after": "**Status:** PLANNED — **next session starts here**"
+      }
+    ],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "cc-linux-enhancments",
+    "path": "/media/endlessblink/data/my-projects/ai-development/cc-linux-enhancments/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/cc-linux-enhancments/MASTER_PLAN.md",
+    "beforeSha256": "0fc61f8d99e9e42bee364bcb853a7fc94d62c6a62262f652462c580fb420abbf",
+    "afterSha256": "9a44a26a4d2f13a06e08113ccc19fe4854c5f4c0c6b6da7306eb8631b05dae51",
+    "statusEdits": [
+      {
+        "before": "**Status:** IN PROGRESS",
+        "after": "**Status:** REVIEW"
+      }
+    ],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "hermes-agent",
+    "path": "/media/endlessblink/data/my-projects/ai-development/bots+automation/hermes-agent/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/hermes-agent/MASTER_PLAN.md",
+    "beforeSha256": "0c2a8832f31167714ae2e8cf8c1ae038dd86723d44a9d51ffbc5d272f057d80f",
+    "afterSha256": "7b02f782a0e629e57530bfc4806f9dd5ff614b7230eb1b698072f35e59692cfc",
+    "statusEdits": [
+      {
+        "before": "| HERMES-002 | Telegram gateway RTL + Markdown rendering for mixed Hebrew/English replies | P1       | IN_PROGRESS | -            |",
+        "after": "| HERMES-002 | Telegram gateway RTL + Markdown rendering for mixed Hebrew/English replies | P1       | REVIEW | -            |"
+      },
+      {
+        "before": "**Status:** In Progress",
+        "after": "**Status:** REVIEW"
+      }
+    ],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "pronto",
+    "path": "/media/endlessblink/data/my-projects/ai-development/productivity/pronto/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/pronto/MASTER_PLAN.md",
+    "beforeSha256": "9d7bdd2562100180ae01ae1f0d4fb86b6382e6315130978d59be49bc02443be9",
+    "afterSha256": "93cc466e80b73b8760f7de50285bb3628d48b8cbc4eef933a9932ab56f41168e",
+    "statusEdits": [
+      {
+        "before": "Status: planned",
+        "after": "Status: REVIEW"
+      },
+      {
+        "before": "Status: planned",
+        "after": "Status: REVIEW"
+      },
+      {
+        "before": "Status: planned",
+        "after": "Status: REVIEW"
+      },
+      {
+        "before": "Status: planned",
+        "after": "Status: REVIEW"
+      },
+      {
+        "before": "Status: planned",
+        "after": "Status: REVIEW"
+      }
+    ],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "lifeboat-live",
+    "path": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-live/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/lifeboat-live/MASTER_PLAN.md",
+    "beforeSha256": "dcd64c5e4015bb4e39d5ffbd1a2f4998fc1c843f822e23d4cf590bc62fc25378",
+    "afterSha256": "784ee6e45e5e0be6bdf80fae3f2d58531784c9d8c1996da9cbfcbc6daf5e405f",
+    "statusEdits": [
+      {
+        "before": "- **Status:** in_progress (handed to a fresh instance 2026-10-05; nothing changed in Life-Boat code yet)",
+        "after": "- **Status:** REVIEW — in_progress (handed to a fresh instance 2026-10-05; nothing changed in Life-Boat code yet)"
+      },
+      {
+        "before": "### TASK-3 - Persistent retry recovery for the morning job 7d1402944efe (implemented locally, not deployed, not activated)",
+        "after": "### TASK-3 - Persistent retry recovery for the morning job 7d1402944efe (REVIEW — activated; natural retry proof pending)"
+      },
+      {
+        "before": "- **Status:** ACTIVATED 2026-10-07 22:39 (Noam: \"Yes, go live now\"). **No production retry has been demonstrated.** The 10-08 and 10-09 morning deliveries were ordinary first-attempt deliveries — they show the opted-in job still delivers once, not that retry works. Every retry line in the live logs is test-generated (fixtures named \"morning\"); zero exist for 7d1402944efe. Retry, quota exhaustion, uncertain delivery, restart recovery and the single-notice claim are proven by tests only. (Corrected 2026-10-09 23:15; see docs/incidents/2026-10-06-test-jobs-live-scheduler.reconciliation.md.)",
+        "after": "- **Status:** REVIEW — ACTIVATED 2026-10-07 22:39 (Noam: \"Yes, go live now\"). **No production retry has been demonstrated.** The 10-08 and 10-09 morning deliveries were ordinary first-attempt deliveries — they show the opted-in job still delivers once, not that retry works. Every retry line in the live logs is test-generated (fixtures named \"morning\"); zero exist for 7d1402944efe. Retry, quota exhaustion, uncertain delivery, restart recovery and the single-notice claim are proven by tests only. (Corrected 2026-10-09 23:15; see docs/incidents/2026-10-06-test-jobs-live-scheduler.reconciliation.md.)"
+      },
+      {
+        "before": "- **Status:** REVIEW — in_progress (handed to a fresh instance 2026-10-05; nothing changed in Life-Boat code yet)",
+        "after": "- **Status:** REVIEW — local context-layer fix built; effectiveness untested. The later 2026-10-06 evidence below supersedes the initial 2026-10-05 no-code-change checkpoint."
+      }
+    ],
+    "auditNoteAdded": true
+  },
+  {
+    "project": "brainiac",
+    "path": "/media/endlessblink/data/my-projects/ai-development/devops/brainiac/MASTER_PLAN.md",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/bot-source-corrections/brainiac/MASTER_PLAN.md",
+    "beforeSha256": "9dca09e372d2229d0e12ae5fae6ea62404fc62c801ba3aae25d5886a00909fde",
+    "afterSha256": "ee2140a56c80f83f6a3c5ff794c3f8cd8bedaec35fe1f9b1060cf85faa6ddefe",
+    "statusEdits": [
+      {
+        "before": "| BRN-002 | Triage baseline: find and import the 2026-09-25 project-retriage verdicts | P0 | S | TODO | - |",
+        "after": "| BRN-002 | Triage baseline: find and import the 2026-09-25 project-retriage verdicts | P0 | S | REVIEW | - |"
+      },
+      {
+        "before": "### BRN-002: Triage baseline (TODO)",
+        "after": "### BRN-002: Triage baseline (REVIEW)"
+      },
+      {
+        "before": "| BRN-002 | **implemented, awaiting Noam",
+        "after": "| BRN-002 | REVIEW — **implemented, awaiting Noam"
+      },
+      {
+        "before": "| BRN-001 | Nightly read-only sweep script + systemd user timer | P0 | M | TODO | - |",
+        "after": "| BRN-001 | Nightly read-only sweep script + systemd user timer | P0 | M | REVIEW | - |"
+      },
+      {
+        "before": "### BRN-001: Nightly read-only sweep (TODO)",
+        "after": "### BRN-001: Nightly read-only sweep (REVIEW)"
+      },
+      {
+        "before": "| BRN-001 | **implemented, awaiting install/approval.** `scripts/sweep.py` (stdlib, read-only on other projects, writes only `snapshots/` + `reports/`, atomic, per-project time budgets, never aborts on one bad project, diff since last snapshot, exit 2 if incomplete, `fcntl` lock) and user units in `systemd/` (`brainiac-sweep.{service,timer}` nightly light, `brainiac-sweep-full.{service,timer}` weekly full, `brainiac-heartbeat.{service,timer}`, `brainiac-failure@.service` OnFailure hook, all `Persistent=true`, `flock` in the unit). Not installed. Manual full run 2026-10-02: 143 projects, 0 failures, about 14 s; `.git`/index mtimes and `git status` counts of all 143 projects identical before and after. Install commands: `systemd/README.md`. Known gaps: file-mtime \"recent activity\" is polluted by edits made by agents today (e.g. plan appends); git worktrees of one repo are counted separately; size scan does not de-duplicate nested repos; no CI/stars lookups. |",
+        "after": "| BRN-001 | REVIEW — **implemented, awaiting install/approval.** `scripts/sweep.py` (stdlib, read-only on other projects, writes only `snapshots/` + `reports/`, atomic, per-project time budgets, never aborts on one bad project, diff since last snapshot, exit 2 if incomplete, `fcntl` lock) and user units in `systemd/` (`brainiac-sweep.{service,timer}` nightly light, `brainiac-sweep-full.{service,timer}` weekly full, `brainiac-heartbeat.{service,timer}`, `brainiac-failure@.service` OnFailure hook, all `Persistent=true`, `flock` in the unit). Not installed. Manual full run 2026-10-02: 143 projects, 0 failures, about 14 s; `.git`/index mtimes and `git status` counts of all 143 projects identical before and after. Install commands: `systemd/README.md`. Known gaps: file-mtime \"recent activity\" is polluted by edits made by agents today (e.g. plan appends); git worktrees of one repo are counted separately; size scan does not de-duplicate nested repos; no CI/stars lookups. |"
+      }
+    ],
+    "auditNoteAdded": true
+  }
+]

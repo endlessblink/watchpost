@@ -1,0 +1,27 @@
+{
+  "projects": [
+    "termfleet-unread",
+    "termfleet-grill-me",
+    "termfleet-close"
+  ],
+  "retainedReconciliationProject": "termfleet-unread",
+  "fullPlanSha256": "e71008f50b45447233c32deac60ba584122a6f1d0d202c86d557a98b308c8596",
+  "rowsComparedPerProject": 224,
+  "fieldsCompared": [
+    "title",
+    "currentStatus",
+    "dependencies"
+  ],
+  "exactSourceBytes": true,
+  "authorityMigration": false,
+  "qualification": "Exact byte comparison occurred before the retained view alone received the dated TC-033 REVIEW qualification; original bytes are backed up.",
+  "retainedQualification": {
+    "path": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-unread/MASTER_PLAN.md",
+    "beforeSha256": "e71008f50b45447233c32deac60ba584122a6f1d0d202c86d557a98b308c8596",
+    "afterSha256": "356f8208bca750d353411ba243b381301634e72de35decb8848f01a0946694be",
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/termfleet-unread-before-tc033-review.md",
+    "task": "TC-033",
+    "beforeStatus": "done",
+    "afterStatus": "review"
+  }
+}

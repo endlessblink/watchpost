@@ -72,11 +72,11 @@ describe('outlook managed plan scope', () => {
         const ordinary = payload.projects.find(project => project.name === 'ordinary');
         expect(product.taskStats).toMatchObject({ total: 2, inProgress: 1, review: 1, done: 0 });
         expect(product.topInProgress).toEqual(['TASK-001: Product work']);
-        expect(film.taskStats).toMatchObject({ total: 2, inProgress: 1, done: 1, review: 0 });
+        expect(film.taskStats).toMatchObject({ total: 1, inProgress: 1, done: 0, archived: 1, review: 0 });
         expect(film.topInProgress).toEqual(['TASK-002: Film work']);
         expect(ordinary.taskStats).toMatchObject({ total: 1, inProgress: 1 });
         expect(ordinary.topInProgress).toEqual(['TASK-100: Ordinary work']);
-        expect(payload.globalStats).toMatchObject({ totalInProgress: 3, totalDone: 1, totalPlanned: 0 });
+        expect(payload.globalStats).toMatchObject({ totalInProgress: 3, totalDone: 0, totalPlanned: 0 });
     });
     it('does not reuse stale Markdown-derived cache for managed plans', () => {
         const payload = outlook({}, { projects: [], globalStats: { totalInProgress: 999 } });

@@ -1,0 +1,51 @@
+[
+  {
+    "project": "claude-and-conquer",
+    "reference": "claude-and-conquer-legacy",
+    "exitCode": 1,
+    "stdout": "{\"status\": \"invalid\", \"errors\": [\"claude-and-conquer-legacy: stale or future observation (age 33 days; limit 30); refresh bounded evidence\"]}\n",
+    "stderr": ""
+  },
+  {
+    "project": "paper-bot",
+    "reference": "paper-bot",
+    "exitCode": 0,
+    "stdout": "{\"status\": \"valid\", \"registry_reference\": \"paper-bot\", \"registry_sha256\": \"db3697ccf2a79c4bff48d40aaf679a30bc183f90bfe0a41e7bd23b8181213834\", \"checkout\": \"/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot\", \"requested_checkout\": \"/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot\", \"lifecycle\": \"active\", \"observed_at\": \"2026-11-06\"}\n",
+    "stderr": ""
+  },
+  {
+    "project": "botson",
+    "reference": "botson",
+    "exitCode": 1,
+    "stdout": "{\"status\": \"invalid\", \"errors\": [\"botson: stale or future observation (age 33 days; limit 30); refresh bounded evidence\"]}\n",
+    "stderr": ""
+  },
+  {
+    "project": "lifeboat-live",
+    "reference": "local-hermes",
+    "exitCode": 1,
+    "stdout": "{\"status\": \"invalid\", \"errors\": [\"local-hermes: stale or future observation (age 33 days; limit 30); refresh bounded evidence\"]}\n",
+    "stderr": ""
+  },
+  {
+    "project": "hermes-agent",
+    "reference": "hermes-vps-health",
+    "exitCode": 1,
+    "stdout": "{\"status\": \"invalid\", \"errors\": [\"hermes-vps-health: stale or future observation (age 33 days; limit 30); refresh bounded evidence\", \"hermes-vps-health: checkout /media/endlessblink/data/my-projects/ai-development/bots+automation/hermes-agent is not a registered local path on local workstation; reconcile source/release/runtime path\"]}\n",
+    "stderr": ""
+  },
+  {
+    "project": "design-ai-bot",
+    "reference": null,
+    "exitCode": 1,
+    "stdout": "{\"status\": \"invalid\", \"errors\": [\"missing workflow reference for this bot checkout; register its owning path, or select --bot <reference-id>\"]}\n",
+    "stderr": ""
+  },
+  {
+    "project": "newsletter-maker",
+    "reference": null,
+    "exitCode": 1,
+    "stdout": "{\"status\": \"invalid\", \"errors\": [\"missing workflow reference for this bot checkout; register its owning path, or select --bot <reference-id>\"]}\n",
+    "stderr": ""
+  }
+]

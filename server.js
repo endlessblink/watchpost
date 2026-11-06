@@ -535,6 +535,8 @@ const writeProjects = (data) => {
     fs.writeFileSync(projectsJsonPath, JSON.stringify(data, null, 2) + '\n');
 };
 
+require('./modules/project-archive-api').mountProjectArchiveRoutes(app, readProjects, writeProjects);
+
 // GET /api/projects - List all registered projects
 app.get('/api/projects', (req, res) => {
     const data = readProjects();

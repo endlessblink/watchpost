@@ -1,0 +1,1689 @@
+[
+  {
+    "project": "flow-state",
+    "id": "BUG-1723",
+    "title": "Supabase Realtime connection drops with CHANNEL_ERROR cycling",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1737",
+    "title": "Canvas Delete + Ctrl+Z undo unreliable — task reappears then vanishes",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1743",
+    "title": "PWA blank screen when fully offline",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1771",
+    "title": "Canvas \"Add Task to Group\" overlaps existing tasks at group center",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1807",
+    "title": "Canvas nudge — all nodes shift on inbox drop (Electron)",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1808",
+    "title": "Canvas nudge on date edit (overdue → today / context-menu reschedule)",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1870",
+    "title": "Electron update/restart can show Sign In while authenticated cache still exists",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1885",
+    "title": "Cloud Whisper forces Hebrew, mangling mixed Hebrew/English dictation",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1899",
+    "title": "🔄 Canvas group echo-stomp + dual-writer LWW discards (BUG-1799 residue, Tidy 3-rows) (4 modes fixed v1.4.227; boot-load serialization residual)",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1910",
+    "title": "🔄 Canvas groups disappeared after restart into v1.4.229 (BUG-1899 boot-load class; DB rows intact, display-side)",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1913",
+    "title": "🔄 Silent write-drop windows — client drops writes without error; server re-sync looks like resurrection",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1917",
+    "title": "🔄 Updater Restart quits but never swaps/relaunches — silent installer handoff (instrumented+hardened v1.4.231)",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1973",
+    "title": "🔄 Cancelled Electron quit permanently disables the Local Task API; restore one authenticated sidecar without killing the live app",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1975",
+    "title": "🔄 Catalog Done and All Active filters can contradict each other and hide the canonical task; local right-click complete/reopen proof passes, packaged Electron remains",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1976",
+    "title": "Guest recurring completion survives visibly after durable storage rejects it",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1978",
+    "title": "Duplicate or stale recurring actions can report success without a successful operation",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-1979",
+    "title": "Stale task actions can be acknowledged as successful no-ops",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2036",
+    "title": "AI Assist promotes tasks from deadline-shaped text without enough context",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2062",
+    "title": "Permanently clear quarantined sync errors without deleting recoverable work",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2067",
+    "title": "Board context-menu completion can silently skip after a timer-stop refresh",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2069",
+    "title": "A successful permanent deletion can be reported as a sync failure",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2070",
+    "title": "Canvas F2 reordering resets Today's group bounds and misorders tasks",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2071",
+    "title": "A failed Electron update cannot reliably retry its download and installation",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2072",
+    "title": "Electron unexpectedly signs out and rate-limited re-authentication cannot recover",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2079",
+    "title": "Daily offline/reconnect hunt collides with a developer Vite server",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2084",
+    "title": "Keep focused timeline ordering shared and start the normal Pomodoro cycle",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2090",
+    "title": "Redesign the Catalog controls and prevent metadata collisions",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2091",
+    "title": "Tidy must contain cards after late renderer growth and repeated presses",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2094",
+    "title": "Trace and prevent historical completions moving onto today",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2095",
+    "title": "Calendar dates must not invent or retain clock times",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "BUG-2096",
+    "title": "Calendar Inbox Priority selection must actually reorder tasks",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "FEATURE-1945",
+    "title": "🔄 Recurrence chain/history reads plus safe cadence edit, pause, resume, and end-series actions",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "FEATURE-1947",
+    "title": "🔄 Leadership-safe timer start/pause/resume/stop through the signed-in Local API",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "FEATURE-2039",
+    "title": "Always-running Pomodoro break handoff",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "FEATURE-2041",
+    "title": "Learn routines and scheduling behavior from task history",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1171",
+    "title": "Add Mobile View E2E Tests",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1214",
+    "title": "Child Groups Inherit Parent Group Properties",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1471",
+    "title": "Docker Self-Host E2E Test",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1773",
+    "title": "Planning canvas interaction polish",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1811",
+    "title": "Group header button — apply group due date / properties to its tasks",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1830",
+    "title": "Server-backed AI context memory for all chat flows",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1831",
+    "title": "Global low-overwhelm clarify-before-answer contract",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1832",
+    "title": "High-quality planning rubric and anti-fake-reasoning evaluator",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1834",
+    "title": "Chat observability for slow or low-quality answers",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1835",
+    "title": "Broaden memory-aware chat beyond weekly planning",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1837",
+    "title": "Memory lifecycle, summarization, and retention policy",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1838",
+    "title": "Hybrid retrieval and latency budget for AI memory",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1839",
+    "title": "Privacy, RLS, and prompt-injection hardening for AI memory",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1840",
+    "title": "Explicit uncertainty scoring and cold-start policy",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1841",
+    "title": "Agent-memory evaluation rubric and citation audit",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1928",
+    "title": "Local API assistant context endpoint for Hermes personal assistant",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1943",
+    "title": "🔄 Reliable Hermes–FlowState personal-assistant program: canonical sync, dynamic decomposition, monitor reliability, writable Notion, watchdogs, and packaged proof",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1944",
+    "title": "🔄 Canonical operation/revision/change-sequence foundation with safe branch recovery, signed-user receipts, replay, compatibility triggers, and deterministic catch-up",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1947",
+    "title": "🔄 Deterministic canonical change-sequence catch-up with scoped durable cursors, ordered invalidation pages, and persistence-gated advancement",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1952",
+    "title": "🔄 Hydrate Electron auth backup into the live Supabase client and restore protected sidecar reads after restart",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1956",
+    "title": "🔄 Reliable complete FlowState inventory with restart-safe sidecar auth, typed freshness/completeness, stable pagination, and packaged proof",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1960",
+    "title": "🔄 Make complete inventory the only exhaustive assistant task boundary with typed samples and fail-closed large scans",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1961",
+    "title": "🔄 Shared canonical assistant receipt validation with recomputed hashes and fail-closed mutation notifications",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1962",
+    "title": "🔄 Preflight every Hermes-to-FlowState route, package the canonical task lifecycle, and reject incomplete runtimes before work starts",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1977",
+    "title": "Exhaustive historical task-consistency and recoverability sweep",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1981",
+    "title": "Restore recurring-task completion and make sync alerts opaque",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-2035",
+    "title": "Deep stability, crash, auth, and Google integration audit",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-2038",
+    "title": "Full stability audit — competing runtimes, harness gaps, and live E2E closure",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-2074",
+    "title": "FlowState desktop startup attempts the Local API before Electron is ready",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-2078",
+    "title": "Restore backup/restore E2E seeded-task durability",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-2080",
+    "title": "Use distinct, consistent priority colors and ordering everywhere",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-2086",
+    "title": "Clear all Canvas tasks or one group's tasks back to Inbox",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-2092",
+    "title": "Recover id-less persisted sync conflicts in the installed Electron runtime",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-2093",
+    "title": "Expose truthful local task API readiness for agents",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Canonical source declares unfinished active scope; current worker identity/heartbeat is not recorded. Do not demote based solely on old date or parser recovery."
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-100",
+    "title": "Preserve the selected Desk conversation and full saved drafts in model context",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-101",
+    "title": "Deliver useful Desk answers after clarification, attachment retry and interruption",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-14",
+    "title": "Make Telegram recovery and planning controls usable",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-21",
+    "title": "Do not treat switching to the emotional lane as consent to resume the active queue topic",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-23",
+    "title": "Improve Hebrew voice transcription accuracy for emotional conversations",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-29",
+    "title": "Make technical Life-Boat updates concise, plain-language, structured, and RTL-safe",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": "proc_ec0da4dfee2b",
+      "liveHeartbeat": "2026-08-22T15:23:00+03:00",
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-32",
+    "title": "Stop unit tests reading the developer's real Hermes session database",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-47",
+    "title": "Normal clip clicks create cuts",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "Codex",
+      "claimOwner": "Codex",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-48",
+    "title": "Playback stutters at cut boundaries",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "Codex",
+      "claimOwner": "Codex",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-49",
+    "title": "Cut splits distort the audio waveform preview",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "Codex",
+      "claimOwner": "Codex",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-53",
+    "title": "Close Life-Boat agency and state-mutation leaks",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "codex",
+      "claimOwner": "codex",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-7",
+    "title": "Stop generic context-free engagement questions in Botson",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-8",
+    "title": "Complete the agreed emotional decomposition before explaining or closing",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-80",
+    "title": "Scope option guard and preserve partial video review evidence",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "codex-video-production-task2",
+      "claimOwner": "codex-video-production-task2",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-88",
+    "title": "Enforce Claude quota and owner authorization at launch",
+    "recommendedStatus": "blocked",
+    "applicationGate": {
+      "currentOwner": "codex-claude-quota",
+      "claimOwner": "codex-claude-quota",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-9",
+    "title": "Do not derail emotional processing with unsupported safety escalation",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-90",
+    "title": "Restore visible progress and stop synthetic follow-up requests in TermFleet",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "codex-termfleet-progress",
+      "claimOwner": "codex-termfleet-progress",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-93",
+    "title": "Explain what help a bot actually needs and open the blocking item",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "codex-bot-needs-help",
+      "claimOwner": "codex-bot-needs-help",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-94",
+    "title": "Close a chat group reversibly and dismiss a read technical status",
+    "recommendedStatus": "blocked",
+    "applicationGate": {
+      "currentOwner": "codex-chat-view",
+      "claimOwner": "codex-chat-view",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-95",
+    "title": "Register explicit progress questions in cards and notifications",
+    "recommendedStatus": "blocked",
+    "applicationGate": {
+      "currentOwner": "codex-progress-question",
+      "claimOwner": "codex-progress-question",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-96",
+    "title": "Deliver complete progress messages to the exact conversation",
+    "recommendedStatus": "blocked",
+    "applicationGate": {
+      "currentOwner": "codex-termfleet-audit",
+      "claimOwner": "codex-termfleet-audit",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "BUG-99",
+    "title": "Stop elapsed-work alerts for idle agents whose assigned work is waiting",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-12",
+    "title": "Add an interactive canonical Kanban and agent launcher to TermFleet",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-24",
+    "title": "Debounce and coalesce rapid Telegram voice and text messages before replying",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-27",
+    "title": "Restore automatic nightly Daily Evidence Journal summary",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-51",
+    "title": "Coordinate concurrent In-Control agents and safe runtime publication",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "codex-incontrol-main",
+      "claimOwner": "codex-incontrol-main",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-60",
+    "title": "Publish TermFleet as a public early preview (Linux only)",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-62",
+    "title": "Build n8n documentary video automation (avenue 7b)",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-63",
+    "title": "Blender add-on: generate video from camera via Higgsfield, open-source release (avenue 7c)",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude-code-imaginebox",
+      "claimOwner": "claude-code-imaginebox",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-64",
+    "title": "Let parent agents supervise child terminals",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude-code-termfleet",
+      "claimOwner": "claude-code-termfleet",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-65",
+    "title": "Rough Cut: free release, everything free (was: free core + paid graphics bundle)",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "currentOwner": "claude-freelance-desk",
+      "gate": "Unfinished graphics/export/package acceptance and current owner claim are preserved. No justified stage correction without confirming current ownership and implementation."
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-79",
+    "title": "Keeping small requests visible and enforcing safe work priorities",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "codex-orchestration-task16",
+      "claimOwner": "codex-orchestration-task16",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-86",
+    "title": "Enforced agent sync: live per-project board, touch declarations, inbox, commit/turn gates",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude-agent-sync",
+      "claimOwner": "claude-agent-sync",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "FEATURE-92",
+    "title": "Choose and safely close or remove several TermControl bots together",
+    "recommendedStatus": "blocked",
+    "applicationGate": {
+      "currentOwner": "codex-bot-groups",
+      "claimOwner": "codex-bot-groups",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "INQUIRY-11",
+    "title": "Research conversational support for simultaneous depressive affect and self-criticism",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "INQUIRY-22",
+    "title": "Research low-burden openings for emotionally loaded conversations",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "INQUIRY-26",
+    "title": "Build a baseline-backed Life-Boat failure matrix and release gate",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "INQUIRY-4",
+    "title": "Evaluate optional adapters without creating dual authority",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-1",
+    "title": "Improve professional representation on GitHub and personal site",
+    "recommendedStatus": "blocked",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-13",
+    "title": "Harden Life-Boat decision support and co-primary subtext",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-15",
+    "title": "Restore approval-safe Flow State planning receipts",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-16",
+    "title": "Provide bounded portfolio and professional mapping decisions",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-17",
+    "title": "Preserve emotional queue, mixed turns, and consent scheduling",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-18",
+    "title": "Distinguish task status, claim ownership, and live agent execution in TermFleet",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-19",
+    "title": "Add a task progress status bar to TermFleet card details",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-20",
+    "title": "Expose live agent session progress and logs in TermFleet",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-28",
+    "title": "Recover agent execution, reconcile false statuses, and drain the verification backlog",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": "proc_task28_watchdog_fix",
+      "liveHeartbeat": "2026-08-22T10:26:10+03:00",
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-3",
+    "title": "Convert actionable Life-Boat review patterns into executable cards",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-31",
+    "title": "Enforce gateway reliability mapping and evidence gates in agent-ops",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "claude",
+      "claimOwner": "claude",
+      "liveExecutionHandle": "proc_d1be6921ada1",
+      "liveHeartbeat": "2026-08-22T16:27:00+03:00",
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-52",
+    "title": "Preparing TermFleet for a public launch",
+    "recommendedStatus": "blocked",
+    "applicationGate": {
+      "currentOwner": "codex-public-launch",
+      "claimOwner": "codex-public-launch",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-77",
+    "title": "Automated browser scanners for gated supply sources (Jack and Jill pattern): Upwork public search first, then Contra and others",
+    "recommendedStatus": "blocked",
+    "applicationGate": {
+      "currentOwner": "claude-code-leads",
+      "claimOwner": "claude-code-leads",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-83",
+    "title": "Implement approved Bennett motion and repair saved animation feedback",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "codex-animation-overnight",
+      "claimOwner": "codex-animation-overnight",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-87",
+    "title": "Verify repeated arcade campaigns and tester recording on frozen A2r5",
+    "recommendedStatus": "review",
+    "applicationGate": {
+      "currentOwner": "codex-combo-072bd9f7",
+      "claimOwner": "codex-combo-072bd9f7",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-89",
+    "title": "ImagineBox isolated generation and safe branch observation",
+    "recommendedStatus": "planned",
+    "applicationGate": {
+      "currentOwner": "codex-generation-branches",
+      "claimOwner": "codex-generation-branches",
+      "liveExecutionHandle": null,
+      "liveHeartbeat": null,
+      "canonicalStatus": "IN PROGRESS",
+      "gate": "Canonical transition rejects foreign owner; no verified stop evidence for this owner. Do not impersonate/release a possibly live worker. Review additionally requires reliability manifest validation.",
+      "runtimeClaimCheck": {
+        "roster": "termfleet-team list --json returned one unnamed imaginebox terminal; no exact canonical owner mapping",
+        "processes": "11 claude, 3 codex, 1 claude.exe, 2 termfleet process names observed; process names cannot prove exact owner stopped",
+        "result": "unverified_claim; absence from incomplete roster is not definitive stopped evidence"
+      }
+    }
+  },
+  {
+    "project": "agent-ops",
+    "id": "TASK-98",
+    "title": "Repair the complete TermFleet request workflow",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "freelance-desk",
+    "id": "PLAN-0823",
+    "title": "8.23 8.22 LEFT OVER: the daily count of rejected and of passed-first-time replie",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "freelance-desk",
+    "id": "PLAN-0848",
+    "title": "8.48 8.48 A STRUCTURAL-ONLY GATE (Noam 04.11: 'why did you patch it to begin wit",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "freelance-desk",
+    "id": "PLAN-0851",
+    "title": "8.51 8.51 THE WORK QUEUE, IN ORDER OF IMPORTANCE, RUN AS ONE CHAIN (Noam 04.11:",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "freelance-desk",
+    "id": "PLAN-0860",
+    "title": "8.60 Chat messages appear, disappear and glitch (Noam 2026-11-04, screenshot cod",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "freelance-desk",
+    "id": "PLAN-0862",
+    "title": "8.62 APIFY RESEARCH IS AN END-TO-END CAPABILITY (Noam 2026-11-04 R-23684/R-23696",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "freelance-desk",
+    "id": "PLAN-0863",
+    "title": "8.63 R-24129: יומן יומי אחרי שחרור המתכנן — להחליף את מסך כמה זמן יש לך ביומן של",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "freelance-desk",
+    "id": "PLAN-1201",
+    "title": "12.1 12.1 DESK STRUCTURAL REBUILD (Noam 06.11: 'never any patches - just reliabl",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {
+      "gate": "Source status is recorded, but current execution identity and heartbeat have not been verified. Preserve unfinished scope; do not present as confirmed current work."
+    }
+  },
+  {
+    "project": "flow-state",
+    "id": "TASK-1836a",
+    "title": "Recommendation feedback and postponement memory",
+    "recommendedStatus": "in_progress",
+    "applicationGate": {}
+  }
+]

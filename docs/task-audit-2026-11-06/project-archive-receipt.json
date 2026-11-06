@@ -1,0 +1,1792 @@
+{
+  "startedAt": "2026-11-06T21:32:25.991Z",
+  "beforeSha256": "ccc1c9b1b26a8c5f4812fbc2aa47d738a8fe8056aef9cd9f257924914cb735f7",
+  "previousPass": {
+    "startedAt": "2026-11-06T21:24:28.685Z",
+    "beforeSha256": "10d330eb641a630f68e7df5f908f93070c30bb353f341debe65978c0628ec104",
+    "applied": [
+      {
+        "project": "hermes-merge-20260717",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes-merge-20260717",
+          "gitPointer": "gitdir: /home/endlessblink/.hermes/hermes-agent/.git/worktrees/hermes-merge-20260717",
+          "canonicalProject": "lifeboat-live",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-live",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "telegram-personal-assistant",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/telegram-personal-assistant",
+          "gitPointer": "gitdir: /home/endlessblink/.hermes/hermes-agent/.git/worktrees/telegram-personal-assistant",
+          "canonicalProject": "lifeboat-live",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-live",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "live-compaction-confidence",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/live-compaction-confidence",
+          "gitPointer": "gitdir: /home/endlessblink/.hermes/hermes-agent/.git/worktrees/live-compaction-confidence",
+          "canonicalProject": "lifeboat-live",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-live",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "exercise-library",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/exercise-library",
+          "gitPointer": "gitdir: /home/endlessblink/.hermes/hermes-agent/.git/worktrees/exercise-library",
+          "canonicalProject": "lifeboat-live",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-live",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "hermes-upstream-botmode-20260822",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/update-safety-worktrees/hermes-upstream-botmode-20260822",
+          "gitPointer": "gitdir: /home/endlessblink/.hermes/hermes-agent/.git/worktrees/hermes-upstream-botmode-202608221",
+          "canonicalProject": "lifeboat-live",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-live",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "hermes-port-rtl",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/hermes-port-rtl",
+          "gitPointer": "gitdir: /home/endlessblink/.hermes/hermes-agent/.git/worktrees/hermes-port-rtl",
+          "canonicalProject": "lifeboat-live",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-live",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "hermes-upstream-main-20260903",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in lifeboat-live. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/update-safety-worktrees/hermes-upstream-main-20260903",
+          "gitPointer": "gitdir: /home/endlessblink/.hermes/hermes-agent/.git/worktrees/hermes-upstream-main-20260903",
+          "canonicalProject": "lifeboat-live",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-live",
+          "parsedTaskCount": 0
+        }
+      }
+    ],
+    "alreadyArchived": [
+      {
+        "project": "action!",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/action!",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "palladio-flow",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/kanopia/palladio-flow",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "Claude-of-war",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/game-dev/Claude-of-war",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "master_plan_demo",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/misc/master_plan_demo",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "paper-bot-v2",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot-v2",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "Archive/palladio-flow",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/kanopia/Archive/palladio-flow",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "Recordly",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/Recordly",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "desktop-sdk",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/onlyoffice-investigation/desktop-sdk",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "sdkjs",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/onlyoffice-investigation/sdkjs",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "show-runner",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "show-runner/video-use",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/video-use",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "life-os",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/productivity/life-os",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-meatzevet-courses-manual-purchase-profile",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-manual-purchase-profile",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-meatzevet-courses-manual-offline-access",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-manual-offline-access",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-meatzevet-courses-subscription-labels",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-subscription-labels",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "artcraft",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/tools/artcraft",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "tools/video-use",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/tools/video-use",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "libraries/video-use",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/libraries/video-use",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-meatzevet-courses-cloudflare-builds",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-cloudflare-builds",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-meatzevet-courses-business-safe",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-business-safe",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "codex-desktop-linux",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/codex-desktop-linux",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "claude-sure-skill",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/claude-sure-skill",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "termfleet-wt-tc018",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-wt-tc018",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "termfleet-tasklist",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-tasklist",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-live-landing",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-live-landing",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "flowstate-reliability-worktree",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-reliability-worktree",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "hermes-reliability-worktree",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/hermes-reliability-worktree",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "flowstate-h0-provenance",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-h0-provenance",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "folder-first-mode",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/folder-first-mode",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "folder-first-compatible",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/folder-first-compatible",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "flowstate-canonical-404",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-canonical-404",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "repo",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/repo",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "flowstate-duration-current",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-duration-current",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-meatzevet-courses-prod-carousel",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-prod-carousel",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-meatzevet-courses-prod-carousel2",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-prod-carousel2",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "email-center-e2e-clean",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/email-center-e2e-clean",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "placement-worktree",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/placement-worktree",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-campaign-stage1",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-campaign-stage1",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-email-center",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-email-center",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "jobrunner",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/jobrunner",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bots-directory",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots-directory",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-meatzevet-courses-vps-ci",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-vps-ci",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "bina-release",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-release",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "lifeboat-task-map-ui",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-task-map-ui",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "lifeboat-emotional-candidate-capture",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-emotional-candidate-capture",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "lifeboat-response-reviewer",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/lifeboat-response-reviewer",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "mixboard",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/misc/mixboard",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "codex-live-boundary-final",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/productivity/codex-live-boundary-final",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "flowstate-canonical-404.git-cleaning-crew-quarantine-20260829",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-canonical-404.git-cleaning-crew-quarantine-20260829",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "flowstate-duration-current.git-cleaning-crew-quarantine-20260829",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-duration-current.git-cleaning-crew-quarantine-20260829",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "flowstate-h0-provenance.git-cleaning-crew-quarantine-20260829",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-h0-provenance.git-cleaning-crew-quarantine-20260829",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "flowstate-reliability-worktree.git-cleaning-crew-quarantine-20260829",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-reliability-worktree.git-cleaning-crew-quarantine-20260829",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "pc-organization",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/pc-organization",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "freelance-desk-jobfinder-trial",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-jobfinder-trial",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "termfleet-design-wt",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-design-wt",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "freelance-desk-pixel-fixes",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-pixel-fixes",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "freelance-desk-wt-desc",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-wt-desc",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "rc-readme-wt",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rc-readme-wt",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "fd-fix2-wt",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-fix2-wt",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "fd-fix2-wt/jobrunner",
+        "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+        "evidence": {
+          "kind": "missing_root",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-fix2-wt/jobrunner",
+          "checkedAt": "2026-11-06T21:24:28.686Z"
+        }
+      },
+      {
+        "project": "assembly-line-hardening-wt",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-hardening-wt",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/devops/assembly-line/.git/worktrees/assembly-line-hardening-wt",
+          "canonicalProject": "assembly-line",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "assembly-line-decider-wt",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-decider-wt",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/devops/assembly-line/.git/worktrees/assembly-line-decider-wt",
+          "canonicalProject": "assembly-line",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "assembly-line-nightly-wt",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-nightly-wt",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/devops/assembly-line/.git/worktrees/assembly-line-nightly-wt",
+          "canonicalProject": "assembly-line",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "assembly-line-lanes-wt",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-lanes-wt",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/devops/assembly-line/.git/worktrees/assembly-line-lanes-wt",
+          "canonicalProject": "assembly-line",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "assembly-line-gaps-wt",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-gaps-wt",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/devops/assembly-line/.git/worktrees/assembly-line-gaps-wt",
+          "canonicalProject": "assembly-line",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "rough-cut-release",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in rough-cut-mvp. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-release",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp/.git/worktrees/rough-cut-release",
+          "canonicalProject": "rough-cut-mvp",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "jr-base-0910",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in freelance-desk. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/jr-base-0910",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/jobrunner/.git/worktrees/jr-base-0910",
+          "canonicalProject": "freelance-desk",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "paper-bot-wt-source-image",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in paper-bot. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot-wt-source-image",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot/.git/worktrees/paper-bot-wt-source-image",
+          "canonicalProject": "paper-bot",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot",
+          "parsedTaskCount": 71
+        }
+      },
+      {
+        "project": "bina-ve-ze-free-skills",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in bina-ve-ze. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/web-dev/bina-ve-ze-free-skills",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/web-dev/bina-ve-ze/.git/worktrees/bina-ve-ze-free-skills",
+          "canonicalProject": "bina-ve-ze",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/web-dev/bina-ve-ze",
+          "parsedTaskCount": 92
+        }
+      },
+      {
+        "project": "cac-weight-wt",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in claude-and-conquer. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/cac-weight-wt",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/.git/worktrees/wt",
+          "canonicalProject": "claude-and-conquer",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer",
+          "parsedTaskCount": 99
+        }
+      },
+      {
+        "project": "rough-cut-ai-edit",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in rough-cut-mvp. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-ai-edit",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp/.git/worktrees/rough-cut-ai-edit",
+          "canonicalProject": "rough-cut-mvp",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "rough-cut-beta13",
+        "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in rough-cut-mvp. Preserve checkout, branch and dirty work.",
+        "evidence": {
+          "kind": "canonical_worktree_copy",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-beta13",
+          "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp/.git/worktrees/rough-cut-beta13",
+          "canonicalProject": "rough-cut-mvp",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp",
+          "parsedTaskCount": 0
+        }
+      },
+      {
+        "project": "apps-and-tools/arthouse",
+        "reason": "Task audit 2026-11-06: exact filesystem alias of arthouse; same root and plan authority.",
+        "evidence": {
+          "kind": "exact_root_alias",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/arthouse",
+          "canonicalProject": "arthouse",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/arthouse",
+          "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/arthouse",
+          "realPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/arthouse/MASTER_PLAN.md"
+        }
+      },
+      {
+        "project": "apps-and-tools/content-maker",
+        "reason": "Task audit 2026-11-06: exact filesystem alias of content-maker; same root and plan authority.",
+        "evidence": {
+          "kind": "exact_root_alias",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/content-maker",
+          "canonicalProject": "content-maker",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/content-maker",
+          "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/content-maker",
+          "realPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/content-maker/MASTER_PLAN.md"
+        }
+      },
+      {
+        "project": "apps-and-tools/inner-dialouge",
+        "reason": "Task audit 2026-11-06: exact filesystem alias of inner-dialouge; same root and plan authority.",
+        "evidence": {
+          "kind": "exact_root_alias",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/inner-dialouge",
+          "canonicalProject": "inner-dialouge",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/inner-dialouge",
+          "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/inner-dialouge",
+          "realPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/inner-dialouge/MASTER_PLAN.md"
+        }
+      },
+      {
+        "project": "apps-and-tools/rough-cut-mvp",
+        "reason": "Task audit 2026-11-06: exact filesystem alias of rough-cut-mvp; same root and plan authority.",
+        "evidence": {
+          "kind": "exact_root_alias",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/rough-cut-mvp",
+          "canonicalProject": "rough-cut-mvp",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp",
+          "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp",
+          "realPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp/MASTER_PLAN.md"
+        }
+      },
+      {
+        "project": "apps-and-tools/frontend-slides",
+        "reason": "Task audit 2026-11-06: exact filesystem alias of content-creation/frontend-slides; same root and plan authority.",
+        "evidence": {
+          "kind": "exact_root_alias",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/frontend-slides",
+          "canonicalProject": "content-creation/frontend-slides",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/frontend-slides",
+          "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/frontend-slides",
+          "realPlan": null
+        }
+      },
+      {
+        "project": "apps-and-tools/it-takes-resolve",
+        "reason": "Task audit 2026-11-06: exact filesystem alias of it-takes-resolve; same root and plan authority.",
+        "evidence": {
+          "kind": "exact_root_alias",
+          "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/it-takes-resolve",
+          "canonicalProject": "it-takes-resolve",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/it-takes-resolve",
+          "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/it-takes-resolve",
+          "realPlan": null
+        }
+      },
+      {
+        "project": "fd-planfix-wt/jobrunner",
+        "reason": "Task audit 2026-11-06: exact filesystem alias of freelance-desk/jobrunner; same root and plan authority.",
+        "evidence": {
+          "kind": "exact_root_alias",
+          "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-planfix-wt/jobrunner",
+          "canonicalProject": "freelance-desk/jobrunner",
+          "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/jobrunner",
+          "realRoot": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/jobrunner",
+          "realPlan": null
+        }
+      }
+    ],
+    "skipped": [],
+    "held": [
+      "rough-cut-lane1-merge-safe",
+      "lifeboat-live",
+      "botson-xevents",
+      "termfleet-unread",
+      "termfleet-grill-me",
+      "termfleet-close",
+      "politic-fighter-title-sample",
+      "fd-planfix-wt"
+    ],
+    "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/projects-before-registration-archive-1794000268784.json",
+    "afterSha256": "ccc1c9b1b26a8c5f4812fbc2aa47d738a8fe8056aef9cd9f257924914cb735f7",
+    "readback": {
+      "projectCount": 251,
+      "archived": 88,
+      "appliedVerified": true,
+      "activeFlagsUnchanged": true,
+      "heldArchivesChanged": []
+    },
+    "previousPass": {
+      "startedAt": "2026-11-06T21:23:53.530Z",
+      "beforeSha256": "624d7f33c0e04a7be90c3dc325c63ef3d30a34e33a7116390f9a53679c69a9e4",
+      "applied": [
+        {
+          "project": "action!",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/action!",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "palladio-flow",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/kanopia/palladio-flow",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "Claude-of-war",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/game-dev/Claude-of-war",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "master_plan_demo",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/misc/master_plan_demo",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "paper-bot-v2",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot-v2",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "Archive/palladio-flow",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/kanopia/Archive/palladio-flow",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "Recordly",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/Recordly",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "desktop-sdk",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/onlyoffice-investigation/desktop-sdk",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "sdkjs",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/onlyoffice-investigation/sdkjs",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "show-runner",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "show-runner/video-use",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/video-use",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "life-os",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/productivity/life-os",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-meatzevet-courses-manual-purchase-profile",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-manual-purchase-profile",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-meatzevet-courses-manual-offline-access",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-manual-offline-access",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-meatzevet-courses-subscription-labels",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-subscription-labels",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "artcraft",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/tools/artcraft",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "tools/video-use",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/tools/video-use",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "libraries/video-use",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/show-runner/libraries/video-use",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-meatzevet-courses-cloudflare-builds",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-cloudflare-builds",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-meatzevet-courses-business-safe",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-business-safe",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "codex-desktop-linux",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/codex-desktop-linux",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "claude-sure-skill",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/claude-sure-skill",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "termfleet-wt-tc018",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-wt-tc018",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "termfleet-tasklist",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-tasklist",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-live-landing",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-live-landing",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "flowstate-reliability-worktree",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-reliability-worktree",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "hermes-reliability-worktree",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/hermes-reliability-worktree",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "flowstate-h0-provenance",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-h0-provenance",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "folder-first-mode",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/folder-first-mode",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "folder-first-compatible",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/folder-first-compatible",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "flowstate-canonical-404",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-canonical-404",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "repo",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/repo",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "flowstate-duration-current",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-duration-current",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-meatzevet-courses-prod-carousel",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-prod-carousel",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-meatzevet-courses-prod-carousel2",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-prod-carousel2",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "email-center-e2e-clean",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/email-center-e2e-clean",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "placement-worktree",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses/placement-worktree",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-campaign-stage1",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-campaign-stage1",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-email-center",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-email-center",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "jobrunner",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/jobrunner",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bots-directory",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots-directory",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-meatzevet-courses-vps-ci",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-meatzevet-courses-vps-ci",
+            "checkedAt": "2026-11-06T21:23:53.531Z"
+          }
+        },
+        {
+          "project": "bina-release",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/freelance/bina-release",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "lifeboat-task-map-ui",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-task-map-ui",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "lifeboat-emotional-candidate-capture",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/lifeboat-emotional-candidate-capture",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "lifeboat-response-reviewer",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/lifeboat-response-reviewer",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "mixboard",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/misc/mixboard",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "codex-live-boundary-final",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/productivity/codex-live-boundary-final",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "flowstate-canonical-404.git-cleaning-crew-quarantine-20260829",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-canonical-404.git-cleaning-crew-quarantine-20260829",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "flowstate-duration-current.git-cleaning-crew-quarantine-20260829",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-duration-current.git-cleaning-crew-quarantine-20260829",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "flowstate-h0-provenance.git-cleaning-crew-quarantine-20260829",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-h0-provenance.git-cleaning-crew-quarantine-20260829",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "flowstate-reliability-worktree.git-cleaning-crew-quarantine-20260829",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/hermes/flowstate-reliability-worktree.git-cleaning-crew-quarantine-20260829",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "pc-organization",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/pc-organization",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "freelance-desk-jobfinder-trial",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-jobfinder-trial",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "termfleet-design-wt",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-design-wt",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "freelance-desk-pixel-fixes",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-pixel-fixes",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "freelance-desk-wt-desc",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk-wt-desc",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "rc-readme-wt",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rc-readme-wt",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "fd-fix2-wt",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-fix2-wt",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "fd-fix2-wt/jobrunner",
+          "reason": "Task audit 2026-11-06: registered checkout root is absent; preserve registration history and restore when checkout returns.",
+          "evidence": {
+            "kind": "missing_root",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-fix2-wt/jobrunner",
+            "checkedAt": "2026-11-06T21:23:53.532Z"
+          }
+        },
+        {
+          "project": "assembly-line-hardening-wt",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-hardening-wt",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/devops/assembly-line/.git/worktrees/assembly-line-hardening-wt",
+            "canonicalProject": "assembly-line",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+            "parsedTaskCount": 0
+          }
+        },
+        {
+          "project": "assembly-line-decider-wt",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-decider-wt",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/devops/assembly-line/.git/worktrees/assembly-line-decider-wt",
+            "canonicalProject": "assembly-line",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+            "parsedTaskCount": 0
+          }
+        },
+        {
+          "project": "assembly-line-nightly-wt",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-nightly-wt",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/devops/assembly-line/.git/worktrees/assembly-line-nightly-wt",
+            "canonicalProject": "assembly-line",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+            "parsedTaskCount": 0
+          }
+        },
+        {
+          "project": "assembly-line-lanes-wt",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-lanes-wt",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/devops/assembly-line/.git/worktrees/assembly-line-lanes-wt",
+            "canonicalProject": "assembly-line",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+            "parsedTaskCount": 0
+          }
+        },
+        {
+          "project": "assembly-line-gaps-wt",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in assembly-line. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line-gaps-wt",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/devops/assembly-line/.git/worktrees/assembly-line-gaps-wt",
+            "canonicalProject": "assembly-line",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/devops/assembly-line",
+            "parsedTaskCount": 0
+          }
+        },
+        {
+          "project": "rough-cut-release",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in rough-cut-mvp. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-release",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp/.git/worktrees/rough-cut-release",
+            "canonicalProject": "rough-cut-mvp",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp",
+            "parsedTaskCount": 0
+          }
+        },
+        {
+          "project": "jr-base-0910",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in freelance-desk. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/jr-base-0910",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/jobrunner/.git/worktrees/jr-base-0910",
+            "canonicalProject": "freelance-desk",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk",
+            "parsedTaskCount": 0
+          }
+        },
+        {
+          "project": "paper-bot-wt-source-image",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in paper-bot. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot-wt-source-image",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot/.git/worktrees/paper-bot-wt-source-image",
+            "canonicalProject": "paper-bot",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/bots+automation/paper-bot",
+            "parsedTaskCount": 71
+          }
+        },
+        {
+          "project": "bina-ve-ze-free-skills",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in bina-ve-ze. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/web-dev/bina-ve-ze-free-skills",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/web-dev/bina-ve-ze/.git/worktrees/bina-ve-ze-free-skills",
+            "canonicalProject": "bina-ve-ze",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/web-dev/bina-ve-ze",
+            "parsedTaskCount": 92
+          }
+        },
+        {
+          "project": "cac-weight-wt",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in claude-and-conquer. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/cac-weight-wt",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/.git/worktrees/wt",
+            "canonicalProject": "claude-and-conquer",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer",
+            "parsedTaskCount": 99
+          }
+        },
+        {
+          "project": "rough-cut-ai-edit",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in rough-cut-mvp. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-ai-edit",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp/.git/worktrees/rough-cut-ai-edit",
+            "canonicalProject": "rough-cut-mvp",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp",
+            "parsedTaskCount": 0
+          }
+        },
+        {
+          "project": "rough-cut-beta13",
+          "reason": "Task audit 2026-11-06: duplicate linked-worktree presentation; canonical tasks are in rough-cut-mvp. Preserve checkout, branch and dirty work.",
+          "evidence": {
+            "kind": "canonical_worktree_copy",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-beta13",
+            "gitPointer": "gitdir: /media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp/.git/worktrees/rough-cut-beta13",
+            "canonicalProject": "rough-cut-mvp",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp",
+            "parsedTaskCount": 0
+          }
+        },
+        {
+          "project": "apps-and-tools/frontend-slides",
+          "reason": "Task audit 2026-11-06: exact filesystem alias of content-creation/frontend-slides; same root and plan authority.",
+          "evidence": {
+            "kind": "exact_root_alias",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/frontend-slides",
+            "canonicalProject": "content-creation/frontend-slides",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/frontend-slides",
+            "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/frontend-slides",
+            "realPlan": null
+          }
+        },
+        {
+          "project": "apps-and-tools/it-takes-resolve",
+          "reason": "Task audit 2026-11-06: exact filesystem alias of it-takes-resolve; same root and plan authority.",
+          "evidence": {
+            "kind": "exact_root_alias",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/it-takes-resolve",
+            "canonicalProject": "it-takes-resolve",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/it-takes-resolve",
+            "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/it-takes-resolve",
+            "realPlan": null
+          }
+        },
+        {
+          "project": "fd-planfix-wt/jobrunner",
+          "reason": "Task audit 2026-11-06: exact filesystem alias of freelance-desk/jobrunner; same root and plan authority.",
+          "evidence": {
+            "kind": "exact_root_alias",
+            "root": "/media/endlessblink/data/my-projects/ai-development/bots+automation/fd-planfix-wt/jobrunner",
+            "canonicalProject": "freelance-desk/jobrunner",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/jobrunner",
+            "realRoot": "/media/endlessblink/data/my-projects/ai-development/bots+automation/freelance-desk/jobrunner",
+            "realPlan": null
+          }
+        }
+      ],
+      "alreadyArchived": [
+        {
+          "project": "apps-and-tools/arthouse",
+          "reason": "Task audit 2026-11-06: exact filesystem alias of arthouse; same root and plan authority.",
+          "evidence": {
+            "kind": "exact_root_alias",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/arthouse",
+            "canonicalProject": "arthouse",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/arthouse",
+            "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/arthouse",
+            "realPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/arthouse/MASTER_PLAN.md"
+          }
+        },
+        {
+          "project": "apps-and-tools/content-maker",
+          "reason": "Task audit 2026-11-06: exact filesystem alias of content-maker; same root and plan authority.",
+          "evidence": {
+            "kind": "exact_root_alias",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/content-maker",
+            "canonicalProject": "content-maker",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/content-maker",
+            "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/content-maker",
+            "realPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/content-maker/MASTER_PLAN.md"
+          }
+        },
+        {
+          "project": "apps-and-tools/inner-dialouge",
+          "reason": "Task audit 2026-11-06: exact filesystem alias of inner-dialouge; same root and plan authority.",
+          "evidence": {
+            "kind": "exact_root_alias",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/inner-dialouge",
+            "canonicalProject": "inner-dialouge",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/inner-dialouge",
+            "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/inner-dialouge",
+            "realPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/inner-dialouge/MASTER_PLAN.md"
+          }
+        },
+        {
+          "project": "apps-and-tools/rough-cut-mvp",
+          "reason": "Task audit 2026-11-06: exact filesystem alias of rough-cut-mvp; same root and plan authority.",
+          "evidence": {
+            "kind": "exact_root_alias",
+            "root": "/media/endlessblink/data/my-projects/ai-development/content-creation/apps-and-tools/rough-cut-mvp",
+            "canonicalProject": "rough-cut-mvp",
+            "canonicalRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp",
+            "realRoot": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp",
+            "realPlan": "/media/endlessblink/data/my-projects/ai-development/content-creation/rough-cut-mvp/MASTER_PLAN.md"
+          }
+        }
+      ],
+      "skipped": [
+        {
+          "project": "hermes-merge-20260717",
+          "reason": "Current root/canonical/worktree identity changed."
+        },
+        {
+          "project": "telegram-personal-assistant",
+          "reason": "Current root/canonical/worktree identity changed."
+        },
+        {
+          "project": "live-compaction-confidence",
+          "reason": "Current root/canonical/worktree identity changed."
+        },
+        {
+          "project": "exercise-library",
+          "reason": "Current root/canonical/worktree identity changed."
+        },
+        {
+          "project": "hermes-upstream-botmode-20260822",
+          "reason": "Current root/canonical/worktree identity changed."
+        },
+        {
+          "project": "hermes-port-rtl",
+          "reason": "Current root/canonical/worktree identity changed."
+        },
+        {
+          "project": "hermes-upstream-main-20260903",
+          "reason": "Current root/canonical/worktree identity changed."
+        }
+      ],
+      "held": [
+        "rough-cut-lane1-merge-safe",
+        "lifeboat-live",
+        "botson-xevents",
+        "termfleet-unread",
+        "termfleet-grill-me",
+        "termfleet-close",
+        "politic-fighter-title-sample",
+        "fd-planfix-wt"
+      ],
+      "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/projects-before-registration-archive-1794000233603.json",
+      "afterSha256": "10d330eb641a630f68e7df5f908f93070c30bb353f341debe65978c0628ec104",
+      "readback": {
+        "projectCount": 251,
+        "archived": 81,
+        "appliedVerified": true,
+        "activeFlagsUnchanged": true,
+        "heldArchivesChanged": []
+      }
+    },
+    "liveReadback": {
+      "checkedAt": "2026-11-06T21:24:54.601114+00:00",
+      "projectCount": 251,
+      "archived": 88,
+      "active": [
+        "claude-and-conquer"
+      ],
+      "servedToggle": true,
+      "verification": "Read-only API and served HTML; archive/restore behavior covered by12 local focused tests."
+    }
+  },
+  "applied": [
+    {
+      "project": "termfleet-grill-me",
+      "canonical": "termfleet-unread",
+      "evidence": {
+        "projects": [
+          "termfleet-unread",
+          "termfleet-grill-me",
+          "termfleet-close"
+        ],
+        "retainedReconciliationProject": "termfleet-unread",
+        "fullPlanSha256": "e71008f50b45447233c32deac60ba584122a6f1d0d202c86d557a98b308c8596",
+        "rowsComparedPerProject": 224,
+        "fieldsCompared": [
+          "title",
+          "currentStatus",
+          "dependencies"
+        ],
+        "exactSourceBytes": true,
+        "authorityMigration": false,
+        "qualification": "Exact byte comparison occurred before the retained view alone received the dated TC-033 REVIEW qualification; original bytes are backed up.",
+        "retainedQualification": {
+          "path": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-unread/MASTER_PLAN.md",
+          "beforeSha256": "e71008f50b45447233c32deac60ba584122a6f1d0d202c86d557a98b308c8596",
+          "afterSha256": "356f8208bca750d353411ba243b381301634e72de35decb8848f01a0946694be",
+          "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/termfleet-unread-before-tc033-review.md",
+          "task": "TC-033",
+          "beforeStatus": "done",
+          "afterStatus": "review"
+        }
+      }
+    },
+    {
+      "project": "termfleet-close",
+      "canonical": "termfleet-unread",
+      "evidence": {
+        "projects": [
+          "termfleet-unread",
+          "termfleet-grill-me",
+          "termfleet-close"
+        ],
+        "retainedReconciliationProject": "termfleet-unread",
+        "fullPlanSha256": "e71008f50b45447233c32deac60ba584122a6f1d0d202c86d557a98b308c8596",
+        "rowsComparedPerProject": 224,
+        "fieldsCompared": [
+          "title",
+          "currentStatus",
+          "dependencies"
+        ],
+        "exactSourceBytes": true,
+        "authorityMigration": false,
+        "qualification": "Exact byte comparison occurred before the retained view alone received the dated TC-033 REVIEW qualification; original bytes are backed up.",
+        "retainedQualification": {
+          "path": "/media/endlessblink/data/my-projects/ai-development/devops/termfleet-unread/MASTER_PLAN.md",
+          "beforeSha256": "e71008f50b45447233c32deac60ba584122a6f1d0d202c86d557a98b308c8596",
+          "afterSha256": "356f8208bca750d353411ba243b381301634e72de35decb8848f01a0946694be",
+          "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/termfleet-unread-before-tc033-review.md",
+          "task": "TC-033",
+          "beforeStatus": "done",
+          "afterStatus": "review"
+        }
+      }
+    }
+  ],
+  "backup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/backups/projects-before-crosscopy-archive-1794000745992.json",
+  "afterSha256": "2b64eae9be99c17a677e8cfc67150be69bdd92437eb15cb2988eb3af038f754e",
+  "readback": {
+    "projectCount": 251,
+    "archived": 90,
+    "retainedViewArchived": false,
+    "tc033": "review",
+    "activeFlagsUnchanged": true
+  }
+}

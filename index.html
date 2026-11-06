@@ -369,6 +369,12 @@
             let highlight = 0;
             let isOpen = false;
             let fetching = false;
+            const archiveToggle = document.createElement('label');
+            archiveToggle.style.cssText = 'display:flex;align-items:center;gap:6px;padding:8px 12px;font-size:12px;color:var(--text-secondary,#94a3b8)';
+            archiveToggle.innerHTML = '<input type="checkbox" id="project-switcher-show-archived"> Show archived projects';
+            list.before(archiveToggle);
+            const showArchived = archiveToggle.querySelector('input');
+            showArchived.addEventListener('change', () => { highlight = 0; render(); });
 
             function escapeHtml(s) {
                 return String(s == null ? '' : s)
@@ -414,7 +420,7 @@
             }
 
             function applyFilter(items) {
-                items = items.filter(p => !p.archived || isActiveProject(p));
+                items = items.filter(p => showArchived.checked || !p.archived || isActiveProject(p));
                 if (!filter) return items;
                 const q = filter.toLowerCase();
                 return items.filter(p =>
