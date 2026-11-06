@@ -43,7 +43,7 @@ describe('flow task cards and panel', () => {
         expect(flow).toMatch(/pick = \(\) => \{ openTaskDetail\(el\.dataset\.id\); copyTaskContext/);
     });
     it('the side panel has no sentence banner or score bar', () => {
-        const panel = flow.slice(flow.indexOf('function renderSidePanel'), flow.indexOf('function renderSidePanel') + 9000);
+        const panel = flow.slice(flow.indexOf('function renderSidePanel'), flow.indexOf('const copyBtn'));
         expect(panel).not.toContain('banner');
         expect(panel).not.toContain('score-bar');
     });
