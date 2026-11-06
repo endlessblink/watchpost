@@ -117,3 +117,7 @@ html,body{height:100%;overflow:hidden}
 .pb-sub{font-size:12.5px}
 .project-switcher-popover{top:78px;bottom:auto;left:calc(64px + (100vw - 64px) / 2 - 170px)}
 @media (max-width:760px){.project-bar{flex-basis:64px}.pb-thumb{width:80px;height:45px;flex-basis:80px}.project-switcher-popover{left:8px;right:8px;top:70px;width:auto}}
+
+/* the picker's only visible control is the project bar */
+.project-switcher-wrap{display:contents}
+.project-bar-main.project-switcher-trigger{width:auto;height:auto;overflow:visible;display:flex;border-radius:12px}

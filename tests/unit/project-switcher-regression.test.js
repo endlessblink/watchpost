@@ -13,8 +13,8 @@ describe('Project switcher regression coverage', () => {
         const html = readRepoFile('index.html');
 
         expect(html).toContain('id="active-project-badge"');
-        expect(html).toContain('id="active-project-badge-name"');
-        expect(html).toContain('class="project-switcher-trigger"');
+        expect(html).toContain('id="bar-name"');
+        expect(html).toContain('project-switcher-trigger');
         expect(html).toContain('id="project-switcher-popover"');
         expect(html).toContain('id="project-switcher-search"');
         expect(html).toContain('id="project-switcher-list"');
@@ -43,8 +43,10 @@ describe('Project switcher regression coverage', () => {
     it('always shows which project is on and follows the server', () => {
         const html = readRepoFile('index.html');
 
-        expect(html).toContain('id="active-project-caption"');
-        expect(html).toContain('id="active-project-thumb"');
+        expect(html).toContain('id="bar-name"');
+        expect(html).toContain('id="bar-thumb"');
+        // one control: the side menu no longer repeats the project
+        expect(html).not.toContain('id="active-project-caption"');
         expect(html).toContain('syncActiveProject');
     });
 

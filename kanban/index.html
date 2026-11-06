@@ -75,27 +75,27 @@
       <!-- KANBAN VIEW -->
       <div class="view-container active" id="kanban-view">
         <div class="kanban-board" id="kanban-board">
-          <div class="kanban-column">
-            <div class="column-header todo"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/></svg></span><span class="label">Planned</span><span class="col-count" data-count-for="column-todo">0</span></div>
+          <div class="kanban-column" onclick="expandIfFolded(event, 'column-todo')">
+            <div class="column-header todo"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/></svg></span><span class="label">Planned</span><span class="col-count" data-count-for="column-todo">0</span><button class="collapse-toggle" type="button" onclick="toggleColumn('column-todo', event)" title="Fold Planned" aria-label="Fold Planned" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5L9 12l5.5 5.5"/></svg></button></div>
             <div class="column-content" id="column-todo"></div>
           </div>
-          <div class="kanban-column">
-            <div class="column-header in-progress"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10.5 8.8l4.5 3.2-4.5 3.2z"/></svg></span><span class="label">In progress</span><span class="col-count" data-count-for="column-in-progress">0</span></div>
+          <div class="kanban-column" onclick="expandIfFolded(event, 'column-in-progress')">
+            <div class="column-header in-progress"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10.5 8.8l4.5 3.2-4.5 3.2z"/></svg></span><span class="label">In progress</span><span class="col-count" data-count-for="column-in-progress">0</span><button class="collapse-toggle" type="button" onclick="toggleColumn('column-in-progress', event)" title="Fold In progress" aria-label="Fold In progress" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5L9 12l5.5 5.5"/></svg></button></div>
             <div class="column-content" id="column-in-progress"></div>
           </div>
-          <div class="kanban-column" id="paused-column" onclick="pausedColumnPeek(event)">
-            <div class="column-header paused"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10 9v6M14 9v6"/></svg></span><span class="label">Paused</span><span class="col-count" data-count-for="column-paused">0</span></div>
+          <div class="kanban-column" id="paused-column" onclick="expandIfFolded(event, 'column-paused')">
+            <div class="column-header paused"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10 9v6M14 9v6"/></svg></span><span class="label">Paused</span><span class="col-count" data-count-for="column-paused">0</span><button class="collapse-toggle" type="button" onclick="toggleColumn('column-paused', event)" title="Fold Paused" aria-label="Fold Paused" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5L9 12l5.5 5.5"/></svg></button></div>
             <div class="column-content" id="column-paused"></div>
           </div>
-          <div class="kanban-column">
-            <div class="column-header review"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 010 17z" fill="currentColor"/></svg></span><span class="label">Review</span><span class="col-count" data-count-for="column-review">0</span></div>
+          <div class="kanban-column" onclick="expandIfFolded(event, 'column-review')">
+            <div class="column-header review"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 010 17z" fill="currentColor"/></svg></span><span class="label">Review</span><span class="col-count" data-count-for="column-review">0</span><button class="collapse-toggle" type="button" onclick="toggleColumn('column-review', event)" title="Fold Review" aria-label="Fold Review" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5L9 12l5.5 5.5"/></svg></button></div>
             <div class="column-content" id="column-review"></div>
           </div>
-          <div class="kanban-column" onclick="doneColumnExpand(event)">
+          <div class="kanban-column" onclick="expandIfFolded(event, 'column-done')">
             <div class="column-header done" id="done-header">
               <span class="column-header-text"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.3l2.5 2.5 4.5-5"/></svg></span><span class="label">Done</span></span>
               <span class="collapse-count" id="done-count">0</span>
-              <button class="collapse-toggle" onclick="toggleDoneColumn()" title="Collapse or expand" aria-label="Collapse or expand Done">▼</button>
+              <button class="collapse-toggle" type="button" onclick="toggleColumn('column-done', event)" title="Fold Done" aria-label="Fold Done" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5L9 12l5.5 5.5"/></svg></button>
             </div>
             <div class="column-content" id="column-done"></div>
           </div>
@@ -3128,27 +3128,10 @@
         const col = document.getElementById(el.getAttribute('data-count-for'));
         el.textContent = col ? col.querySelectorAll('.task-card:not(.filter-hidden)').length : 0;
       });
-      const paused = document.getElementById('paused-column');
-      if (paused) {
-        const n = document.getElementById('column-paused').querySelectorAll('.task-card').length;
-        paused.classList.toggle('slim', n === 0 && !paused.classList.contains('peek'));
-        if (n > 0) paused.classList.remove('slim', 'peek');
-      }
+      applyColumnState();
     }
 
-    function pausedColumnPeek(event) {
-      const paused = document.getElementById('paused-column');
-      if (paused && paused.classList.contains('slim')) {
-        paused.classList.add('peek');
-      }
-    }
 
-    function doneColumnExpand(event) {
-      const header = document.getElementById('done-header');
-      if (header && header.classList.contains('collapsed') && !event.target.closest('.collapse-toggle')) {
-        toggleDoneColumn();
-      }
-    }
 
     function syncToolbarMarks() {
       const t = document.getElementById('type-filter');
@@ -3157,34 +3140,45 @@
       document.getElementById('priority-btn')?.classList.toggle('has-filter', !!p && p.value !== 'all');
     }
 
-    // COLLAPSE DONE COLUMN
-    function toggleDoneColumn() {
-      const header = document.getElementById('done-header');
-      const content = document.getElementById('column-done');
-      const toggle = header.querySelector('.collapse-toggle');
-
-      const isCollapsed = content.classList.toggle('collapsed');
-      header.classList.toggle('collapsed', isCollapsed);
-
-      // Save state to localStorage
-      localStorage.setItem('kanban-done-collapsed', isCollapsed);
-
-      // Update toggle icon
-      toggle.textContent = isCollapsed ? '▶' : '▼';
+    // FOLD COLUMNS: one mechanism for every column, remembered per column.
+    const FOLD_KEY = 'kanban-folded-columns';
+    function foldedMap() {
+      let map = {};
+      try { map = JSON.parse(localStorage.getItem(FOLD_KEY) || '{}') || {}; } catch (_) { map = {}; }
+      // older versions remembered only the Done column
+      if (map['column-done'] === undefined && localStorage.getItem('kanban-done-collapsed') === 'true') map['column-done'] = true;
+      return map;
     }
-
-    function loadDoneColumnState() {
-      const isCollapsed = localStorage.getItem('kanban-done-collapsed') === 'true';
-      if (isCollapsed) {
-        const header = document.getElementById('done-header');
-        const content = document.getElementById('column-done');
-        const toggle = header.querySelector('.collapse-toggle');
-
-        content.classList.add('collapsed');
-        header.classList.add('collapsed');
-        toggle.textContent = '▶';
-      }
+    function applyColumnState() {
+      const map = foldedMap();
+      document.querySelectorAll('.kanban-column').forEach(col => {
+        const content = col.querySelector('.column-content');
+        if (!content) return;
+        let folded = map[content.id];
+        // an empty Paused column starts folded until someone chooses otherwise
+        if (folded === undefined && content.id === 'column-paused') folded = !content.querySelector('.task-card');
+        col.classList.toggle('is-folded', !!folded);
+        const toggle = col.querySelector('.collapse-toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', String(!folded));
+      });
     }
+    function toggleColumn(id, event) {
+      if (event) event.stopPropagation();
+      const content = document.getElementById(id);
+      const col = content && content.closest('.kanban-column');
+      if (!col) return;
+      const map = foldedMap();
+      map[id] = !col.classList.contains('is-folded');
+      localStorage.setItem(FOLD_KEY, JSON.stringify(map));
+      applyColumnState();
+    }
+    function expandIfFolded(event, id) {
+      const content = document.getElementById(id);
+      const col = content && content.closest('.kanban-column');
+      if (col && col.classList.contains('is-folded') && !event.target.closest('.collapse-toggle')) toggleColumn(id, event);
+    }
+    function toggleDoneColumn() { toggleColumn('column-done'); }
+    function loadDoneColumnState() { applyColumnState(); }
 
     function updateDoneCount() {
       const doneContent = document.getElementById('column-done');
