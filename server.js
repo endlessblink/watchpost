@@ -122,8 +122,9 @@ const HOST = resolveBindHost({ localConfig });
 
 
 // Cache for health scan results
-let healthCache = null;
-let healthScanInProgress = false;
+// Health results are kept per project: a scan always means the picked project, never a global one.
+const healthCaches = new Map();      // project root -> last scan result
+const healthScansRunning = new Set(); // project roots being scanned right now
 
 // SSE Clients
 let clients = [];
@@ -1265,27 +1266,36 @@ ${description ? `\n${description}\n` : ''}
 
 // Health API Endpoints
 
+// The folder a health scan should look at: the project this request means.
+function healthRootFor(req) {
+    const project = projectForRequest(req);
+    if (project?.root) return project.root;
+    return getProjectRoot(resolvePlanForRequest(req));
+}
+
+
 // GET /api/health - Full health scan (slow, ~30-60s)
 app.get('/api/health', async (req, res) => {
+    const root = healthRootFor(req);
     console.log('[API] Starting full health scan...');
 
-    if (healthScanInProgress) {
+    if (healthScansRunning.has(root)) {
         return res.status(429).json({
             error: 'Scan already in progress',
-            cached: healthCache
+            cached: healthCaches.get(root) || null
         });
     }
 
     try {
-        healthScanInProgress = true;
-        const result = await healthScanner.runFullScan((msg) => broadcastLog(msg));
-        healthCache = result;
-        healthScanInProgress = false;
+        healthScansRunning.add(root);
+        const result = await healthScanner.runFullScan((msg) => broadcastLog(msg), root);
+        healthCaches.set(root, result);
+        healthScansRunning.delete(root);
 
         console.log(`[API] Full scan completed: Score ${result.health.score}/100 (${result.health.grade})`);
         res.json(result);
     } catch (err) {
-        healthScanInProgress = false;
+        healthScansRunning.delete(root);
         console.error(`[API] Health scan error: ${err.message}`);
         res.status(500).json({
             error: 'Health scan failed',
@@ -1296,10 +1306,11 @@ app.get('/api/health', async (req, res) => {
 
 // GET /api/health/quick - Quick scan (TS + ESLint only, ~5-10s)
 app.get('/api/health/quick', async (req, res) => {
+    const root = healthRootFor(req);
     console.log('[API] Starting quick health scan...');
 
     try {
-        const result = await healthScanner.runQuickScan();
+        const result = await healthScanner.runQuickScan(root);
         console.log('[API] Quick scan completed');
         res.json(result);
     } catch (err) {
@@ -1313,7 +1324,8 @@ app.get('/api/health/quick', async (req, res) => {
 
 // GET /api/health/cached - Return last scan results (instant)
 app.get('/api/health/cached', (req, res) => {
-    if (!healthCache) {
+    const root = healthRootFor(req);
+    if (!healthCaches.get(root)) {
         return res.status(404).json({
             error: 'No cached scan available',
             message: 'Run a full scan first with GET /api/health'
@@ -1321,41 +1333,43 @@ app.get('/api/health/cached', (req, res) => {
     }
 
     res.json({
-        ...healthCache,
+        ...healthCaches.get(root),
         fromCache: true,
-        cacheAge: Date.now() - new Date(healthCache.timestamp).getTime()
+        cacheAge: Date.now() - new Date(healthCaches.get(root).timestamp).getTime()
     });
 });
 
 // GET /api/health/status - Check if scan is in progress
 app.get('/api/health/status', (req, res) => {
+    const root = healthRootFor(req);
     res.json({
-        scanning: healthScanInProgress,
-        hasCachedResult: !!healthCache,
-        lastScanTime: healthCache?.timestamp || null
+        scanning: healthScansRunning.has(root),
+        hasCachedResult: healthCaches.has(root),
+        lastScanTime: healthCaches.get(root)?.timestamp || null
     });
 });
 
 // POST /api/health/scan - Trigger background scan (non-blocking)
 app.post('/api/health/scan', (req, res) => {
-    if (healthScanInProgress) {
+    const root = healthRootFor(req);
+    if (healthScansRunning.has(root)) {
         return res.status(429).json({
             error: 'Scan already in progress'
         });
     }
 
     // Start scan in background
-    healthScanInProgress = true;
+    healthScansRunning.add(root);
     console.log('[API] Background scan triggered...');
 
-    healthScanner.runFullScan((msg) => broadcastLog(msg))
+    healthScanner.runFullScan((msg) => broadcastLog(msg), root)
         .then(result => {
-            healthCache = result;
-            healthScanInProgress = false;
+            healthCaches.set(root, result);
+            healthScansRunning.delete(root);
             console.log(`[API] Background scan completed: Score ${result.health.score}/100`);
         })
         .catch(err => {
-            healthScanInProgress = false;
+            healthScansRunning.delete(root);
             console.error(`[API] Background scan error: ${err.message}`);
         });
 
@@ -1368,16 +1382,17 @@ app.post('/api/health/scan', (req, res) => {
 
 // GET /api/health/report - Generate AI-friendly markdown report
 app.get('/api/health/report', async (req, res) => {
+    const root = healthRootFor(req);
     const excludeArchive = req.query.includeArchive !== 'true';
 
     // Use cached results if available, otherwise run a scan
-    let scanData = healthCache;
+    let scanData = healthCaches.get(root);
 
     if (!scanData) {
         console.log('[API] No cached results, running full scan for report...');
         try {
-            scanData = await healthScanner.runFullScan();
-            healthCache = scanData;
+            scanData = await healthScanner.runFullScan(undefined, root);
+            healthCaches.set(root, scanData);
         } catch (err) {
             return res.status(500).json({
                 error: 'Failed to generate report',
@@ -1396,15 +1411,16 @@ app.get('/api/health/report', async (req, res) => {
 
 // GET /api/health/report/json - Return report data as JSON for programmatic use
 app.get('/api/health/report/json', async (req, res) => {
+    const root = healthRootFor(req);
     const excludeArchive = req.query.includeArchive !== 'true';
 
-    let scanData = healthCache;
+    let scanData = healthCaches.get(root);
 
     if (!scanData) {
         console.log('[API] No cached results, running full scan for report...');
         try {
-            scanData = await healthScanner.runFullScan();
-            healthCache = scanData;
+            scanData = await healthScanner.runFullScan(undefined, root);
+            healthCaches.set(root, scanData);
         } catch (err) {
             return res.status(500).json({
                 error: 'Failed to generate report',

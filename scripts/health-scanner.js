@@ -71,18 +71,49 @@ function runCommand(command, args = [], options = {}) {
 }
 
 /**
+ * A check that cannot produce a real result is "not measured": it carries a reason and no numbers,
+ * so it can never be mistaken for a clean 0 and is left out of the score.
+ */
+function notMeasured(reason, extra = {}) {
+    return { status: 'not-measured', measured: false, reason, ...extra };
+}
+
+function hasAny(root, names) {
+    return names.some(name => fs.existsSync(path.join(root, name)));
+}
+
+function readPackageJson(root) {
+    try { return JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')); } catch { return null; }
+}
+
+// First useful line of a failed tool run, for the "why not measured" text.
+function firstLine(text) {
+    return String(text || '').split('\n').map(l => l.trim()).find(Boolean)?.slice(0, 160) || 'no output';
+}
+
+// Tool never started (not installed, or it printed its help instead of checking anything).
+function toolDidNotRun(result) {
+    if (result.error) return true;
+    const out = `${result.stdout}\n${result.stderr}`;
+    return /command not found|not found|could not determine executable|ENOENT|npm error code E404|Unknown command|Usage:|Common Commands|tsc: The TypeScript Compiler/i.test(out);
+}
+
+/**
  * Scan TypeScript errors using vue-tsc
  */
-async function scanTypeScript(onLog) {
+async function scanTypeScript(onLog, root = PROJECT_ROOT) {
     if (onLog) onLog('Starting TypeScript scan...\n');
-    const result = await runCommand('npx', ['vue-tsc', '--noEmit', '--pretty', 'false'], {
+    if (!hasAny(root, ['tsconfig.json'])) return notMeasured('No TypeScript setup (no tsconfig.json) in this project.');
+    const pkg = readPackageJson(root) || {};
+    const usesVue = Boolean({ ...pkg.dependencies, ...pkg.devDependencies }.vue);
+    const result = await runCommand('npx', ['--no-install', usesVue ? 'vue-tsc' : 'tsc', '--noEmit', '--pretty', 'false'], {
         timeout: SCANNER_TIMEOUT,
+        cwd: root,
         onLog
     });
 
-    if (result.timedOut) {
-        return { status: 'timeout', errors: [], count: 0 };
-    }
+    if (result.timedOut) return notMeasured('The type check took too long and was stopped.');
+    if (toolDidNotRun(result)) return notMeasured(`The type checker could not run: ${firstLine(result.stderr || result.stdout)}`);
 
     // Parse TypeScript errors from stderr
     const errors = [];
@@ -107,6 +138,11 @@ async function scanTypeScript(onLog) {
     const simpleRegex = /error TS\d+:/g;
     const simpleMatches = (result.stderr + result.stdout).match(simpleRegex) || [];
 
+    // Failed, but no error line we can read: that is a broken run, not a count.
+    if (result.code !== 0 && errors.length === 0 && simpleMatches.length === 0) {
+        return notMeasured(`The type checker failed without a readable error list: ${firstLine(result.stderr || result.stdout)}`);
+    }
+
     return {
         status: result.code === 0 ? 'healthy' : 'error',
         errors: errors.slice(0, 50), // Limit to 50 for display
@@ -118,16 +154,21 @@ async function scanTypeScript(onLog) {
 /**
  * Scan ESLint issues
  */
-async function scanESLint(onLog) {
+async function scanESLint(onLog, root = PROJECT_ROOT) {
     if (onLog) onLog('Starting ESLint scan...\n');
+    const pkgForLint = readPackageJson(root) || {};
+    if (!hasAny(root, ['eslint.config.js', 'eslint.config.mjs', 'eslint.config.cjs', 'eslint.config.ts', '.eslintrc', '.eslintrc.js', '.eslintrc.cjs', '.eslintrc.json', '.eslintrc.yml', '.eslintrc.yaml']) && !pkgForLint.eslintConfig) {
+        return notMeasured('No ESLint setup in this project.');
+    }
+    if (!fs.existsSync(path.join(root, 'src'))) return notMeasured('No src folder to lint.');
     // Don't pass onLog to runCommand to avoid streaming raw JSON
-    const result = await runCommand('npx', ['eslint', 'src', '--format', 'json', '--max-warnings', '9999'], {
-        timeout: SCANNER_TIMEOUT
+    const result = await runCommand('npx', ['--no-install', 'eslint', 'src', '--format', 'json', '--max-warnings', '9999'], {
+        timeout: SCANNER_TIMEOUT,
+        cwd: root
     });
 
-    if (result.timedOut) {
-        return { status: 'timeout', errors: 0, warnings: 0, files: [] };
-    }
+    if (result.timedOut) return notMeasured('The lint run took too long and was stopped.');
+    if (toolDidNotRun(result) && !result.stdout.trim().startsWith('[')) return notMeasured(`ESLint could not run: ${firstLine(result.stderr || result.stdout)}`);
 
     try {
         // ESLint outputs JSON to stdout
@@ -144,7 +185,7 @@ async function scanESLint(onLog) {
 
             if (file.errorCount > 0 || file.warningCount > 0) {
                 filesWithIssues.push({
-                    file: path.relative(PROJECT_ROOT, file.filePath),
+                    file: path.relative(root, file.filePath),
                     errors: file.errorCount,
                     warnings: file.warningCount,
                     messages: (file.messages || []).slice(0, 5).map(m => ({
@@ -165,29 +206,23 @@ async function scanESLint(onLog) {
             files: filesWithIssues.slice(0, 20)
         };
     } catch (e) {
-        return {
-            status: 'error',
-            errors: 0,
-            warnings: 0,
-            files: [],
-            parseError: e.message,
-            raw: result.stdout.slice(0, 500)
-        };
+        return notMeasured(`ESLint output could not be read: ${firstLine(result.stderr || result.stdout)}`);
     }
 }
 
 /**
  * Scan dead code using knip
  */
-async function scanDeadCode(onLog) {
+async function scanDeadCode(onLog, root = PROJECT_ROOT) {
     if (onLog) onLog('Starting Dead Code scan (knip)...\n');
-    const result = await runCommand('npx', ['knip', '--reporter', 'json'], {
-        timeout: SCANNER_TIMEOUT
+    if (!hasAny(root, ['package.json'])) return notMeasured('Not a JavaScript project (no package.json).');
+    const result = await runCommand('npx', ['--no-install', 'knip', '--reporter', 'json'], {
+        timeout: SCANNER_TIMEOUT,
+        cwd: root
     });
 
-    if (result.timedOut) {
-        return { status: 'timeout', files: 0, exports: 0, dependencies: 0 };
-    }
+    if (result.timedOut) return notMeasured('The dead code scan took too long and was stopped.');
+    if (toolDidNotRun(result)) return notMeasured(`Knip could not run: ${firstLine(result.stderr || result.stdout)}`);
 
     try {
         const json = JSON.parse(result.stdout);
@@ -206,34 +241,31 @@ async function scanDeadCode(onLog) {
         };
     } catch (e) {
         // Knip might output non-JSON on success
-        if (result.code === 0) {
+        if (result.code === 0 && !result.stdout.trim()) {
             return { status: 'healthy', files: 0, exports: 0, dependencies: 0 };
         }
-        return {
-            status: 'error',
-            files: 0,
-            exports: 0,
-            dependencies: 0,
-            parseError: e.message
-        };
+        return notMeasured(`Knip output could not be read: ${firstLine(result.stderr || result.stdout)}`);
     }
 }
 
 /**
  * Scan npm audit for security vulnerabilities
  */
-async function scanAudit(onLog) {
+async function scanAudit(onLog, root = PROJECT_ROOT) {
     if (onLog) onLog('Starting Security Audit...\n');
+    if (!hasAny(root, ['package-lock.json', 'npm-shrinkwrap.json'])) return notMeasured('No package-lock.json, so there is nothing to audit.');
     const result = await runCommand('npm', ['audit', '--json'], {
-        timeout: SCANNER_TIMEOUT
+        timeout: SCANNER_TIMEOUT,
+        cwd: root
     });
 
-    if (result.timedOut) {
-        return { status: 'timeout', total: 0, critical: 0, high: 0, moderate: 0, low: 0 };
-    }
+    if (result.timedOut) return notMeasured('The security audit took too long and was stopped.');
 
     try {
         const json = JSON.parse(result.stdout);
+        if (json.error || !json.metadata?.vulnerabilities) {
+            return notMeasured(`The security audit did not return a result: ${json.error?.summary || json.error?.code || 'no vulnerability data'}`);
+        }
         const vulns = json.metadata?.vulnerabilities || {};
 
         const total = (vulns.critical || 0) + (vulns.high || 0) + (vulns.moderate || 0) + (vulns.low || 0);
@@ -247,30 +279,23 @@ async function scanAudit(onLog) {
             low: vulns.low || 0
         };
     } catch (e) {
-        return {
-            status: 'healthy',
-            total: 0,
-            critical: 0,
-            high: 0,
-            moderate: 0,
-            low: 0,
-            note: 'Unable to parse audit results'
-        };
+        return notMeasured(`The security audit output could not be read: ${firstLine(result.stderr || result.stdout)}`);
     }
 }
 
 /**
  * Check for outdated dependencies
  */
-async function scanOutdated(onLog) {
+async function scanOutdated(onLog, root = PROJECT_ROOT) {
     if (onLog) onLog('Checking for outdated dependencies...\n');
+    if (!hasAny(root, ['package.json'])) return notMeasured('Not a JavaScript project (no package.json).');
     const result = await runCommand('npm', ['outdated', '--json'], {
-        timeout: SCANNER_TIMEOUT
+        timeout: SCANNER_TIMEOUT,
+        cwd: root
     });
 
-    if (result.timedOut) {
-        return { status: 'timeout', count: 0, packages: [] };
-    }
+    if (result.timedOut) return notMeasured('The outdated check took too long and was stopped.');
+    if (!result.stdout.trim() && result.code !== 0) return notMeasured(`The outdated check failed: ${firstLine(result.stderr)}`);
 
     try {
         // npm outdated exits with code 1 if outdated packages exist
@@ -300,25 +325,20 @@ async function scanOutdated(onLog) {
             // No outdated packages
             return { status: 'healthy', count: 0, packages: [] };
         }
-        return {
-            status: 'warning',
-            count: 0,
-            packages: [],
-            parseError: e.message
-        };
+        return notMeasured(`The outdated check output could not be read: ${firstLine(result.stderr || result.stdout)}`);
     }
 }
 
 /**
  * Calculate bundle size from dist folder
  */
-async function scanBundleSize(onLog) {
+async function scanBundleSize(onLog, root = PROJECT_ROOT) {
     if (onLog) onLog('Analyzing bundle size...\n');
-    const distPath = path.join(PROJECT_ROOT, 'dist', 'assets');
+    const distPath = path.join(root, 'dist', 'assets');
 
     try {
         if (!fs.existsSync(distPath)) {
-            return { status: 'warning', totalMB: 0, note: 'No build found - run npm run build first' };
+            return notMeasured('No build folder found, so bundle size is unknown.');
         }
 
         const files = fs.readdirSync(distPath);
@@ -361,13 +381,13 @@ async function scanBundleSize(onLog) {
 /**
  * Check test coverage
  */
-async function scanCoverage(onLog) {
+async function scanCoverage(onLog, root = PROJECT_ROOT) {
     if (onLog) onLog('Checking test coverage...\n');
-    const coveragePath = path.join(PROJECT_ROOT, 'coverage', 'coverage-summary.json');
+    const coveragePath = path.join(root, 'coverage', 'coverage-summary.json');
 
     try {
         if (!fs.existsSync(coveragePath)) {
-            return { status: 'warning', coverage: 0, note: 'No coverage data - run npm run test:coverage first' };
+            return notMeasured('No coverage report found, so test coverage is unknown.');
         }
 
         const data = JSON.parse(fs.readFileSync(coveragePath, 'utf8'));
@@ -400,9 +420,9 @@ async function scanCoverage(onLog) {
 /**
  * Check build status
  */
-async function scanBuildStatus(onLog) {
+async function scanBuildStatus(onLog, root = PROJECT_ROOT) {
     if (onLog) onLog('Checking build status...\n');
-    const distPath = path.join(PROJECT_ROOT, 'dist');
+    const distPath = path.join(root, 'dist');
 
     try {
         if (!fs.existsSync(distPath)) {
@@ -471,7 +491,7 @@ function calculateHealthScore(results) {
         typescript: measured.typescript ? (results.typescript.count === 0 ? 'No type errors.' : `${results.typescript.count} type errors, 5 points off each.`) : 'Not measured.',
         eslint: measured.eslint ? `${results.eslint?.errors || 0} errors (10 off each) and ${results.eslint?.warnings || 0} warnings (2 off each).` : 'Not measured.',
         deadCode: measured.deadCode ? `${results.deadCode.files} unused files, 5 points off each.` : 'Not measured.',
-        coverage: measured.coverage ? `${results.coverage.coverage}% of the code is covered by tests.` : 'No coverage report found, so it counts as 0.',
+        coverage: measured.coverage ? `${results.coverage.coverage}% of the code is covered by tests.` : 'No coverage report found.',
         bundleSize: measured.bundleSize ? `${results.bundleSize.totalMB} MB; full marks under 1.5 MB.` : 'No build size found.',
         audit: measured.audit ? `${results.audit?.critical || 0} critical and ${results.audit?.high || 0} high security issues.` : 'Not measured.',
         outdated: measured.outdated ? `${results.outdated.count} outdated packages, 3 points off each.` : 'Not measured.'
@@ -494,7 +514,7 @@ function calculateHealthScore(results) {
             score: measured[key] ? Math.round(scores[key] || 0) : null,
             points: Math.round((measured[key] ? (scores[key] || 0) * weightShare : 0) * 10) / 10,
             measured: measured[key],
-            note: measured[key] ? notes[key] : 'Not measured, so it is left out of the score.'
+            note: measured[key] ? notes[key] : `${results[key]?.reason || 'Not measured'} It is left out of the score.`
         };
     });
 
@@ -511,7 +531,7 @@ function calculateHealthScore(results) {
 /**
  * Run full health scan (all scanners in parallel)
  */
-async function runFullScan(onLog) {
+async function runFullScan(onLog, root = PROJECT_ROOT) {
     const startTime = Date.now();
 
     console.log('[Health Scanner] Starting full scan...');
@@ -528,26 +548,26 @@ async function runFullScan(onLog) {
         coverage,
         buildStatus
     ] = await Promise.allSettled([
-        scanTypeScript(onLog),
-        scanESLint(onLog),
-        scanDeadCode(onLog),
-        scanAudit(onLog),
-        scanOutdated(onLog),
-        scanBundleSize(onLog),
-        scanCoverage(onLog),
-        scanBuildStatus(onLog)
+        scanTypeScript(onLog, root),
+        scanESLint(onLog, root),
+        scanDeadCode(onLog, root),
+        scanAudit(onLog, root),
+        scanOutdated(onLog, root),
+        scanBundleSize(onLog, root),
+        scanCoverage(onLog, root),
+        scanBuildStatus(onLog, root)
     ]);
 
     // Extract results, handling any rejected promises
     const results = {
-        typescript: typescript.status === 'fulfilled' ? typescript.value : { status: 'error', error: typescript.reason?.message },
-        eslint: eslint.status === 'fulfilled' ? eslint.value : { status: 'error', error: eslint.reason?.message },
-        deadCode: deadCode.status === 'fulfilled' ? deadCode.value : { status: 'error', error: deadCode.reason?.message },
-        audit: audit.status === 'fulfilled' ? audit.value : { status: 'error', error: audit.reason?.message },
-        outdated: outdated.status === 'fulfilled' ? outdated.value : { status: 'error', error: outdated.reason?.message },
-        bundleSize: bundleSize.status === 'fulfilled' ? bundleSize.value : { status: 'error', error: bundleSize.reason?.message },
-        coverage: coverage.status === 'fulfilled' ? coverage.value : { status: 'error', error: coverage.reason?.message },
-        buildStatus: buildStatus.status === 'fulfilled' ? buildStatus.value : { status: 'error', error: buildStatus.reason?.message }
+        typescript: typescript.status === 'fulfilled' ? typescript.value : notMeasured(`The check crashed: ${typescript.reason?.message}`),
+        eslint: eslint.status === 'fulfilled' ? eslint.value : notMeasured(`The check crashed: ${eslint.reason?.message}`),
+        deadCode: deadCode.status === 'fulfilled' ? deadCode.value : notMeasured(`The check crashed: ${deadCode.reason?.message}`),
+        audit: audit.status === 'fulfilled' ? audit.value : notMeasured(`The check crashed: ${audit.reason?.message}`),
+        outdated: outdated.status === 'fulfilled' ? outdated.value : notMeasured(`The check crashed: ${outdated.reason?.message}`),
+        bundleSize: bundleSize.status === 'fulfilled' ? bundleSize.value : notMeasured(`The check crashed: ${bundleSize.reason?.message}`),
+        coverage: coverage.status === 'fulfilled' ? coverage.value : notMeasured(`The check crashed: ${coverage.reason?.message}`),
+        buildStatus: buildStatus.status === 'fulfilled' ? buildStatus.value : notMeasured(`The check crashed: ${buildStatus.reason?.message}`)
     };
 
     // Calculate overall health score
@@ -568,19 +588,19 @@ async function runFullScan(onLog) {
 /**
  * Run quick scan (TypeScript + ESLint only)
  */
-async function runQuickScan() {
+async function runQuickScan(root = PROJECT_ROOT) {
     const startTime = Date.now();
 
     console.log('[Health Scanner] Starting quick scan...');
 
     const [typescript, eslint] = await Promise.allSettled([
-        scanTypeScript(),
-        scanESLint()
+        scanTypeScript(undefined, root),
+        scanESLint(undefined, root)
     ]);
 
     const results = {
-        typescript: typescript.status === 'fulfilled' ? typescript.value : { status: 'error', error: typescript.reason?.message },
-        eslint: eslint.status === 'fulfilled' ? eslint.value : { status: 'error', error: eslint.reason?.message }
+        typescript: typescript.status === 'fulfilled' ? typescript.value : notMeasured(`The check crashed: ${typescript.reason?.message}`),
+        eslint: eslint.status === 'fulfilled' ? eslint.value : notMeasured(`The check crashed: ${eslint.reason?.message}`)
     };
 
     const duration = Date.now() - startTime;
@@ -781,6 +801,8 @@ npx vue-tsc --noEmit
 
 // Export scanner functions
 module.exports = {
+    notMeasured,
+    toolDidNotRun,
     runFullScan,
     runQuickScan,
     scanTypeScript,
