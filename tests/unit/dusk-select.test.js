@@ -24,3 +24,14 @@ describe('shared Dusk dropdown', () => {
         expect(css).toContain('.dusk-opt');
     });
 });
+
+describe('every button class on a page has Dusk styles', () => {
+    it('kanban header tabs are styled, not left as browser buttons', () => {
+        const css = fs.readFileSync(path.join(root, 'kanban/dusk.css'), 'utf8');
+        const html = fs.readFileSync(path.join(root, 'kanban/index.html'), 'utf8');
+        const header = html.slice(html.indexOf('class="header-actions"'), html.indexOf('class="stats-bar"'));
+        const classes = [...header.matchAll(/<button class="([\w-]+)[" ]/g)].map(m => m[1]);
+        const missing = [...new Set(classes)].filter(c => !css.includes('.' + c));
+        expect(missing).toEqual([]);
+    });
+});
