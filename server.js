@@ -105,6 +105,16 @@ const healthScanner = require('./scripts/health-scanner');
 
 const app = express();
 // Use port from: 1) env var, 2) local config, 3) default 6010
+// A stray rejected promise must not take the whole dashboard down; an uncaught exception leaves
+// unknown state, so log it and exit and let the service manager start a clean copy.
+process.on('unhandledRejection', (reason) => {
+    console.error('[Fatal-avoided] unhandled rejection:', reason && reason.stack || reason);
+});
+process.on('uncaughtException', (err) => {
+    console.error('[Fatal] uncaught exception, exiting for restart:', err && err.stack || err);
+    process.exit(1);
+});
+
 const PORT = process.env.PORT || localConfig.port || 6010;
 // Keep the control plane local by default. Remote access should proxy through
 // an authenticated private network such as Tailscale Serve.
@@ -207,7 +217,9 @@ app.get('/favicon.ico', (req, res, next) => {
 app.use(express.static(__dirname));
 
 // 6. Mount Control Room routes (enriched projects, stats, summaries, covers)
-mountControlRoomRoutes(app);
+mountControlRoomRoutes(app, {
+    getTaskEngine: project => getEngineForPlan(planPathForProject(project), project)?.engine
+});
 
 // 7. Mount VPS monitor routes (/api/vps/status, /api/vps/bots, /api/vps/cover/:id)
 mountVpsRoutes(app);
@@ -894,7 +906,7 @@ app.post('/api/task/:id/status', (req, res) => {
         const isDone = status === 'done';
 
         // Regex to match the target task header
-        const taskHeaderRegex = new RegExp(`^###\\s+(?:~~)?${id}(?:~~)?:\\s*(.+?)(?:\\s*\\(([^)]+)\\))?$`);
+        const taskHeaderRegex = new RegExp(`^###\\s+(?:[\\w.-]+\\s*/\\s*)*(?:~~)?${id}(?:~~)?:\\s*(.+?)(?:\\s*\\(([^)]+)\\))?$`);
 
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i];
@@ -946,6 +958,25 @@ app.post('/api/task/:id/status', (req, res) => {
                     lines.splice(insertIdx, 0, `**Status**: ${newHumanStatus}`);
                     break;
                 }
+            }
+        }
+
+        // Tasks kept as table rows ("| TASK-014 | Title | P2 | IN PROGRESS |") have no heading to rewrite:
+        // change the status cell of that row instead.
+        if (!updated) {
+            const tableWord = { 'todo': 'PENDING', 'in-progress': 'IN PROGRESS', 'paused': 'PAUSED', 'review': 'REVIEW', 'done': 'DONE' }[status];
+            const idPattern = new RegExp(`^\\s*\\|\\s*(?:~~)?\\*{0,2}(?:~~)?${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`);
+            const statusCell = /^(?:\*\*)?(?:DONE|COMPLETE[D]?|IN[ _-]?PROGRESS|PENDING|TODO|PLANNED|REVIEW|PAUSED|BLOCKED|OPEN)\b/i;
+            for (let i = 0; i < lines.length && tableWord; i++) {
+                if (!idPattern.test(lines[i])) continue;
+                const cells = lines[i].split('|');
+                const k = cells.findIndex((c, idx) => idx > 1 && statusCell.test(c.trim()));
+                if (k < 0) continue;
+                const bold = cells[k].includes('**');
+                cells[k] = ` ${bold ? '**' + tableWord + '**' : tableWord} `;
+                lines[i] = cells.join('|');
+                updated = true;
+                break;
             }
         }
 
@@ -3757,12 +3788,16 @@ app.get('/api/tasks/list', requireTaskEngine, (req, res) => {
         const filters = {};
         if (req.query.status) filters.status = req.query.status;
         if (req.query.priority) filters.priority = req.query.priority;
+        if (req.query.includeArchived === '1') filters.includeArchived = true;
+        if (req.query.archived === '1') filters.archivedOnly = true;
         const tasks = req.taskEngine.getTasks(Object.keys(filters).length ? filters : undefined);
         res.json({ tasks });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
+
+require('./modules/task-archive-api').mountTaskArchiveRoutes(app, requireTaskEngine);
 
 // GET /api/tasks/ready - Tasks with all deps resolved
 app.get('/api/tasks/ready', requireTaskEngine, (req, res) => {
