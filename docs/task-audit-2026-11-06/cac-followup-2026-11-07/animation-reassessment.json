@@ -1,0 +1,269 @@
+{
+  "auditedAt": "2026-11-07T06:37:29.557025+00:00",
+  "scope": "Read-only TASK082\u2013098 reassessment; no plan/code/runtime edits",
+  "tasks": [
+    {
+      "id": "TASK-082",
+      "classification": "unfinished_browser_acceptance",
+      "recommendedStatus": "review",
+      "canonicalTask": null,
+      "rationale": "Browser recovery is a separate residual gate, not completed by health PWA migration.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:140-158"
+      ],
+      "residualRequirements": [
+        "Installed extension identity/version receipt",
+        "Automatic reconnect and authenticated browser receipt; no blind real-screen actions"
+      ]
+    },
+    {
+      "id": "TASK-083",
+      "classification": "consolidated_animation_acceptance",
+      "recommendedStatus": "review",
+      "canonicalTask": null,
+      "rationale": "Keep one animation delivery/quality owner. October5 zero-bank statement is stale against October23 production history. Current runtime worker state and owner acceptance remain unverified.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:731-820",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/guided_grid/drive.py:2-6",
+        "git adc74614120ec6c750c10405edcb8d5f95a7a8d3 2026-10-23: new ShoulderPress/Janda review loops and owner Deadlift rejection",
+        "/home/endlessblink/home-data/app-data/sync/Dropbox/OBSIDIAN_SYNCED/MAIN VULT/_Agent-Notes/claude-and-conquer--a4babba700.md:5"
+      ],
+      "residualRequirements": [
+        "Full exercise/stretch/warmup/cooldown/Pomodoro coverage and source-correct movement",
+        "Actual approved-asset and live delivery evidence, rather than generation or agent look-pass alone",
+        "Preserve old Arm/Shoulder feasibility/manual gate as one held branch; do not assume all newer guided-grid work is held",
+        "6% daily and40% weekly subscription cap with fail-closed missing quota/in-flight allowance; existing authorization only",
+        "Redraw rejected exercises; prioritize3bar-freepulls; inspect candidate review queue and source-specific owner corrections"
+      ]
+    },
+    {
+      "id": "TASK-084",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-083",
+      "rationale": "Review learning, batch decisions and delivery are acceptance requirements of the same animation initiative.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:140-158",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/docs/exercise-live-review.md:1-36",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/src/exerciseReviewServer.py:27-74"
+      ],
+      "residualRequirements": [
+        "Append-only hash-bound review history",
+        "Later owner rejection overrides prior visual pass",
+        "Receipt means queue delivery, not completed correction",
+        "Batch filters, explicit approval/rejection, durable lessons and safe target-folder promotion"
+      ]
+    },
+    {
+      "id": "TASK-085",
+      "classification": "superseded_legacy_implementation",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-083",
+      "rationale": "Original CI proposal targets retired Node poller; active animation regression coverage is retained under its current owner instead of a separate stale legacy CI task.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:550-553",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/package.json:7-11",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/bots-directory/bot-registry.yaml:1489-1507"
+      ],
+      "residualRequirements": [
+        "Retain Python/frozen-animation regression coverage in animation delivery acceptance; do not claim CI installed (.github absent)"
+      ]
+    },
+    {
+      "id": "TASK-086",
+      "classification": "superseded",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": null,
+      "rationale": "acceptEdits/raw cc/root-container hardening applies to retired poller, not current PWA/gateway implementation.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:560-562",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/src/index.js:3532",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/src/sessionManager.js:905",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/bots-directory/bot-registry.yaml:1489-1507"
+      ],
+      "residualRequirements": [
+        "Retain historical security rationale; reactivation would require a fresh security review"
+      ]
+    },
+    {
+      "id": "TASK-087",
+      "classification": "superseded",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": null,
+      "rationale": "Refactoring retired index.js/sessionManager.js is not required for current separate Health App delivery.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:563-565",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/bots-directory/bot-registry.yaml:1467-1507"
+      ],
+      "residualRequirements": [
+        "No source deletion or refactoring implied by archival"
+      ]
+    },
+    {
+      "id": "TASK-088",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-111",
+      "rationale": "Handoff organization is repository hygiene and belongs with existing backup/hygiene owner.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:571-574"
+      ],
+      "residualRequirements": [
+        "Preserve still-true handoff content, canonical references and append-only history; do not delete owner evidence"
+      ]
+    },
+    {
+      "id": "TASK-089",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-111",
+      "rationale": "Root outputs, evidence storage and asset backup overlap private backup/repository hygiene.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:575-581",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/.gitignore"
+      ],
+      "residualRequirements": [
+        "Back up before any cleanup; generated review JSON/screenshots and approved originals must remain recoverable",
+        "Choose approved asset authority and ignore policy; no deletion authorized by board consolidation"
+      ]
+    },
+    {
+      "id": "TASK-090",
+      "classification": "superseded",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": null,
+      "rationale": "GPT Image1.5 adapter is only imported by retired Node index; current guided-grid path uses Codex route and its own caps.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/src/imageGen.js:18",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/src/index.js:10",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/guided_grid/batch-after-reset.sh:3-11",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/bots-directory/bot-registry.yaml:1489-1507"
+      ],
+      "residualRequirements": [
+        "Do not reactivate old image generation route; no code removal implied"
+      ]
+    },
+    {
+      "id": "TASK-091",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-083",
+      "rationale": "Frozen manifest and input parity are implemented partially, not separate production streams.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/exercise_animation_pipeline.py:99-128"
+      ],
+      "residualRequirements": [
+        "Frozen exercise/source/cast/frame/reference identities",
+        "Current bank entry metadata and cross-path parity"
+      ]
+    },
+    {
+      "id": "TASK-092",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-083",
+      "rationale": "Locked reference inputs are shared pipeline safeguards.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/exercise_animation_pipeline.py:116-125"
+      ],
+      "residualRequirements": [
+        "Hash-bound cast/style/canvas refs on every applicable call; equivalent guarantees must be reconciled with guided-grid path"
+      ]
+    },
+    {
+      "id": "TASK-093",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-083",
+      "rationale": "Old star-of-edits implementation choice is superseded by newer guided-grid production; source-correct coherent keyframes remain required.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:615-617",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/guided_grid/drive.py:2-6",
+        "git0634cac4bd37795b5ffb8ad4fbfbdfd5f8dca02e: ~4000drawings and revised layouts"
+      ],
+      "residualRequirements": [
+        "Owner-correct exercise/artwork, no accumulated pose drift",
+        "Do not revive exhausted old Arm call budget or override newer subscription limits"
+      ]
+    },
+    {
+      "id": "TASK-094",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-083",
+      "rationale": "Deterministic exports are a child capability, not another active initiative.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/exercise_animation_pipeline.py:263-305",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/guided_grid/package.py:170-320"
+      ],
+      "residualRequirements": [
+        "Determinism, source frame preservation, whole motion envelope, stable scale/palette, required output formats",
+        "Reconcile current guided-grid output with older native24fps/slow-review contract before claiming conformance; no speculative Hermes consolidation"
+      ]
+    },
+    {
+      "id": "TASK-095",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-083",
+      "rationale": "Numeric and independent visual QA are one release gate.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/exercise_animation_pipeline.py:189-215",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:622-625"
+      ],
+      "residualRequirements": [
+        "Defects withhold release; numeric checks cannot certify anatomy/motion",
+        "Qualified human safety gate where required; every final frame and full loop normal/slow review"
+      ]
+    },
+    {
+      "id": "TASK-096",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-083",
+      "rationale": "Human approval is the same candidate-to-approved release boundary.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/docs/exercise-live-review.md:1-24",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/health-app/lib/exercises.js:40-45"
+      ],
+      "residualRequirements": [
+        "Exact final asset/revision hash bound to verdict",
+        "Current owner rejection precedence; dashboard and actual live-media proof"
+      ]
+    },
+    {
+      "id": "TASK-097",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-083",
+      "rationale": "Cost/quota bookkeeping is actively evolved in newer guided-grid path; preserve it under current pipeline.",
+      "evidence": [
+        "git f0e0216505b29f33ce181974de96f7c4bd1c0931 2026-10-24",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/guided_grid/batch-after-reset.sh:3-14",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/exercise_animation_pipeline.py:427-428"
+      ],
+      "residualRequirements": [
+        "Append-only attempt and prompt/reference provenance/cache",
+        "Fail-closed quota read, calls-in-flight reservation,6%daily/40%weekly caps; no raising without ownerapproval"
+      ]
+    },
+    {
+      "id": "TASK-098",
+      "classification": "duplicate",
+      "recommendedStatus": "preserve_original",
+      "canonicalTask": "TASK-083",
+      "rationale": "Old three-implementation consolidation proposal predates active guided-grid path; architecture decision is subordinate to successful delivery.",
+      "evidence": [
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/MASTER_PLAN.md:633-634",
+        "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/scripts/guided_grid/package.py:170-320"
+      ],
+      "residualRequirements": [
+        "Inventory actual current callers; retire duplicate implementations only after one source-correct exercise completes review and delivery",
+        "Preserve all original reliability gates; no migration or restart implied"
+      ]
+    }
+  ],
+  "keyCorrection": "Health PWA does not supersede animation requirements: it consumes approved media via lib/exercises.js:40-45 and server.js:698-706. Old zero-bank/pilot-only plan is stale against Oct23/24 guided_grid history. Current worker and live approval inventory were not verified.",
+  "consolidationAdvice": "Six canonical survivors proposed by parent are structurally sound if residual checklists preserved. Prefer TASK083 REVIEW over blanket PAUSED; PAUSED must not imply current newer batch is verified stopped. TASK088/089 merge into TASK111; legacy085/086/087/090 archived as superseded, retaining relevant animation test requirements.",
+  "outsideScope": "INQUIRY042 owned by parent; current separate Health PWA registry identity supports a completed platform decision, not completion of app acceptance."
+}

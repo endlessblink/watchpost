@@ -1,0 +1,1505 @@
+{
+  "at": "2026-11-07T06:43:18.716Z",
+  "project": "claude-and-conquer",
+  "dbPath": "/media/endlessblink/data/my-projects/ai-development/bots+automation/claude-and-conquer/.watchpost/db.sqlite",
+  "backup": "/tmp/cac-followup-20261107-before.sqlite",
+  "results": [
+    {
+      "id": "BUG-001",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-001 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-002",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-002 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-003",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-003 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-004",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-004 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-005",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-005 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-006",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-006 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-007",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-007 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-008",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-008 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-009",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-009 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-032",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "BUG-037",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-037 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-039",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-039 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-040",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies BUG-040 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "BUG-041",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "BUG-042",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "BUG-043",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "BUG-044",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "BUG-045",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "BUG-046",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the BUG-046 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-001",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-001 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-002",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-002 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-003",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-003 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-004",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-004 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-005",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "FEATURE-006",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-006 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-007",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-007 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-008",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-008 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-009",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-009 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-010",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-010 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-011",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-011 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-012",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-012 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-013",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-013 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-014",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "FEATURE-015",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "FEATURE-016",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies FEATURE-016 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-017",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "FEATURE-018",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the FEATURE-018 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "FEATURE-019",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "FEATURE-020",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "FEATURE-021",
+      "status": "review",
+      "classification": "needs_verification",
+      "disposition": null,
+      "auditNote": "[Task audit 2026-11-07] needs_verification. One acceptance card for the delivered Health App, not six parallel implementation tasks. Preserve original per-step evidence limits: local-only library/login/Today evidence is not fresh live proof; coach first-message, actual profile save/injury/gear constraints, real product-photo add/paste, media continuity and physical-phone acceptance remain unverified. Later Oct31 release evidence shows an active web service and installed product/profile code, not owner sign-off. No Hermes restart or model call is authorized by this consolidation. Next action: Review the consolidated acceptance checklist in this task before resuming work; do not infer completion or current execution.",
+      "dependencyIssues": [],
+      "recommendedStatus": "review",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "INQUIRY-038",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies INQUIRY-038 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "INQUIRY-042",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-07] superseded. The later explicit Health PWA decision and deployed FEATURE-021 supersede the old platform-choice inquiry; current Health App acceptance is still open. Canonical task: claude-and-conquer:FEATURE-021. Next action: Use the active Health App/Hermes authority; do not restart or refactor the retired poller as part of backlog cleanup.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-001",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-001 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-002",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-002 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-014",
+      "status": "in_progress",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-06] duplicate. TASK-014 and FEATURE-005 share one detail heading and same remaining Codex backend work; preserve FEATURE-005 as canonical retired-scope history. Canonical task: claude-and-conquer/FEATURE-005. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-015",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-015 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-016",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-016 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-017",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-017 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-018",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-019",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-020",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-021",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-022",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-023",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-024",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-025",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-026",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-027",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-028",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-029",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-029 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-030",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-031",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-033",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-034",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-035",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-036",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-041",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-041 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-043",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-043 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-044",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-044 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-045",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-045 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-046",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-046 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-047",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-048",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-048 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-049",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-050",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-050 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-051",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-052",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-053",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-054",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-055",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-056",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-057",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-058",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-059",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-060",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-061",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-062",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-063",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-064",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-065",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-066",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. Old Node-bot food/persona Telegram verification targets a retired runtime. Current food/workout capability belongs to Hermes/Health App. Next action: Archive retired runtime acceptance scope; retain current Hermes Health App acceptance tasks without claiming old checks passed.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-067",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-067 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-068",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-069",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-070",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-071",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-072",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-073",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-074",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-075",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. This is unfinished legacy Node Telegram poller scope; the owner-retired poller is exited and Hermes owns the live bot. Closing as superseded must not claim implementation or revive the token-sharing poller. Next action: Archive as superseded by Hermes runtime, preserve original scope and dependencies; transfer only a separately confirmed current Hermes gap.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-076",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-076 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-077",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-077 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-078",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-078 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-079",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-079 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-080",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-080 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-081",
+      "status": "in_progress",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-06] superseded. Old Node-bot food/persona Telegram verification targets a retired runtime. Current food/workout capability belongs to Hermes/Health App. Next action: Archive retired runtime acceptance scope; retain current Hermes Health App acceptance tasks without claiming old checks passed.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-082",
+      "status": "review",
+      "classification": "needs_verification",
+      "disposition": null,
+      "auditNote": "[Task audit 2026-11-07] needs_verification. Retain the original browser-extension reconnection, version identity and authenticated receipt requirement. This is a verification gate, not evidence of a running browser repair. The animation initiative is separately tracked in TASK-083; browser automation must still respect screen-isolation and explicit approval rules. Next action: Review the consolidated acceptance checklist in this task before resuming work; do not infer completion or current execution.",
+      "dependencyIssues": [],
+      "recommendedStatus": "review",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-083",
+      "status": "review",
+      "classification": "needs_verification",
+      "disposition": null,
+      "auditNote": "[Task audit 2026-11-07] needs_verification. One animation initiative replaces ten overlapping pipeline and production cards. Current guided_grid workflow supersedes the older star-of-edits implementation recipe, but all unresolved outcomes remain required. Preserve complete library coverage, redraw/review/rejection feedback, reference/manifest identity, locked cast/style/canvas inputs, deterministic assembly/export, numeric and independent visual/motion/safety QA, human review/promotion, cache/cost accounting and generator parity.  Keep the offline Python and frozen-fixture regression runner requirements from TASK-085 under this animation initiative; only the retired Node-poller CI proposal is superseded. Oct23 adc7461 records new candidate loops and owner rejection; Oct24 f0e0216 adds real quota enforcement, so the old zero-output narrative is not current. Preserve Oct16 failed-animation redraw-until-end-to-end requirement; Oct23 three bar-free pulls/redos/review queue; hard 6% daily/40% weekly limits and no-reading=no-spend. The Arm source-feasibility exception is a separate held branch in the canonical project note. Whole-library completion, current batch activity and owner acceptance remain unverified; REVIEW describes accumulated candidates and acceptance work, not a finished library. Next action: Review the consolidated acceptance checklist in this task before resuming work; do not infer completion or current execution.",
+      "dependencyIssues": [],
+      "recommendedStatus": "review",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-084",
+      "status": "in_progress",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-083; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-083. Next action: Continue the TASK-084 requirements through TASK-083; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-085",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-07] superseded. This maintenance proposal targets the retired Node Telegram poller, not the active Health App or Hermes gateway. The poller is intentionally exited; no new legacy refactor is in the active delivery scope. Next action: Use the active Health App/Hermes authority; do not restart or refactor the retired poller as part of backlog cleanup.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-086",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-07] superseded. This maintenance proposal targets the retired Node Telegram poller, not the active Health App or Hermes gateway. The poller is intentionally exited; no new legacy refactor is in the active delivery scope. Next action: Use the active Health App/Hermes authority; do not restart or refactor the retired poller as part of backlog cleanup.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-087",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-07] superseded. This maintenance proposal targets the retired Node Telegram poller, not the active Health App or Hermes gateway. The poller is intentionally exited; no new legacy refactor is in the active delivery scope. Next action: Use the active Health App/Hermes authority; do not restart or refactor the retired poller as part of backlog cleanup.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-088",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-111; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-111. Next action: Continue the TASK-088 requirements through TASK-111; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-089",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-111; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-111. Next action: Continue the TASK-089 requirements through TASK-111; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-090",
+      "status": "planned",
+      "classification": "superseded",
+      "disposition": "superseded",
+      "auditNote": "[Task audit 2026-11-07] superseded. This maintenance proposal targets the retired Node Telegram poller, not the active Health App or Hermes gateway. The poller is intentionally exited; no new legacy refactor is in the active delivery scope. Next action: Use the active Health App/Hermes authority; do not restart or refactor the retired poller as part of backlog cleanup.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-091",
+      "status": "in_progress",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-083; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-083. Next action: Continue the TASK-091 requirements through TASK-083; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-092",
+      "status": "in_progress",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-083; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-083. Next action: Continue the TASK-092 requirements through TASK-083; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-093",
+      "status": "in_progress",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-083; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-083. Next action: Continue the TASK-093 requirements through TASK-083; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-094",
+      "status": "in_progress",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-083; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-083. Next action: Continue the TASK-094 requirements through TASK-083; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-095",
+      "status": "in_progress",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-083; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-083. Next action: Continue the TASK-095 requirements through TASK-083; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-096",
+      "status": "in_progress",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-083; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-083. Next action: Continue the TASK-096 requirements through TASK-083; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-097",
+      "status": "in_progress",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-083; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-083. Next action: Continue the TASK-097 requirements through TASK-083; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": true
+    },
+    {
+      "id": "TASK-098",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-083; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-083. Next action: Continue the TASK-098 requirements through TASK-083; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-099",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-099 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-100",
+      "status": "planned",
+      "classification": "unfinished",
+      "disposition": null,
+      "auditNote": "[Task audit 2026-11-07] unfinished. Consolidated future health roadmap. None of the merged tasks is declared implemented: retain their original detailed requirements and acceptance checks below. Current web app has profile, injury guards and products, but full schema migration, dated targets/TDEE/floors, cross-topic context/privacy, structured-photo evaluation, imported Hebrew foods and plan semantics still need requirement-by-requirement gap verification. This card has no dependency on its own consolidated historical children. Private backup is independently tracked in TASK-111; preserve original substep ordering in this checklist. Naming is an approval-gated decision, not authorization to rename. Next action: Review the consolidated acceptance checklist in this task before resuming work; do not infer completion or current execution.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-101",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-101 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-102",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-102 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-103",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-103 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-104",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-104 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-105",
+      "status": "in_progress",
+      "classification": "unfinished",
+      "disposition": null,
+      "auditNote": "[Task audit 2026-11-07] unfinished. Concurrent source update adds offline evaluation tooling and explicitly marks IN PROGRESS — structure only. Preserve this separate current work item. Synthetic scaffold tests are not a real labeled evaluation baseline; no model, production or owner acceptance is claimed. Canonical prerequisite: TASK-100, replacing archived TASK-104. Next action: Verify private user-confirmed dataset and exact current prompt/model baseline after the structural tooling phase; preserve no-model and private-data constraints. Prerequisite TASK-104 is roadmap work consolidated into TASK-100; this does not claim it is complete.",
+      "dependencyIssues": [],
+      "recommendedStatus": "in_progress",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-106",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-106 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-107",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-107 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-108",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-108 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-109",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-109 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-110",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-110 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-111",
+      "status": "planned",
+      "classification": "unfinished",
+      "disposition": null,
+      "auditNote": "[Task audit 2026-11-07] unfinished. One private-data preservation and repository-housekeeping task combines the backup/restore requirement with root/HANDOFF cleanup. Keep health notes, existing animation artifacts, dirty work and uploads intact. First inventory and establish a private recoverable backup; rehearse restoration before any cleanup. No deletion, moving owner data, bot restart or publishing is authorized by the board audit. Next action: Review the consolidated acceptance checklist in this task before resuming work; do not infer completion or current execution.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-112",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-112 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-113",
+      "status": "planned",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into TASK-100; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:TASK-100. Next action: Continue the TASK-113 requirements through TASK-100; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-114",
+      "status": "review",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into FEATURE-021; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:FEATURE-021. Next action: Continue the TASK-114 requirements through FEATURE-021; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "review",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-115",
+      "status": "review",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into FEATURE-021; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:FEATURE-021. Next action: Continue the TASK-115 requirements through FEATURE-021; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "review",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-116",
+      "status": "review",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into FEATURE-021; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:FEATURE-021. Next action: Continue the TASK-116 requirements through FEATURE-021; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "review",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-117",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-117 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-118",
+      "status": "review",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into FEATURE-021; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:FEATURE-021. Next action: Continue the TASK-118 requirements through FEATURE-021; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "review",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-119",
+      "status": "planned",
+      "classification": "unfinished",
+      "disposition": null,
+      "auditNote": "[Task audit 2026-11-07] unfinished. The six specifically named redraws remain an unfinished deliverable. Their original names and visual requirements remain in the historical source table. Broad Health App deployment and animation candidate commits do not prove these six were redrawn and accepted. Next action: Review the consolidated acceptance checklist in this task before resuming work; do not infer completion or current execution.",
+      "dependencyIssues": [],
+      "recommendedStatus": "planned",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-120",
+      "status": "done",
+      "classification": "declared_done_unverified",
+      "disposition": "completed",
+      "auditNote": "[Task audit 2026-11-06] declared_done_unverified. Source identifies TASK-120 as done; completion is a historical source declaration, without fresh task-specific acceptance/runtime proof. Next action: Retain completion history; archive as source-declared completed with runtime acceptance explicitly unverified.",
+      "dependencyIssues": [],
+      "recommendedStatus": "done",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-121",
+      "status": "review",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into FEATURE-021; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:FEATURE-021. Next action: Continue the TASK-121 requirements through FEATURE-021; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "review",
+      "sourceStatusMismatch": false
+    },
+    {
+      "id": "TASK-122",
+      "status": "review",
+      "classification": "duplicate",
+      "disposition": "duplicate",
+      "auditNote": "[Task audit 2026-11-07] duplicate. Consolidated into FEATURE-021; this is an overlapping child or milestone of the same workstream. Its full unfinished acceptance requirements and original evidence remain in the canonical source checklist; no implementation or owner acceptance is claimed. Canonical task: claude-and-conquer:FEATURE-021. Next action: Continue the TASK-122 requirements through FEATURE-021; do not create a second parallel backlog card.",
+      "dependencyIssues": [],
+      "recommendedStatus": "review",
+      "sourceStatusMismatch": false
+    }
+  ],
+  "counts": {
+    "retained": 147,
+    "active": 7,
+    "archived": 140,
+    "byStatus": [
+      {
+        "status": "in_progress",
+        "count": 1
+      },
+      {
+        "status": "planned",
+        "count": 3
+      },
+      {
+        "status": "review",
+        "count": 3
+      }
+    ]
+  },
+  "activeDependencies": [
+    {
+      "target": "TASK-105",
+      "source": "TASK-100"
+    }
+  ],
+  "errors": [],
+  "runtimeMutations": 0
+}

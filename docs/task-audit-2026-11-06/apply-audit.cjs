@@ -54,7 +54,7 @@ async function main() {
           const prerequisite=taskMap.get(link.source);
           return !prerequisite ? [`${link.source}: unresolved reference`] : prerequisite.archived_at && prerequisite.status!=='done' ? [`${link.source}: retired unfinished prerequisite`] : [];
         });
-        const note=`[Task audit 2026-11-06] ${row.classification}. ${row.rationale || ''}${canonical?' Canonical task: '+canonical+'.':''} Next action: ${row.nextAction || 'Recheck current implementation and acceptance before claiming completion.'}${dependencyIssues.length?' Dependencies need reconciliation: '+dependencyIssues.join('; ')+'.':''}`;
+        const note=`[Task audit ${row.auditDate || '2026-11-06'}] ${row.classification}. ${row.rationale || ''}${canonical?' Canonical task: '+canonical+'.':''} Next action: ${row.nextAction || 'Recheck current implementation and acceptance before claiming completion.'}${dependencyIssues.length?' Dependencies need reconciliation: '+dependencyIssues.join('; ')+'.':''}`;
         let disposition=null;
         if (row.archiveEligible!==false) {
           if (['superseded','duplicate','rejected'].includes(row.classification)) disposition=row.classification;

@@ -1,0 +1,97 @@
+{
+  "at": "2026-11-07T06:38:11.881123+00:00",
+  "before": {
+    "active": 43,
+    "planned": 25,
+    "in_progress": 10,
+    "review": 8
+  },
+  "expectedActive": {
+    "FEATURE-021": "review",
+    "TASK-082": "review",
+    "TASK-083": "review",
+    "TASK-100": "planned",
+    "TASK-111": "planned",
+    "TASK-119": "planned",
+    "TASK-105": "in_progress"
+  },
+  "groups": {
+    "FEATURE-021": [
+      "TASK-114",
+      "TASK-115",
+      "TASK-116",
+      "TASK-118",
+      "TASK-121",
+      "TASK-122"
+    ],
+    "TASK-083": [
+      "TASK-084",
+      "TASK-091",
+      "TASK-092",
+      "TASK-093",
+      "TASK-094",
+      "TASK-095",
+      "TASK-096",
+      "TASK-097",
+      "TASK-098"
+    ],
+    "TASK-100": [
+      "FEATURE-018",
+      "TASK-099",
+      "TASK-101",
+      "TASK-102",
+      "TASK-103",
+      "BUG-046",
+      "TASK-104",
+      "TASK-106",
+      "TASK-107",
+      "TASK-108",
+      "TASK-109",
+      "TASK-110",
+      "TASK-112",
+      "TASK-113"
+    ],
+    "TASK-111": [
+      "TASK-088",
+      "TASK-089"
+    ]
+  },
+  "superseded": [
+    "INQUIRY-042",
+    "TASK-085",
+    "TASK-086",
+    "TASK-087",
+    "TASK-090"
+  ],
+  "sourceBackup": "/media/endlessblink/data/my-projects/ai-development/devops/watchpost/docs/task-audit-2026-11-06/cac-followup-2026-11-07/MASTER_PLAN.before.md",
+  "beforeSha256": "a987d118dbf83180ebb6bff4fed32bab5e1ebf210703e6c709fab4de94384040",
+  "afterSha256": "b4c4399705ede31585227d56909d68664b5d04d3e5a0753bbd8b0af8ff923197",
+  "scopeNotes": {
+    "FEATURE-021": "One acceptance card for the delivered Health App, not six parallel implementation tasks. Preserve original per-step evidence limits: local-only library/login/Today evidence is not fresh live proof; coach first-message, actual profile save/injury/gear constraints, real product-photo add/paste, media continuity and physical-phone acceptance remain unverified. Later Oct31 release evidence shows an active web service and installed product/profile code, not owner sign-off. No Hermes restart or model call is authorized by this consolidation.",
+    "TASK-082": "Retain the original browser-extension reconnection, version identity and authenticated receipt requirement. This is a verification gate, not evidence of a running browser repair. The animation initiative is separately tracked in TASK-083; browser automation must still respect screen-isolation and explicit approval rules.",
+    "TASK-083": "One animation initiative replaces ten overlapping pipeline and production cards. Current guided_grid workflow supersedes the older star-of-edits implementation recipe, but all unresolved outcomes remain required. Preserve complete library coverage, redraw/review/rejection feedback, reference/manifest identity, locked cast/style/canvas inputs, deterministic assembly/export, numeric and independent visual/motion/safety QA, human review/promotion, cache/cost accounting and generator parity.  Keep the offline Python and frozen-fixture regression runner requirements from TASK-085 under this animation initiative; only the retired Node-poller CI proposal is superseded. Oct23 adc7461 records new candidate loops and owner rejection; Oct24 f0e0216 adds real quota enforcement, so the old zero-output narrative is not current. Preserve Oct16 failed-animation redraw-until-end-to-end requirement; Oct23 three bar-free pulls/redos/review queue; hard 6% daily/40% weekly limits and no-reading=no-spend. The Arm source-feasibility exception is a separate held branch in the canonical project note. Whole-library completion, current batch activity and owner acceptance remain unverified; REVIEW describes accumulated candidates and acceptance work, not a finished library.",
+    "TASK-100": "Consolidated future health roadmap. None of the merged tasks is declared implemented: retain their original detailed requirements and acceptance checks below. Current web app has profile, injury guards and products, but full schema migration, dated targets/TDEE/floors, cross-topic context/privacy, structured-photo evaluation, imported Hebrew foods and plan semantics still need requirement-by-requirement gap verification. This card has no dependency on its own consolidated historical children. Private backup is independently tracked in TASK-111; preserve original substep ordering in this checklist. Naming is an approval-gated decision, not authorization to rename.",
+    "TASK-111": "One private-data preservation and repository-housekeeping task combines the backup/restore requirement with root/HANDOFF cleanup. Keep health notes, existing animation artifacts, dirty work and uploads intact. First inventory and establish a private recoverable backup; rehearse restoration before any cleanup. No deletion, moving owner data, bot restart or publishing is authorized by the board audit.",
+    "TASK-119": "The six specifically named redraws remain an unfinished deliverable. Their original names and visual requirements remain in the historical source table. Broad Health App deployment and animation candidate commits do not prove these six were redrawn and accepted."
+  },
+  "runtimeReadback": {
+    "legacy": "exited",
+    "hermes": "running",
+    "healthApp": "active",
+    "sourceIdentity": "health-app-web;claude-and-conquer-legacy",
+    "modelCalls": 0,
+    "runtimeMutations": 0
+  },
+  "concurrentChange": {
+    "id": "TASK-105",
+    "sourceStage": "IN PROGRESS — structure only",
+    "evidence": "docs/food-photo-evaluation.md modified during audit; new scripts/food-photo-eval.js and test/food-photo-eval.test.js; real dataset, baseline and runtime integration remain unproved",
+    "disposition": "retain separately; preserve concurrent source edit"
+  },
+  "dependencyCorrection": {
+    "task": "TASK-105",
+    "old": "TASK-104",
+    "new": "TASK-100",
+    "reason": "Retain unmet structured-photo prerequisite through the canonical roadmap task; consolidation is not completion."
+  }
+}

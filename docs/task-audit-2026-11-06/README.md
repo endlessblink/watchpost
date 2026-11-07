@@ -1,5 +1,13 @@
 # Watchpost task audit — 6 November 2026
 
+## 7 November correction — Claude & Conquer
+
+The first pass retained too many overlapping milestones and roadmap proposals. A task-by-task follow-up reduced this project's active cards from 43 to 7: three planned, one in progress and three in review, with 140 records archived and all 147 identifiers retained. Thirty-one child/milestone cards now link to consolidated canonical checklists; five obsolete platform-choice/retired-poller proposals are superseded. No unfinished work was relabelled completed.
+
+The remaining in-progress item, TASK-105, was independently updated during this follow-up with new offline food-photo evaluation tooling. Its source change is preserved. Structural work does not establish a private real-data baseline, model integration or owner acceptance. Its structured-photo prerequisite now points to the canonical TASK-100 roadmap, retaining the unmet requirement instead of depending on archived TASK-104.
+
+`cac-followup-2026-11-07/` contains source backups and hashes, the independent animation reassessment, exact native/API and headless browser readbacks, and preparation/application scripts. The updated task report includes these scoped corrections. Other projects retain their original audit cutoff; the totals below describe the original 6 November application.
+
 Complete audit of all 251 original project registrations and all 4,787 current unique task records across 50 task scopes. Eight TermFleet tasks added concurrently were included before final application.
 
 ## Applied result

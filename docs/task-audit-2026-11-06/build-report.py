@@ -11,6 +11,7 @@ raw_count = 0
 receipt_path = root / 'apply-receipt.json'
 receipt = json.loads(receipt_path.read_text()) if receipt_path.exists() else {}
 applied = {(p['project'], t['id']): t for p in receipt.get('projects', []) for t in p.get('results', [])}
+applied_times = {(p['project'], t['id']): p.get('followupAt', receipt.get('at')) for p in receipt.get('projects', []) for t in p.get('results', [])}
 for path in sorted(root.glob('*-audit.json')):
     ledger = json.loads(path.read_text())
     tasks = ledger.get('rows', ledger.get('tasks', []))
@@ -31,7 +32,7 @@ for path in sorted(root.glob('*-audit.json')):
         if result:
             row['boardReceiptStatus'] = result.get('status')
             row['boardReceiptDisposition'] = result.get('disposition')
-            row['boardReceiptAt'] = receipt.get('at')
+            row['boardReceiptAt'] = applied_times[(row.get('project'), row.get('id'))]
             row['dependencyIssues'] = result.get('dependencyIssues', [])
             row['boardAuditNote'] = result.get('auditNote')
         rows.append(row)
@@ -49,16 +50,17 @@ for row in rows:
 rows = list(deduped.values())
 fields = ['ledger', 'project', 'id', 'title', 'currentStatus', 'sourceStatus', 'appliedStatus', 'classification', 'recommendedStatus', 'canonicalTask', 'rationale', 'nextAction', 'executionVerification', 'applicationGate', 'boardReceiptStatus', 'boardReceiptDisposition', 'boardReceiptAt', 'dependencyIssues', 'boardAuditNote', 'evidenceText']
 with (root / 'task-audit.csv').open('w', newline='') as output:
-    writer = csv.DictWriter(output, fieldnames=fields)
+    writer = csv.DictWriter(output, fieldnames=fields, lineterminator='\n')
     writer.writeheader()
     for row in rows:
         values = {k: json.dumps(v, ensure_ascii=False) if isinstance(v, (dict, list)) else v for k in fields if (v := row.get(k)) is not None}
+        values = {k: '\n'.join(line.rstrip() for line in v.split('\n')) if isinstance(v, str) else v for k, v in values.items()}
         writer.writerow({k: "'" + v if isinstance(v, str) and v.startswith(('=', '+', '-', '@')) else v for k, v in values.items()})
 payload = json.dumps(rows, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
 page = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Watchpost task audit</title>
 <style>
 :root{font-family:system-ui,sans-serif;color:#e5eaf3;background:#10151f;color-scheme:dark}body{max-width:1400px;margin:auto;padding:28px}h1{font-size:28px}p{line-height:1.5;color:#bdcce1}a{color:#8fc7ff}.controls{display:flex;gap:10px;flex-wrap:wrap;position:sticky;top:0;background:#10151f;padding:14px 0;z-index:1}input,select,button{font:inherit;padding:10px;border:1px solid #46546a;border-radius:6px;background:#1b2433;color:white}input{flex:1;min-width:240px}.card{border:1px solid #344258;border-radius:8px;padding:16px;margin:12px 0;background:#171f2c}.meta{display:flex;gap:8px;flex-wrap:wrap;font-size:13px}.tag{background:#26354b;padding:4px 7px;border-radius:4px}h2{font-size:18px}summary{cursor:pointer;color:#a7d2ff}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,monospace;background:#0d131d;padding:12px}.pagination{display:flex;gap:14px;margin:20px 0}.notice{border-left:3px solid #d7ac5d;padding:12px;background:#27251e}button:disabled{opacity:.4}
-</style><h1>Watchpost task audit</h1><p>6 November 2026 · Source evidence, remaining work, and board recommendations.</p><p class="notice">Historical completion declarations are distinct from current runtime verification. Recommendations are distinct from applied changes. Board receipt badges show recorded application results, not owner acceptance. Fifty agent-ops owner claims cannot be validated as active: this is an execution-evidence gap, not a claim that the underlying product work is blocked. Task-plan excerpts are included; raw private conversations are excluded.</p><p id="coverage">COVERAGE</p><p><a href="task-audit.csv" download>Download all unique task rows as CSV</a></p><div class="controls"><input id="search" aria-label="Search tasks" placeholder="Search title, ID, evidence, or next action"><select id="project" aria-label="Project"></select><select id="classification" aria-label="Classification"></select><select id="status" aria-label="Current status"></select><select id="target" aria-label="Recommended status"></select><button id="reset">Reset</button></div><p id="count" aria-live="polite"></p><div id="results"></div><div class="pagination"><button id="previous">Previous</button><span id="page"></span><button id="next">Next</button></div><script id="data" type="application/json">PAYLOAD</script><script>
+</style><h1>Watchpost task audit</h1><p>6 November 2026 audit snapshot · Claude &amp; Conquer corrected 7 November: 7 active (3 planned, 1 in progress, 3 review), 140 archived. Other projects retain their original audit cutoff.</p><p class="notice">Historical completion declarations are distinct from current runtime verification. Recommendations are distinct from applied changes. Board receipt badges show recorded application results, not owner acceptance. Fifty agent-ops owner claims cannot be validated as active: this is an execution-evidence gap, not a claim that the underlying product work is blocked. Task-plan excerpts are included; raw private conversations are excluded.</p><p id="coverage">COVERAGE</p><p><a href="task-audit.csv" download>Download all unique task rows as CSV</a></p><div class="controls"><input id="search" aria-label="Search tasks" placeholder="Search title, ID, evidence, or next action"><select id="project" aria-label="Project"></select><select id="classification" aria-label="Classification"></select><select id="status" aria-label="Current status"></select><select id="target" aria-label="Recommended status"></select><button id="reset">Reset</button></div><p id="count" aria-live="polite"></p><div id="results"></div><div class="pagination"><button id="previous">Previous</button><span id="page"></span><button id="next">Next</button></div><script id="data" type="application/json">PAYLOAD</script><script>
 const rows=JSON.parse(document.getElementById('data').textContent);let page=0;const size=75;
 const filters=[['project','project','All projects'],['classification','classification','All classifications'],['status','currentStatus','All current statuses'],['target','recommendedStatus','All recommendations']];
 for(const [id,key,label] of filters){const e=document.getElementById(id);e.add(new Option(label,''));for(const v of [...new Set(rows.map(r=>r[key]).filter(Boolean))].sort())e.add(new Option(v,v));e.onchange=()=>{page=0;render()}}
