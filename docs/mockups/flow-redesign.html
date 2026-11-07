@@ -3,65 +3,163 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flow side card mockup</title>
+  <title>Flow sidebar mockup</title>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../dusk-tokens.css">
   <link rel="stylesheet" href="../../flow/dusk.css">
   <style>
-    /* mockup frame only: the real stylesheet locks the page, this lets it scroll */
+    /* mockup frame only: the real stylesheet locks the page */
     html,body{height:auto;overflow:auto}
-    body{padding:24px}
-    .frame{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
-    .col{width:380px;max-width:100%}
-    .label{font:500 12px var(--f-mono);color:var(--text-3);margin:0 0 10px 4px}
-    .col .side-pane{margin:0;overflow:visible}
+    #root{height:auto;min-height:100vh;grid-template-columns:minmax(0,1fr) 340px;grid-template-rows:auto auto;grid-template-areas:"toolbar toolbar" "graph side"}
+    .graph-pane{overflow:visible}
+    .lane-col{padding:6px 16px 24px 24px}
+    .side-pane{margin:0 16px 16px 0;align-self:start}
+    .vb{width:auto;padding:0 14px;color:var(--text-2)} .vb .lbl{display:inline}
+    [data-v]{display:none} body[data-view="now"] [data-v="now"],body[data-view="new"] [data-v="new"]{display:block}
+
+    /* redesign additions, built from the app's own tokens */
+    .td-sub{margin:-8px 0 0;font-size:13.5px;color:var(--text-2);line-height:1.45}
+    .td-section{display:flex;flex-direction:column;gap:10px}
+    .td-label{margin:0;font:500 11.5px var(--f-mono);color:var(--text-3);letter-spacing:.02em}
+    .td-label b{color:var(--text-2);font-weight:500}
+    .td-next{padding:12px 14px;border-radius:14px;background:var(--card);color:var(--text);font-size:13.5px;line-height:1.5}
+    .td-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.td-stats.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .td-stat{padding:10px 12px;border-radius:12px;background:var(--card)}
+    .td-stat span{display:block;font:500 11.5px var(--f-mono);color:var(--text-3)}
+    .td-stat strong{display:block;margin-top:2px;font-size:17px;font-weight:600;color:var(--text)}
+    .td-stat strong small{font-size:12px;font-weight:400;color:var(--text-3)}
+    .td-table{display:grid;grid-template-columns:1fr auto auto;gap:0 14px;font-size:13px;color:var(--text-2)}
+    .td-table>*{padding:7px 0;border-top:1px solid var(--line)}
+    .td-table .h{font:500 11.5px var(--f-mono);color:var(--text-3);border-top:0;padding-top:0}
+    .td-table .n{text-align:right;font-family:var(--f-mono);color:var(--text)}
+    .td-table .good{color:var(--done)}
+    .td-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--text-2);line-height:1.45}
+    .td-list b{color:var(--text);font-weight:500}
+    .td-foot{margin:0;font-size:13px;color:var(--text-2);line-height:1.5}
+    .agent-track-sub{margin:2px 0 0;font-size:13.5px;color:var(--text-2)}
   </style>
 </head>
-<body>
-  <div class="frame">
+<body data-view="new">
+<div id="root">
 
-    <div class="col">
-      <p class="label">NOW</p>
-      <aside class="side-pane">
-        <div class="task-detail">
-          <div class="td-head">
-            <span class="td-id">S2-31</span>
-            <button class="td-btn" type="button" aria-label="Copy task context for an agent"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg></button>
-            <button class="td-btn" type="button" aria-label="Open in Kanban"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/></svg></button>
-          </div>
-          <h3>ASSIGNMENT CONTRACT. — Progress: RELIABILITY PATH 1/6: assignment contract; do first, with S2.35; LANE Reliability path; 6 Nov 22:4x canary evidence read from the real-chat scorecard (4 days before vs the 4 days of canary on Freelance-desk_dev: silent 14 to 0, errors 5 to 1, same-minute 8 to 0, not delivered 0 to 0; 27 contract tests pass; contract promoted to every bot by setting promoted true in the rollout table (backup kept, rollback = promoted false); next: compare the scorecard for all bots over the next day and keep S2.31 open until then; 7 Nov 23:xx scorecard over 26.8 h, all bots…</h3>
-          <div class="td-facts">
-            <span class="td-fact status-planned"><i class="td-dot"></i><span>Planned</span></span>
-            <span class="td-fact priority-high"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V4M6 4h11l-2.5 4L17 12H6"/></svg><span>high</span></span>
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <div class="col">
-      <p class="label">PROPOSED: title cut to its first sentence, full text folded</p>
-      <aside class="side-pane">
-        <div class="task-detail">
-          <div class="td-head">
-            <span class="td-id">S2-31</span>
-            <button class="td-btn" type="button" aria-label="Copy task context for an agent"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg></button>
-            <button class="td-btn" type="button" aria-label="Open in Kanban"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/></svg></button>
-          </div>
-          <h3>ASSIGNMENT CONTRACT. — Progress: RELIABILITY PATH 1/6: assignment contract; do first…</h3>
-          <div class="td-facts">
-            <span class="td-fact status-planned"><i class="td-dot"></i><span>Planned</span></span>
-            <span class="td-fact priority-high"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V4M6 4h11l-2.5 4L17 12H6"/></svg><span>high</span></span>
-          </div>
-          <div class="td-desc">
-            <details>
-              <summary aria-label="Show the full text"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-              <p>ASSIGNMENT CONTRACT. — Progress: RELIABILITY PATH 1/6: assignment contract; do first, with S2.35; LANE Reliability path; 6 Nov 22:4x canary evidence read from the real-chat scorecard (4 days before vs the 4 days of canary on Freelance-desk_dev: silent 14 to 0, errors 5 to 1, same-minute 8 to 0, not delivered 0 to 0; 27 contract tests pass; contract promoted to every bot by setting promoted true in the rollout table (backup kept, rollback = promoted false); next: compare the scorecard for all bots over the next day and keep S2.31 open until then; 7 Nov 23:xx scorecard over 26.8 h, all bots…</p>
-            </details>
-          </div>
-        </div>
-      </aside>
-    </div>
-
+  <div class="toolbar">
+    <h1 class="title">Flow</h1>
+    <span class="spacer"></span>
+    <span class="view-mode-group views" role="tablist" aria-label="Mockup version">
+      <button class="toolbar-toggle vb" id="b-now" type="button"><span class="lbl">Now</span></button>
+      <button class="toolbar-toggle vb on" id="b-new" type="button"><span class="lbl">Redesign</span></button>
+    </span>
   </div>
+
+  <div class="graph-pane"><div class="lane-col">
+
+    <!-- lane card, NOW -->
+    <article class="flow-row agent-flow" data-v="now">
+      <div class="agent-track-poster">
+        <div class="agent-track-ribbon">
+          <div><div class="agent-track-agent">Claude Ec9b43e0</div><div class="agent-track-agent-meta">14m ago · activity</div></div>
+          <div class="agent-track-owner-mark">CL</div>
+        </div>
+        <div class="agent-track-main"><div class="agent-track-copy">
+          <div class="agent-track-kicker">Reliability path <button class="flow-chip" type="button">LINE A ⧉</button></div>
+          <button class="agent-track-headline" type="button">S2-31 - ASSIGNMENT CONTRACT. — Progress: RELIABILITY PATH 1/6: assignment contract; do first…</button>
+        </div></div>
+        <div class="agent-track-meta"><span class="flow-row-state ready">Planned</span><span class="flow-row-owner">High</span><span class="flow-row-owner">Activity</span></div>
+      </div>
+      <div class="agent-track-sequence"><div class="flow-sequence">
+        <div class="flow-node current"><span class="flow-node-eyebrow">Current</span><div class="flow-node-id">S2-31</div><div class="flow-node-title">ASSIGNMENT CONTRACT. — Progress: RELIABILITY PATH 1/6: assignment contract; d…</div></div>
+        <div class="flow-arrow" aria-hidden="true"></div>
+        <div class="flow-node next"><span class="flow-node-eyebrow">Next</span><div class="flow-node-id">S2-35</div><div class="flow-node-title">AN INTERRUPTED DELIVERY MUST NEVER PAUSE ALL AUTOMATION. — Progress:…</div></div>
+      </div></div>
+    </article>
+
+    <!-- lane card, REDESIGN -->
+    <article class="flow-row agent-flow" data-v="new">
+      <div class="agent-track-poster">
+        <div class="agent-track-ribbon">
+          <div><div class="agent-track-agent">Claude Ec9b43e0</div><div class="agent-track-agent-meta">14m ago · activity</div></div>
+          <div class="agent-track-owner-mark">CL</div>
+        </div>
+        <div class="agent-track-main"><div class="agent-track-copy">
+          <div class="agent-track-kicker">Reliability path <button class="flow-chip" type="button">LINE A ⧉</button></div>
+          <button class="agent-track-headline" type="button">S2-31 · Assignment contract</button>
+        </div></div>
+        <div class="agent-track-meta"><span class="flow-row-state ready">Planned</span></div>
+      </div>
+      <div class="agent-track-sequence"><div class="flow-sequence">
+        <div class="flow-node current"><span class="flow-node-eyebrow">Current</span><div class="flow-node-id">S2-31</div><div class="flow-node-title">Assignment contract</div></div>
+        <div class="flow-arrow" aria-hidden="true"></div>
+        <div class="flow-node next"><span class="flow-node-eyebrow">Next</span><div class="flow-node-id">S2-35</div><div class="flow-node-title">An interrupted delivery must never pause all automation</div></div>
+      </div></div>
+    </article>
+
+  </div></div>
+
+  <!-- SIDEBAR, NOW -->
+  <aside class="side-pane" data-v="now">
+    <div class="task-detail">
+      <div class="td-head"><span class="td-id">S2-31</span>
+        <button class="td-btn" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg></button>
+        <button class="td-btn" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/></svg></button>
+      </div>
+      <h3>ASSIGNMENT CONTRACT. — Progress: RELIABILITY PATH 1/6: assignment contract; do first…</h3>
+      <div class="td-facts">
+        <span class="td-fact status-planned"><i class="td-dot"></i><span>Planned</span></span>
+        <span class="td-fact priority-high"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V4M6 4h11l-2.5 4L17 12H6"/></svg><span>high</span></span>
+        <span class="td-fact"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/></svg><span>65</span></span>
+      </div>
+      <div class="td-rels"><div class="td-rel"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><div class="dep-list"><span class="dep-chip">S2-25</span></div></div></div>
+      <div class="td-desc"><p>ASSIGNMENT CONTRACT. — Progress: RELIABILITY PATH 1/6: assignment contract; do first, with S2.35; LANE Reliability path; 6 Nov 22:4x canary evidence read from the real-chat scorecard (4 days before vs the 4 days of canary on Freelance-desk_dev: silent 14 to 0, errors 5 to 1, same-minute owner 8 to 0, not delivered 0 to 0; 27 contract tests pass; contract promoted to every bot by setting promoted true in the rollout table (backup kept, rollback = promoted false); next: compare the scorecard for all bots over the next day and keep S2.31 open until then; 7 Nov 23:xx scorecard over 26.8 h, all bots, since the contract was promoted (6 Nov 20:37): Noam would have hit 4 (silent 2: side check, health-coach_dev; slow 1: fine-tuned; result never reached him 1: Income-Zen, the finished-helper case now fixed by S2.67/S2.68/S2.57). Errors 0, failed hand-offs 0, not delivered 0. Tokens about 573k per turn (no change yet; S2.22/S2.5 await data). Compare after the 7 Nov releases.</p></div>
+    </div>
+  </aside>
+
+  <!-- SIDEBAR, REDESIGN -->
+  <aside class="side-pane" data-v="new">
+    <div class="task-detail">
+      <div class="td-head"><span class="td-id">S2-31</span>
+        <button class="td-btn" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg></button>
+        <button class="td-btn" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/></svg></button>
+      </div>
+      <h3>Assignment contract</h3>
+      <div class="td-facts">
+        <span class="td-fact status-planned"><i class="td-dot"></i><span>Planned</span></span>
+        <span class="td-fact priority-high"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V4M6 4h11l-2.5 4L17 12H6"/></svg><span>high</span></span>
+        <span class="dep-chip" style="display:inline-flex;align-items:center;height:28px;padding:0 11px;border-radius:999px;background:var(--card);color:var(--text-2);font-size:12.5px">→ S2-25</span>
+      </div>
+
+      <section class="td-section">
+        <p class="td-label">NEXT</p>
+        <div class="td-next">Compare the scorecard for all bots over the next day. Keep open until then.</div>
+      </section>
+
+      <section class="td-section">
+        <p class="td-label">7 NOV · 26.8 H</p>
+        <div class="td-stats three">
+          <div class="td-stat"><span>Would have hit</span><strong>4</strong></div>
+          <div class="td-stat"><span>Errors</span><strong>0</strong></div>
+          <div class="td-stat"><span>Failed</span><strong>0</strong></div>
+        </div>
+      </section>
+
+      <div class="td-desc">
+        <details>
+          <summary aria-label="Show the canary evidence"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="td-table">
+            <span class="h">6 Nov canary</span><span class="h n">Before</span><span class="h n">After</span>
+            <span>Silent</span><span class="n">14</span><span class="n good">0</span>
+            <span>Errors</span><span class="n">5</span><span class="n good">1</span>
+            <span>Same-minute owner</span><span class="n">8</span><span class="n good">0</span>
+          </div>
+        </details>
+      </div>
+    </div>
+  </aside>
+
+</div>
+<script>
+  const set = v => { document.body.dataset.view = v; document.getElementById('b-now').classList.toggle('on', v==='now'); document.getElementById('b-new').classList.toggle('on', v==='new'); };
+  document.getElementById('b-now').onclick = () => set('now');
+  document.getElementById('b-new').onclick = () => set('new');
+</script>
 </body>
 </html>

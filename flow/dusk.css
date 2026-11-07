@@ -451,6 +451,9 @@ details[open]>summary::before{transform:rotate(90deg)}
 .td-rels{display:flex;flex-direction:column;gap:10px}
 .td-rel{display:flex;align-items:flex-start;gap:10px}
 .td-rel>.ic{width:16px;height:16px;margin-top:6px;color:var(--text-3)}
+.td-section{display:flex;flex-direction:column;gap:10px}
+.td-label{margin:0;font-family:var(--f-mono);font-size:11.5px;font-weight:500;color:var(--text-3);letter-spacing:.02em}
+.td-next{padding:12px 14px;border-radius:14px;background:var(--card);color:var(--text);font-size:13.5px;line-height:1.5}
 .td-desc{font-size:13.5px;line-height:1.55;color:var(--text-2)}
 .td-desc p{margin:0 0 10px;max-width:65ch;text-wrap:pretty}
 .td-desc details summary{list-style:none;width:32px;height:28px;display:grid;place-items:center;border-radius:999px;background:var(--card);color:var(--text-3);cursor:pointer;margin-bottom:10px}

@@ -1448,7 +1448,7 @@
         <div class="flow-node ${cls}" data-id="${task.id}" role="button" tabindex="0" title="${escapeAttr(`${label}: ${task.id} ${task.title || ''}`)}">
           <span class="flow-node-eyebrow">${label}</span>
           <div class="flow-node-id">${task.id}</div>
-          <div class="flow-node-title">${escapeHtml(task.title || '')}</div>
+          <div class="flow-node-title">${escapeHtml(coreTitle(task.title))}</div>
         </div>`;
     }
 
@@ -1658,7 +1658,7 @@
       const task = primaryTaskId ? taskById.get(primaryTaskId) : null;
       const agentName = track ? formatSessionName(track) : (line.owner ? `Instance ${line.owner.session_short}` : line.name);
       const lastSeen = track ? formatRelativeTime(track.ts || track.lastSeenMs || '') : lineActivityLabel(line);
-      const taskTitle = task ? `${task.id} - ${shortTitle(task.title) || 'Untitled task'}` : 'No task selected';
+      const taskTitle = task ? `${task.id} · ${coreTitle(task.title) || 'Untitled task'}` : 'No task selected';
       const detail = getTaskExcerpt(task);
       const stateClass = task?.status === 'in-progress' ? 'in-progress'
         : task?.status === 'paused' ? 'blocked'
@@ -2820,6 +2820,18 @@
     }
 
     /* ─── Side panel ───────────────────────────────────────────────── */
+    // The short name of a task whose title cell holds a whole progress note:
+    // text up to the first " — " or sentence end, sentence-cased when it is shouted in capitals.
+    function coreTitle(raw, max = 80) {
+      const text = String(raw || '').replace(/[`*]/g, '').replace(/\s+/g, ' ').trim();
+      if (text.length <= max && !/\s—\s|\.\s/.test(text)) return text;
+      const stop = text.slice(8).search(/\s[—–]\s|\.\s/);
+      let core = (stop >= 0 ? text.slice(0, stop + 8) : text).replace(/[\s.:—–-]+$/, '');
+      const letters = core.replace(/[^A-Za-z]/g, '');
+      if (letters.length > 6 && letters === letters.toUpperCase()) core = core.charAt(0) + core.slice(1).toLowerCase();
+      return core.length > max ? shortTitle(core, max) : core;
+    }
+
     // Some plans keep a whole progress note in the title cell: show its first sentence only.
     function shortTitle(raw, max = 90) {
       const text = String(raw || '').replace(/[`*]/g, '').replace(/\s+/g, ' ').trim();
@@ -2885,8 +2897,7 @@
         `<span class="td-fact status-${task.status}" title="${escapeAttr(statusLabel(task.status))}"><i class="td-dot"></i><span>${escapeHtml(statusLabel(task.status))}</span></span>`,
         task.priority ? fact(`priority-${task.priority}`, 'flag', String(task.priority), `Priority ${task.priority}`) : '',
         dueStr ? fact(overdue ? 'bad' : '', 'clock', dueStr, overdue ? `Overdue since ${dueStr}` : `Due ${dueStr}`) : '',
-        readiness || '',
-        task.score ? fact('', 'bolt', String(task.score), `Next-up score ${task.score}`) : ''
+        readiness || ''
       ].join('');
 
       // Relations: each row is an icon and chips, no text label. Declared, inferred and unblocking links are deduped.
@@ -2905,9 +2916,19 @@
       // Description: first paragraph, the rest folded away.
       const paragraphs = plain(task.body).split(/\n\s*\n/).map(x => x.replace(/\s*\n\s*/g, ' ').trim()).filter(Boolean);
       const fullTitle = plain(task.title);
-      if (shortTitle(fullTitle) !== fullTitle) paragraphs.unshift(fullTitle);
+      const longTitle = coreTitle(fullTitle) !== fullTitle;
+      if (longTitle) paragraphs.unshift(fullTitle);
+      // A plan note that says "next: …" gets its own box, so the next step is visible without reading the note.
+      const nextMatch = paragraphs.join(' ').match(/\bnext:\s*([^;]+)/i);
+      const nextText = nextMatch ? nextMatch[1].trim().replace(/[.\s]+$/, '') : '';
+      const nextBox = nextText
+        ? `<section class="td-section"><p class="td-label">NEXT</p><div class="td-next">${escapeHtml(nextText.charAt(0).toUpperCase() + nextText.slice(1))}.</div></section>`
+        : '';
+      const chevron = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+      const visibleCount = longTitle ? 0 : 1;
+      const folded = paragraphs.slice(visibleCount);
       const description = paragraphs.length
-        ?`<div class="td-desc"><p>${escapeHtml(paragraphs[0])}</p>${paragraphs.length > 1 ? `<details><summary aria-label="Show the rest"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>${paragraphs.slice(1).map(x => `<p>${escapeHtml(x)}</p>`).join('')}</details>` : ''}</div>`
+        ? `<div class="td-desc">${visibleCount ? `<p>${escapeHtml(paragraphs[0])}</p>` : ''}${folded.length ? `<details><summary aria-label="Show the full text">${chevron}</summary>${folded.map(x => `<p>${escapeHtml(x)}</p>`).join('')}</details>` : ''}</div>`
         : '';
 
       pane.innerHTML = `
@@ -2917,9 +2938,10 @@
             <button id="copy-context" class="td-btn" type="button" title="Copy task context for an agent" aria-label="Copy task context for an agent">${ico('copy')}</button>
             <button id="jump-kanban" class="td-btn" type="button" title="Open in Kanban" aria-label="Open in Kanban">${ico('board')}</button>
           </div>
-          <h3 style="overflow-wrap:anywhere">${escapeHtml(shortTitle(plain(task.title)))}</h3>
+          <h3>${escapeHtml(coreTitle(plain(task.title)))}</h3>
           <div class="td-facts">${facts}</div>
           ${relations ? `<div class="td-rels">${relations}</div>` : ''}
+          ${nextBox}
           ${description}
         </div>
       `;
