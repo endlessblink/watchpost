@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flow side card mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../dusk-tokens.css">
+  <link rel="stylesheet" href="../../flow/dusk.css">
+  <style>
+    /* mockup frame only: the real stylesheet locks the page, this lets it scroll */
+    html,body{height:auto;overflow:auto}
+    body{padding:24px}
+    .frame{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+    .col{width:380px;max-width:100%}
+    .label{font:500 12px var(--f-mono);color:var(--text-3);margin:0 0 10px 4px}
+    .col .side-pane{margin:0;overflow:visible}
+  </style>
+</head>
+<body>
+  <div class="frame">
+
+    <div class="col">
+      <p class="label">NOW</p>
+      <aside class="side-pane">
+        <div class="task-detail">
+          <div class="td-head">
+            <span class="td-id">S2-31</span>
+            <button class="td-btn" type="button" aria-label="Copy task context for an agent"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg></button>
+            <button class="td-btn" type="button" aria-label="Open in Kanban"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/></svg></button>
+          </div>
+          <h3>ASSIGNMENT CONTRACT. — Progress: RELIABILITY PATH 1/6: assignment contract; do first, with S2.35; LANE Reliability path; 6 Nov 22:4x canary evidence read from the real-chat scorecard (4 days before vs the 4 days of canary on Freelance-desk_dev: silent 14 to 0, errors 5 to 1, same-minute 8 to 0, not delivered 0 to 0; 27 contract tests pass; contract promoted to every bot by setting promoted true in the rollout table (backup kept, rollback = promoted false); next: compare the scorecard for all bots over the next day and keep S2.31 open until then; 7 Nov 23:xx scorecard over 26.8 h, all bots…</h3>
+          <div class="td-facts">
+            <span class="td-fact status-planned"><i class="td-dot"></i><span>Planned</span></span>
+            <span class="td-fact priority-high"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V4M6 4h11l-2.5 4L17 12H6"/></svg><span>high</span></span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="col">
+      <p class="label">PROPOSED: title cut to its first sentence, full text folded</p>
+      <aside class="side-pane">
+        <div class="task-detail">
+          <div class="td-head">
+            <span class="td-id">S2-31</span>
+            <button class="td-btn" type="button" aria-label="Copy task context for an agent"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg></button>
+            <button class="td-btn" type="button" aria-label="Open in Kanban"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/></svg></button>
+          </div>
+          <h3>ASSIGNMENT CONTRACT. — Progress: RELIABILITY PATH 1/6: assignment contract; do first…</h3>
+          <div class="td-facts">
+            <span class="td-fact status-planned"><i class="td-dot"></i><span>Planned</span></span>
+            <span class="td-fact priority-high"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V4M6 4h11l-2.5 4L17 12H6"/></svg><span>high</span></span>
+          </div>
+          <div class="td-desc">
+            <details>
+              <summary aria-label="Show the full text"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <p>ASSIGNMENT CONTRACT. — Progress: RELIABILITY PATH 1/6: assignment contract; do first, with S2.35; LANE Reliability path; 6 Nov 22:4x canary evidence read from the real-chat scorecard (4 days before vs the 4 days of canary on Freelance-desk_dev: silent 14 to 0, errors 5 to 1, same-minute 8 to 0, not delivered 0 to 0; 27 contract tests pass; contract promoted to every bot by setting promoted true in the rollout table (backup kept, rollback = promoted false); next: compare the scorecard for all bots over the next day and keep S2.31 open until then; 7 Nov 23:xx scorecard over 26.8 h, all bots…</p>
+            </details>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+</body>
+</html>
