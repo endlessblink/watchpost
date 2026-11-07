@@ -376,6 +376,13 @@
             const showArchived = archiveToggle.querySelector('input');
             showArchived.addEventListener('change', () => { highlight = 0; render(); });
 
+            const noLanesToggle = document.createElement('label');
+            noLanesToggle.style.cssText = archiveToggle.style.cssText;
+            noLanesToggle.innerHTML = '<input type="checkbox" id="project-switcher-no-lanes"> No lanes set up only';
+            archiveToggle.after(noLanesToggle);
+            const noLanesOnly = noLanesToggle.querySelector('input');
+            noLanesOnly.addEventListener('change', () => { highlight = 0; render(); });
+
             function escapeHtml(s) {
                 return String(s == null ? '' : s)
                     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -421,6 +428,7 @@
 
             function applyFilter(items) {
                 items = items.filter(p => showArchived.checked || !p.archived || isActiveProject(p));
+                if (noLanesOnly.checked) items = items.filter(p => p.masterPlan && !p.hasLanes);
                 if (!filter) return items;
                 const q = filter.toLowerCase();
                 return items.filter(p =>

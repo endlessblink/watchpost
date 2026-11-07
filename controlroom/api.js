@@ -858,6 +858,32 @@ module.exports = function mountControlRoomRoutes(app, { getTaskEngine } = {}) {
     fs.mkdirSync(COVERS_DIR, { recursive: true });
     fs.mkdirSync(SUMMARIES_DIR, { recursive: true });
 
+    // True when a plan defines lanes: a Delivery Lines block, a **Lane**: field, or a
+    // table Lane column holding 2+ distinct values. Cached by file mtime.
+    const laneCache = new Map();
+    function planHasLanes(planPath) {
+        try {
+            const mtime = fs.statSync(planPath).mtimeMs;
+            const hit = laneCache.get(planPath);
+            if (hit && hit.mtime === mtime) return hit.value;
+            const md = fs.readFileSync(planPath, 'utf8');
+            let value = /###\s+Delivery\s+Lines/i.test(md) || /^[-*]?\s*\*\*Lane\*\*:/im.test(md);
+            if (!value) {
+                const values = new Set();
+                let laneCol = -1;
+                for (const line of md.split('\n')) {
+                    if (!line.startsWith('|')) { laneCol = -1; continue; }
+                    const cells = line.split('|').slice(1, -1).map(c => c.trim());
+                    if (laneCol < 0) { laneCol = cells.findIndex(c => /^(lane|domain|area)$/i.test(c)); continue; }
+                    if (cells[laneCol] && !/^-+$/.test(cells[laneCol])) values.add(cells[laneCol].replace(/\s*\(.*$/, ''));
+                }
+                value = values.size > 1;
+            }
+            laneCache.set(planPath, { mtime, value });
+            return value;
+        } catch { return false; }
+    }
+
     // ── 1. GET /api/projects/enriched ──────────────────────────────────────
 
     app.get('/api/projects/enriched', (req, res) => {
@@ -875,7 +901,8 @@ module.exports = function mountControlRoomRoutes(app, { getTaskEngine } = {}) {
                 coverUrl: cover ? `/api/projects/${encodeURIComponent(project.name)}/cover` : null,
                 lastActivity: gitInfo.lastCommitDate,
                 commits7d: gitInfo.commits7d,
-                archived: project.archived || false
+                archived: project.archived || false,
+                hasLanes: project.masterPlan ? planHasLanes(project.masterPlan) : false
             };
         });
 

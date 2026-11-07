@@ -1163,7 +1163,7 @@ app.post('/api/task/:id', (req, res, next) => {
 
 // POST /api/task/add - Add a new task to MASTER_PLAN.md
 app.post('/api/task/add', (req, res) => {
-    const { title, type = 'TASK', priority = 'Medium', description = '', project } = req.body;
+    const { title, type = 'TASK', priority = 'Medium', description = '', project, lane = '' } = req.body;
 
     // Optional per-request target: route the task into a named tracked project's
     // MASTER_PLAN without changing the globally-active project (no side effects,
@@ -1222,7 +1222,7 @@ app.post('/api/task/add', (req, res) => {
 
 **Priority**: ${priority}
 **Status**: Backlog
-${description ? `\n${description}\n` : ''}
+${lane ? `**Lane**: ${String(lane).replace(/[\r\n]+/g, ' ').trim()}\n` : ''}${description ? `\n${description}\n` : ''}
 `;
 
         // Find where to insert (look for "## Active Tasks" or "## Backlog" section)

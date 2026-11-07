@@ -299,6 +299,8 @@
             const parsed = parseStatus(statusMatch[1].toUpperCase(), '', false);
             if (parsed !== 'unknown') current.status = parsed;
           }
+          const laneMatch = trimmed.match(/^[-*]?\s*\*\*Lane\*\*:\s*(.+?)\s*$/i);
+          if (laneMatch) current.streamParent = laneMatch[1];
           const depMatch = trimmed.match(/^[-*]\s*\*\*Depends[- ]on\*\*:\s*(.+?)\s*$/i);
           if (depMatch) {
             const ids = depMatch[1].match(ID_PATTERN) || [];
@@ -358,7 +360,11 @@
     function mergeTaskDetails(apiTasks, parsedTasks) {
       if (!apiTasks.length) return parsedTasks;
       const parsedById = new Map(parsedTasks.map(task => [task.id, task]));
-      return apiTasks.map(task => {
+      // The viewed project's plan is the source of truth: drop graph tasks that are
+      // not in it, so another project's tasks and lanes never leak in.
+      const ownTasks = apiTasks.filter(task => parsedById.size === 0 || parsedById.has(task.id));
+      if (ownTasks.length === 0) return parsedTasks;
+      return ownTasks.map(task => {
         const parsed = parsedById.get(task.id);
         if (!parsed) return task;
         return {
@@ -1127,6 +1133,32 @@
 
       if (activeTasks.length === 0) return [];
 
+      // Plans whose table has a Lane column (e.g. freelance-desk) get one lane per
+      // value, so the board shows the real workstreams instead of a single bucket.
+      const laneKey = task => String(task.streamParent || '').replace(/\s*\(.*$/, '').trim();
+      const laneKeys = [...new Set(activeTasks.map(laneKey))].filter(Boolean);
+      if (laneKeys.length > 1) {
+        const laneNum = key => Number((key.match(/^(\d+)/) || [0, 1e9])[1]);
+        const lanes = laneKeys
+          .sort((a, b) => laneNum(a) - laneNum(b) || a.localeCompare(b))
+          .map((key, index) => {
+            const laneTasks = activeTasks.filter(task => laneKey(task) === key);
+            const num = (key.match(/^(\d+)/) || [])[1];
+            const label = key.replace(/^\d+\.?\s*/, '').trim();
+            return {
+              id: normalizeLineId(num ? `LANE ${num}` : `LANE ${key}`, index),
+              name: num ? `${num}. ${label || 'Lane ' + num}` : key,
+              dependsOnLineIds: [],
+              sequenceTaskIds: laneTasks.map(task => task.id),
+              supportTaskIds: [],
+              source: 'derived-lane',
+              hasWork: laneTasks.some(task => task.status === 'in-progress'),
+            };
+          });
+        if (!lanes.some(lane => lane.hasWork)) lanes[0].hasWork = true;
+        return lanes;
+      }
+
       return [{
         id: normalizeLineId('LINE AUTO', 0),
         name: 'Auto-prioritized active work',
@@ -1196,7 +1228,7 @@
           // lines or sprints) are treated as live by default — otherwise they get
           // hidden in the collapsed "Other Planned Flows" section and the user sees
           // an empty Active Instances panel.
-          isLiveInstance: sessionTracks.some(isRuntimeActive) || line.source === 'derived-priority',
+          isLiveInstance: sessionTracks.some(isRuntimeActive) || line.source === 'derived-priority' || (line.source === 'derived-lane' && line.hasWork),
           supportTasks: line.supportTaskIds.map(id => taskById.get(id)).filter(task => task && task.status !== 'done'),
         };
       });
@@ -1504,6 +1536,10 @@
       }).join('');
     }
 
+    function getClearedSessions() {
+      try { return new Set(JSON.parse(localStorage.getItem('flow-cleared-sessions') || '[]')); } catch { return new Set(); }
+    }
+
     function renderUnassignedAgentFlowRow(track, taskById) {
       const agentName = formatSessionName(track);
       const lastSeen = formatRelativeTime(track.ts || track.lastSeenMs || '') || 'live';
@@ -1531,6 +1567,7 @@
                   ${renderTaskAssignmentOptions(taskById)}
                 </select>
                 <button class="flow-btn primary" type="button" data-action="assign-session-task" data-session-sid="${escapeAttr(track.sid || '')}" data-session-agent="${escapeAttr(track.agent || '')}">Assign</button>
+                <button class="flow-btn" type="button" data-action="clear-session" data-session-sid="${escapeAttr(track.sid || '')}" title="Hide this session from the list">Clear</button>
               </div>
             </div>
             <div class="agent-track-meta">
@@ -1640,7 +1677,7 @@
             </div>
             <div class="agent-track-main">
               <div class="agent-track-copy">
-                <div class="agent-track-kicker">${escapeHtml(line.name)}</div>
+                <div class="agent-track-kicker">${escapeHtml(line.name)} <button class="flow-chip" type="button" data-action="copy-lane-id" data-lane-id="${escapeAttr(line.id)}" title="Click to copy the lane ID">${escapeHtml(line.id)} ⧉</button></div>
                 <button class="agent-track-headline" type="button" data-id="${escapeAttr(task?.id || '')}">${escapeHtml(taskTitle)}</button>
                 ${detail ? `<div class="agent-track-detail">${escapeHtml(detail)}</div>` : ''}
               </div>
@@ -1698,6 +1735,7 @@
             <div class="flow-row-meta">
               <div class="flow-row-labels">
                 <span class="flow-row-name">${escapeHtml(line.name)}</span>
+                <button class="flow-chip" type="button" data-action="copy-lane-id" data-lane-id="${escapeAttr(line.id)}" title="Click to copy the lane ID">${escapeHtml(line.id)} ⧉</button>
                 <span class="flow-row-state ${line.state}">${lineStateLabel(line)}</span>
                 <span class="flow-row-owner ${line.owner || activeTrackCount > 0 ? '' : 'unclaimed'}">${ownerLabel}</span>
               </div>
@@ -1802,7 +1840,8 @@
       const activeFlows = lineStates.filter(line => line.isLiveInstance);
       const availableFlows = lineStates.filter(line => !line.isLiveInstance);
       const backlogGroups = buildBacklogGroups(lineStates, taskById);
-      const unassignedSessions = buildUnassignedSessionTracks(lines);
+      const clearedSessions = getClearedSessions();
+      const unassignedSessions = buildUnassignedSessionTracks(lines).filter(t => !clearedSessions.has(t.sid));
       const activeInstances = buildActiveInstanceRows(activeFlows, taskById);
       const activeInstanceCount = activeInstances.length + unassignedSessions.length;
 
@@ -1826,6 +1865,7 @@
                 <h2>Active Instances</h2>
                 <p>These lanes are backed by live rough-cut context from recent logs or active locks.</p>
               </div>
+              ${unassignedSessions.length > 1 ? '<button class="flow-btn" type="button" data-action="clear-session" data-session-sid="*">Clear all idle</button>' : ''}
               <span class="flow-section-count primary">${activeInstanceCount}</span>
             </div>
             <div class="flow-list">
@@ -2427,6 +2467,29 @@
           }
         });
       });
+      root.querySelectorAll('[data-action="copy-lane-id"]').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          try {
+            await navigator.clipboard.writeText(btn.dataset.laneId);
+            showToast(`Copied lane ID: ${btn.dataset.laneId}`, 'success');
+          } catch {
+            showToast('Clipboard copy failed', 'error');
+          }
+        });
+      });
+      root.querySelectorAll('[data-action="clear-session"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const sids = btn.dataset.sessionSid === '*'
+            ? buildUnassignedSessionTracks(currentDeliveryLines).map(t => t.sid)
+            : [btn.dataset.sessionSid];
+          const set = getClearedSessions();
+          sids.forEach(sid => sid && set.add(sid));
+          try { localStorage.setItem('flow-cleared-sessions', JSON.stringify([...set])); } catch { /* per-viewer convenience only */ }
+          renderDeliveryView(allTasks, currentDeliveryLines);
+        });
+      });
       root.querySelectorAll('[data-action="copy-line-agent-prompt"]').forEach(btn => {
         btn.addEventListener('click', async (e) => {
           e.stopPropagation();
@@ -2957,7 +3020,7 @@
 
     async function fetchTaskApiFlowTasks() {
       try {
-        const graph = await fetchJson(`${API_BASE}/api/tasks/graph?t=${Date.now()}`);
+        const graph = await fetchJson(`${API_BASE}/api/tasks/graph?t=${Date.now()}${currentProjectRoot ? `&cwd=${encodeURIComponent(currentProjectRoot)}` : ''}`);
         const nodes = Array.isArray(graph.nodes) ? graph.nodes : [];
         if (!nodes.length) return [];
 
