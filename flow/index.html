@@ -1658,7 +1658,7 @@
       const task = primaryTaskId ? taskById.get(primaryTaskId) : null;
       const agentName = track ? formatSessionName(track) : (line.owner ? `Instance ${line.owner.session_short}` : line.name);
       const lastSeen = track ? formatRelativeTime(track.ts || track.lastSeenMs || '') : lineActivityLabel(line);
-      const taskTitle = task ? `${task.id} - ${task.title || 'Untitled task'}` : 'No task selected';
+      const taskTitle = task ? `${task.id} - ${shortTitle(task.title) || 'Untitled task'}` : 'No task selected';
       const detail = getTaskExcerpt(task);
       const stateClass = task?.status === 'in-progress' ? 'in-progress'
         : task?.status === 'paused' ? 'blocked'
@@ -2820,6 +2820,16 @@
     }
 
     /* ─── Side panel ───────────────────────────────────────────────── */
+    // Some plans keep a whole progress note in the title cell: show its first sentence only.
+    function shortTitle(raw, max = 90) {
+      const text = String(raw || '').replace(/[`*]/g, '').replace(/\s+/g, ' ').trim();
+      if (text.length <= max) return text;
+      const cut = text.slice(0, max);
+      const sentence = cut.search(/(?:\s[—–-]\s|[.;:]\s)/);
+      const base = sentence >= 30 ? cut.slice(0, sentence) : cut.replace(/\s+\S*$/, '');
+      return base.replace(/[\s,.;:—–-]+$/, '') + '…';
+    }
+
     function renderSidePanel(task) {
       const pane = document.getElementById('side-pane');
       if (!task) {
@@ -2894,8 +2904,10 @@
 
       // Description: first paragraph, the rest folded away.
       const paragraphs = plain(task.body).split(/\n\s*\n/).map(x => x.replace(/\s*\n\s*/g, ' ').trim()).filter(Boolean);
+      const fullTitle = plain(task.title);
+      if (shortTitle(fullTitle) !== fullTitle) paragraphs.unshift(fullTitle);
       const description = paragraphs.length
-        ? `<div class="td-desc"><p>${escapeHtml(paragraphs[0])}</p>${paragraphs.length > 1 ? `<details><summary aria-label="Show the rest"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>${paragraphs.slice(1).map(x => `<p>${escapeHtml(x)}</p>`).join('')}</details>` : ''}</div>`
+        ?`<div class="td-desc"><p>${escapeHtml(paragraphs[0])}</p>${paragraphs.length > 1 ? `<details><summary aria-label="Show the rest"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>${paragraphs.slice(1).map(x => `<p>${escapeHtml(x)}</p>`).join('')}</details>` : ''}</div>`
         : '';
 
       pane.innerHTML = `
@@ -2905,7 +2917,7 @@
             <button id="copy-context" class="td-btn" type="button" title="Copy task context for an agent" aria-label="Copy task context for an agent">${ico('copy')}</button>
             <button id="jump-kanban" class="td-btn" type="button" title="Open in Kanban" aria-label="Open in Kanban">${ico('board')}</button>
           </div>
-          <h3>${escapeHtml(plain(task.title))}</h3>
+          <h3 style="overflow-wrap:anywhere">${escapeHtml(shortTitle(plain(task.title)))}</h3>
           <div class="td-facts">${facts}</div>
           ${relations ? `<div class="td-rels">${relations}</div>` : ''}
           ${description}
