@@ -3863,7 +3863,10 @@ app.get('/api/tasks/:id/deps', requireTaskEngine, (req, res) => {
 // GET /api/tasks/graph - Full dependency graph for D3
 app.get('/api/tasks/graph', requireTaskEngine, (req, res) => {
     try {
-        res.json(req.taskEngine.getGraph());
+        // Plan notes are written with numeric character codes (&#45; for "-") so a note can never inject markup into the plan file; show them as the characters they stand for.
+        const plain = (text) => typeof text === 'string' ? text.replace(/&#(\d{1,5});/g, (_, code) => String.fromCharCode(Number(code))) : text;
+        const graph = req.taskEngine.getGraph();
+        res.json({ ...graph, nodes: (graph.nodes || []).map((node) => ({ ...node, title: plain(node.title), description: plain(node.description) })) });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

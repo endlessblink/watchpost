@@ -1228,7 +1228,9 @@
           // lines or sprints) are treated as live by default — otherwise they get
           // hidden in the collapsed "Other Planned Flows" section and the user sees
           // an empty Active Instances panel.
-          isLiveInstance: sessionTracks.some(isRuntimeActive) || line.source === 'derived-priority' || (line.source === 'derived-lane' && line.hasWork),
+          isLiveInstance: sessionTracks.some(isRuntimeActive) || line.source === 'derived-priority' || (line.source === 'derived-lane' && line.hasWork)
+            // A delivery line the plan itself defines, with open work and nothing blocking it, is the live flow even when no session is tagged to it (Noam R-25138).
+            || (line.source === 'delivery-lines' && Boolean(currentTask) && blockingLineIds.length === 0),
           supportTasks: line.supportTaskIds.map(id => taskById.get(id)).filter(task => task && task.status !== 'done'),
         };
       });
