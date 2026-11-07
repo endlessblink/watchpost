@@ -369,19 +369,17 @@
             let highlight = 0;
             let isOpen = false;
             let fetching = false;
-            const archiveToggle = document.createElement('label');
-            archiveToggle.style.cssText = 'display:flex;align-items:center;gap:6px;padding:8px 12px;font-size:12px;color:var(--text-secondary,#94a3b8)';
-            archiveToggle.innerHTML = '<input type="checkbox" id="project-switcher-show-archived"> Show archived projects';
-            list.before(archiveToggle);
-            const showArchived = archiveToggle.querySelector('input');
+            const filterRow = document.createElement('div');
+            filterRow.className = 'project-switcher-filters';
+            filterRow.innerHTML =
+                '<label class="ps-chip"><input type="checkbox" id="project-switcher-show-archived"><span>Archived</span></label>' +
+                '<label class="ps-chip"><input type="checkbox" id="project-switcher-plan-only"><span>With MASTER_PLAN.md only</span></label>';
+            list.before(filterRow);
+            const showArchived = filterRow.querySelector('#project-switcher-show-archived');
             showArchived.addEventListener('change', () => { highlight = 0; render(); });
 
-            const noLanesToggle = document.createElement('label');
-            noLanesToggle.style.cssText = archiveToggle.style.cssText;
-            noLanesToggle.innerHTML = '<input type="checkbox" id="project-switcher-no-lanes"> No lanes set up only';
-            archiveToggle.after(noLanesToggle);
-            const noLanesOnly = noLanesToggle.querySelector('input');
-            noLanesOnly.addEventListener('change', () => { highlight = 0; render(); });
+            const planOnly = filterRow.querySelector('#project-switcher-plan-only');
+            planOnly.addEventListener('change', () => { highlight = 0; render(); });
 
             function escapeHtml(s) {
                 return String(s == null ? '' : s)
@@ -428,7 +426,7 @@
 
             function applyFilter(items) {
                 items = items.filter(p => showArchived.checked || !p.archived || isActiveProject(p));
-                if (noLanesOnly.checked) items = items.filter(p => p.masterPlan && !p.hasLanes);
+                if (planOnly.checked) items = items.filter(p => p.masterPlan && p.planExists !== false);
                 if (!filter) return items;
                 const q = filter.toLowerCase();
                 return items.filter(p =>

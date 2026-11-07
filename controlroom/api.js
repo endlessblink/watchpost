@@ -901,8 +901,7 @@ module.exports = function mountControlRoomRoutes(app, { getTaskEngine } = {}) {
                 coverUrl: cover ? `/api/projects/${encodeURIComponent(project.name)}/cover` : null,
                 lastActivity: gitInfo.lastCommitDate,
                 commits7d: gitInfo.commits7d,
-                archived: project.archived || false,
-                hasLanes: project.masterPlan ? planHasLanes(project.masterPlan) : false
+                archived: project.archived || false
             };
         });
 
