@@ -1119,6 +1119,7 @@
 
     // Short subject titles per lane, written once by the local model (server keeps them).
     const laneTitleCache = new Map();
+    const laneDescCache = new Map();
     async function requestLaneTitles(lines, tasks) {
       const taskById = new Map(tasks.map(task => [task.id, task]));
       const missing = lines
@@ -1135,10 +1136,11 @@
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ root: currentProjectRoot || '', lanes: missing }),
         });
-        const { titles } = await res.json();
+        const { titles, descriptions } = await res.json();
         let changed = false;
         for (const [key, title] of Object.entries(titles || {})) {
-          const ck = `${currentProjectRoot}|${key}`; if (!laneTitleCache.has(ck)) { laneTitleCache.set(ck, title); changed = true; }
+          const ck = `${currentProjectRoot}|${key}`;
+          if (!laneTitleCache.has(ck)) { laneTitleCache.set(ck, title); laneDescCache.set(ck, (descriptions || {})[key] || ''); changed = true; }
         }
         if (changed) renderGraph();
       } catch { /* titles are a nicety: the cleaned lane name stays */ }
@@ -1192,6 +1194,7 @@
               id: normalizeLineId(num ? `LANE ${num}` : `LANE ${key}`, index),
               name: laneTitleCache.get(`${currentProjectRoot}|${key}`) || laneDisplayName(label || key, laneTasks),
               laneKey: key,
+              description: laneDescCache.get(`${currentProjectRoot}|${key}`) || '',
               dependsOnLineIds: [],
               sequenceTaskIds: laneTasks.map(task => task.id),
               supportTaskIds: [],
@@ -1748,8 +1751,8 @@
             <div class="agent-track-main">
               <div class="agent-track-copy">
                 <div class="agent-track-kicker">${escapeHtml(line.name)} <button class="flow-chip" type="button" data-action="copy-lane-id" data-lane-id="${escapeAttr(line.id)}" title="Click to copy the lane ID">${escapeHtml(line.id)} ⧉</button></div>
-                <button class="agent-track-headline" type="button" data-id="${escapeAttr(task?.id || '')}">${escapeHtml(taskTitle)}</button>
-                ${detail ? `<div class="agent-track-detail">${escapeHtml(detail)}</div>` : ''}
+                ${line.description ? `<p class="agent-track-about">${escapeHtml(line.description)}</p>` : ''}
+                <button class="agent-track-headline" type="button" data-id="${escapeAttr(task?.id || '')}"><span class="agent-track-now">Now</span> ${escapeHtml(taskTitle)}</button>
               </div>
               ${task ? `<div class="agent-track-slash">${escapeHtml(task.title || task.id)}</div>` : ''}
             </div>
@@ -2890,11 +2893,15 @@
     // The short name of a task whose title cell holds a whole progress note:
     // text up to the first " — " or sentence end, sentence-cased when it is shouted in capitals.
     function coreTitle(raw, max = 80) {
-      const text = String(raw || '').replace(/[`*]/g, '').replace(/\s+/g, ' ').trim()
-        .replace(/^(?:\d+(?:\.\d+)+\.?\s+)+/, '');
-      if (text.length <= max && !/\s—\s|\.\s/.test(text)) return text;
-      const stop = text.slice(8).search(/\s[—–]\s|\.\s/);
-      let core = (stop >= 0 ? text.slice(0, stop + 8) : text).replace(/[\s.:—–-]+$/, '');
+      let text = String(raw || '').replace(/[`*]/g, '').replace(/\s+/g, ' ').trim()
+        .replace(/^(?:\d+(?:\.\d+)+\.?\s+)+/, '')
+        // a trailing "(Noam 07.11: ...", "(split from 5.5 ..." or dated note is history, not the name
+        .replace(/\s*\((?=[^)]*(?:Noam|moved from|split from|CORRECTED|\d{2}[.\/-]\d{2}))[^)]*\)?\s*$/i, '');
+      let core = text;
+      if (text.length > max || /\s[—–]\s|\.\s/.test(text)) {
+        const stop = text.slice(8).search(/\s[—–]\s|\.\s/);
+        core = (stop >= 0 ? text.slice(0, stop + 8) : text).replace(/[\s.:—–-]+$/, '');
+      }
       const letters = core.replace(/[^A-Za-z]/g, '');
       if (letters.length > 6 && letters === letters.toUpperCase()) core = core.charAt(0) + core.slice(1).toLowerCase();
       return core.length > max ? shortTitle(core, max) : core;
