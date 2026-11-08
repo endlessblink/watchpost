@@ -765,6 +765,7 @@
             : buildDerivedDeliveryLines(tasks);
         setViewMode('delivery');
         renderDeliveryView(tasks, lines);
+        requestLaneTitles(lines, tasks);
         return;
       }
       currentDeliveryLines = [];
@@ -1116,6 +1117,33 @@
       }));
     }
 
+    // Short subject titles per lane, written once by the local model (server keeps them).
+    const laneTitleCache = new Map();
+    async function requestLaneTitles(lines, tasks) {
+      const taskById = new Map(tasks.map(task => [task.id, task]));
+      const missing = lines
+        .filter(line => line.source === 'derived-lane' && !laneTitleCache.has(`${currentProjectRoot}|${line.laneKey}`))
+        .map(line => ({
+          key: line.laneKey,
+          name: line.laneKey.replace(/^\d+\.?\s*/, ''),
+          tasks: line.sequenceTaskIds.slice(0, 8).map(id => coreTitle(taskById.get(id)?.title)).filter(Boolean),
+        }));
+      if (missing.length === 0) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/lane-titles`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ root: currentProjectRoot || '', lanes: missing }),
+        });
+        const { titles } = await res.json();
+        let changed = false;
+        for (const [key, title] of Object.entries(titles || {})) {
+          const ck = `${currentProjectRoot}|${key}`; if (!laneTitleCache.has(ck)) { laneTitleCache.set(ck, title); changed = true; }
+        }
+        if (changed) renderGraph();
+      } catch { /* titles are a nicety: the cleaned lane name stays */ }
+    }
+
     // A lane's title is its topic only: no number, no "lane" word, nothing after the first comma or dash.
     // When nothing is left, the lane is named after its first task.
     function laneDisplayName(raw, laneTasks) {
@@ -1162,7 +1190,8 @@
             const label = key.replace(/^\d+\.?\s*/, '').trim();
             return {
               id: normalizeLineId(num ? `LANE ${num}` : `LANE ${key}`, index),
-              name: laneDisplayName(label || key, laneTasks),
+              name: laneTitleCache.get(`${currentProjectRoot}|${key}`) || laneDisplayName(label || key, laneTasks),
+              laneKey: key,
               dependsOnLineIds: [],
               sequenceTaskIds: laneTasks.map(task => task.id),
               supportTaskIds: [],

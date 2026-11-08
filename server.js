@@ -1158,6 +1158,65 @@ app.post('/api/task/:id', (req, res, next) => {
 });
 
 // ============================================================================
+// LANE TITLES — short subject titles for Flow lanes. The local model writes each
+// one once; it is cached on disk and a title set by hand always wins.
+// ============================================================================
+const LANE_TITLES_FILE = path.join(__dirname, 'data', 'lane-titles.json');
+const laneTitlePending = new Set();
+let laneTitleQueue = Promise.resolve();
+
+function readLaneTitles() {
+    try { return JSON.parse(fs.readFileSync(LANE_TITLES_FILE, 'utf8')); } catch { return {}; }
+}
+
+function queueLaneTitle(id, lane) {
+    if (laneTitlePending.has(id)) return;
+    laneTitlePending.add(id);
+    laneTitleQueue = laneTitleQueue.then(async () => {
+        try {
+            const prompt = `Name the subject of this group of software tasks in 2 to 3 plain words, like a sidebar section name. Never more than 3 words. Reply with the name only.\nOld name: ${String(lane.name || '').slice(0, 120)}\nTasks:\n- ${(lane.tasks || []).slice(0, 8).map(t => String(t).slice(0, 100)).join('\n- ')}`;
+            const r = await fetch('http://127.0.0.1:11434/api/generate', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ model: 'qwen2.5:7b', prompt, stream: false, options: { temperature: 0.2, num_predict: 12 } }),
+                signal: AbortSignal.timeout(90000)
+            });
+            const title = String((await r.json()).response || '').split('\n')[0].replace(/["'*.]/g, '').trim();
+            if (title && title.length <= 40) {
+                const map = readLaneTitles();
+                if (!map[id]) {
+                    map[id] = { title, auto: true };
+                    fs.mkdirSync(path.dirname(LANE_TITLES_FILE), { recursive: true });
+                    fs.writeFileSync(LANE_TITLES_FILE, JSON.stringify(map, null, 2));
+                }
+            }
+        } catch (err) {
+            console.warn(`[LaneTitles] ${id}: ${err.message}`);
+        } finally {
+            laneTitlePending.delete(id);
+        }
+    });
+}
+
+// POST /api/lane-titles  { root, lanes: [{ key, name, tasks: [title…] }], set?: { key, title } }
+app.post('/api/lane-titles', (req, res) => {
+    const { root = '', lanes = [], set } = req.body || {};
+    const map = readLaneTitles();
+    if (set && set.key && set.title) {
+        map[`${root}|${set.key}`] = { title: String(set.title).slice(0, 40), auto: false };
+        fs.mkdirSync(path.dirname(LANE_TITLES_FILE), { recursive: true });
+        fs.writeFileSync(LANE_TITLES_FILE, JSON.stringify(map, null, 2));
+    }
+    const titles = {};
+    for (const lane of lanes.slice(0, 40)) {
+        const id = `${root}|${lane.key}`;
+        if (map[id]) titles[lane.key] = map[id].title;
+        else queueLaneTitle(id, lane);
+    }
+    res.json({ titles, pending: laneTitlePending.size });
+});
+
+// ============================================================================
 // TASK CREATION API
 // ============================================================================
 
