@@ -1542,6 +1542,30 @@
       try { return new Set(JSON.parse(localStorage.getItem('flow-cleared-sessions') || '[]')); } catch { return new Set(); }
     }
 
+    // Live sessions with no task: one folded list of one-line rows instead of a card each.
+    function renderIdleSessions(tracks, taskById) {
+      if (tracks.length === 0) return '';
+      const options = renderTaskAssignmentOptions(taskById);
+      const rows = tracks.map(track => `
+        <div class="flow-idle-row agent-flow">
+          <span class="flow-idle-name">${escapeHtml(formatSessionName(track))}</span>
+          <span class="flow-idle-age">${escapeHtml(formatRelativeTime(track.ts || track.lastSeenMs || '') || 'live')}</span>
+          <select class="flow-task-select" data-session-task-select data-session-sid="${escapeAttr(track.sid || '')}">${options}</select>
+          <button class="flow-btn primary" type="button" data-action="assign-session-task" data-session-sid="${escapeAttr(track.sid || '')}" data-session-agent="${escapeAttr(track.agent || '')}">Assign</button>
+          <button class="flow-btn" type="button" data-action="clear-session" data-session-sid="${escapeAttr(track.sid || '')}" title="Hide this session from the list">Clear</button>
+        </div>`).join('');
+      return `
+        <div class="flow-backlog">
+          <details>
+            <summary>Idle sessions (${tracks.length})</summary>
+            <div class="flow-backlog-list">
+              ${tracks.length > 1 ? '<button class="flow-btn flow-idle-clear-all" type="button" data-action="clear-session" data-session-sid="*">Clear all</button>' : ''}
+              ${rows}
+            </div>
+          </details>
+        </div>`;
+    }
+
     function renderUnassignedAgentFlowRow(track, taskById) {
       const agentName = formatSessionName(track);
       const lastSeen = formatRelativeTime(track.ts || track.lastSeenMs || '') || 'live';
@@ -1845,7 +1869,7 @@
       const clearedSessions = getClearedSessions();
       const unassignedSessions = buildUnassignedSessionTracks(lines).filter(t => !clearedSessions.has(t.sid));
       const activeInstances = buildActiveInstanceRows(activeFlows, taskById);
-      const activeInstanceCount = activeInstances.length + unassignedSessions.length;
+      const activeInstanceCount = activeInstances.length;
 
       const lineStatesById = new Map(lineStates.map(line => [line.id, line]));
       if (!selectedLineId || !lineStatesById.has(selectedLineId)) {
@@ -1867,15 +1891,14 @@
                 <h2>Active Instances</h2>
                 <p>These lanes are backed by live rough-cut context from recent logs or active locks.</p>
               </div>
-              ${unassignedSessions.length > 1 ? '<button class="flow-btn" type="button" data-action="clear-session" data-session-sid="*">Clear all idle</button>' : ''}
               <span class="flow-section-count primary">${activeInstanceCount}</span>
             </div>
             <div class="flow-list">
-              ${activeInstances.length > 0 || unassignedSessions.length > 0
-                ? activeInstances.map(instance => renderAgentFlowRow(instance, taskById)).join('') +
-                  unassignedSessions.map(track => renderUnassignedAgentFlowRow(track, taskById)).join('')
+              ${activeInstances.length > 0
+                ? activeInstances.map(instance => renderAgentFlowRow(instance, taskById)).join('')
                 : '<div class="flow-empty">No active instances from current rough-cut logs or locks.</div>'}
             </div>
+            ${renderIdleSessions(unassignedSessions, taskById)}
           </section>
           ${renderCollapsedFlows(availableFlows, taskById)}
           <section class="flow-section">
